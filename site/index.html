@@ -511,6 +511,530 @@ this file is not canonical doctrine by itself.
       </ul>
     </li>
     <li class="nav-group">
+      <div class="group-title">00_QiEOS/reconciliation</div>
+      <ul>
+        <li class="nav-item" data-search="00_qieos/reconciliation/2026-06-09_codex_reconciliation_brief.md # codex reconciliation brief: qios dna
+
+## purpose
+
+this document is the merged instruction brief for codex to reconcile the `_qios_dna` repository without destroying raw imports, losing context, or inventing a new folder doctrine.
+
+codex should use this as the controlling task document.
+
+---
+
+## 1. locked system model
+
+the locked local root structure is:
+
+```text
+c:\qilabs\
+  .github\
+  .qios\
+  .vscode\
+  00_qieos\
+  10_qios_start\
+  20_qisystem\
+  30_qiserver\
+  40_qicapture\
+  50_qinexus\
+    my drive\
+  60_qiapps\
+  70_qiconnect\
+  packages\
+  scripts\
+  toolbox\
+```
+
+this repo, `_qios_dna`, is the portable github documentation/doctrine version of the qilabs system brain. it should mirror the locked qilabs root logic, not a generic documentation hierarchy.
+
+---
+
+## 2. layer definitions
+
+use these definitions as canon:
+
+```text
+qios        = whole ecosystem / operating system
+qieos       = origin brain / doctrine / decisions / receipts / system map
+qios_start  = cockpit / launcher / front door / docs surface
+qisystem    = rules / schemas / naming / database doctrine / lifecycle rules
+qiserver    = infrastructure / docker / cloudflare / deploy / monitoring / backups
+qicapture   = ingestion / ocr / parsing / embeddings / pipelines
+qinexus     = storage backbone / workspace model
+qiapps      = standalone apps, sites, tools
+qiconnect   = integrations / apis / workers
+packages    = shared code, types, utilities, db helpers
+scripts     = thin wrappers only
+toolbox     = local tools and power utilities
+```
+
+important correction: qios is not only the interface. the interface is qios_start. qios is the whole operating system/ecosystem.
+
+---
+
+## 3. current doctrine relationships
+
+use these module relationships:
+
+```text
+qios
+├── 00_qieos        master doctrine / dna / decisions / receipts / map
+├── 10_qios_start  front door / cockpit / access dashboard / docs surface
+├── 20_qisystem    rules / naming / schemas / lifecycle / database doctrine
+├── 30_qiserver    runtime / infrastructure / deploy / monitoring
+├── 40_qicapture   ingestion / ocr / parsing / embedding / pipelines
+├── 50_qinexus     storage model / my drive bucket doctrine
+├── 60_qiapps      apps including qilife and qijourney
+├── 70_qiconnect   connectors / integrations / apis / workers
+├── packages       reusable shared code
+├── scripts        thin wrappers only
+└── toolbox        local utilities and power tools
+```
+
+### active modules
+
+```text
+qiaccess start = lives under 10_qios_start/qiaccess_start
+qilife         = lives under 60_qiapps/qilife and is the living data spine
+qijourney      = lives under 60_qiapps/qijourney and is the interpretation / narrative branch
+qinexus        = storage model lives under 50_qinexus, actual files live in my drive elsewhere
+qiserver       = runtime layer under 30_qiserver
+qicapture      = ingestion layer under 40_qicapture
+qiconnect      = integration layer under 70_qiconnect
+```
+
+---
+
+## 4. hard truth rules
+
+```text
+raw imports are evidence.
+canonical docs are law.
+exports are snapshots.
+```
+
+do not promote raw imported docs to canon without review.
+
+do not delete raw imported docs.
+
+do not silently merge conflicting docs.
+
+do not duplicate the full qinexus `my drive` storage bucket tree inside this repo.
+
+do not invent a new folder hierarchy.
+
+do not treat old app-specific docs as master doctrine unless the content is promoted into `00_qieos` or `20_qisystem` with review.
+
+---
+
+## 5. qinexus bucket doctrine
+
+qinexus is the storage/workspace backbone. the actual file buckets are:
+
+```text
+50_qinexus/my drive/
+  00_inbox
+  01_workbench
+  02_timeline
+  03_life
+  04_people
+  05_business
+  06_finance
+  07_legal
+  08_tech
+  09_assets
+  10_data
+  11_reference
+  12_archive
+  13_system
+```
+
+do not create duplicate roots inside `my drive` such as:
+
+```text
+20_qinexus
+30_qiarchive
+40_qisystem
+70_qiconnect
+```
+
+those are wrong inside qinexus storage. they belong to the qilabs root model, not inside the my drive bucket tree.
+
+---
+
+## 6. current repo condition
+
+the repo now contains a new locked-structure spine, but it also appears to contain older imported/mirrored folders such as:
+
+```text
+01_qidna/
+60_qiapps/
+70_qiconnect/
+site/
+```
+
+these older folders should be reviewed before moving, renaming, or deleting.
+
+codex should not bulldoze them.
+
+---
+
+## 7. target canonical repo structure
+
+the intended canonical roots are:
+
+```text
+_qios_dna/
+├── readme.md
+├── docs.json
+├── index.mdx
+├── 00_qieos/
+│   ├── doctrine/
+│   ├── decisions/
+│   ├── receipts/
+│   │   └── raw_imports/
+│   ├── system_map/
+│   ├── reconciliation/
+│   └── exports/
+├── 10_qios_start/
+│   └── qiaccess_start/
+├── 20_qisystem/
+│   ├── rules/
+│   ├── schemas/
+│   ├── naming/
+│   ├── metadata/
+│   ├── database_doctrine/
+│   ├── lifecycle/
+│   └── manifests/
+├── 30_qiserver/
+├── 40_qicapture/
+├── 50_qinexus/
+│   └── my_drive_model/
+├── 60_qiapps/
+│   ├── qilife/
+│   └── qijourney/
+├── 70_qiconnect/
+├── packages/
+├── scripts/
+├── toolbox/
+└── 09_tools/
+```
+
+note: `09_tools/` is acceptable in the repo as a helper/scripts location for repo-maintenance tools, even though local qilabs has `toolbox` and `scripts`. if desired later, it can be reconciled into `toolbox` or `scripts`, but do not move it now unless the repo convention is explicitly changed.
+
+---
+
+## 8. source material to reconcile
+
+primary sources already present or expected in repo:
+
+```text
+readme.md
+docs.json
+index.mdx
+00_qieos/**
+10_qios_start/**
+20_qisystem/**
+30_qiserver/**
+40_qicapture/**
+50_qinexus/**
+60_qiapps/**
+70_qiconnect/**
+01_qidna/**
+60_qiapps/**
+70_qiconnect/**
+site/**
+```
+
+source repos that informed this reconciliation:
+
+```text
+qiallyme/_qiaccess_start
+qiallyme/qilife
+qiallyme/_qios_dna
+```
+
+expected raw import location:
+
+```text
+00_qieos/receipts/raw_imports/2026-06-09/
+```
+
+if raw import folders are elsewhere, do not delete them. report where they are and recommend a move.
+
+---
+
+## 9. file classification rules
+
+classify each document into one of these groups:
+
+```text
+promote_canon
+keep_as_module_doc
+keep_as_receipt
+archive_legacy
+duplicate_conflict
+needs_review
+generated_export
+tooling
+```
+
+### promote to canon
+
+promote only when a document clearly defines the whole system, naming, rules, schema, source of truth, or root structure.
+
+targets:
+
+```text
+00_qieos/doctrine/
+00_qieos/decisions/
+00_qieos/system_map/
+20_qisystem/rules/
+20_qisystem/schemas/
+20_qisystem/naming/
+20_qisystem/metadata/
+20_qisystem/database_doctrine/
+20_qisystem/lifecycle/
+20_qisystem/manifests/
+```
+
+### keep as module doc
+
+if the doc explains one module/app, place or summarize it under:
+
+```text
+10_qios_start/qiaccess_start/
+30_qiserver/
+40_qicapture/
+50_qinexus/my_drive_model/
+60_qiapps/qilife/
+60_qiapps/qijourney/
+70_qiconnect/
+```
+
+### keep as receipt
+
+if it is a raw import, old source snapshot, prior draft, chat-derived doc, or evidence of previous decisions, keep it under:
+
+```text
+00_qieos/receipts/
+```
+
+### archive legacy
+
+if it is superseded but historically useful, recommend archive location but do not delete.
+
+### duplicate/conflict
+
+if two docs disagree, do not merge automatically. flag both and explain the conflict.
+
+---
+
+## 10. specific reconciliation corrections
+
+### qiaccess start
+
+qiaccess start is the front door/cockpit/access dashboard/docs surface.
+
+it is not the whole operating system.
+
+if any qiaccess doc says it replaces all qios doctrine, rewrite or flag that as outdated. correct doctrine:
+
+```text
+qiaccess start replaces older dashboard/front-door framing, not qios itself.
+qios dna / qieos remains the master doctrine layer.
+```
+
+### qilife
+
+qilife is the living operational data spine and ai lifedesk.
+
+qilife owns or models:
+
+```text
+qibits
+buckets
+threads
+actions
+action_steps
+people
+transactions
+obligations
+knowledge_items
+documents
+events
+links
+activity_log
+ai_outputs
+daily_summaries
+```
+
+timeline is a projection over timestamped records, not its own truth table.
+
+### qijourney
+
+qijourney is interpretation, reflection, narrative, creative synthesis, and meaning-making.
+
+qijourney outputs are derived unless linked back to canonical records.
+
+### qinexus
+
+qinexus storage buckets are not to be duplicated inside the repo as if they are root doctrine folders.
+
+this repo may document the model under:
+
+```text
+50_qinexus/my_drive_model/
+```
+
+---
+
+## 11. codex tasks
+
+### task a: generate full file inventory
+
+run or use:
+
+```bash
+python 09_tools/build_qios_chronicle.py
+```
+
+this should generate or update:
+
+```text
+20_qisystem/manifests/qios_dna_file_manifest.md
+00_qieos/exports/qios_dna_chronicle.md
+```
+
+if the script outputs `.md` while mintlify expects `.mdx`, do not break the docs site. either keep `.md` for generated exports or add matching nav entries only when needed.
+
+### task b: create reconciliation matrix
+
+create:
+
+```text
+00_qieos/reconciliation/2026-06-09_reconciliation_matrix.md
+```
+
+for every meaningful doc, include:
+
+```text
+path
+classification
+recommended target
+status
+notes/conflicts
+```
+
+### task c: identify outdated folder roots
+
+create:
+
+```text
+00_qieos/reconciliation/2026-06-09_folder_drift_report.md
+```
+
+include old/lowercase/non-locked folders and recommended action:
+
+```text
+keep
+move later
+merge later
+archive later
+delete only after review
+```
+
+do not delete anything in this pass.
+
+### task d: promote obvious canonical summaries only
+
+only promote documents when obvious. if uncertain, leave them in receipts and mark `needs_review`.
+
+### task e: validate mintlify docs
+
+check `docs.json` references. ensure each referenced page exists or create a safe placeholder.
+
+do not point mintlify to huge generated raw imports unless intentionally publishing them.
+
+---
+
+## 12. required deliverables
+
+codex should produce or update these files:
+
+```text
+20_qisystem/manifests/qios_dna_file_manifest.md
+00_qieos/exports/qios_dna_chronicle.md
+00_qieos/reconciliation/2026-06-09_reconciliation_matrix.md
+00_qieos/reconciliation/2026-06-09_folder_drift_report.md
+00_qieos/reconciliation/2026-06-09_codex_summary.md
+```
+
+optional if useful:
+
+```text
+00_qieos/reconciliation/2026-06-09_conflict_log.md
+00_qieos/reconciliation/2026-06-09_promotion_plan.md
+```
+
+---
+
+## 13. acceptance criteria
+
+reconciliation is complete for this pass when:
+
+1. every readable doc/config file is listed in the manifest.
+2. the chronicle export can be generated without scanning junk folders.
+3. folder drift is reported, not silently changed.
+4. mintlify navigation points only to files that exist.
+5. raw imports remain preserved.
+6. obvious canonical docs are placed in the locked qilabs structure.
+7. unclear docs are marked `needs_review` instead of guessed.
+8. no full qinexus `my drive` bucket tree is duplicated inside `_qios_dna`.
+9. qiaccess start is correctly treated as front door/cockpit, not master doctrine.
+10. qilife is correctly treated as data spine, not the whole os.
+11. qijourney is correctly treated as derived interpretation/creative layer.
+
+---
+
+## 14. commit guidance
+
+use small commits:
+
+```text
+generate qios dna manifest and chronicle
+add qios dna reconciliation matrix
+add folder drift report
+fix mintlify navigation references
+promote obvious canonical qios docs
+```
+
+avoid one giant mystery commit.
+
+---
+
+## 15. non-negotiables
+
+```text
+do not delete raw imports.
+do not delete older folders.
+do not flatten the repo.
+do not invent new root naming.
+do not mix qinexus storage buckets with qilabs system roots.
+do not treat generated exports as canonical.
+do not hide conflicts.
+```
+
+the job is not to make the repo look clean by force.
+
+the job is to make the repo understandable, auditable, and safe to reconcile.
+">
+          <a class="nav-link" href="#00-qieos-reconciliation-2026-06-09-codex-reconciliation-brief">Codex Reconciliation Brief: QiOS DNA</a>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-group">
       <div class="group-title">01_QiDNA</div>
       <ul>
         <li class="nav-item" data-search="01_qidna/_01_qidna.md # qidna
@@ -822,6 +1346,182 @@ system layer names are fixed: qidna, qiaccess, qisystem, qiserver, qicapture, qi
 - preserve unresolved conflicts pending an accepted decision.
 ">
           <a class="nav-link" href="#01-qidna-reconciliation-reconciliation">Reconciliation</a>
+        </li>
+        <li class="nav-item" data-search="01_qidna/reconciliation/2026-06-10_blueprint_readiness_and_decision_gate.md # qidna blueprint readiness and decision gate
+
+## purpose
+
+this document states whether qidna is ready to govern database and ui implementation and identifies the decisions required before that work continues.
+
+assessment date: 2026-06-10.
+
+## current position
+
+qidna has a sound governance foundation, but it is not yet a contradiction-free or implementation-complete master blueprint.
+
+the repository is synchronized, the active `01-70` domains are documented, the architecture adrs are in place, and the single-page site builds successfully. structural reconciliation and implementation specifications remain incomplete.
+
+## established foundations
+
+- eight primary domains define the current system boundary.
+- adrs define data strategy, folder documentation, topology, build strategy, and the ai auditor role.
+- the reconciliation report records naming, ownership, topology, and persistence conflicts.
+- sqlite, qinexus, and legacy supabase have separate intended responsibilities.
+- the generated site provides a searchable single-page documentation reader.
+
+## blocking issues
+
+### 1. competing root models
+
+the repository still presents two architectures as if both are current:
+
+```text
+current: 01_qidna, 10_qiaccess, 60_qiapp_qilife
+legacy:  00_qieos, 10_qios_start, 60_qiapps
+```
+
+`readme.md`, `docs.json`, doctrine, manifests, and module documents do not yet use one canonical vocabulary.
+
+### 2. incomplete site coverage
+
+the current node builder renders `.md` files but omits `.mdx` files. fourteen mdx documents are absent from the site, including the historical master map, source-of-truth rules, qilife data spine, and several module pages.
+
+the site also renders current and legacy markdown together without visible status labels.
+
+### 3. incomplete database blueprint
+
+the entity catalog exists, but the following are not yet canonical and complete:
+
+- field definitions and types
+- primary and foreign keys
+- relationship cardinality
+- status values and transition rules
+- uniqueness and validation constraints
+- indexes and query requirements
+- ownership and provenance rules
+- retention, archive, and deletion behavior
+- migration and backup rules
+- authorization and sensitive-data boundaries
+
+the actual qilife sqlite schema and legacy supabase schema were not available for comparison.
+
+### 4. incomplete ui blueprint
+
+module flows exist, but the following are not yet unified:
+
+- application route map
+- screen and view inventory
+- component ownership
+- navigation hierarchy
+- loading, empty, error, and offline states
+- create, review, approve, edit, archive, and delete flows
+- entity-to-screen and api-to-screen mappings
+- permissions and visibility rules
+- accessibility and responsive behavior requirements
+- acceptance criteria for each workflow
+
+## readiness decision
+
+broad database and ui implementation should not begin from the current documentation alone.
+
+the required sequence is:
+
+1. select and document the canonical root vocabulary.
+2. label all competing documents as active, legacy, proposed, generated, or evidence.
+3. consolidate active domain documentation without deleting historical evidence.
+4. make the generated site include all supported canonical formats and display document status.
+5. complete and verify the database blueprint against the actual implementation schema.
+6. complete the route, screen, workflow, and ui-to-entity blueprint.
+7. implement database changes, then api contracts, then ui behavior.
+
+## decision package required from cody
+
+review the documents listed below and provide explicit decisions for each question.
+
+### canonical structure
+
+review:
+
+- `01_qidna/_01_qidna.md`
+- `01_qidna/qieos/_qieos.md`
+- `00_qieos/system_map/qios_master_map.mdx`
+- `00_qieos/doctrine/qios_core_doctrine.mdx`
+- `readme.md`
+
+decision:
+
+- is the canonical root model the current `01_qidna` through `70_qiconnect` structure?
+- is `qieos` a doctrine section inside qidna rather than a separate top-level root?
+- is the canonical front-door name `qiaccess` rather than `qios start` or `qiaccess start`?
+- is the canonical application name and root `qiapp qilife` / `60_qiapp_qilife`?
+
+### data authority
+
+review:
+
+- `01_qidna/architecture/decisions/adr-0012_data_strategy.md`
+- `20_qisystem/schemas/qilife_data_spine.mdx`
+- `90_decisions/0006_clean_core_with_legacy_bridge.md`
+- `70_deployment/00_local_dev.md`
+
+decision:
+
+- confirm sqlite as the current qilife structured-data authority.
+- confirm qinexus as file, export, reference, and archive storage rather than a database.
+- confirm supabase as legacy/import or future integration only.
+- provide or identify the actual qilife schema repository and database path.
+
+### product scope
+
+review:
+
+- `60_qiapp_qilife/_60_qiapp_qilife.md`
+- `90_decisions/0001_personal_lifedesk_model.md`
+- `90_decisions/0002_qibit_as_atomic_unit.md`
+- `90_decisions/0003_timeline_as_spine.md`
+- `90_decisions/0009_agent_first_copilot_cockpit.md`
+- `90_decisions/0010_spaces_for_scoped_shared_access.md`
+
+decision:
+
+- confirm which entities and modules are required for v1.
+- confirm whether spaces and shared access are v1 or later.
+- confirm whether ai is central to v1 or staged after manual workflows.
+
+### ui direction
+
+review:
+
+- `10_qiaccess/_10_qiaccess.md`
+- `60_qiapp_qilife/_60_qiapp_qilife.md`
+- `50_modules/*/overview.md`
+- `50_modules/*/ui_flow.md`
+- `60_ai_layer/02_ai_review_workflow.md`
+
+decision:
+
+- confirm the primary navigation and first screens to implement.
+- confirm whether qiaccess and qilife are separate applications or one shell with embedded modules.
+- confirm the minimum capture, inbox, timeline, action, and review workflows for v1.
+
+## exit criteria
+
+database and ui work may proceed when:
+
+- one root vocabulary is accepted
+- contradictory documents are labeled or reconciled
+- the actual database schema is available and mapped to the entity catalog
+- v1 entities, statuses, and relationships are approved
+- v1 routes, screens, and workflows are approved
+- the generated site contains the complete active blueprint without presenting legacy material as current authority
+
+## readiness estimate
+
+- governance and architecture foundation: approximately 70 percent.
+- implementation-level database and ui specification: approximately 40-50 percent.
+- current status: documentation consolidation and decision review required before implementation expansion.
+">
+          <a class="nav-link" href="#01-qidna-reconciliation-2026-06-10-blueprint-readiness-and-decision-gate">QiDNA Blueprint Readiness and Decision Gate</a>
         </li>
         <li class="nav-item" data-search="01_qidna/reconciliation/2026-06-10_qidna_implementation_reconciliation.md # qidna and implementation reconciliation
 
@@ -3189,7 +3889,7 @@ site/
     </li></ul>
 </nav>
 <main><div class="content">
-  <header class="intro"><h1>QiOS DNA</h1><p>104 source documents rendered from the repository.</p><div class="status" aria-live="polite"></div></header>
+  <header class="intro"><h1>QiOS DNA</h1><p>106 source documents rendered from the repository.</p><div class="status" aria-live="polite"></div></header>
 
     <article id="repository-root" class="doc" data-search="_..md # qios dna repository
 
@@ -3277,6 +3977,879 @@ this file is not canonical doctrine by itself.
 <p>Generated review export placeholder.</p>
 <p>Regenerate this file from Codespaces after the repo structure is stable.</p>
 <p>This file is not canonical doctrine by itself.</p>
+
+    </article>
+    <article id="00-qieos-reconciliation-2026-06-09-codex-reconciliation-brief" class="doc" data-search="00_qieos/reconciliation/2026-06-09_codex_reconciliation_brief.md # codex reconciliation brief: qios dna
+
+## purpose
+
+this document is the merged instruction brief for codex to reconcile the `_qios_dna` repository without destroying raw imports, losing context, or inventing a new folder doctrine.
+
+codex should use this as the controlling task document.
+
+---
+
+## 1. locked system model
+
+the locked local root structure is:
+
+```text
+c:\qilabs\
+  .github\
+  .qios\
+  .vscode\
+  00_qieos\
+  10_qios_start\
+  20_qisystem\
+  30_qiserver\
+  40_qicapture\
+  50_qinexus\
+    my drive\
+  60_qiapps\
+  70_qiconnect\
+  packages\
+  scripts\
+  toolbox\
+```
+
+this repo, `_qios_dna`, is the portable github documentation/doctrine version of the qilabs system brain. it should mirror the locked qilabs root logic, not a generic documentation hierarchy.
+
+---
+
+## 2. layer definitions
+
+use these definitions as canon:
+
+```text
+qios        = whole ecosystem / operating system
+qieos       = origin brain / doctrine / decisions / receipts / system map
+qios_start  = cockpit / launcher / front door / docs surface
+qisystem    = rules / schemas / naming / database doctrine / lifecycle rules
+qiserver    = infrastructure / docker / cloudflare / deploy / monitoring / backups
+qicapture   = ingestion / ocr / parsing / embeddings / pipelines
+qinexus     = storage backbone / workspace model
+qiapps      = standalone apps, sites, tools
+qiconnect   = integrations / apis / workers
+packages    = shared code, types, utilities, db helpers
+scripts     = thin wrappers only
+toolbox     = local tools and power utilities
+```
+
+important correction: qios is not only the interface. the interface is qios_start. qios is the whole operating system/ecosystem.
+
+---
+
+## 3. current doctrine relationships
+
+use these module relationships:
+
+```text
+qios
+├── 00_qieos        master doctrine / dna / decisions / receipts / map
+├── 10_qios_start  front door / cockpit / access dashboard / docs surface
+├── 20_qisystem    rules / naming / schemas / lifecycle / database doctrine
+├── 30_qiserver    runtime / infrastructure / deploy / monitoring
+├── 40_qicapture   ingestion / ocr / parsing / embedding / pipelines
+├── 50_qinexus     storage model / my drive bucket doctrine
+├── 60_qiapps      apps including qilife and qijourney
+├── 70_qiconnect   connectors / integrations / apis / workers
+├── packages       reusable shared code
+├── scripts        thin wrappers only
+└── toolbox        local utilities and power tools
+```
+
+### active modules
+
+```text
+qiaccess start = lives under 10_qios_start/qiaccess_start
+qilife         = lives under 60_qiapps/qilife and is the living data spine
+qijourney      = lives under 60_qiapps/qijourney and is the interpretation / narrative branch
+qinexus        = storage model lives under 50_qinexus, actual files live in my drive elsewhere
+qiserver       = runtime layer under 30_qiserver
+qicapture      = ingestion layer under 40_qicapture
+qiconnect      = integration layer under 70_qiconnect
+```
+
+---
+
+## 4. hard truth rules
+
+```text
+raw imports are evidence.
+canonical docs are law.
+exports are snapshots.
+```
+
+do not promote raw imported docs to canon without review.
+
+do not delete raw imported docs.
+
+do not silently merge conflicting docs.
+
+do not duplicate the full qinexus `my drive` storage bucket tree inside this repo.
+
+do not invent a new folder hierarchy.
+
+do not treat old app-specific docs as master doctrine unless the content is promoted into `00_qieos` or `20_qisystem` with review.
+
+---
+
+## 5. qinexus bucket doctrine
+
+qinexus is the storage/workspace backbone. the actual file buckets are:
+
+```text
+50_qinexus/my drive/
+  00_inbox
+  01_workbench
+  02_timeline
+  03_life
+  04_people
+  05_business
+  06_finance
+  07_legal
+  08_tech
+  09_assets
+  10_data
+  11_reference
+  12_archive
+  13_system
+```
+
+do not create duplicate roots inside `my drive` such as:
+
+```text
+20_qinexus
+30_qiarchive
+40_qisystem
+70_qiconnect
+```
+
+those are wrong inside qinexus storage. they belong to the qilabs root model, not inside the my drive bucket tree.
+
+---
+
+## 6. current repo condition
+
+the repo now contains a new locked-structure spine, but it also appears to contain older imported/mirrored folders such as:
+
+```text
+01_qidna/
+60_qiapps/
+70_qiconnect/
+site/
+```
+
+these older folders should be reviewed before moving, renaming, or deleting.
+
+codex should not bulldoze them.
+
+---
+
+## 7. target canonical repo structure
+
+the intended canonical roots are:
+
+```text
+_qios_dna/
+├── readme.md
+├── docs.json
+├── index.mdx
+├── 00_qieos/
+│   ├── doctrine/
+│   ├── decisions/
+│   ├── receipts/
+│   │   └── raw_imports/
+│   ├── system_map/
+│   ├── reconciliation/
+│   └── exports/
+├── 10_qios_start/
+│   └── qiaccess_start/
+├── 20_qisystem/
+│   ├── rules/
+│   ├── schemas/
+│   ├── naming/
+│   ├── metadata/
+│   ├── database_doctrine/
+│   ├── lifecycle/
+│   └── manifests/
+├── 30_qiserver/
+├── 40_qicapture/
+├── 50_qinexus/
+│   └── my_drive_model/
+├── 60_qiapps/
+│   ├── qilife/
+│   └── qijourney/
+├── 70_qiconnect/
+├── packages/
+├── scripts/
+├── toolbox/
+└── 09_tools/
+```
+
+note: `09_tools/` is acceptable in the repo as a helper/scripts location for repo-maintenance tools, even though local qilabs has `toolbox` and `scripts`. if desired later, it can be reconciled into `toolbox` or `scripts`, but do not move it now unless the repo convention is explicitly changed.
+
+---
+
+## 8. source material to reconcile
+
+primary sources already present or expected in repo:
+
+```text
+readme.md
+docs.json
+index.mdx
+00_qieos/**
+10_qios_start/**
+20_qisystem/**
+30_qiserver/**
+40_qicapture/**
+50_qinexus/**
+60_qiapps/**
+70_qiconnect/**
+01_qidna/**
+60_qiapps/**
+70_qiconnect/**
+site/**
+```
+
+source repos that informed this reconciliation:
+
+```text
+qiallyme/_qiaccess_start
+qiallyme/qilife
+qiallyme/_qios_dna
+```
+
+expected raw import location:
+
+```text
+00_qieos/receipts/raw_imports/2026-06-09/
+```
+
+if raw import folders are elsewhere, do not delete them. report where they are and recommend a move.
+
+---
+
+## 9. file classification rules
+
+classify each document into one of these groups:
+
+```text
+promote_canon
+keep_as_module_doc
+keep_as_receipt
+archive_legacy
+duplicate_conflict
+needs_review
+generated_export
+tooling
+```
+
+### promote to canon
+
+promote only when a document clearly defines the whole system, naming, rules, schema, source of truth, or root structure.
+
+targets:
+
+```text
+00_qieos/doctrine/
+00_qieos/decisions/
+00_qieos/system_map/
+20_qisystem/rules/
+20_qisystem/schemas/
+20_qisystem/naming/
+20_qisystem/metadata/
+20_qisystem/database_doctrine/
+20_qisystem/lifecycle/
+20_qisystem/manifests/
+```
+
+### keep as module doc
+
+if the doc explains one module/app, place or summarize it under:
+
+```text
+10_qios_start/qiaccess_start/
+30_qiserver/
+40_qicapture/
+50_qinexus/my_drive_model/
+60_qiapps/qilife/
+60_qiapps/qijourney/
+70_qiconnect/
+```
+
+### keep as receipt
+
+if it is a raw import, old source snapshot, prior draft, chat-derived doc, or evidence of previous decisions, keep it under:
+
+```text
+00_qieos/receipts/
+```
+
+### archive legacy
+
+if it is superseded but historically useful, recommend archive location but do not delete.
+
+### duplicate/conflict
+
+if two docs disagree, do not merge automatically. flag both and explain the conflict.
+
+---
+
+## 10. specific reconciliation corrections
+
+### qiaccess start
+
+qiaccess start is the front door/cockpit/access dashboard/docs surface.
+
+it is not the whole operating system.
+
+if any qiaccess doc says it replaces all qios doctrine, rewrite or flag that as outdated. correct doctrine:
+
+```text
+qiaccess start replaces older dashboard/front-door framing, not qios itself.
+qios dna / qieos remains the master doctrine layer.
+```
+
+### qilife
+
+qilife is the living operational data spine and ai lifedesk.
+
+qilife owns or models:
+
+```text
+qibits
+buckets
+threads
+actions
+action_steps
+people
+transactions
+obligations
+knowledge_items
+documents
+events
+links
+activity_log
+ai_outputs
+daily_summaries
+```
+
+timeline is a projection over timestamped records, not its own truth table.
+
+### qijourney
+
+qijourney is interpretation, reflection, narrative, creative synthesis, and meaning-making.
+
+qijourney outputs are derived unless linked back to canonical records.
+
+### qinexus
+
+qinexus storage buckets are not to be duplicated inside the repo as if they are root doctrine folders.
+
+this repo may document the model under:
+
+```text
+50_qinexus/my_drive_model/
+```
+
+---
+
+## 11. codex tasks
+
+### task a: generate full file inventory
+
+run or use:
+
+```bash
+python 09_tools/build_qios_chronicle.py
+```
+
+this should generate or update:
+
+```text
+20_qisystem/manifests/qios_dna_file_manifest.md
+00_qieos/exports/qios_dna_chronicle.md
+```
+
+if the script outputs `.md` while mintlify expects `.mdx`, do not break the docs site. either keep `.md` for generated exports or add matching nav entries only when needed.
+
+### task b: create reconciliation matrix
+
+create:
+
+```text
+00_qieos/reconciliation/2026-06-09_reconciliation_matrix.md
+```
+
+for every meaningful doc, include:
+
+```text
+path
+classification
+recommended target
+status
+notes/conflicts
+```
+
+### task c: identify outdated folder roots
+
+create:
+
+```text
+00_qieos/reconciliation/2026-06-09_folder_drift_report.md
+```
+
+include old/lowercase/non-locked folders and recommended action:
+
+```text
+keep
+move later
+merge later
+archive later
+delete only after review
+```
+
+do not delete anything in this pass.
+
+### task d: promote obvious canonical summaries only
+
+only promote documents when obvious. if uncertain, leave them in receipts and mark `needs_review`.
+
+### task e: validate mintlify docs
+
+check `docs.json` references. ensure each referenced page exists or create a safe placeholder.
+
+do not point mintlify to huge generated raw imports unless intentionally publishing them.
+
+---
+
+## 12. required deliverables
+
+codex should produce or update these files:
+
+```text
+20_qisystem/manifests/qios_dna_file_manifest.md
+00_qieos/exports/qios_dna_chronicle.md
+00_qieos/reconciliation/2026-06-09_reconciliation_matrix.md
+00_qieos/reconciliation/2026-06-09_folder_drift_report.md
+00_qieos/reconciliation/2026-06-09_codex_summary.md
+```
+
+optional if useful:
+
+```text
+00_qieos/reconciliation/2026-06-09_conflict_log.md
+00_qieos/reconciliation/2026-06-09_promotion_plan.md
+```
+
+---
+
+## 13. acceptance criteria
+
+reconciliation is complete for this pass when:
+
+1. every readable doc/config file is listed in the manifest.
+2. the chronicle export can be generated without scanning junk folders.
+3. folder drift is reported, not silently changed.
+4. mintlify navigation points only to files that exist.
+5. raw imports remain preserved.
+6. obvious canonical docs are placed in the locked qilabs structure.
+7. unclear docs are marked `needs_review` instead of guessed.
+8. no full qinexus `my drive` bucket tree is duplicated inside `_qios_dna`.
+9. qiaccess start is correctly treated as front door/cockpit, not master doctrine.
+10. qilife is correctly treated as data spine, not the whole os.
+11. qijourney is correctly treated as derived interpretation/creative layer.
+
+---
+
+## 14. commit guidance
+
+use small commits:
+
+```text
+generate qios dna manifest and chronicle
+add qios dna reconciliation matrix
+add folder drift report
+fix mintlify navigation references
+promote obvious canonical qios docs
+```
+
+avoid one giant mystery commit.
+
+---
+
+## 15. non-negotiables
+
+```text
+do not delete raw imports.
+do not delete older folders.
+do not flatten the repo.
+do not invent new root naming.
+do not mix qinexus storage buckets with qilabs system roots.
+do not treat generated exports as canonical.
+do not hide conflicts.
+```
+
+the job is not to make the repo look clean by force.
+
+the job is to make the repo understandable, auditable, and safe to reconcile.
+">
+      <div class="source-path">00_QiEOS/reconciliation/2026-06-09_codex_reconciliation_brief.md</div>
+      <h1>Codex Reconciliation Brief: QiOS DNA</h1>
+<h2>Purpose</h2>
+<p>This document is the merged instruction brief for Codex to reconcile the <code>_QiOS_DNA</code> repository without destroying raw imports, losing context, or inventing a new folder doctrine.</p>
+<p>Codex should use this as the controlling task document.</p>
+<hr>
+<h2>1. Locked System Model</h2>
+<p>The locked local root structure is:</p>
+<pre><code class="language-text">C:\QiLabs\
+  .github\
+  .qios\
+  .vscode\
+  00_QiEOS\
+  10_QiOS_Start\
+  20_QiSystem\
+  30_QiServer\
+  40_QiCapture\
+  50_QiNexus\
+    My Drive\
+  60_QiApps\
+  70_QiConnect\
+  packages\
+  scripts\
+  toolbox\
+</code></pre>
+<p>This repo, <code>_QiOS_DNA</code>, is the portable GitHub documentation/doctrine version of the QiLabs system brain. It should mirror the locked QiLabs root logic, not a generic documentation hierarchy.</p>
+<hr>
+<h2>2. Layer Definitions</h2>
+<p>Use these definitions as canon:</p>
+<pre><code class="language-text">QiOS        = whole ecosystem / operating system
+QiEOS       = origin brain / doctrine / decisions / receipts / system map
+QiOS_Start  = cockpit / launcher / front door / docs surface
+QiSystem    = rules / schemas / naming / database doctrine / lifecycle rules
+QiServer    = infrastructure / Docker / Cloudflare / deploy / monitoring / backups
+QiCapture   = ingestion / OCR / parsing / embeddings / pipelines
+QiNexus     = storage backbone / workspace model
+QiApps      = standalone apps, sites, tools
+QiConnect   = integrations / APIs / workers
+packages    = shared code, types, utilities, db helpers
+scripts     = thin wrappers only
+toolbox     = local tools and power utilities
+</code></pre>
+<p>Important correction: QiOS is not only the interface. The interface is QiOS_Start. QiOS is the whole operating system/ecosystem.</p>
+<hr>
+<h2>3. Current Doctrine Relationships</h2>
+<p>Use these module relationships:</p>
+<pre><code class="language-text">QiOS
+├── 00_QiEOS        master doctrine / DNA / decisions / receipts / map
+├── 10_QiOS_Start  front door / cockpit / access dashboard / docs surface
+├── 20_QiSystem    rules / naming / schemas / lifecycle / database doctrine
+├── 30_QiServer    runtime / infrastructure / deploy / monitoring
+├── 40_QiCapture   ingestion / OCR / parsing / embedding / pipelines
+├── 50_QiNexus     storage model / My Drive bucket doctrine
+├── 60_QiApps      apps including QiLife and QiJourney
+├── 70_QiConnect   connectors / integrations / APIs / workers
+├── packages       reusable shared code
+├── scripts        thin wrappers only
+└── toolbox        local utilities and power tools
+</code></pre>
+<h3>Active modules</h3>
+<pre><code class="language-text">QiAccess Start = lives under 10_QiOS_Start/QiAccess_Start
+QiLife         = lives under 60_QiApps/QiLife and is the living data spine
+QiJourney      = lives under 60_QiApps/QiJourney and is the interpretation / narrative branch
+QiNexus        = storage model lives under 50_QiNexus, actual files live in My Drive elsewhere
+QiServer       = runtime layer under 30_QiServer
+QiCapture      = ingestion layer under 40_QiCapture
+QiConnect      = integration layer under 70_QiConnect
+</code></pre>
+<hr>
+<h2>4. Hard Truth Rules</h2>
+<pre><code class="language-text">Raw imports are evidence.
+Canonical docs are law.
+Exports are snapshots.
+</code></pre>
+<p>Do not promote raw imported docs to canon without review.</p>
+<p>Do not delete raw imported docs.</p>
+<p>Do not silently merge conflicting docs.</p>
+<p>Do not duplicate the full QiNexus <code>My Drive</code> storage bucket tree inside this repo.</p>
+<p>Do not invent a new folder hierarchy.</p>
+<p>Do not treat old app-specific docs as master doctrine unless the content is promoted into <code>00_QiEOS</code> or <code>20_QiSystem</code> with review.</p>
+<hr>
+<h2>5. QiNexus Bucket Doctrine</h2>
+<p>QiNexus is the storage/workspace backbone. The actual file buckets are:</p>
+<pre><code class="language-text">50_QiNexus/My Drive/
+  00_inbox
+  01_workbench
+  02_timeline
+  03_life
+  04_people
+  05_business
+  06_finance
+  07_legal
+  08_tech
+  09_assets
+  10_data
+  11_reference
+  12_archive
+  13_system
+</code></pre>
+<p>Do not create duplicate roots inside <code>My Drive</code> such as:</p>
+<pre><code class="language-text">20_qinexus
+30_qiarchive
+40_qisystem
+70_qiconnect
+</code></pre>
+<p>Those are wrong inside QiNexus storage. They belong to the QiLabs root model, not inside the My Drive bucket tree.</p>
+<hr>
+<h2>6. Current Repo Condition</h2>
+<p>The repo now contains a new locked-structure spine, but it also appears to contain older imported/mirrored folders such as:</p>
+<pre><code class="language-text">01_QiDNA/
+60_qiapps/
+70_qiconnect/
+site/
+</code></pre>
+<p>These older folders should be reviewed before moving, renaming, or deleting.</p>
+<p>Codex should not bulldoze them.</p>
+<hr>
+<h2>7. Target Canonical Repo Structure</h2>
+<p>The intended canonical roots are:</p>
+<pre><code class="language-text">_QiOS_DNA/
+├── README.md
+├── docs.json
+├── index.mdx
+├── 00_QiEOS/
+│   ├── doctrine/
+│   ├── decisions/
+│   ├── receipts/
+│   │   └── raw_imports/
+│   ├── system_map/
+│   ├── reconciliation/
+│   └── exports/
+├── 10_QiOS_Start/
+│   └── QiAccess_Start/
+├── 20_QiSystem/
+│   ├── rules/
+│   ├── schemas/
+│   ├── naming/
+│   ├── metadata/
+│   ├── database_doctrine/
+│   ├── lifecycle/
+│   └── manifests/
+├── 30_QiServer/
+├── 40_QiCapture/
+├── 50_QiNexus/
+│   └── My_Drive_Model/
+├── 60_QiApps/
+│   ├── QiLife/
+│   └── QiJourney/
+├── 70_QiConnect/
+├── packages/
+├── scripts/
+├── toolbox/
+└── 09_tools/
+</code></pre>
+<p>Note: <code>09_tools/</code> is acceptable in the repo as a helper/scripts location for repo-maintenance tools, even though local QiLabs has <code>toolbox</code> and <code>scripts</code>. If desired later, it can be reconciled into <code>toolbox</code> or <code>scripts</code>, but do not move it now unless the repo convention is explicitly changed.</p>
+<hr>
+<h2>8. Source Material to Reconcile</h2>
+<p>Primary sources already present or expected in repo:</p>
+<pre><code class="language-text">README.md
+docs.json
+index.mdx
+00_QiEOS/**
+10_QiOS_Start/**
+20_QiSystem/**
+30_QiServer/**
+40_QiCapture/**
+50_QiNexus/**
+60_QiApps/**
+70_QiConnect/**
+01_QiDNA/**
+60_qiapps/**
+70_qiconnect/**
+site/**
+</code></pre>
+<p>Source repos that informed this reconciliation:</p>
+<pre><code class="language-text">qiallyme/_QiAccess_Start
+qiallyme/qilife
+qiallyme/_QiOS_DNA
+</code></pre>
+<p>Expected raw import location:</p>
+<pre><code class="language-text">00_QiEOS/receipts/raw_imports/2026-06-09/
+</code></pre>
+<p>If raw import folders are elsewhere, do not delete them. Report where they are and recommend a move.</p>
+<hr>
+<h2>9. File Classification Rules</h2>
+<p>Classify each document into one of these groups:</p>
+<pre><code class="language-text">PROMOTE_CANON
+KEEP_AS_MODULE_DOC
+KEEP_AS_RECEIPT
+ARCHIVE_LEGACY
+DUPLICATE_CONFLICT
+NEEDS_REVIEW
+GENERATED_EXPORT
+TOOLING
+</code></pre>
+<h3>Promote to canon</h3>
+<p>Promote only when a document clearly defines the whole system, naming, rules, schema, source of truth, or root structure.</p>
+<p>Targets:</p>
+<pre><code class="language-text">00_QiEOS/doctrine/
+00_QiEOS/decisions/
+00_QiEOS/system_map/
+20_QiSystem/rules/
+20_QiSystem/schemas/
+20_QiSystem/naming/
+20_QiSystem/metadata/
+20_QiSystem/database_doctrine/
+20_QiSystem/lifecycle/
+20_QiSystem/manifests/
+</code></pre>
+<h3>Keep as module doc</h3>
+<p>If the doc explains one module/app, place or summarize it under:</p>
+<pre><code class="language-text">10_QiOS_Start/QiAccess_Start/
+30_QiServer/
+40_QiCapture/
+50_QiNexus/My_Drive_Model/
+60_QiApps/QiLife/
+60_QiApps/QiJourney/
+70_QiConnect/
+</code></pre>
+<h3>Keep as receipt</h3>
+<p>If it is a raw import, old source snapshot, prior draft, chat-derived doc, or evidence of previous decisions, keep it under:</p>
+<pre><code class="language-text">00_QiEOS/receipts/
+</code></pre>
+<h3>Archive legacy</h3>
+<p>If it is superseded but historically useful, recommend archive location but do not delete.</p>
+<h3>Duplicate/conflict</h3>
+<p>If two docs disagree, do not merge automatically. Flag both and explain the conflict.</p>
+<hr>
+<h2>10. Specific Reconciliation Corrections</h2>
+<h3>QiAccess Start</h3>
+<p>QiAccess Start is the front door/cockpit/access dashboard/docs surface.</p>
+<p>It is not the whole operating system.</p>
+<p>If any QiAccess doc says it replaces all QiOS doctrine, rewrite or flag that as outdated. Correct doctrine:</p>
+<pre><code class="language-text">QiAccess Start replaces older dashboard/front-door framing, not QiOS itself.
+QiOS DNA / QiEOS remains the master doctrine layer.
+</code></pre>
+<h3>QiLife</h3>
+<p>QiLife is the living operational data spine and AI LifeDesk.</p>
+<p>QiLife owns or models:</p>
+<pre><code class="language-text">qibits
+buckets
+threads
+actions
+action_steps
+people
+transactions
+obligations
+knowledge_items
+documents
+events
+links
+activity_log
+ai_outputs
+daily_summaries
+</code></pre>
+<p>Timeline is a projection over timestamped records, not its own truth table.</p>
+<h3>QiJourney</h3>
+<p>QiJourney is interpretation, reflection, narrative, creative synthesis, and meaning-making.</p>
+<p>QiJourney outputs are derived unless linked back to canonical records.</p>
+<h3>QiNexus</h3>
+<p>QiNexus storage buckets are not to be duplicated inside the repo as if they are root doctrine folders.</p>
+<p>This repo may document the model under:</p>
+<pre><code class="language-text">50_QiNexus/My_Drive_Model/
+</code></pre>
+<hr>
+<h2>11. Codex Tasks</h2>
+<h3>Task A: Generate full file inventory</h3>
+<p>Run or use:</p>
+<pre><code class="language-bash">python 09_tools/build_qios_chronicle.py
+</code></pre>
+<p>This should generate or update:</p>
+<pre><code class="language-text">20_QiSystem/manifests/QiOS_DNA_File_Manifest.md
+00_QiEOS/exports/QiOS_DNA_Chronicle.md
+</code></pre>
+<p>If the script outputs <code>.md</code> while Mintlify expects <code>.mdx</code>, do not break the docs site. Either keep <code>.md</code> for generated exports or add matching nav entries only when needed.</p>
+<h3>Task B: Create reconciliation matrix</h3>
+<p>Create:</p>
+<pre><code class="language-text">00_QiEOS/reconciliation/2026-06-09_reconciliation_matrix.md
+</code></pre>
+<p>For every meaningful doc, include:</p>
+<pre><code class="language-text">path
+classification
+recommended target
+status
+notes/conflicts
+</code></pre>
+<h3>Task C: Identify outdated folder roots</h3>
+<p>Create:</p>
+<pre><code class="language-text">00_QiEOS/reconciliation/2026-06-09_folder_drift_report.md
+</code></pre>
+<p>Include old/lowercase/non-locked folders and recommended action:</p>
+<pre><code class="language-text">keep
+move later
+merge later
+archive later
+delete only after review
+</code></pre>
+<p>Do not delete anything in this pass.</p>
+<h3>Task D: Promote obvious canonical summaries only</h3>
+<p>Only promote documents when obvious. If uncertain, leave them in receipts and mark <code>NEEDS_REVIEW</code>.</p>
+<h3>Task E: Validate Mintlify docs</h3>
+<p>Check <code>docs.json</code> references. Ensure each referenced page exists or create a safe placeholder.</p>
+<p>Do not point Mintlify to huge generated raw imports unless intentionally publishing them.</p>
+<hr>
+<h2>12. Required Deliverables</h2>
+<p>Codex should produce or update these files:</p>
+<pre><code class="language-text">20_QiSystem/manifests/QiOS_DNA_File_Manifest.md
+00_QiEOS/exports/QiOS_DNA_Chronicle.md
+00_QiEOS/reconciliation/2026-06-09_reconciliation_matrix.md
+00_QiEOS/reconciliation/2026-06-09_folder_drift_report.md
+00_QiEOS/reconciliation/2026-06-09_codex_summary.md
+</code></pre>
+<p>Optional if useful:</p>
+<pre><code class="language-text">00_QiEOS/reconciliation/2026-06-09_conflict_log.md
+00_QiEOS/reconciliation/2026-06-09_promotion_plan.md
+</code></pre>
+<hr>
+<h2>13. Acceptance Criteria</h2>
+<p>Reconciliation is complete for this pass when:</p>
+<ol>
+<li>Every readable doc/config file is listed in the manifest.</li>
+<li>The Chronicle export can be generated without scanning junk folders.</li>
+<li>Folder drift is reported, not silently changed.</li>
+<li>Mintlify navigation points only to files that exist.</li>
+<li>Raw imports remain preserved.</li>
+<li>Obvious canonical docs are placed in the locked QiLabs structure.</li>
+<li>Unclear docs are marked <code>NEEDS_REVIEW</code> instead of guessed.</li>
+<li>No full QiNexus <code>My Drive</code> bucket tree is duplicated inside <code>_QiOS_DNA</code>.</li>
+<li>QiAccess Start is correctly treated as front door/cockpit, not master doctrine.</li>
+<li>QiLife is correctly treated as data spine, not the whole OS.</li>
+<li>QiJourney is correctly treated as derived interpretation/creative layer.</li>
+</ol>
+<hr>
+<h2>14. Commit Guidance</h2>
+<p>Use small commits:</p>
+<pre><code class="language-text">Generate QiOS DNA manifest and chronicle
+Add QiOS DNA reconciliation matrix
+Add folder drift report
+Fix Mintlify navigation references
+Promote obvious canonical QiOS docs
+</code></pre>
+<p>Avoid one giant mystery commit.</p>
+<hr>
+<h2>15. Non-Negotiables</h2>
+<pre><code class="language-text">Do not delete raw imports.
+Do not delete older folders.
+Do not flatten the repo.
+Do not invent new root naming.
+Do not mix QiNexus storage buckets with QiLabs system roots.
+Do not treat generated exports as canonical.
+Do not hide conflicts.
+</code></pre>
+<p>The job is not to make the repo look clean by force.</p>
+<p>The job is to make the repo understandable, auditable, and safe to reconcile.</p>
 
     </article>
     <article id="01-qidna-01-qidna" class="doc" data-search="01_qidna/_01_qidna.md # qidna
@@ -3763,6 +5336,329 @@ system layer names are fixed: qidna, qiaccess, qisystem, qiserver, qicapture, qi
 <li>Separate facts from proposals.</li>
 <li>Classify recommendations as ADD, MERGE, UPDATE, or DELETE.</li>
 <li>Preserve unresolved conflicts pending an accepted decision.</li>
+</ul>
+
+    </article>
+    <article id="01-qidna-reconciliation-2026-06-10-blueprint-readiness-and-decision-gate" class="doc" data-search="01_qidna/reconciliation/2026-06-10_blueprint_readiness_and_decision_gate.md # qidna blueprint readiness and decision gate
+
+## purpose
+
+this document states whether qidna is ready to govern database and ui implementation and identifies the decisions required before that work continues.
+
+assessment date: 2026-06-10.
+
+## current position
+
+qidna has a sound governance foundation, but it is not yet a contradiction-free or implementation-complete master blueprint.
+
+the repository is synchronized, the active `01-70` domains are documented, the architecture adrs are in place, and the single-page site builds successfully. structural reconciliation and implementation specifications remain incomplete.
+
+## established foundations
+
+- eight primary domains define the current system boundary.
+- adrs define data strategy, folder documentation, topology, build strategy, and the ai auditor role.
+- the reconciliation report records naming, ownership, topology, and persistence conflicts.
+- sqlite, qinexus, and legacy supabase have separate intended responsibilities.
+- the generated site provides a searchable single-page documentation reader.
+
+## blocking issues
+
+### 1. competing root models
+
+the repository still presents two architectures as if both are current:
+
+```text
+current: 01_qidna, 10_qiaccess, 60_qiapp_qilife
+legacy:  00_qieos, 10_qios_start, 60_qiapps
+```
+
+`readme.md`, `docs.json`, doctrine, manifests, and module documents do not yet use one canonical vocabulary.
+
+### 2. incomplete site coverage
+
+the current node builder renders `.md` files but omits `.mdx` files. fourteen mdx documents are absent from the site, including the historical master map, source-of-truth rules, qilife data spine, and several module pages.
+
+the site also renders current and legacy markdown together without visible status labels.
+
+### 3. incomplete database blueprint
+
+the entity catalog exists, but the following are not yet canonical and complete:
+
+- field definitions and types
+- primary and foreign keys
+- relationship cardinality
+- status values and transition rules
+- uniqueness and validation constraints
+- indexes and query requirements
+- ownership and provenance rules
+- retention, archive, and deletion behavior
+- migration and backup rules
+- authorization and sensitive-data boundaries
+
+the actual qilife sqlite schema and legacy supabase schema were not available for comparison.
+
+### 4. incomplete ui blueprint
+
+module flows exist, but the following are not yet unified:
+
+- application route map
+- screen and view inventory
+- component ownership
+- navigation hierarchy
+- loading, empty, error, and offline states
+- create, review, approve, edit, archive, and delete flows
+- entity-to-screen and api-to-screen mappings
+- permissions and visibility rules
+- accessibility and responsive behavior requirements
+- acceptance criteria for each workflow
+
+## readiness decision
+
+broad database and ui implementation should not begin from the current documentation alone.
+
+the required sequence is:
+
+1. select and document the canonical root vocabulary.
+2. label all competing documents as active, legacy, proposed, generated, or evidence.
+3. consolidate active domain documentation without deleting historical evidence.
+4. make the generated site include all supported canonical formats and display document status.
+5. complete and verify the database blueprint against the actual implementation schema.
+6. complete the route, screen, workflow, and ui-to-entity blueprint.
+7. implement database changes, then api contracts, then ui behavior.
+
+## decision package required from cody
+
+review the documents listed below and provide explicit decisions for each question.
+
+### canonical structure
+
+review:
+
+- `01_qidna/_01_qidna.md`
+- `01_qidna/qieos/_qieos.md`
+- `00_qieos/system_map/qios_master_map.mdx`
+- `00_qieos/doctrine/qios_core_doctrine.mdx`
+- `readme.md`
+
+decision:
+
+- is the canonical root model the current `01_qidna` through `70_qiconnect` structure?
+- is `qieos` a doctrine section inside qidna rather than a separate top-level root?
+- is the canonical front-door name `qiaccess` rather than `qios start` or `qiaccess start`?
+- is the canonical application name and root `qiapp qilife` / `60_qiapp_qilife`?
+
+### data authority
+
+review:
+
+- `01_qidna/architecture/decisions/adr-0012_data_strategy.md`
+- `20_qisystem/schemas/qilife_data_spine.mdx`
+- `90_decisions/0006_clean_core_with_legacy_bridge.md`
+- `70_deployment/00_local_dev.md`
+
+decision:
+
+- confirm sqlite as the current qilife structured-data authority.
+- confirm qinexus as file, export, reference, and archive storage rather than a database.
+- confirm supabase as legacy/import or future integration only.
+- provide or identify the actual qilife schema repository and database path.
+
+### product scope
+
+review:
+
+- `60_qiapp_qilife/_60_qiapp_qilife.md`
+- `90_decisions/0001_personal_lifedesk_model.md`
+- `90_decisions/0002_qibit_as_atomic_unit.md`
+- `90_decisions/0003_timeline_as_spine.md`
+- `90_decisions/0009_agent_first_copilot_cockpit.md`
+- `90_decisions/0010_spaces_for_scoped_shared_access.md`
+
+decision:
+
+- confirm which entities and modules are required for v1.
+- confirm whether spaces and shared access are v1 or later.
+- confirm whether ai is central to v1 or staged after manual workflows.
+
+### ui direction
+
+review:
+
+- `10_qiaccess/_10_qiaccess.md`
+- `60_qiapp_qilife/_60_qiapp_qilife.md`
+- `50_modules/*/overview.md`
+- `50_modules/*/ui_flow.md`
+- `60_ai_layer/02_ai_review_workflow.md`
+
+decision:
+
+- confirm the primary navigation and first screens to implement.
+- confirm whether qiaccess and qilife are separate applications or one shell with embedded modules.
+- confirm the minimum capture, inbox, timeline, action, and review workflows for v1.
+
+## exit criteria
+
+database and ui work may proceed when:
+
+- one root vocabulary is accepted
+- contradictory documents are labeled or reconciled
+- the actual database schema is available and mapped to the entity catalog
+- v1 entities, statuses, and relationships are approved
+- v1 routes, screens, and workflows are approved
+- the generated site contains the complete active blueprint without presenting legacy material as current authority
+
+## readiness estimate
+
+- governance and architecture foundation: approximately 70 percent.
+- implementation-level database and ui specification: approximately 40-50 percent.
+- current status: documentation consolidation and decision review required before implementation expansion.
+">
+      <div class="source-path">01_QiDNA/Reconciliation/2026-06-10_blueprint_readiness_and_decision_gate.md</div>
+      <h1>QiDNA Blueprint Readiness and Decision Gate</h1>
+<h2>Purpose</h2>
+<p>This document states whether QiDNA is ready to govern database and UI implementation and identifies the decisions required before that work continues.</p>
+<p>Assessment date: 2026-06-10.</p>
+<h2>Current Position</h2>
+<p>QiDNA has a sound governance foundation, but it is not yet a contradiction-free or implementation-complete master blueprint.</p>
+<p>The repository is synchronized, the active <code>01-70</code> domains are documented, the architecture ADRs are in place, and the single-page site builds successfully. Structural reconciliation and implementation specifications remain incomplete.</p>
+<h2>Established Foundations</h2>
+<ul>
+<li>Eight primary domains define the current system boundary.</li>
+<li>ADRs define data strategy, folder documentation, topology, build strategy, and the AI auditor role.</li>
+<li>The reconciliation report records naming, ownership, topology, and persistence conflicts.</li>
+<li>SQLite, QiNexus, and legacy Supabase have separate intended responsibilities.</li>
+<li>The generated site provides a searchable single-page documentation reader.</li>
+</ul>
+<h2>Blocking Issues</h2>
+<h3>1. Competing Root Models</h3>
+<p>The repository still presents two architectures as if both are current:</p>
+<pre><code class="language-text">Current: 01_QiDNA, 10_QiAccess, 60_QiApp_QiLife
+Legacy:  00_QiEOS, 10_QiOS_Start, 60_QiApps
+</code></pre>
+<p><code>README.md</code>, <code>docs.json</code>, doctrine, manifests, and module documents do not yet use one canonical vocabulary.</p>
+<h3>2. Incomplete Site Coverage</h3>
+<p>The current Node builder renders <code>.md</code> files but omits <code>.mdx</code> files. Fourteen MDX documents are absent from the site, including the historical master map, source-of-truth rules, QiLife data spine, and several module pages.</p>
+<p>The site also renders current and legacy Markdown together without visible status labels.</p>
+<h3>3. Incomplete Database Blueprint</h3>
+<p>The entity catalog exists, but the following are not yet canonical and complete:</p>
+<ul>
+<li>field definitions and types</li>
+<li>primary and foreign keys</li>
+<li>relationship cardinality</li>
+<li>status values and transition rules</li>
+<li>uniqueness and validation constraints</li>
+<li>indexes and query requirements</li>
+<li>ownership and provenance rules</li>
+<li>retention, archive, and deletion behavior</li>
+<li>migration and backup rules</li>
+<li>authorization and sensitive-data boundaries</li>
+</ul>
+<p>The actual QiLife SQLite schema and legacy Supabase schema were not available for comparison.</p>
+<h3>4. Incomplete UI Blueprint</h3>
+<p>Module flows exist, but the following are not yet unified:</p>
+<ul>
+<li>application route map</li>
+<li>screen and view inventory</li>
+<li>component ownership</li>
+<li>navigation hierarchy</li>
+<li>loading, empty, error, and offline states</li>
+<li>create, review, approve, edit, archive, and delete flows</li>
+<li>entity-to-screen and API-to-screen mappings</li>
+<li>permissions and visibility rules</li>
+<li>accessibility and responsive behavior requirements</li>
+<li>acceptance criteria for each workflow</li>
+</ul>
+<h2>Readiness Decision</h2>
+<p>Broad database and UI implementation should not begin from the current documentation alone.</p>
+<p>The required sequence is:</p>
+<ol>
+<li>Select and document the canonical root vocabulary.</li>
+<li>Label all competing documents as Active, Legacy, Proposed, Generated, or Evidence.</li>
+<li>Consolidate active domain documentation without deleting historical evidence.</li>
+<li>Make the generated site include all supported canonical formats and display document status.</li>
+<li>Complete and verify the database blueprint against the actual implementation schema.</li>
+<li>Complete the route, screen, workflow, and UI-to-entity blueprint.</li>
+<li>Implement database changes, then API contracts, then UI behavior.</li>
+</ol>
+<h2>Decision Package Required From Cody</h2>
+<p>Review the documents listed below and provide explicit decisions for each question.</p>
+<h3>Canonical Structure</h3>
+<p>Review:</p>
+<ul>
+<li><code>01_QiDNA/_01_QiDNA.md</code></li>
+<li><code>01_QiDNA/QiEOS/_QiEOS.md</code></li>
+<li><code>00_QiEOS/system_map/QiOS_Master_Map.mdx</code></li>
+<li><code>00_QiEOS/doctrine/QiOS_Core_Doctrine.mdx</code></li>
+<li><code>README.md</code></li>
+</ul>
+<p>Decision:</p>
+<ul>
+<li>Is the canonical root model the current <code>01_QiDNA</code> through <code>70_QiConnect</code> structure?</li>
+<li>Is <code>QiEOS</code> a doctrine section inside QiDNA rather than a separate top-level root?</li>
+<li>Is the canonical front-door name <code>QiAccess</code> rather than <code>QiOS Start</code> or <code>QiAccess Start</code>?</li>
+<li>Is the canonical application name and root <code>QiApp QiLife</code> / <code>60_QiApp_QiLife</code>?</li>
+</ul>
+<h3>Data Authority</h3>
+<p>Review:</p>
+<ul>
+<li><code>01_QiDNA/Architecture/Decisions/ADR-0012_data_strategy.md</code></li>
+<li><code>20_QiSystem/schemas/QiLife_Data_Spine.mdx</code></li>
+<li><code>90_decisions/0006_clean_core_with_legacy_bridge.md</code></li>
+<li><code>70_deployment/00_local_dev.md</code></li>
+</ul>
+<p>Decision:</p>
+<ul>
+<li>Confirm SQLite as the current QiLife structured-data authority.</li>
+<li>Confirm QiNexus as file, export, reference, and archive storage rather than a database.</li>
+<li>Confirm Supabase as legacy/import or future integration only.</li>
+<li>Provide or identify the actual QiLife schema repository and database path.</li>
+</ul>
+<h3>Product Scope</h3>
+<p>Review:</p>
+<ul>
+<li><code>60_QiApp_QiLife/_60_QiApp_QiLife.md</code></li>
+<li><code>90_decisions/0001_personal_lifedesk_model.md</code></li>
+<li><code>90_decisions/0002_qibit_as_atomic_unit.md</code></li>
+<li><code>90_decisions/0003_timeline_as_spine.md</code></li>
+<li><code>90_decisions/0009_agent_first_copilot_cockpit.md</code></li>
+<li><code>90_decisions/0010_spaces_for_scoped_shared_access.md</code></li>
+</ul>
+<p>Decision:</p>
+<ul>
+<li>Confirm which entities and modules are required for v1.</li>
+<li>Confirm whether Spaces and shared access are v1 or later.</li>
+<li>Confirm whether AI is central to v1 or staged after manual workflows.</li>
+</ul>
+<h3>UI Direction</h3>
+<p>Review:</p>
+<ul>
+<li><code>10_QiAccess/_10_QiAccess.md</code></li>
+<li><code>60_QiApp_QiLife/_60_QiApp_QiLife.md</code></li>
+<li><code>50_modules/*/overview.md</code></li>
+<li><code>50_modules/*/ui_flow.md</code></li>
+<li><code>60_ai_layer/02_ai_review_workflow.md</code></li>
+</ul>
+<p>Decision:</p>
+<ul>
+<li>Confirm the primary navigation and first screens to implement.</li>
+<li>Confirm whether QiAccess and QiLife are separate applications or one shell with embedded modules.</li>
+<li>Confirm the minimum capture, inbox, timeline, action, and review workflows for v1.</li>
+</ul>
+<h2>Exit Criteria</h2>
+<p>Database and UI work may proceed when:</p>
+<ul>
+<li>one root vocabulary is accepted</li>
+<li>contradictory documents are labeled or reconciled</li>
+<li>the actual database schema is available and mapped to the entity catalog</li>
+<li>v1 entities, statuses, and relationships are approved</li>
+<li>v1 routes, screens, and workflows are approved</li>
+<li>the generated site contains the complete active blueprint without presenting legacy material as current authority</li>
+</ul>
+<h2>Readiness Estimate</h2>
+<ul>
+<li>Governance and architecture foundation: approximately 70 percent.</li>
+<li>Implementation-level database and UI specification: approximately 40-50 percent.</li>
+<li>Current status: documentation consolidation and decision review required before implementation expansion.</li>
 </ul>
 
     </article>
