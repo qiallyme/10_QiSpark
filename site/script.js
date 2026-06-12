@@ -1,7 +1,541 @@
-const docs=[{"path":".","id":"root","depth":0,"markdown":"# QiOS DNA Repository\n\n## Overview\n\nQiOS DNA is the mirrored documentation filesystem for the live Qi system.\n\nThe active model is:\n\n```text\nQiAccess -> QiLife -> (QiSystem + QiNexus + QiCapture + QiConnect)\n```\n\n## Responsibilities\n\n- Keep every physical folder documented by exactly one `_folder.md`.\n- Keep documentation location-based.\n- Keep active system-layer names stable.\n- Keep the single-page mirror viewer in `site/`.\n\n## Flows\n\n```text\nSystem folder -> matching QiDNA folder -> _folder.md\n```\n\n## Structure\n\nActive system folders:\n\n- `01_QiDNA`\n- `10_QiAccess`\n- `20_QiSystem`\n- `30_QiServer`\n- `40_QiCapture`\n- `50_QiNexus`\n- `60_QiApp_QiLife`\n- `70_QiConnect`\n\nThe `site/` folder contains the single-page system mirror viewer.\n\n"},{"path":"01_QiDNA","id":"01_qidna","depth":0,"markdown":"# QiDNA\n\n## Overview\n\nQiDNA is the governance and documentation layer for the Qi system. It defines the mirror rule: documentation must live in the same layer as the thing it describes.\n\nThe active system model is:\n\n```text\nQiAccess -> QiLife -> (QiSystem + QiNexus + QiCapture + QiConnect)\n```\n\nQiDNA names system layers, keeps their boundaries clear, and holds system-level doctrine in `01_QiDNA/QiEOS/`.\n\n## Responsibilities\n\n- Maintain the mirrored documentation structure.\n- Keep system-layer names stable.\n- Hold doctrine, philosophy, decisions, and system reasoning in `QiEOS/`.\n- Prevent duplicate or conflicting source-of-truth documents.\n- Record the active system model clearly and consistently.\n\n## Flows\n\n```text\nQuestion\n  -> identify the system layer\n  -> open the matching folder\n  -> read _folder.md\n```\n\nRuntime facts beat planning notes. Active mirrored docs beat legacy documents. QiEOS explains why, but each layer owns its operating details.\n\n## Structure\n\n```text\n01_QiDNA/\n├── _folder.md\n└── QiEOS/\n    └── _folder.md\n```\n\n"},{"path":"01_QiDNA/QiEOS","id":"01_qidna_qieos","depth":1,"markdown":"# QiEOS\n\n## Overview\n\nQiEOS is the governing doctrine for the Qi system.\n\nCore rules:\n\n- Flat over nested when a simpler structure answers the question.\n- Linked over duplicated.\n- Documented over remembered.\n- Modular over massive.\n- Runtime facts beat assumptions.\n- Derived layers do not become truth by themselves.\n\n## Responsibilities\n\n- Hold doctrine, philosophy, decisions, and system reasoning.\n- Keep system layer names fixed.\n- Explain why the mirror structure exists.\n- Resolve conflicts by aligning old material to the active system model.\n\n## Flows\n\n```text\nDoctrine or decision question\n  -> 01_QiDNA/QiEOS/_folder.md\n  -> apply reasoning to the matching system-layer folder\n```\n\nQiEOS explains why. Each system folder documents what it owns and how it operates.\n\n## Structure\n\nSystem layer names are fixed: QiDNA, QiAccess, QiSystem, QiServer, QiCapture, QiNexus, QiApp QiLife, and QiConnect.\n\n"},{"path":"10_QiAccess","id":"10_qiaccess","depth":0,"markdown":"# QiAccess\n\n## Overview\n\nQiAccess is the portal and navigation shell for the system. It is the daily entry point for opening tools, seeing what needs attention, capturing quickly, and reaching system services.\n\n## Responsibilities\n\n- Provide the main portal and dashboard.\n- Open real tools and services quickly.\n- Present the seven-root navigation contract.\n- Surface Capture as a fast path.\n- Point Knowledge to canonical docs and references.\n- Show System visibility without becoming the system layer itself.\n\n## Flows\n\n```text\nOpen QiAccess\n  -> see Home for attention items\n  -> use Start to open tools\n  -> use Capture for immediate input\n  -> use Knowledge for references\n  -> use System for runtime visibility\n```\n\n## Structure\n\nQiAccess active navigation has seven roots: Home, Start, Capture, Knowledge, Memory, Insights, and System. System subroutes stay nested under System.\n\n"},{"path":"20_QiSystem","id":"20_qisystem","depth":0,"markdown":"# QiSystem\n\n## Overview\n\nQiSystem is the operational integrity layer. It tracks evidence that the system is running correctly and keeps generated operational material separate from product, portal, and doctrine docs.\n\n## Responsibilities\n\n- Logs and operational records.\n- Audits and validation outputs.\n- Backup and restore references.\n- Health checks and verification results.\n- Generated reports.\n- Generated indexes and inventories.\n- Maintenance notes and cleanup tasks.\n\n## Flows\n\n```text\nRuntime or service check\n  -> health result\n  -> audit or generated report\n  -> maintenance action if needed\n  -> retained QiSystem record\n```\n\n## Structure\n\nQiSystem may contain physical subfolders for real operational records when needed. Each subfolder must contain its own `_folder.md` when created.\n\n"},{"path":"30_QiServer","id":"30_qiserver","depth":0,"markdown":"# QiServer\n\n## Overview\n\nQiServer is the protected runtime host for internal services. It contains live Docker Compose stacks, system services, private access routes, public restricted routes, and runtime configuration paths.\n\nVerified runtime facts win over repo planning notes.\n\n## Responsibilities\n\n- Host protected runtime services.\n- Keep runtime stack paths and service facts clear.\n- Separate public restricted access from private-only access.\n- Run Docker Compose stacks and systemd services.\n- Verify local, tailnet, and public routes after changes.\n\n## Flows\n\n```text\nInspect qiserver\n  -> confirm repo, branch, remote, stack, ports, and working tree\n  -> pull only from the confirmed repo\n  -> back up runtime config before overwriting\n  -> deploy or restart only the needed stack\n  -> verify routes\n```\n\n## Structure\n\nKnown runtime paths include `/srv/qios/stacks/_qiaccess_start`, `/srv/qios/stacks/_qiaccess_start/docker-compose.yml`, and `/srv/qios/apps/_QiAccess_Start/qiaccess/config`.\n\n"},{"path":"40_QiCapture","id":"40_qicapture","depth":0,"markdown":"# QiCapture\n\n## Overview\n\nQiCapture is the intake, ingestion, review, and approval layer. It protects raw input while turning it into usable QiLife records.\n\nRaw capture is sacred. AI interpretation is a draft until approved or trusted by explicit rules.\n\n## Responsibilities\n\n- Fast intake of raw thoughts, files, notes, messages, and documents.\n- Preserve original capture text or source files.\n- Create ingestion items.\n- Run extraction or inspection.\n- Produce draft interpretations.\n- Support approve, edit, or reject review actions.\n- Hand official records to QiLife.\n\n## Flows\n\n```text\nRaw capture\n  -> ingestion item\n  -> extraction\n  -> AI draft\n  -> review\n  -> approve, edit, or reject\n  -> QiBit, Action, or Thread\n```\n\n## Structure\n\nQiCapture records distinguish raw capture, ingestion item, extracted text or metadata, AI draft, review decision, official QiLife object, and timeline/activity log entry.\n\n"},{"path":"50_QiNexus","id":"50_qinexus","depth":0,"markdown":"# QiNexus\n\n## Overview\n\nQiNexus is the storage backbone and folder discipline layer. It provides the durable workspace for life, projects, knowledge, data, reference material, and archive records.\n\n## Responsibilities\n\n- Folder discipline.\n- Durable storage categories.\n- Bucket alignment for QiLife.\n- Archive placement.\n- Reference material placement.\n- Data exports and structured datasets.\n\n## Flows\n\n```text\nItem needs storage\n  -> identify bucket/domain\n  -> place in matching QiNexus location\n  -> link from QiLife record when applicable\n  -> archive only when inactive or historical\n```\n\n## Structure\n\nCanonical buckets: `00 Inbox`, `10 Workbench`, `20 Timeline`, `30 Life`, `40 People`, `50 Business`, `60 Finance`, `70 Legal`, `80 Tech`, `90 Assets`, `100 Data`, `110 Reference`, `900 Archive`, and `990 System`.\n\n"},{"path":"60_QiApp_QiLife","id":"60_qiapp_qilife","depth":0,"markdown":"# QiApp QiLife\n\n## Overview\n\nQiLife is the private life operating app. It turns life chaos into QiBits that can be captured, triaged, routed, acted on, documented, resolved, reflected on, and retrieved.\n\n## Responsibilities\n\n- QiBits.\n- Timeline projection.\n- Buckets.\n- Threads.\n- Actions and steps.\n- People, money, documents, events, and knowledge items.\n- Context Dock.\n- Activity log.\n- AI outputs and retrieval.\n\n## Flows\n\n```text\nCapture\n  -> Bucket\n  -> Interpret\n  -> Relate\n  -> Slot\n  -> Breakdown\n  -> Enrich\n  -> Act\n  -> Resolve\n  -> Reflect\n  -> Retrieve\n```\n\n## Structure\n\nCore v1 tables: `qibits`, `buckets`, `threads`, `actions`, `action_steps`, `people`, `transactions`, `obligations`, `knowledge_items`, `documents`, `events`, `links`, `activity_log`, `ai_outputs`, and `daily_summaries`.\n\n"},{"path":"70_QiConnect","id":"70_qiconnect","depth":0,"markdown":"# QiConnect\n\n## Overview\n\nQiConnect is the integration and access-boundary layer. It documents how Qi services connect to each other, to external providers, and to protected entrypoints.\n\n## Responsibilities\n\n- External integrations.\n- API and webhook boundaries.\n- Public restricted access paths.\n- Private-only access paths.\n- Tailscale and Cloudflare Access patterns.\n- Service-to-service connection notes.\n- Integration safety rules.\n\n## Flows\n\n```text\nExternal request\n  -> DNS, policy, or tunnel endpoint\n  -> protected QiServer route\n  -> target service\n  -> internal data service if required\n```\n\n## Structure\n\nAccess classes are Private Only, Public Restricted, and Public Safe. Known connection surfaces include Cloudflare Access, Tailscale, localhost verification ports, Docker Compose networks, API endpoints, and webhooks.\n\n"},{"path":"site","id":"site","depth":0,"markdown":"# Site\n\n## Overview\n\n`site/` contains the single-page system mirror viewer.\n\n## Responsibilities\n\n- Render all active `_folder.md` files into one scrollable HTML page.\n- Provide a location-based navigation tree.\n- Preserve the physical folder hierarchy visually.\n\n## Flows\n\n```text\nOpen site/index.html\n  -> navigation tree loads\n  -> click folder link\n  -> scroll to matching rendered _folder.md section\n```\n\n## Structure\n\n```text\nsite/\n├── _folder.md\n├── index.html\n├── script.js\n└── style.css\n```\n\n"}];
-function esc(v){return v.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
-function inline(v){return esc(v).replace(/`([^`]+)`/g,"<code>$1</code>").replace(/**([^*]+)**/g,"<strong>$1</strong>")}
-function md(s){const lines=s.trim().split(/\r?\n/);let h="",code=false,ul=false,ol=false,p=[];const fp=()=>{if(p.length){h+="<p>"+inline(p.join(" "))+"</p>";p=[]}};const cl=()=>{if(ul){h+="</ul>";ul=false}if(ol){h+="</ol>";ol=false}};for(const line of lines){if(line.startsWith("```")){fp();cl();h+=code?"</code></pre>":"<pre><code>";code=!code;continue}if(code){h+=esc(line)+"\n";continue}if(!line.trim()){fp();cl();continue}let m=line.match(/^(#{1,6})\s+(.*)$/);if(m){fp();cl();const l=Math.min(m[1].length+1,6);h+="<h"+l+">"+inline(m[2])+"</h"+l+">";continue}m=line.match(/^-\s+(.*)$/);if(m){fp();if(ol){h+="</ol>";ol=false}if(!ul){h+="<ul>";ul=true}h+="<li>"+inline(m[1])+"</li>";continue}m=line.match(/^\d+\.\s+(.*)$/);if(m){fp();if(ul){h+="</ul>";ul=false}if(!ol){h+="<ol>";ol=true}h+="<li>"+inline(m[1])+"</li>";continue}p.push(line.trim())}fp();cl();if(code)h+="</code></pre>";return h}
-function nav(){const root=document.createElement("ul"),stack=[{depth:-1,list:root}];for(const d of docs){while(stack.length&&stack[stack.length-1].depth>=d.depth)stack.pop();const li=document.createElement("li"),a=document.createElement("a");a.href="#"+d.id;a.textContent=d.path==="."?"Repository Root":d.path.split("/").at(-1);li.appendChild(a);stack[stack.length-1].list.appendChild(li);const child=document.createElement("ul");li.appendChild(child);stack.push({depth:d.depth,list:child})}document.getElementById("nav-tree").appendChild(root)}
-function render(){const c=document.getElementById("docs");for(const d of docs){const s=document.createElement("section");s.className="doc-section";s.id=d.id;s.innerHTML="<div class=\"folder-path\">"+d.path+"/_folder.md</div>"+md(d.markdown);c.appendChild(s)}}
-nav();render();
+(() => {
+  'use strict';
+  const body = document.body;
+  const root = document.documentElement;
+  const nav = document.querySelector('nav');
+  const overlay = document.querySelector('.overlay');
+  const menu = document.querySelector('.menu');
+  const search = document.querySelector('#search');
+  const statusFilter = document.querySelector('#status-filter');
+  const clearButton = document.querySelector('#clear');
+  const focusButton = document.querySelector('#focus');
+  const status = document.querySelector('.status');
+  const topButton = document.querySelector('.top');
+  const intro = document.querySelector('.intro');
+  const docs = Array.from(document.querySelectorAll('.doc'));
+  const links = Array.from(document.querySelectorAll('.nav-link'));
+  const items = Array.from(document.querySelectorAll('.nav-item'));
+  const treeNodes = Array.from(document.querySelectorAll('.tree-node'));
+  const folderButtons = Array.from(document.querySelectorAll('.folder-toggle'));
+  const docMap = new Map(docs.map((doc) => [doc.id, doc]));
+  const index = docs.map((doc) => ({
+    id: doc.id,
+    title: doc.querySelector('h1')?.textContent.trim() || doc.id,
+    path: doc.querySelector('.source-path')?.textContent.trim() || '',
+    status: doc.dataset.status,
+    search: doc.dataset.search || ''
+  }));
+  let activeId = location.hash.slice(1);
+  let currentResults = [];
+  let selectedResult = -1;
+  let searchTimer;
+
+  const brandBar = document.createElement('div');
+  brandBar.className = 'brand-bar';
+  nav.insertBefore(brandBar, nav.firstChild);
+  brandBar.append(nav.querySelector('.brand'));
+  const themeButton = document.createElement('button');
+  themeButton.className = 'theme-toggle';
+  themeButton.type = 'button';
+  themeButton.title = 'Switch color theme';
+  brandBar.append(themeButton);
+
+  const searchShell = document.createElement('div');
+  searchShell.className = 'search-shell';
+  search.parentNode.insertBefore(searchShell, search);
+  const searchIcon = document.createElement('span');
+  searchIcon.setAttribute('aria-hidden', 'true');
+  searchIcon.textContent = '⌕';
+  const shortcut = document.createElement('kbd');
+  shortcut.textContent = '/';
+  searchShell.append(searchIcon, search, shortcut);
+  search.placeholder = 'Search everything...';
+  const help = document.createElement('p');
+  help.className = 'search-help';
+  help.innerHTML = '<kbd>Ctrl</kbd><kbd>K</kbd> search <span>·</span> <kbd>Esc</kbd> clear';
+  document.querySelector('.tools').append(help);
+
+  const results = document.createElement('section');
+  results.className = 'search-results hidden';
+  results.setAttribute('aria-label', 'Search results');
+  intro.insertAdjacentElement('afterend', results);
+
+  function closeNav() {
+    nav.classList.remove('open');
+    overlay.classList.remove('open');
+  }
+  function openNav() {
+    nav.classList.add('open');
+    overlay.classList.add('open');
+  }
+  function setTheme(theme) {
+    root.dataset.theme = theme;
+    themeButton.textContent = theme === 'dark' ? '☾' : '☀';
+    themeButton.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+    localStorage.setItem('qios-docs-theme', theme);
+  }
+  function termsFor(value) {
+    return value.toLowerCase().match(/[a-z0-9_./-]+/g) || [];
+  }
+  function rank(doc, terms) {
+    const title = doc.title.toLowerCase();
+    const path = doc.path.toLowerCase();
+    let score = 0;
+    for (const term of terms) {
+      if (!doc.search.includes(term)) return -1;
+      if (title === term) score += 30;
+      else if (title.startsWith(term)) score += 18;
+      else if (title.includes(term)) score += 12;
+      if (path.includes(term)) score += 6;
+      score += Math.min(doc.search.split(term).length - 1, 8);
+    }
+    return score + (doc.status === 'Active' ? 2 : 0);
+  }
+  function snippet(doc, terms) {
+    const text = doc.search.replace(/[#*|>[\]]/g, ' ').replace(/\s+/g, ' ').trim();
+    const positions = terms.map((term) => text.indexOf(term)).filter((position) => position >= 0);
+    const start = Math.max(0, (positions.length ? Math.min(...positions) : 0) - 65);
+    const end = Math.min(text.length, start + 220);
+    return (start ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
+  }
+  function highlight(value, terms) {
+    const fragment = document.createDocumentFragment();
+    const escaped = terms.map((term) => term.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'));
+    const matcher = new RegExp('(' + escaped.join('|') + ')', 'ig');
+    value.split(matcher).forEach((part) => {
+      if (terms.some((term) => part.toLowerCase() === term)) {
+        const mark = document.createElement('mark');
+        mark.textContent = part;
+        fragment.append(mark);
+      } else {
+        fragment.append(document.createTextNode(part));
+      }
+    });
+    return fragment;
+  }
+  function resultCard(doc, terms, position) {
+    const card = document.createElement('button');
+    card.className = 'result-card';
+    card.type = 'button';
+    card.dataset.id = doc.id;
+    if (position === selectedResult) card.classList.add('selected');
+    const head = document.createElement('div');
+    head.className = 'result-head';
+    const title = document.createElement('span');
+    title.className = 'result-title';
+    title.append(highlight(doc.title, terms));
+    const badge = document.createElement('span');
+    badge.className = 'status-badge status-' + doc.status.toLowerCase();
+    badge.textContent = doc.status;
+    head.append(title, badge);
+    const path = document.createElement('div');
+    path.className = 'result-path';
+    path.append(highlight(doc.path, terms));
+    const summary = document.createElement('p');
+    summary.className = 'result-snippet';
+    summary.append(highlight(snippet(doc, terms), terms));
+    card.append(head, path, summary);
+    return card;
+  }
+  function updateUrl() {
+    const params = new URLSearchParams();
+    if (search.value.trim()) params.set('q', search.value.trim());
+    if (statusFilter.value !== 'Active') params.set('status', statusFilter.value);
+    const query = params.toString();
+    history.replaceState(null, '', (query ? '?' + query : '') + (activeId ? '#' + activeId : ''));
+  }
+  function setFocus(id, scroll) {
+    if (!docMap.has(id)) return;
+    activeId = id;
+    docs.forEach((doc) => doc.classList.toggle('focused', doc.id === id));
+    links.forEach((link) => link.classList.toggle('active', link.hash === '#' + id));
+    const activeLink = links.find((link) => link.hash === '#' + id);
+    let ancestor = activeLink?.closest('.tree-node');
+    while (ancestor) {
+      ancestor.classList.remove('collapsed');
+      ancestor.querySelector(':scope > .folder-toggle')?.setAttribute('aria-expanded', 'true');
+      ancestor = ancestor.parentElement?.closest('.tree-node');
+    }
+    updateUrl();
+    if (scroll) docMap.get(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function filter() {
+    const query = search.value.trim();
+    const terms = termsFor(query);
+    const selectedStatus = statusFilter.value;
+    const allowed = index.filter((doc) => selectedStatus === 'All' || doc.status === selectedStatus);
+    items.forEach((item) => item.classList.toggle('hidden', selectedStatus !== 'All' && item.dataset.status !== selectedStatus));
+    [...treeNodes].reverse().forEach((node) => {
+      if (node.classList.contains('tree-root-node')) return;
+      const hasVisibleDocument = Boolean(node.querySelector(':scope > .tree-children > .nav-item:not(.hidden)'));
+      const hasVisibleFolder = Boolean(node.querySelector(':scope > .tree-children > .tree-node:not(.hidden)'));
+      node.classList.toggle('hidden', !hasVisibleDocument && !hasVisibleFolder);
+    });
+
+    if (terms.length) {
+      currentResults = allowed.map((doc) => ({ doc, score: rank(doc, terms) }))
+        .filter((entry) => entry.score >= 0)
+        .sort((a, b) => b.score - a.score || a.doc.title.localeCompare(b.doc.title))
+        .slice(0, 75)
+        .map((entry) => entry.doc);
+      selectedResult = currentResults.length ? 0 : -1;
+      results.replaceChildren();
+      if (currentResults.length) {
+        currentResults.forEach((doc, position) => results.append(resultCard(doc, terms, position)));
+      } else {
+        const empty = document.createElement('div');
+        empty.className = 'empty-state';
+        empty.innerHTML = '<strong>No matching documents</strong>Try fewer words, a path fragment, or switch the status filter to All.';
+        results.append(empty);
+      }
+      results.classList.remove('hidden');
+      docs.forEach((doc) => doc.classList.add('hidden'));
+      status.textContent = currentResults.length + ' result' + (currentResults.length === 1 ? '' : 's') + ' for “' + query + '”';
+    } else {
+      currentResults = [];
+      selectedResult = -1;
+      results.classList.add('hidden');
+      docs.forEach((doc) => doc.classList.toggle('hidden', selectedStatus !== 'All' && doc.dataset.status !== selectedStatus));
+      status.textContent = allowed.length + ' ' + selectedStatus.toLowerCase() + ' document' + (allowed.length === 1 ? '' : 's');
+    }
+    updateUrl();
+  }
+  function moveResult(direction) {
+    if (!currentResults.length) return;
+    selectedResult = (selectedResult + direction + currentResults.length) % currentResults.length;
+    document.querySelectorAll('.result-card').forEach((card, position) => card.classList.toggle('selected', position === selectedResult));
+    document.querySelector('.result-card.selected')?.scrollIntoView({ block: 'nearest' });
+  }
+  function openResult(id) {
+    search.value = '';
+    body.classList.add('focus');
+    focusButton.classList.add('active');
+    focusButton.setAttribute('aria-pressed', 'true');
+    focusButton.textContent = 'Show all';
+    filter();
+    setFocus(id, true);
+    closeNav();
+  }
+
+  const mindMapButton = document.createElement('button');
+  mindMapButton.id = 'mind-map-toggle';
+  mindMapButton.className = 'tool';
+  mindMapButton.type = 'button';
+  mindMapButton.textContent = 'Mind map';
+  mindMapButton.setAttribute('aria-pressed', 'false');
+  document.querySelector('.tool-row').prepend(mindMapButton);
+
+  const mindMapView = document.createElement('section');
+  mindMapView.className = 'mind-map-view hidden';
+  mindMapView.innerHTML = '<header class="mind-map-header"><div><h2 class="mind-map-title">QiDNA Mind Map</h2><p class="mind-map-subtitle">Select a folder to expand it. Select a document to open its page.</p></div><div class="mind-map-actions"><button class="map-action" id="map-collapse" type="button">Collapse</button><button class="map-action" id="map-fit" type="button">Fit</button><button class="map-action" id="map-close" type="button">Document view</button></div></header><div class="mind-map-viewport"><svg class="mind-map-svg" role="img" aria-label="Interactive QiDNA folder and document mind map"></svg></div>';
+  intro.insertAdjacentElement('afterend', mindMapView);
+  const mindMapSvg = mindMapView.querySelector('.mind-map-svg');
+  const mindMapViewport = mindMapView.querySelector('.mind-map-viewport');
+  const mapExpanded = new Set();
+  let mapScale = 1;
+
+  function mindTree() {
+    const selectedStatus = statusFilter.value;
+    const rootNode = { key: 'root', name: 'QiDNA', type: 'root', children: [] };
+    const folderMap = new Map([['', rootNode]]);
+    index.filter((doc) => selectedStatus === 'All' || doc.status === selectedStatus).forEach((doc) => {
+      const parts = doc.path.split('/');
+      parts.pop();
+      let parentPath = '';
+      let parent = rootNode;
+      parts.forEach((part) => {
+        const folderPath = parentPath ? parentPath + '/' + part : part;
+        if (!folderMap.has(folderPath)) {
+          const folder = { key: 'folder:' + folderPath, name: part, path: folderPath, type: 'folder', children: [] };
+          folderMap.set(folderPath, folder);
+          parent.children.push(folder);
+        }
+        parent = folderMap.get(folderPath);
+        parentPath = folderPath;
+      });
+      parent.children.push({ key: 'doc:' + doc.id, name: doc.title, type: 'document', id: doc.id, status: doc.status, path: doc.path, children: [] });
+    });
+    const sortNode = (node) => {
+      node.children.sort((a, b) => {
+        if (a.type !== b.type) return a.type === 'folder' ? -1 : 1;
+        return a.name.localeCompare(b.name, undefined, { numeric: true });
+      });
+      node.children.forEach(sortNode);
+    };
+    sortNode(rootNode);
+    return rootNode;
+  }
+
+  function visibleMapChildren(node) {
+    if (node.type === 'root') return node.children;
+    return node.type === 'folder' && mapExpanded.has(node.key) ? node.children : [];
+  }
+
+  function mapWords(value, limit) {
+    const words = value.replace(/_/g, ' ').split(/\s+/);
+    const lines = [''];
+    words.forEach((word) => {
+      const current = lines[lines.length - 1];
+      if (!current || (current + ' ' + word).length <= limit) lines[lines.length - 1] = current ? current + ' ' + word : word;
+      else if (lines.length < 2) lines.push(word);
+      else lines[1] = (lines[1] + ' ' + word).slice(0, limit - 1) + '…';
+    });
+    return lines;
+  }
+
+  function renderMindMap() {
+    const tree = mindTree();
+    const left = tree.children.filter((_, index) => index % 2);
+    const right = tree.children.filter((_, index) => index % 2 === 0);
+    const positions = new Map([[tree.key, { node: tree, x: 0, y: 0, side: 0, parent: null }]]);
+    const edges = [];
+
+    function layoutSide(nodes, side) {
+      let cursor = 0;
+      const placed = [];
+      function place(node, depth, parent) {
+        const children = visibleMapChildren(node);
+        let y;
+        if (children.length) {
+          const childPositions = children.map((child) => place(child, depth + 1, node));
+          y = childPositions.reduce((sum, child) => sum + child.y, 0) / childPositions.length;
+        } else {
+          y = cursor * 92;
+          cursor += 1;
+        }
+        const position = { node, x: side * (235 + (depth - 1) * 235), y, side, parent };
+        positions.set(node.key, position);
+        placed.push(position);
+        if (parent) edges.push([parent.key, node.key]);
+        return position;
+      }
+      nodes.forEach((node) => place(node, 1, tree));
+      if (!placed.length) return;
+      const ys = placed.map((position) => position.y);
+      const offset = (Math.min(...ys) + Math.max(...ys)) / 2;
+      placed.forEach((position) => { position.y -= offset; });
+    }
+
+    layoutSide(left, -1);
+    layoutSide(right, 1);
+
+    const all = [...positions.values()];
+    const minX = Math.min(...all.map((p) => p.x)) - 150;
+    const maxX = Math.max(...all.map((p) => p.x)) + 150;
+    const minY = Math.min(...all.map((p) => p.y)) - 85;
+    const maxY = Math.max(...all.map((p) => p.y)) + 85;
+    const width = Math.max(900, maxX - minX);
+    const height = Math.max(620, maxY - minY);
+    mindMapSvg.setAttribute('viewBox', [minX, minY, width, height].join(' '));
+    mindMapSvg.setAttribute('width', width * mapScale);
+    mindMapSvg.setAttribute('height', height * mapScale);
+    mindMapSvg.replaceChildren();
+
+    const ns = 'http://www.w3.org/2000/svg';
+    const edgeLayer = document.createElementNS(ns, 'g');
+    edgeLayer.setAttribute('class', 'map-edges');
+    edges.forEach(([fromKey, toKey]) => {
+      const from = positions.get(fromKey);
+      const to = positions.get(toKey);
+      if (!from || !to) return;
+      const path = document.createElementNS(ns, 'path');
+      const startX = from.x + (to.side < 0 ? -82 : 82);
+      const endX = to.x + (to.side < 0 ? 96 : -96);
+      const bend = (startX + endX) / 2;
+      path.setAttribute('d', `M ${startX} ${from.y} C ${bend} ${from.y}, ${bend} ${to.y}, ${endX} ${to.y}`);
+      path.setAttribute('class', 'map-connector');
+      edgeLayer.append(path);
+    });
+    mindMapSvg.append(edgeLayer);
+
+    all.forEach(({ node, x, y }) => {
+      const group = document.createElementNS(ns, 'g');
+      const nodeClass = node.type === 'document' ? 'map-node map-node-document status-' + node.status.toLowerCase() : 'map-node map-node-' + node.type;
+      group.setAttribute('class', nodeClass);
+      group.setAttribute('transform', `translate(${x} ${y})`);
+      group.setAttribute('tabindex', '0');
+      group.setAttribute('role', 'button');
+      group.setAttribute('aria-label', node.type === 'document' ? 'Open ' + node.name : 'Toggle ' + node.name);
+      const rect = document.createElementNS(ns, 'rect');
+      const nodeWidth = node.type === 'root' ? 170 : node.type === 'folder' ? 190 : 210;
+      const nodeHeight = node.type === 'root' ? 58 : 66;
+      rect.setAttribute('x', -nodeWidth / 2);
+      rect.setAttribute('y', -nodeHeight / 2);
+      rect.setAttribute('width', nodeWidth);
+      rect.setAttribute('height', nodeHeight);
+      rect.setAttribute('rx', node.type === 'root' ? 22 : 13);
+      const text = document.createElementNS(ns, 'text');
+      text.setAttribute('text-anchor', 'middle');
+      const lines = mapWords(node.name, node.type === 'document' ? 27 : 23);
+      lines.forEach((line, lineIndex) => {
+        const tspan = document.createElementNS(ns, 'tspan');
+        tspan.setAttribute('x', 0);
+        tspan.setAttribute('dy', lineIndex ? 15 : (lines.length === 1 ? 4 : -2));
+        tspan.textContent = line;
+        text.append(tspan);
+      });
+      group.append(rect, text);
+      if (node.type === 'folder' && node.children.length) {
+        const dot = document.createElementNS(ns, 'circle');
+        dot.setAttribute('class', 'map-expand-dot');
+        dot.setAttribute('cx', x < 0 ? -95 : 95);
+        dot.setAttribute('cy', 0);
+        dot.setAttribute('r', 7);
+        group.append(dot);
+      }
+      const activate = () => {
+        if (node.type === 'folder') {
+          if (mapExpanded.has(node.key)) mapExpanded.delete(node.key);
+          else mapExpanded.add(node.key);
+          renderMindMap();
+        } else if (node.type === 'document') {
+          const doc = index.find((entry) => entry.id === node.id);
+          if (doc && statusFilter.value !== 'All' && statusFilter.value !== doc.status) statusFilter.value = doc.status;
+          closeMindMap();
+          filter();
+          body.classList.add('focus');
+          focusButton.classList.add('active');
+          focusButton.setAttribute('aria-pressed', 'true');
+          focusButton.textContent = 'Show all';
+          setFocus(node.id, true);
+        }
+      };
+      group.addEventListener('click', activate);
+      group.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          activate();
+        }
+      });
+      mindMapSvg.append(group);
+    });
+    requestAnimationFrame(() => {
+      mindMapViewport.scrollLeft = Math.max(0, (mindMapViewport.scrollWidth - mindMapViewport.clientWidth) / 2);
+      mindMapViewport.scrollTop = Math.max(0, (mindMapViewport.scrollHeight - mindMapViewport.clientHeight) / 2);
+    });
+  }
+
+  function openMindMap() {
+    body.classList.add('mind-map-mode');
+    mindMapView.classList.remove('hidden');
+    mindMapButton.classList.add('active');
+    mindMapButton.setAttribute('aria-pressed', 'true');
+    mindMapButton.textContent = 'Document view';
+    renderMindMap();
+    closeNav();
+  }
+
+  function closeMindMap() {
+    body.classList.remove('mind-map-mode');
+    mindMapView.classList.add('hidden');
+    mindMapButton.classList.remove('active');
+    mindMapButton.setAttribute('aria-pressed', 'false');
+    mindMapButton.textContent = 'Mind map';
+  }
+
+  mindMapButton.addEventListener('click', () => body.classList.contains('mind-map-mode') ? closeMindMap() : openMindMap());
+  mindMapView.querySelector('#map-close').addEventListener('click', closeMindMap);
+  mindMapView.querySelector('#map-collapse').addEventListener('click', () => {
+    mapExpanded.clear();
+    renderMindMap();
+  });
+  mindMapView.querySelector('#map-fit').addEventListener('click', () => {
+    mapScale = 1;
+    renderMindMap();
+    mindMapViewport.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+  });
+
+  menu.addEventListener('click', () => nav.classList.contains('open') ? closeNav() : openNav());
+  overlay.addEventListener('click', closeNav);
+  themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+  statusFilter.addEventListener('change', () => { filter(); if (body.classList.contains('mind-map-mode')) renderMindMap(); });
+  search.addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(filter, 70);
+  });
+  search.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      moveResult(1);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      moveResult(-1);
+    } else if (event.key === 'Enter' && selectedResult >= 0) {
+      event.preventDefault();
+      openResult(currentResults[selectedResult].id);
+    }
+  });
+  results.addEventListener('click', (event) => {
+    const card = event.target.closest('.result-card');
+    if (card) openResult(card.dataset.id);
+  });
+  clearButton.addEventListener('click', () => {
+    search.value = '';
+    statusFilter.value = 'Active';
+    filter();
+    search.focus();
+  });
+  focusButton.addEventListener('click', () => {
+    const enabled = body.classList.toggle('focus');
+    focusButton.classList.toggle('active', enabled);
+    focusButton.setAttribute('aria-pressed', String(enabled));
+    focusButton.textContent = enabled ? 'Show all' : 'Focus mode';
+    setFocus(activeId || docs.find((doc) => !doc.classList.contains('hidden'))?.id, false);
+  });
+  folderButtons.forEach((button) => {
+    const node = button.closest('.tree-node');
+    const depth = Number(node.dataset.depth);
+    const open = depth <= 1;
+    button.setAttribute('aria-expanded', String(open));
+    if (!open) node.classList.add('collapsed');
+    button.addEventListener('click', () => {
+      const collapsed = node.classList.toggle('collapsed');
+      button.setAttribute('aria-expanded', String(!collapsed));
+    });
+  });
+  links.forEach((link) => link.addEventListener('click', () => {
+    setFocus(link.hash.slice(1), false);
+    closeNav();
+  }));
+  topButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  window.addEventListener('scroll', () => topButton.classList.toggle('visible', window.scrollY > 500), { passive: true });
+  document.addEventListener('keydown', (event) => {
+    const typing = /input|textarea|select/i.test(document.activeElement.tagName);
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+      event.preventDefault();
+      if (innerWidth <= 800) openNav();
+      search.focus();
+    } else if (event.key === '/' && !typing) {
+      event.preventDefault();
+      if (innerWidth <= 800) openNav();
+      search.focus();
+    } else if (event.key === 'Escape') {
+      if (search.value) {
+        search.value = '';
+        filter();
+        search.focus();
+      } else {
+        closeNav();
+      }
+    }
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    if (body.classList.contains('focus') || search.value.trim()) return;
+    const visible = entries.filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (visible) setFocus(visible.target.id, false);
+  }, { rootMargin: '-12% 0px -68% 0px', threshold: [0, .2, .6] });
+  docs.forEach((doc) => observer.observe(doc));
+
+  const params = new URLSearchParams(location.search);
+  const requestedStatus = params.get('status');
+  if (requestedStatus && Array.from(statusFilter.options).some((option) => option.value === requestedStatus)) {
+    statusFilter.value = requestedStatus;
+  }
+  search.value = params.get('q') || '';
+  setTheme(localStorage.getItem('qios-docs-theme')
+    || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  setFocus(docMap.has(activeId) ? activeId : docs[0]?.id, false);
+  filter();
+})();

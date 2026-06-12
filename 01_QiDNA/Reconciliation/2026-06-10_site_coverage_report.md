@@ -19,6 +19,8 @@ The builder now:
 - defaults to Active documents
 - provides Active, Legacy, Proposed, Generated, Evidence, and All filters
 - retains search and focus mode
+- provides a cascading folder-mirror directory tree
+- provides a separate center-screen expandable mind map
 - validates required canonical documents during the build
 
 ## Authority Behavior
@@ -41,3 +43,4 @@ The site is acceptable for blueprint review when:
 - Active is the default view
 - required canonical documents are present
 - legacy evidence remains available without appearing current
+- directory-tree and mind-map document nodes open the same rendered source page

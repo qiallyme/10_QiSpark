@@ -62,7 +62,6 @@ The current design collections below are Proposed because they have not yet been
 - `20_QiSystem/50_Generated_Reports/`
 - `20_QiSystem/manifests/`
 - `00_QiEOS/exports/`
-- `site/_site.md`
 - `site/index.html` is generated output and is not a source document.
 
 ## Evidence Rules
@@ -74,13 +73,13 @@ The current design collections below are Proposed because they have not yet been
 
 ## Verified Coverage
 
-The 2026-06-10 build classified 126 source documents:
+The 2026-06-10 build classified 127 source documents:
 
-- Active: 27
+- Active: 28
 - Legacy: 16
 - Proposed: 55
-- Generated: 4
-- Evidence: 24
+- Generated: 3
+- Evidence: 25
 
 ## Enforcement
 
