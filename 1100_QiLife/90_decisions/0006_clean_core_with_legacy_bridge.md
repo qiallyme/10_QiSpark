@@ -1,5 +1,7 @@
 # Decision 0006: Clean Core with Legacy Bridge
 
+> **Superseded by ADR-0018 on 2026-06-14.** Retained as historical decision evidence. Supabase is now canonical; SQLite is transitional only.
+
 ## Context
 QiLife is replacing an older Supabase-backed system that has a messy schema.
 

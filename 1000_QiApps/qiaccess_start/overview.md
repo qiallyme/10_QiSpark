@@ -1,5 +1,7 @@
 # QiAccess Start Overview
 
+> **Legacy - Superseded implementation evidence.** Reconciled on 2026-06-12 against the live Homepage stack. Valid deployment-boundary and no-secrets rules were merged into `10_QiAccess/_10_QiAccess.md`. Recorded URLs and repo assumptions are historical and non-authoritative.
+
 This document provides a high-level overview of the **repo-side canonical QiAccess Homepage configuration** prepared on Cody's local PC. It is not a claim that the live qiserver Homepage config already matches this repo.
 
 ---

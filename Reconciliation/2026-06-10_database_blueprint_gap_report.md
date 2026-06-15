@@ -1,79 +1,29 @@
 # Database Blueprint Gap Report
 
-## Accepted Direction
+## Status
 
-- SQLite is the current QiLife structured-data authority.
-- QiNexus owns files, exports, references, and archives.
-- Supabase is legacy import or possible future integration only.
-- V1 is manual-first and AI writes require review and approval.
+The 2026-06-12 SQLite inventory is retained as legacy implementation evidence. ADR-0018 superseded it as canonical design on 2026-06-14.
 
-## Evidence Available
+## Canonical Baseline
 
-QiDNA names these intended entities:
+- Authority: Supabase Postgres.
+- Schemas: `qi_entities`, `qi_events`.
+- Tables: `entities`, `relationships`, `qibits`.
+- Keys: generated UUID primary keys.
+- Security: RLS enabled, no permissive client policies.
+- Files: QiNexus authority; Paperless processing surface.
+- Migration: `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`.
 
-```text
-qibits
-buckets
-threads
-actions
-action_steps
-people
-transactions
-obligations
-knowledge_items
-documents
-events
-links
-activity_log
-ai_outputs
-daily_summaries
-```
+## Remaining Gaps
 
-Module and decision documents describe provenance, timeline projection, capture, triage, documents, people, actions, and summaries.
+1. User ownership and identity mapping.
+2. RLS policies and custom-schema grants.
+3. Governed Entity, relationship, and QiBit type vocabularies.
+4. SQLite-to-Supabase mapping, validation, and duplicate handling.
+5. Backup, rollback, cutover, and offline behavior.
+6. Application integration and end-to-end tests.
+7. Retention, archive, restoration, and purge rules.
 
-## Blocking Evidence Missing
+## Legacy Evidence
 
-No SQLite database, SQL schema, migration files, ORM model, or database configuration exists in this repository. The actual schema cannot be reconstructed safely from prose.
-
-Required implementation evidence:
-
-- actual `qilife.sqlite` database or a read-only schema dump
-- migration directory, if one exists
-- ORM or model definitions
-- database creation/bootstrap code
-- canonical runtime database path
-- current application repository and commit
-- sample data only if sanitized and necessary for constraint discovery
-
-## Blueprint Gaps
-
-For every v1 entity, approval is still required for:
-
-- table and column names
-- types, nullability, and defaults
-- primary and foreign keys
-- cardinality and delete behavior
-- unique and check constraints
-- status enums and state transitions
-- timestamps and timeline projection field
-- indexes and required queries
-- provenance and audit fields
-- file-reference rules
-- archive, retention, restoration, and purge behavior
-- backup and migration procedure
-- privacy and authorization boundaries
-
-## V1 Mapping Priority
-
-1. QiBit and raw capture provenance.
-2. Inbox and triage state.
-3. Actions and action steps.
-4. Documents and evidence links.
-5. People and entity relationships.
-6. Timeline projection rules.
-7. Daily summaries.
-8. AI output staging and approval records.
-
-## Exit Criteria
-
-Database implementation may continue only after the real schema is inspected, mapped to the entity catalog, discrepancies are documented, and v1 fields, statuses, relationships, and migrations are approved.
+QiLife commit `c589e1e` contains 15 SQLite tables. Those tables are not automatically recreated or discarded. Their useful data and constraints require an explicit migration map.

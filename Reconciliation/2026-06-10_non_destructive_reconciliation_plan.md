@@ -24,6 +24,8 @@ Status: implemented in the site classifier.
 
 ## Phase 3: Content Promotion
 
+Status: in progress. The `00_QiEOS` doctrine, master map, and ADR-0001 set was reconciled on 2026-06-12.
+
 For each legacy document:
 
 1. Identify unique claims.
@@ -32,7 +34,7 @@ For each legacy document:
 4. Merge compatible unique content into one canonical destination.
 5. Record the legacy source path in the reconciliation receipt.
 6. Resolve conflicts through an ADR or explicit owner decision.
-7. Leave the legacy source unchanged and labeled Legacy or Evidence.
+7. Add an explicit supersession notice to the legacy source and retain it in place as hierarchy-preserving archive evidence unless a later approved move preserves its source path and provenance.
 
 Priority promotion sets:
 
@@ -55,11 +57,10 @@ Status: builder updated.
 
 ## Phase 5: Database Blueprint
 
-Status: blocked on actual SQLite evidence.
+Status: physical schema inventory complete; behavioral contracts remain open.
 
-- Obtain the database or schema dump.
-- Inventory tables, columns, keys, indexes, triggers, and migrations.
-- Map implementation to the approved entity catalog.
+- The QiLife repository, SQLModel metadata, and canonical SQLite database were inspected on 2026-06-12.
+- Tables, columns, keys, relationships, indexes, constraints, and migration state are mapped in `20_QiSystem/schemas/QiLife_Data_Spine.mdx`.
 - Produce ADD, MERGE, UPDATE, or DELETE recommendations.
 - Approve v1 schema before migration or application changes.
 

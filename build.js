@@ -15,6 +15,9 @@ const required = [
   'README.md',
   '00_QiEOS/_QiEOS.md',
   '00_QiEOS/QiOS_Core_Doctrine.mdx',
+  '05_Decisions/ADR-0017_canonical_vocabulary_and_v1_direction.md',
+  '05_Decisions/ADR-0018_supabase_qilife_data_authority.md',
+  '20_QiSystem/schemas/QiLife_Data_Spine.mdx',
   '1000_QiApps/site/_site.md'
 ];
 const statuses = ['Active', 'Legacy', 'Proposed', 'Generated', 'Evidence'];
@@ -159,7 +162,7 @@ function render(documents) {
     .replace("help.innerHTML = '<kbd>Ctrl</kbd><kbd>K</kbd> search <span>Â·</span> <kbd>Esc</kbd> clear';", "help.innerHTML = '<kbd>Ctrl</kbd><kbd>K</kbd> search <span>|</span> <kbd>Esc</kbd> clear';")
     .replace("themeButton.textContent = theme === 'dark' ? 'â˜¾' : 'â˜€';", "themeButton.textContent = theme === 'dark' ? 'DK' : 'LT';")
     .replaceAll("â€¦", "...")
-    .replace("status.textContent = currentResults.length + ' result' + (currentResults.length === 1 ? '' : 's') + ' for â€œ' + query + 'â€';", "status.textContent = currentResults.length + ' result' + (currentResults.length === 1 ? '' : 's') + ' for \"' + query + '\"';");
+    .replace("status.textContent = currentResults.length + ' result' + (currentResults.length === 1 ? '' : 's') + ' for â€œ' + query + 'â€ ';", "status.textContent = currentResults.length + ' result' + (currentResults.length === 1 ? '' : 's') + ' for \"' + query + '\"';");
   const tree = buildTree(documents);
   const counts = Object.fromEntries(statuses.map((status) => [
     status, documents.filter((doc) => doc.status === status).length

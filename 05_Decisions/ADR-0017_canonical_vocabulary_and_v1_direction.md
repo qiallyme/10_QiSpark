@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted on 2026-06-10.
+Accepted on 2026-06-10. Database-authority bullets superseded by ADR-0018 on 2026-06-14; all other decisions remain active.
 
 ## Context
 
@@ -27,18 +27,20 @@ The canonical roots are:
 - QiEOS is doctrine inside `01_QiDNA`, not a top-level root.
 - QiAccess is the canonical front-door name and remains separate from QiLife.
 - QiApp QiLife and `60_QiApp_QiLife` are the canonical app name and root.
-- SQLite is the current structured-data authority.
-- QiNexus owns file, export, reference, and archive storage, not relational data.
-- Supabase is legacy import or possible future integration only.
+- Supabase Postgres is the canonical structured-data authority under ADR-0018.
+- QiNexus owns file, export, reference, archive, and backup storage, not relational data.
+- SQLite is deprecated and limited to legacy, local, or transitional use.
 - V1 is manual-first: capture, inbox and triage, QiBit review, timeline projection, actions, documents and evidence links, people and entities, and daily summaries.
 - AI may assist but must use review and approval; it is not silent authority.
 
-## Rationale
+## Verified Implementation
 
-These choices remove naming ambiguity, separate shell and product responsibilities, and establish a conservative implementation sequence that can be verified against the actual SQLite schema.
+QiLife commit `c589e1e` implements the legacy 15-table SQLite catalog. ADR-0018 replaces it with the minimal Supabase Entity/QiBit spine documented in `20_QiSystem/schemas/QiLife_Data_Spine.mdx`.
 
 ## Consequences
 
 - All documents receive an explicit Active, Legacy, Proposed, Generated, or Evidence status.
 - Legacy content remains preserved and cannot override Active documentation.
-- Broad database or UI implementation remains blocked until the actual schema and approved implementation blueprints are available.
+- The missing-schema blocker is closed.
+- Schema hardening remains gated on accepted categorical values, constraints, indexes, lifecycle rules, migrations, privacy, retention, and backup contracts.
+- UI implementation remains gated on the approved route, screen, workflow, and entity-to-view blueprint.

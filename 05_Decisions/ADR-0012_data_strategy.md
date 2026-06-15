@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted.
+Superseded on 2026-06-14 by ADR-0018 for database authority. Retained as decision history.
 
 ## Context
 

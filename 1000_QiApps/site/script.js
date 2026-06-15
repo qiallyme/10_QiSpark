@@ -17,6 +17,7 @@
   const items = Array.from(document.querySelectorAll('.nav-item'));
   const treeNodes = Array.from(document.querySelectorAll('.tree-node'));
   const folderButtons = Array.from(document.querySelectorAll('.folder-toggle'));
+  const treeHeading = document.querySelector('.tree-heading');
   const docMap = new Map(docs.map((doc) => [doc.id, doc]));
   const index = docs.map((doc) => ({
     id: doc.id,
@@ -159,18 +160,31 @@
     updateUrl();
     if (scroll) docMap.get(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-  function filter() {
-    const query = search.value.trim();
-    const terms = termsFor(query);
-    const selectedStatus = statusFilter.value;
-    const allowed = index.filter((doc) => selectedStatus === 'All' || doc.status === selectedStatus);
+  function setTreeExpanded(expanded) {
+    treeNodes.forEach((node) => {
+      if (node.classList.contains('tree-root-node') || node.classList.contains('hidden')) return;
+      node.classList.toggle('collapsed', !expanded);
+      node.querySelector(':scope > .folder-toggle')?.setAttribute('aria-expanded', String(expanded));
+    });
+  }
+
+  function refreshTreeVisibility(selectedStatus) {
     items.forEach((item) => item.classList.toggle('hidden', selectedStatus !== 'All' && item.dataset.status !== selectedStatus));
+    treeNodes.forEach((node) => node.classList.remove('hidden'));
     [...treeNodes].reverse().forEach((node) => {
       if (node.classList.contains('tree-root-node')) return;
       const hasVisibleDocument = Boolean(node.querySelector(':scope > .tree-children > .nav-item:not(.hidden)'));
       const hasVisibleFolder = Boolean(node.querySelector(':scope > .tree-children > .tree-node:not(.hidden)'));
       node.classList.toggle('hidden', !hasVisibleDocument && !hasVisibleFolder);
     });
+  }
+
+  function filter() {
+    const query = search.value.trim();
+    const terms = termsFor(query);
+    const selectedStatus = statusFilter.value;
+    const allowed = index.filter((doc) => selectedStatus === 'All' || doc.status === selectedStatus);
+    refreshTreeVisibility(selectedStatus);
 
     if (terms.length) {
       currentResults = allowed.map((doc) => ({ doc, score: rank(doc, terms) }))
@@ -217,6 +231,13 @@
     closeNav();
   }
 
+  const treeActions = document.createElement('div');
+  treeActions.className = 'tree-actions';
+  treeActions.innerHTML = '<button type="button" id="tree-expand">Expand all</button><button type="button" id="tree-collapse">Collapse all</button>';
+  treeHeading.insertAdjacentElement('afterend', treeActions);
+  treeActions.querySelector('#tree-expand').addEventListener('click', () => setTreeExpanded(true));
+  treeActions.querySelector('#tree-collapse').addEventListener('click', () => setTreeExpanded(false));
+
   const mindMapButton = document.createElement('button');
   mindMapButton.id = 'mind-map-toggle';
   mindMapButton.className = 'tool';
@@ -227,12 +248,23 @@
 
   const mindMapView = document.createElement('section');
   mindMapView.className = 'mind-map-view hidden';
-  mindMapView.innerHTML = '<header class="mind-map-header"><div><h2 class="mind-map-title">QiDNA Mind Map</h2><p class="mind-map-subtitle">Select a folder to expand it. Select a document to open its page.</p></div><div class="mind-map-actions"><button class="map-action" id="map-collapse" type="button">Collapse</button><button class="map-action" id="map-fit" type="button">Fit</button><button class="map-action" id="map-close" type="button">Document view</button></div></header><div class="mind-map-viewport"><svg class="mind-map-svg" role="img" aria-label="Interactive QiDNA folder and document mind map"></svg></div>';
+  mindMapView.innerHTML = '<header class="mind-map-header"><div><h2 class="mind-map-title">QiDNA Mind Map</h2><p class="mind-map-subtitle">Select a folder to expand it. Select a document to open its page.</p></div><div class="mind-map-actions"><button class="map-action" id="map-collapse" type="button">Collapse</button><button class="map-action" id="map-zoom-out" type="button" aria-label="Zoom out">−</button><button class="map-action" id="map-fit" type="button">Fit</button><button class="map-action" id="map-zoom-in" type="button" aria-label="Zoom in">+</button><button class="map-action" id="map-close" type="button">Document view</button></div></header><div class="mind-map-viewport"><svg class="mind-map-svg" role="img" aria-label="Interactive QiDNA folder and document mind map"></svg></div>';
   intro.insertAdjacentElement('afterend', mindMapView);
   const mindMapSvg = mindMapView.querySelector('.mind-map-svg');
   const mindMapViewport = mindMapView.querySelector('.mind-map-viewport');
   const mapExpanded = new Set();
   let mapScale = 1;
+  let mapBounds = { x: -450, y: -310, width: 900, height: 620 };
+  let mapResizeTimer;
+
+  function applyMapViewBox() {
+    const scale = Math.max(0.65, Math.min(mapScale, 3));
+    const width = mapBounds.width / scale;
+    const height = mapBounds.height / scale;
+    const x = mapBounds.x + (mapBounds.width - width) / 2;
+    const y = mapBounds.y + (mapBounds.height - height) / 2;
+    mindMapSvg.setAttribute('viewBox', [x, y, width, height].join(' '));
+  }
 
   function mindTree() {
     const selectedStatus = statusFilter.value;
@@ -326,9 +358,11 @@
     const maxY = Math.max(...all.map((p) => p.y)) + 85;
     const width = Math.max(900, maxX - minX);
     const height = Math.max(620, maxY - minY);
-    mindMapSvg.setAttribute('viewBox', [minX, minY, width, height].join(' '));
-    mindMapSvg.setAttribute('width', width * mapScale);
-    mindMapSvg.setAttribute('height', height * mapScale);
+    mapBounds = { x: minX, y: minY, width, height };
+    mindMapSvg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    mindMapSvg.removeAttribute('width');
+    mindMapSvg.removeAttribute('height');
+    applyMapViewBox();
     mindMapSvg.replaceChildren();
 
     const ns = 'http://www.w3.org/2000/svg';
@@ -409,10 +443,7 @@
       });
       mindMapSvg.append(group);
     });
-    requestAnimationFrame(() => {
-      mindMapViewport.scrollLeft = Math.max(0, (mindMapViewport.scrollWidth - mindMapViewport.clientWidth) / 2);
-      mindMapViewport.scrollTop = Math.max(0, (mindMapViewport.scrollHeight - mindMapViewport.clientHeight) / 2);
-    });
+    requestAnimationFrame(applyMapViewBox);
   }
 
   function openMindMap() {
@@ -441,8 +472,27 @@
   });
   mindMapView.querySelector('#map-fit').addEventListener('click', () => {
     mapScale = 1;
-    renderMindMap();
-    mindMapViewport.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+    applyMapViewBox();
+  });
+  mindMapView.querySelector('#map-zoom-in').addEventListener('click', () => {
+    mapScale = Math.min(3, mapScale * 1.2);
+    applyMapViewBox();
+  });
+  mindMapView.querySelector('#map-zoom-out').addEventListener('click', () => {
+    mapScale = Math.max(0.65, mapScale / 1.2);
+    applyMapViewBox();
+  });
+  mindMapViewport.addEventListener('wheel', (event) => {
+    if (!event.ctrlKey && !event.metaKey) return;
+    event.preventDefault();
+    mapScale = event.deltaY < 0 ? Math.min(3, mapScale * 1.12) : Math.max(0.65, mapScale / 1.12);
+    applyMapViewBox();
+  }, { passive: false });
+  window.addEventListener('resize', () => {
+    clearTimeout(mapResizeTimer);
+    mapResizeTimer = setTimeout(() => {
+      if (body.classList.contains('mind-map-mode')) applyMapViewBox();
+    }, 100);
   });
 
   menu.addEventListener('click', () => nav.classList.contains('open') ? closeNav() : openNav());
