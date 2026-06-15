@@ -2,37 +2,24 @@
 
 ## Overview
 
-QiLife is the private life operating app. It turns life chaos into QiBits that can be captured, triaged, routed, acted on, documented, resolved, reflected on, and retrieved.
+QiLife is the private operational app and data spine. It captures reality as QiBits and relates those QiBits to persistent Entities.
 
-## Responsibilities
+## Canonical Concepts
 
-- QiBits.
-- Timeline projection.
-- Buckets.
-- Threads.
-- Actions and steps.
-- People, money, documents, events, and knowledge items.
-- Context Dock.
-- Activity log.
-- AI outputs and retrieval.
+- **Entity:** who or what.
+- **QiBit:** event or unit of reality.
+- Every canonical structured record is represented as an Entity or QiBit.
+- QiBits may reference Entities.
+- Files remain in QiNexus; Paperless may process documents without replacing file authority.
 
-## Flows
+## Data Authority
 
-```text
-Capture
-  -> Bucket
-  -> Interpret
-  -> Relate
-  -> Slot
-  -> Breakdown
-  -> Enrich
-  -> Act
-  -> Resolve
-  -> Reflect
-  -> Retrieve
-```
+Supabase Postgres is canonical under ADR-0018. SQLite is deprecated and limited to legacy, local, or transitional use.
 
-## Structure
+## Baseline Structure
 
-Core v1 tables: `qibits`, `buckets`, `threads`, `actions`, `action_steps`, `people`, `transactions`, `obligations`, `knowledge_items`, `documents`, `events`, `links`, `activity_log`, `ai_outputs`, and `daily_summaries`.
+- `qi_entities.entities`
+- `qi_entities.relationships`
+- `qi_events.qibits`
 
+The field contract is maintained in `20_QiSystem/schemas/QiLife_Data_Spine.mdx`. Additional tables require proven constraints or query needs and an accepted reconciliation decision.

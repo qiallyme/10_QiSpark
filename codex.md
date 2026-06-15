@@ -77,9 +77,9 @@ Treat these as current unless a newer ADR contradicts them:
   - `70_QiConnect`
 - QiAccess is the front door / cockpit / docs surface.
 - QiLife is the private life operating app and data spine.
-- SQLite is the current QiLife structured-data authority.
+- Supabase Postgres is the current QiLife structured-data authority under ADR-0018.
 - QiNexus is file/export/reference/archive storage.
-- Supabase is legacy/import/future integration only unless a later ADR says otherwise.
+- SQLite is deprecated and allowed only for legacy, local, or transitional use.
 
 Do not reopen these decisions unless the task explicitly asks for architecture review.
 
@@ -220,51 +220,32 @@ Audit only. No building.
 
 ## 🔵 SECTION 3 — CURRENT STATUS AND NEXT ACTIONS
 
-### [STATUS-2026-06-12] QiDNA Navigation and QiLife Repository
+### [STATUS-2026-06-14] Supabase Authority and QiDNA Reconciliation
 
 **Verified status:**
 
-- QiDNA repository: `/home/qiadmin/qi_workspace/_QiOS_DNA`
-- QiDNA branch: `main`, synchronized with `origin/main`
-- QiDNA documentation site includes:
-  - cascading, collapsible folder-mirror navigation
-  - separate center-screen mind map
-  - document status filters
-  - Markdown and MDX coverage
-- QiDNA navigation update commit: `97aeaf3`
-- QiLife repository is now cloned locally:
-  - path: `/home/qiadmin/qi_workspace/qilife`
-  - remote: `git@github.com:qiallyme/qilife.git`
-  - branch: `main`
-  - verified clone commit at time of checkout: `c589e1e`
-- The prior schema-source report remains evidence of the earlier missing checkout:
-  - `01_QiDNA/Reconciliation/2026-06-10_qilife_schema_source_report.md`
-- The missing-repository blocker is resolved.
-- The actual QiLife implementation schema has not yet been audited after the clone.
+- Canonical mirrored hierarchy remains unchanged.
+- ADR-0018 supersedes prior SQLite authority decisions.
+- Supabase Postgres is the canonical QiLife structured-data authority.
+- SQLite and the 15-table SQLModel implementation are legacy/local/transitional evidence.
+- Canonical baseline: Entity, Entity Relationship, and QiBit.
+- Local migration created at `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`.
+- Migration contains exactly two schemas and three tables.
+- Migration was syntax-applied successfully in disposable PostgreSQL 16; the validation container was removed.
+- RLS is enabled; no client grants or policies are defined.
+- No deployment or SQLite data conversion was run.
+- QiDNA tree navigation and mind map usability repairs are built into the generated site.
+- Referral side quest found no matching source in QiDNA, `/home/qiadmin/qi_workspace`, or `/srv/qios/repos`.
 
-### Next Actions — Do Later, In Order
+### Next Actions - In Order
 
-1. Read the QiLife repository control files and README before scanning implementation.
-2. Check QiLife Git status and current commit.
-3. Perform a targeted schema-source audit inside `/home/qiadmin/qi_workspace/qilife`:
-   - SQLite database files
-   - SQL migrations
-   - ORM models
-   - database initialization code
-   - API data models
-4. Update the QiLife schema source report with verified implementation paths and schema types.
-5. Map actual tables, columns, keys, indexes, and constraints to:
-   - ADR-0017
-   - `20_QiSystem/schemas/QiLife_Data_Spine.mdx`
-   - the database blueprint gap report
-6. Produce discrepancy recommendations using only ADD, MERGE, UPDATE, or DELETE.
-7. Request approval for v1 entities, statuses, and relationships.
-8. Only after schema approval, build the UI route, screen, workflow, and entity-mapping blueprint.
-9. Do not create migrations, alter database code, connect Supabase, or continue broad UI/API implementation until the schema audit and approvals are complete.
+1. Approve identity ownership, custom-schema exposure, RLS policies, and grants.
+2. Define SQLite-to-Supabase mapping, backup, rollback, and cutover.
+3. Continue document-by-document QiLife reconciliation.
+4. Complete the route, screen, workflow, permission, and entity-to-view UI blueprint.
 
-### Stop Conditions
+### Questions for Cody
 
-- Do not infer schema from documentation when implementation evidence exists.
-- Do not modify the QiLife database during the audit.
-- Do not treat Supabase as current authority unless a newer accepted ADR changes ADR-0017.
-- Stop if credentials, private runtime paths, or owner decisions are required.
+- What Supabase user/tenant ownership column should protect each Entity and QiBit?
+- Should the custom schemas be exposed through the Supabase Data API, or accessed only by trusted backend code?
+- Where is the referral/bonus page repository if it is outside the three searched roots?

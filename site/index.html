@@ -478,6 +478,135 @@ mark { padding: .03em .12em; border-radius: 3px; color: inherit; background: var
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+
+/* Tree usability */
+.tree-actions { display: flex; gap: .4rem; margin: -.15rem .2rem .65rem; }
+.tree-actions button {
+  flex: 1;
+  padding: .34rem .45rem;
+  border: 1px solid var(--sidebar-border);
+  border-radius: 7px;
+  color: var(--sidebar-muted);
+  background: transparent;
+  font-size: .66rem;
+  cursor: pointer;
+}
+.tree-actions button:hover {
+  color: var(--sidebar-text);
+  border-color: #9d76ed;
+  background: var(--sidebar-soft);
+}
+.tool-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* Responsive mind map */
+body.mind-map-mode .doc,
+body.mind-map-mode .search-results { display: none !important; }
+body.mind-map-mode .content { width: min(1500px, 100%); }
+.mind-map-view {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 4.5rem);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.mind-map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.mind-map-title { margin: 0; color: var(--heading); font-size: 1.2rem; }
+.mind-map-subtitle { margin: .2rem 0 0; color: var(--muted); font-size: .8rem; line-height: 1.4; }
+.mind-map-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .4rem; }
+.map-action {
+  min-width: 2.25rem;
+  padding: .42rem .62rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--surface-soft);
+  font-size: .75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.map-action:hover { color: #fff; border-color: var(--accent); background: var(--accent); }
+.mind-map-viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 620px;
+  height: calc(100vh - 12rem);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(109, 53, 212, .08), transparent 42%),
+    linear-gradient(rgba(113, 106, 125, .08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(113, 106, 125, .08) 1px, transparent 1px);
+  background-size: auto, 28px 28px, 28px 28px;
+}
+.mind-map-svg { display: block; width: 100%; height: 100%; min-height: 620px; }
+.map-connector { fill: none; stroke: #9682bd; stroke-width: 2.5; opacity: .72; }
+.map-node { cursor: pointer; outline: none; }
+.map-node rect {
+  fill: var(--surface);
+  stroke: #8d73bf;
+  stroke-width: 2;
+  filter: drop-shadow(0 5px 8px rgba(34, 23, 52, .14));
+}
+.map-node text {
+  fill: var(--heading);
+  font: 700 13px/1.2 Inter, ui-sans-serif, system-ui, sans-serif;
+  pointer-events: none;
+}
+.map-node-root rect { fill: var(--accent-strong); stroke: var(--accent-strong); }
+.map-node-root text { fill: #fff; font-size: 16px; }
+.map-node-folder rect { fill: #eee7fb; stroke: #7548ca; }
+.map-node-folder text { fill: #33204f; }
+.map-node-document rect { fill: var(--surface); stroke: #8b82a0; }
+.map-node-document.status-active rect { stroke: #1d9b55; }
+.map-node-document.status-legacy rect { stroke: #dc6d28; }
+.map-node-document.status-proposed rect { stroke: #a34bea; }
+.map-node-document.status-generated rect { stroke: #718096; }
+.map-node-document.status-evidence rect { stroke: #3780d8; }
+.map-node:hover rect,
+.map-node:focus-visible rect {
+  stroke: var(--accent);
+  stroke-width: 4;
+  filter: drop-shadow(0 7px 12px rgba(87, 34, 182, .28));
+}
+.map-expand-dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+[data-theme="dark"] .mind-map-viewport {
+  background:
+    radial-gradient(circle at center, rgba(173, 138, 255, .1), transparent 42%),
+    linear-gradient(rgba(170, 161, 181, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(170, 161, 181, .07) 1px, transparent 1px);
+  background-size: auto, 28px 28px, 28px 28px;
+}
+[data-theme="dark"] .map-connector { stroke: #8f7aae; }
+[data-theme="dark"] .map-node rect { fill: #201a2a; stroke: #9c88c2; }
+[data-theme="dark"] .map-node text { fill: #f5f1fb; }
+[data-theme="dark"] .map-node-root rect { fill: #7548ca; stroke: #ad8aff; }
+[data-theme="dark"] .map-node-folder rect { fill: #312440; stroke: #ad8aff; }
+[data-theme="dark"] .map-node-folder text { fill: #fff; }
+
+@media (max-width: 800px) {
+  .tool-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mind-map-view { min-height: calc(100vh - var(--header) - 1.8rem); }
+  .mind-map-header { align-items: flex-start; flex-direction: column; }
+  .mind-map-actions { justify-content: flex-start; }
+  .mind-map-viewport,
+  .mind-map-svg { min-height: 520px; height: calc(100vh - 17rem); }
+}
+@media (max-width: 480px) {
+  .tool { padding-inline: .3rem; font-size: .68rem; }
+  .map-action { padding: .38rem .5rem; }
+  .mind-map-subtitle { display: none; }
+}
 </style>
 </head>
 <body>
@@ -489,7 +618,7 @@ mark { padding: .03em .12em; border-radius: 3px; color: inherit; background: var
     <label class="group-title" for="search">Find a document</label>
     <input id="search" class="search" type="search" placeholder="Search titles and content" autocomplete="off">
     <label class="group-title" for="status-filter">Document status</label>
-    <select id="status-filter" class="status-filter"><option value="Active">Active (28)</option><option value="All">All statuses (127)</option><option value="Legacy">Legacy (16)</option><option value="Proposed">Proposed (55)</option><option value="Generated">Generated (3)</option><option value="Evidence">Evidence (25)</option></select>
+    <select id="status-filter" class="status-filter"><option value="Active">Active (32)</option><option value="All">All statuses (131)</option><option value="Legacy">Legacy (15)</option><option value="Proposed">Proposed (55)</option><option value="Generated">Generated (3)</option><option value="Evidence">Evidence (26)</option></select>
     <div class="tool-row"><button id="focus" class="tool" type="button" aria-pressed="false">Focus mode</button><button id="clear" class="tool" type="button">Clear</button></div>
   </div>
   <div class="tree-heading">Folder mirror</div>
@@ -560,6 +689,59 @@ qiaccess had drifted into multiple overlapping implementations, including a cust
 - legacy material may be salvaged selectively, but it is not part of the active runtime without an explicit documented decision.
 ">
     <a class="nav-link" href="#adr-0011-homepage-powered-qiaccess"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">ADR-0011: Homepage-Powered QiAccess</span><span class="nav-status status-evidence">Evidence</span></a>
+  </li><li class="nav-item" data-status="Active" data-search="active readme.md # chronicle qidna
+
+chronicle qidna is the portable, status-labeled master manual for the qios ecosystem. it preserves current doctrine, architecture, schemas, decisions, evidence, and reconciliation work needed to understand or rebuild the system.
+
+## canonical structure
+
+- **qios**: the overall ecosystem.
+- **qidna**: governance and documentation.
+- **qieos**: doctrine inside `01_qidna/qieos`.
+- **qiaccess**: cockpit, launcher, front door, and documentation surface.
+- **qisystem**: rules, schemas, naming, database doctrine, and lifecycle rules.
+- **qiserver**: infrastructure, runtime, networking, monitoring, and backups.
+- **qicapture**: ingestion, ocr, parsing, embeddings, and pipelines.
+- **qinexus**: file, export, reference, and archive storage.
+- **qiapp qilife**: private life operating app and structured-data spine.
+- **qiconnect**: external integrations, apis, workers, and connectors.
+
+```text
+01_qidna/
+10_qiaccess/
+20_qisystem/
+30_qiserver/
+40_qicapture/
+50_qinexus/
+60_qiapp_qilife/
+70_qiconnect/
+```
+
+older roots such as `00_qieos`, `10_qios_start`, and `60_qiapps` are retained as legacy or evidence. they cannot override active documentation.
+
+## data authority
+
+- supabase postgres is the canonical qilife structured-data authority.
+- qinexus stores files, exports, references, archives, and backups.
+- sqlite is deprecated and limited to legacy, local, or transitional use.
+- the canonical schema reference is `20_qisystem/schemas/qilife_data_spine.mdx`.
+
+## repository rule
+
+this repository mirrors the system's ownership boundaries for governance and documentation. it is not the runtime file-storage root and does not duplicate the full qinexus bucket tree.
+
+documents are explicitly classified as active, legacy, proposed, generated, or evidence. historical material is preserved, while current authority is kept singular and visible.
+
+## truth rule
+
+```text
+runtime facts beat planning notes.
+active canonical docs govern.
+legacy and evidence explain history.
+generated exports are snapshots.
+```
+">
+    <a class="nav-link" href="#readme"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">Chronicle QiDNA</span><span class="nav-status status-active">Active</span></a>
   </li><li class="nav-item" data-status="Evidence" data-search="evidence codex.md # codex system control file
 
 ---
@@ -639,9 +821,9 @@ treat these as current unless a newer adr contradicts them:
   - `70_qiconnect`
 - qiaccess is the front door / cockpit / docs surface.
 - qilife is the private life operating app and data spine.
-- sqlite is the current qilife structured-data authority.
+- supabase postgres is the current qilife structured-data authority under adr-0018.
 - qinexus is file/export/reference/archive storage.
-- supabase is legacy/import/future integration only unless a later adr says otherwise.
+- sqlite is deprecated and allowed only for legacy, local, or transitional use.
 
 do not reopen these decisions unless the task explicitly asks for architecture review.
 
@@ -776,6 +958,41 @@ audit only. no building.
 ## 🟢 section 2 — resolved / archive
 
 (none yet)
+
+
+---
+
+## 🔵 section 3 — current status and next actions
+
+### [status-2026-06-14] supabase authority and qidna reconciliation
+
+**verified status:**
+
+- canonical mirrored hierarchy remains unchanged.
+- adr-0018 supersedes prior sqlite authority decisions.
+- supabase postgres is the canonical qilife structured-data authority.
+- sqlite and the 15-table sqlmodel implementation are legacy/local/transitional evidence.
+- canonical baseline: entity, entity relationship, and qibit.
+- local migration created at `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`.
+- migration contains exactly two schemas and three tables.
+- migration was syntax-applied successfully in disposable postgresql 16; the validation container was removed.
+- rls is enabled; no client grants or policies are defined.
+- no deployment or sqlite data conversion was run.
+- qidna tree navigation and mind map usability repairs are built into the generated site.
+- referral side quest found no matching source in qidna, `/home/qiadmin/qi_workspace`, or `/srv/qios/repos`.
+
+### next actions - in order
+
+1. approve identity ownership, custom-schema exposure, rls policies, and grants.
+2. define sqlite-to-supabase mapping, backup, rollback, and cutover.
+3. continue document-by-document qilife reconciliation.
+4. complete the route, screen, workflow, permission, and entity-to-view ui blueprint.
+
+### questions for cody
+
+- what supabase user/tenant ownership column should protect each entity and qibit?
+- should the custom schemas be exposed through the supabase data api, or accessed only by trusted backend code?
+- where is the referral/bonus page repository if it is outside the three searched roots?
 ">
     <a class="nav-link" href="#codex"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">CODEX SYSTEM CONTROL FILE</span><span class="nav-status status-evidence">Evidence</span></a>
   </li><li class="nav-item" data-status="Evidence" data-search="evidence qilinks_bookmark_admin_plan.md # qilinks bookmark admin plan
@@ -1009,66 +1226,6 @@ phase 3:
 - no direct server deployment work in this phase
 ">
     <a class="nav-link" href="#qilinks-bookmark-admin-plan"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">QiLinks Bookmark Admin Plan</span><span class="nav-status status-evidence">Evidence</span></a>
-  </li><li class="nav-item" data-status="Legacy" data-search="legacy readme.md # qios dna
-
-qios dna is the portable master manual for the qios ecosystem.
-
-it preserves the origin doctrine, system map, rules, schemas, decisions, receipts, and reconciliation work needed to understand or rebuild the system.
-
-## core doctrine
-
-- **qios** = the overall ecosystem / operating system.
-- **qieos** = the origin brain / dna / doctrine layer.
-- **qios start** = the cockpit / launcher / front door / docs surface.
-- **qisystem** = rules, schemas, naming, database doctrine, and lifecycle rules.
-- **qiserver** = infrastructure, runtime, docker, cloudflare, monitoring, and backups.
-- **qicapture** = ingestion, ocr, parsing, embeddings, and pipelines.
-- **qinexus** = storage backbone and file system model.
-- **qiapps** = standalone apps, sites, and tools.
-- **qiconnect** = external integrations, apis, workers, and connector surfaces.
-
-## locked qilabs structure
-
-```text
-c:\qilabs\
-  .github\
-  .qios\
-  .vscode\
-  00_qieos\
-  10_qios_start\
-  20_qisystem\
-  30_qiserver\
-  40_qicapture\
-  50_qinexus\
-    my drive\
-  60_qiapps\
-  70_qiconnect\
-  packages\
-  scripts\
-  toolbox\
-```
-
-## repo rule
-
-this repo mirrors the qilabs root logic for doctrine and documentation. it is not the actual file-storage root and does not duplicate the full qinexus `my drive` bucket system.
-
-raw imported docs stay under:
-
-```text
-00_qieos/receipts/raw_imports/
-```
-
-canonical doctrine is promoted only after review.
-
-## truth rule
-
-```text
-raw imports are evidence.
-canonical docs are law.
-exports are snapshots.
-```
-">
-    <a class="nav-link" href="#readme"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">QiOS DNA</span><span class="nav-status status-legacy">Legacy</span></a>
   </li><li class="nav-item" data-status="Active" data-search="active _..md # qios dna repository
 
 ## overview
@@ -1117,9 +1274,11 @@ the `site/` folder contains the single-page system mirror viewer.
     <button class="folder-toggle" type="button" aria-expanded="false"><span class="tree-caret" aria-hidden="true"></span><span class="folder-icon" aria-hidden="true"></span><span class="folder-label">decisions</span></button>
     <ul class="tree-children"><li class="nav-item" data-status="Legacy" data-search="legacy 00_qieos/decisions/adr-0001_qios_dna_as_master_doctrine_repo.mdx # adr-0001: qios dna as master doctrine repo
 
+&gt; **legacy - superseded.** reconciled on 2026-06-12. repository-authority doctrine was promoted to `01_qidna/qieos/_qieos.md`. root vocabulary and locations are superseded by adr-0017. retained in place as hierarchy-preserving archive evidence.
+
 ## status
 
-accepted.
+superseded by adr-0017.
 
 ## decision
 
@@ -1154,6 +1313,8 @@ toolbox
   </li><li class="tree-node" data-path="00_QiEOS/doctrine" data-depth="2">
     <button class="folder-toggle" type="button" aria-expanded="false"><span class="tree-caret" aria-hidden="true"></span><span class="folder-icon" aria-hidden="true"></span><span class="folder-label">doctrine</span></button>
     <ul class="tree-children"><li class="nav-item" data-status="Legacy" data-search="legacy 00_qieos/doctrine/qios_core_doctrine.mdx # qios core doctrine
+
+&gt; **legacy - superseded.** reconciled on 2026-06-12. operating-truth and promotion rules were promoted to `01_qidna/qieos/_qieos.md`. layer names are superseded by adr-0017. retained in place as hierarchy-preserving archive evidence.
 
 qios is the master operating system for the qi ecosystem.
 
@@ -1785,6 +1946,8 @@ these should be reviewed before moving, renaming, or deleting. do not bulldoze t
     <button class="folder-toggle" type="button" aria-expanded="false"><span class="tree-caret" aria-hidden="true"></span><span class="folder-icon" aria-hidden="true"></span><span class="folder-label">system_map</span></button>
     <ul class="tree-children"><li class="nav-item" data-status="Legacy" data-search="legacy 00_qieos/system_map/qios_master_map.mdx # qios master map
 
+&gt; **legacy - superseded.** reconciled on 2026-06-12. the canonical root map is maintained by adr-0017 and the active root documents. this historical map is retained in place as hierarchy-preserving archive evidence.
+
 ```text
 qios
 ├── 00_qieos        brain / doctrine / decisions / receipts / system map
@@ -1897,7 +2060,7 @@ architectural question -&gt; inspect evidence -&gt; record decision -&gt; update
 
 ## status
 
-accepted.
+superseded on 2026-06-14 by adr-0018 for database authority. retained as decision history.
 
 ## context
 
@@ -2044,7 +2207,7 @@ ai improves consistency and scale but can be incomplete or wrong. qidna must rem
 
 ## status
 
-accepted on 2026-06-10.
+accepted on 2026-06-10. database-authority bullets superseded by adr-0018 on 2026-06-14; all other decisions remain active.
 
 ## context
 
@@ -2069,23 +2232,63 @@ the canonical roots are:
 - qieos is doctrine inside `01_qidna`, not a top-level root.
 - qiaccess is the canonical front-door name and remains separate from qilife.
 - qiapp qilife and `60_qiapp_qilife` are the canonical app name and root.
-- sqlite is the current structured-data authority.
-- qinexus owns file, export, reference, and archive storage, not relational data.
-- supabase is legacy import or possible future integration only.
+- supabase postgres is the canonical structured-data authority under adr-0018.
+- qinexus owns file, export, reference, archive, and backup storage, not relational data.
+- sqlite is deprecated and limited to legacy, local, or transitional use.
 - v1 is manual-first: capture, inbox and triage, qibit review, timeline projection, actions, documents and evidence links, people and entities, and daily summaries.
 - ai may assist but must use review and approval; it is not silent authority.
 
-## rationale
+## verified implementation
 
-these choices remove naming ambiguity, separate shell and product responsibilities, and establish a conservative implementation sequence that can be verified against the actual sqlite schema.
+qilife commit `c589e1e` implements the legacy 15-table sqlite catalog. adr-0018 replaces it with the minimal supabase entity/qibit spine documented in `20_qisystem/schemas/qilife_data_spine.mdx`.
 
 ## consequences
 
 - all documents receive an explicit active, legacy, proposed, generated, or evidence status.
 - legacy content remains preserved and cannot override active documentation.
-- broad database or ui implementation remains blocked until the actual schema and approved implementation blueprints are available.
+- the missing-schema blocker is closed.
+- schema hardening remains gated on accepted categorical values, constraints, indexes, lifecycle rules, migrations, privacy, retention, and backup contracts.
+- ui implementation remains gated on the approved route, screen, workflow, and entity-to-view blueprint.
 ">
     <a class="nav-link" href="#01-qidna-architecture-decisions-adr-0017-canonical-vocabulary-and-v1-direction"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">ADR-0017: Canonical Vocabulary and V1 Direction</span><span class="nav-status status-active">Active</span></a>
+  </li><li class="nav-item" data-status="Active" data-search="active 01_qidna/architecture/decisions/adr-0018_supabase_qilife_data_authority.md # adr-0018: supabase as qilife data authority
+
+## status
+
+accepted on 2026-06-14.
+
+## context
+
+qilife needs centralized, queryable, cross-device structured data and a stable api surface for normalized imports. the existing sqlite implementation proved the earlier 15-table model, but it is no longer the canonical direction.
+
+## decision
+
+- supabase postgres is the canonical qilife structured-data authority.
+- sqlite is deprecated and may be used only for legacy, local, or transitional operation.
+- the canonical minimum model has two concepts: an **entity** is a who or what; a **qibit** is an event or unit of reality.
+- every canonical structured record is represented as an entity or qibit.
+- qibits may reference one primary entity in the baseline. additional participation models require a later decision.
+- entity-to-entity meaning is stored in `qi_entities.relationships`.
+- files remain outside the relational spine in qinexus. paperless may process and manage documents but does not replace qinexus authority.
+- the baseline contains only `qi_entities.entities`, `qi_entities.relationships`, and `qi_events.qibits`.
+
+## security boundary
+
+the custom schemas are private by default. row-level security is enabled, but no client policies or schema grants are created until identity and authorization rules are approved.
+
+## migration boundary
+
+this decision authorizes a migration-ready baseline, not deployment or automatic sqlite conversion. cutover, data mapping, validation, backup, rollback, and application integration remain separate work.
+
+## supersedes
+
+- adr-0012's sqlite/supabase authority decision.
+- adr-0017's sqlite/supabase authority bullets.
+- decision 0006's sqlite clean-core direction.
+
+all unrelated vocabulary, hierarchy, qinexus, manual-first, and review requirements remain in force.
+">
+    <a class="nav-link" href="#01-qidna-architecture-decisions-adr-0018-supabase-qilife-data-authority"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">ADR-0018: Supabase as QiLife Data Authority</span><span class="nav-status status-active">Active</span></a>
   </li><li class="nav-item" data-status="Active" data-search="active 01_qidna/architecture/decisions/_decisions.md # architecture decisions
 
 ## overview
@@ -2128,6 +2331,22 @@ core rules:
 - keep system layer names fixed.
 - explain why the mirror structure exists.
 - resolve conflicts by aligning old material to the active system model.
+- preserve system memory and reduce drift across implementation repositories.
+- govern system-level interpretation while allowing child repositories to own local implementation details.
+
+## repository authority
+
+chronicle qidna is the portable governance and doctrine repository for the qios ecosystem. implementation repositories may keep local documentation, but local material does not override accepted qidna doctrine or architecture decisions.
+
+promotion follows this rule:
+
+```text
+raw imports are evidence.
+reviewed canonical documents govern.
+generated exports are snapshots.
+```
+
+unique valid meaning is promoted into the matching canonical document. superseded sources remain visible as legacy or evidence so history is preserved without creating a second authority.
 
 ## flows
 
@@ -2148,85 +2367,122 @@ system layer names are fixed: qidna, qiaccess, qisystem, qiserver, qicapture, qi
   </li></ul>
   </li><li class="tree-node" data-path="01_QiDNA/Reconciliation" data-depth="2">
     <button class="folder-toggle" type="button" aria-expanded="false"><span class="tree-caret" aria-hidden="true"></span><span class="folder-icon" aria-hidden="true"></span><span class="folder-label">Reconciliation</span></button>
-    <ul class="tree-children"><li class="nav-item" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-10_database_blueprint_gap_report.md # database blueprint gap report
+    <ul class="tree-children"><li class="nav-item" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-12_document_reconciliation_ledger.md # chronicle qidna document reconciliation ledger
 
-## accepted direction
+## purpose
 
-- sqlite is the current qilife structured-data authority.
-- qinexus owns files, exports, references, and archives.
-- supabase is legacy import or possible future integration only.
-- v1 is manual-first and ai writes require review and approval.
+this ledger tracks every source document through review, promotion, supersession, and verification. reconciliation is complete only when every document has one explicit disposition and every valid governing claim has one canonical destination.
 
-## evidence available
+## dispositions
 
-qidna names these intended entities:
+- **canonical:** current governing document.
+- **merged:** unique valid meaning was promoted into a canonical document.
+- **superseded:** retained only for history; cannot govern current work.
+- **evidence:** factual receipt or audit retained without governing authority.
+- **generated:** derived output; rebuildable and non-canonical.
+- **pending:** not yet reviewed claim by claim.
 
-```text
-qibits
-buckets
-threads
-actions
-action_steps
-people
-transactions
-obligations
-knowledge_items
-documents
-events
-links
-activity_log
-ai_outputs
-daily_summaries
-```
+legacy sources are retained in their mirrored source location as archive evidence unless an approved archive move can preserve hierarchy, provenance, and links. this avoids flattening and prevents archive organization from becoming a competing system map.
 
-module and decision documents describe provenance, timeline projection, capture, triage, documents, people, actions, and summaries.
+## progress summary
 
-## blocking evidence missing
+| domain | reconciled | pending | status |
+|---|---:|---:|---|
+| `00_qieos` -&gt; `01_qidna` | 3 | 0 | complete |
+| `10_qios_start` + legacy qiaccess -&gt; `10_qiaccess` | 3 | 0 | complete |
+| remaining repository | 0 | 121 | pending |
 
-no sqlite database, sql schema, migration files, orm model, or database configuration exists in this repository. the actual schema cannot be reconstructed safely from prose.
+## reconciliation entries
 
-required implementation evidence:
+### `00_qieos/decisions/adr-0001_qios_dna_as_master_doctrine_repo.mdx`
 
-- actual `qilife.sqlite` database or a read-only schema dump
-- migration directory, if one exists
-- orm or model definitions
-- database creation/bootstrap code
-- canonical runtime database path
-- current application repository and commit
-- sample data only if sanitized and necessary for constraint discovery
+- previous status: legacy, accepted under obsolete vocabulary.
+- valid unique claims: qidna is portable system doctrine; local implementation docs cannot override system doctrine; system-level interpretation belongs in qidna.
+- merged into: `01_qidna/qieos/_qieos.md`.
+- superseded claims: old root names and old reconciliation/export locations.
+- current disposition: **merged + superseded**, retained in place as legacy archive evidence.
 
-## blueprint gaps
+### `00_qieos/doctrine/qios_core_doctrine.mdx`
 
-for every v1 entity, approval is still required for:
+- previous status: legacy.
+- valid unique claims: reduce drift, preserve system memory, review raw imports before promotion, exports are snapshots.
+- merged into: `01_qidna/qieos/_qieos.md`.
+- superseded claims: qieos as a top-level root, qios start, and qiapps vocabulary.
+- current disposition: **merged + superseded**, retained in place as legacy archive evidence.
 
-- table and column names
-- types, nullability, and defaults
-- primary and foreign keys
-- cardinality and delete behavior
-- unique and check constraints
-- status enums and state transitions
-- timestamps and timeline projection field
-- indexes and required queries
-- provenance and audit fields
-- file-reference rules
-- archive, retention, restoration, and purge behavior
-- backup and migration procedure
-- privacy and authorization boundaries
+### `00_qieos/system_map/qios_master_map.mdx`
 
-## v1 mapping priority
+- previous status: legacy.
+- valid unique claims: none not already governed by active root documents and adr-0017.
+- superseded claims: the old root map, qiaccess start location, qilife legacy location, qijourney as a major active module, and top-level `packages`, `scripts`, and `toolbox` doctrine.
+- canonical destination: `01_qidna/architecture/decisions/adr-0017_canonical_vocabulary_and_v1_direction.md` and active root documents.
+- current disposition: **superseded**, retained in place as legacy archive evidence.
 
-1. qibit and raw capture provenance.
-2. inbox and triage state.
-3. actions and action steps.
-4. documents and evidence links.
-5. people and entity relationships.
-6. timeline projection rules.
-7. daily summaries.
-8. ai output staging and approval records.
 
-## exit criteria
+### `10_qios_start/qiaccess_start/index.mdx`
 
-database implementation may continue only after the real schema is inspected, mapped to the entity catalog, discrepancies are documented, and v1 fields, statuses, relationships, and migrations are approved.
+- previous status: legacy.
+- valid unique claims: qiaccess is the front door and interface layer, while runtime, doctrine, rules, and storage remain owned by their respective layers.
+- merged into: `10_qiaccess/_10_qiaccess.md`.
+- superseded claims: qiaccess start naming and old root location.
+- current disposition: **merged + superseded**, retained in place as legacy archive evidence.
+
+### `60_qiapps/qiaccess_start/overview.md`
+
+- previous status: legacy implementation evidence.
+- verified against: healthy live homepage stack at `/srv/qios/stacks/_qiaccess_start` and implementation repository commit `07268d4`.
+- valid unique claims: homepage implementation, repository-to-live synchronization boundary, and no-secrets rule.
+- merged into: `10_qiaccess/_10_qiaccess.md`.
+- superseded claims: repo config as runtime authority and historical url inventory.
+- current disposition: **merged + superseded**, retained in place as legacy archive evidence.
+
+### `60_qiapps/qiaccess_start/wiki_publish_plan.md`
+
+- previous status: legacy proposal.
+- valid unique claims: none required by the accepted build.
+- conflict: proposes a wiki.js publication authority while adr-0015 selects the generated static chronicle reader.
+- current disposition: **superseded**, retained in place as legacy archive evidence.
+
+## verification rule
+
+after each domain:
+
+1. confirm every reviewed source has a ledger entry.
+2. confirm promoted claims appear in one canonical destination.
+3. confirm superseded sources carry a visible notice.
+4. rebuild the site and verify active remains the printable governing view.
+5. update counts and the next bounded domain.
+">
+    <a class="nav-link" href="#01-qidna-reconciliation-2026-06-12-document-reconciliation-ledger"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">Chronicle QiDNA Document Reconciliation Ledger</span><span class="nav-status status-evidence">Evidence</span></a>
+  </li><li class="nav-item" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-10_database_blueprint_gap_report.md # database blueprint gap report
+
+## status
+
+the 2026-06-12 sqlite inventory is retained as legacy implementation evidence. adr-0018 superseded it as canonical design on 2026-06-14.
+
+## canonical baseline
+
+- authority: supabase postgres.
+- schemas: `qi_entities`, `qi_events`.
+- tables: `entities`, `relationships`, `qibits`.
+- keys: generated uuid primary keys.
+- security: rls enabled, no permissive client policies.
+- files: qinexus authority; paperless processing surface.
+- migration: `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`.
+
+## remaining gaps
+
+1. user ownership and identity mapping.
+2. rls policies and custom-schema grants.
+3. governed entity, relationship, and qibit type vocabularies.
+4. sqlite-to-supabase mapping, validation, and duplicate handling.
+5. backup, rollback, cutover, and offline behavior.
+6. application integration and end-to-end tests.
+7. retention, archive, restoration, and purge rules.
+
+## legacy evidence
+
+qilife commit `c589e1e` contains 15 sqlite tables. those tables are not automatically recreated or discarded. their useful data and constraints require an explicit migration map.
 ">
     <a class="nav-link" href="#01-qidna-reconciliation-2026-06-10-database-blueprint-gap-report"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">Database Blueprint Gap Report</span><span class="nav-status status-evidence">Evidence</span></a>
   </li><li class="nav-item" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-10_documentation_status_map.md # documentation status map
@@ -2343,6 +2599,8 @@ status: implemented in the site classifier.
 
 ## phase 3: content promotion
 
+status: in progress. the `00_qieos` doctrine, master map, and adr-0001 set was reconciled on 2026-06-12.
+
 for each legacy document:
 
 1. identify unique claims.
@@ -2351,7 +2609,7 @@ for each legacy document:
 4. merge compatible unique content into one canonical destination.
 5. record the legacy source path in the reconciliation receipt.
 6. resolve conflicts through an adr or explicit owner decision.
-7. leave the legacy source unchanged and labeled legacy or evidence.
+7. add an explicit supersession notice to the legacy source and retain it in place as hierarchy-preserving archive evidence unless a later approved move preserves its source path and provenance.
 
 priority promotion sets:
 
@@ -2374,11 +2632,10 @@ status: builder updated.
 
 ## phase 5: database blueprint
 
-status: blocked on actual sqlite evidence.
+status: physical schema inventory complete; behavioral contracts remain open.
 
-- obtain the database or schema dump.
-- inventory tables, columns, keys, indexes, triggers, and migrations.
-- map implementation to the approved entity catalog.
+- the qilife repository, sqlmodel metadata, and canonical sqlite database were inspected on 2026-06-12.
+- tables, columns, keys, relationships, indexes, constraints, and migration state are mapped in `20_qisystem/schemas/qilife_data_spine.mdx`.
 - produce add, merge, update, or delete recommendations.
 - approve v1 schema before migration or application changes.
 
@@ -2490,177 +2747,48 @@ these are proposals, not executed moves or deletions.
     <a class="nav-link" href="#01-qidna-reconciliation-2026-06-10-qidna-implementation-reconciliation"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">QiDNA and Implementation Reconciliation</span><span class="nav-status status-evidence">Evidence</span></a>
   </li><li class="nav-item" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-10_blueprint_readiness_and_decision_gate.md # qidna blueprint readiness and decision gate
 
-## purpose
+## status
 
-this document states whether qidna is ready to govern database and ui implementation and identifies the decisions required before that work continues.
+original assessment: 2026-06-10. supabase authority update: 2026-06-14.
 
-assessment date: 2026-06-10.
+qidna has one accepted vocabulary, complete markdown/mdx site coverage, visible document statuses, and an accepted minimal supabase spine. database deployment and application cutover remain gated.
 
-## current position
+## resolved gates
 
-qidna has a sound governance foundation, but it is not yet a contradiction-free or implementation-complete master blueprint.
+- adr-0017 defines the canonical mirrored roots.
+- adr-0018 defines supabase postgres as qilife's canonical structured-data authority.
+- the canonical minimum is entity, entity relationship, and qibit.
+- the local migration contains only `qi_entities.entities`, `qi_entities.relationships`, and `qi_events.qibits`.
+- qinexus remains file/export/reference/archive authority.
+- sqlite is legacy, local, or transitional evidence only.
 
-the repository is synchronized, the active `01-70` domains are documented, the architecture adrs are in place, and the single-page site builds successfully. structural reconciliation and implementation specifications remain incomplete.
+## open database gate
 
-## established foundations
+before deployment:
 
-- eight primary domains define the current system boundary.
-- adrs define data strategy, folder documentation, topology, build strategy, and the ai auditor role.
-- the reconciliation report records naming, ownership, topology, and persistence conflicts.
-- sqlite, qinexus, and legacy supabase have separate intended responsibilities.
-- the generated site provides a searchable single-page documentation reader.
+1. approve user identity and ownership columns.
+2. approve custom-schema data api exposure.
+3. define rls policies and role grants.
+4. define sqlite-to-supabase mapping and validation.
+5. define backup, rollback, cutover, and offline behavior.
+6. test the migration against a local or linked supabase project.
 
-## blocking issues
+## open ui gate
 
-### 1. competing root models
+the route, screen, workflow, loading, empty, error, offline, permission, visibility, accessibility, and entity-to-view contracts remain incomplete.
 
-the repository still presents two architectures as if both are current:
+## required sequence
 
-```text
-current: 01_qidna, 10_qiaccess, 60_qiapp_qilife
-legacy:  00_qieos, 10_qios_start, 60_qiapps
-```
-
-`readme.md`, `docs.json`, doctrine, manifests, and module documents do not yet use one canonical vocabulary.
-
-### 2. incomplete site coverage
-
-the current node builder renders `.md` files but omits `.mdx` files. fourteen mdx documents are absent from the site, including the historical master map, source-of-truth rules, qilife data spine, and several module pages.
-
-the site also renders current and legacy markdown together without visible status labels.
-
-### 3. incomplete database blueprint
-
-the entity catalog exists, but the following are not yet canonical and complete:
-
-- field definitions and types
-- primary and foreign keys
-- relationship cardinality
-- status values and transition rules
-- uniqueness and validation constraints
-- indexes and query requirements
-- ownership and provenance rules
-- retention, archive, and deletion behavior
-- migration and backup rules
-- authorization and sensitive-data boundaries
-
-the actual qilife sqlite schema and legacy supabase schema were not available for comparison.
-
-### 4. incomplete ui blueprint
-
-module flows exist, but the following are not yet unified:
-
-- application route map
-- screen and view inventory
-- component ownership
-- navigation hierarchy
-- loading, empty, error, and offline states
-- create, review, approve, edit, archive, and delete flows
-- entity-to-screen and api-to-screen mappings
-- permissions and visibility rules
-- accessibility and responsive behavior requirements
-- acceptance criteria for each workflow
-
-## readiness decision
-
-broad database and ui implementation should not begin from the current documentation alone.
-
-the required sequence is:
-
-1. select and document the canonical root vocabulary.
-2. label all competing documents as active, legacy, proposed, generated, or evidence.
-3. consolidate active domain documentation without deleting historical evidence.
-4. make the generated site include all supported canonical formats and display document status.
-5. complete and verify the database blueprint against the actual implementation schema.
-6. complete the route, screen, workflow, and ui-to-entity blueprint.
-7. implement database changes, then api contracts, then ui behavior.
-
-## decision package required from cody
-
-review the documents listed below and provide explicit decisions for each question.
-
-### canonical structure
-
-review:
-
-- `01_qidna/_01_qidna.md`
-- `01_qidna/qieos/_qieos.md`
-- `00_qieos/system_map/qios_master_map.mdx`
-- `00_qieos/doctrine/qios_core_doctrine.mdx`
-- `readme.md`
-
-decision:
-
-- is the canonical root model the current `01_qidna` through `70_qiconnect` structure?
-- is `qieos` a doctrine section inside qidna rather than a separate top-level root?
-- is the canonical front-door name `qiaccess` rather than `qios start` or `qiaccess start`?
-- is the canonical application name and root `qiapp qilife` / `60_qiapp_qilife`?
-
-### data authority
-
-review:
-
-- `01_qidna/architecture/decisions/adr-0012_data_strategy.md`
-- `20_qisystem/schemas/qilife_data_spine.mdx`
-- `90_decisions/0006_clean_core_with_legacy_bridge.md`
-- `70_deployment/00_local_dev.md`
-
-decision:
-
-- confirm sqlite as the current qilife structured-data authority.
-- confirm qinexus as file, export, reference, and archive storage rather than a database.
-- confirm supabase as legacy/import or future integration only.
-- provide or identify the actual qilife schema repository and database path.
-
-### product scope
-
-review:
-
-- `60_qiapp_qilife/_60_qiapp_qilife.md`
-- `90_decisions/0001_personal_lifedesk_model.md`
-- `90_decisions/0002_qibit_as_atomic_unit.md`
-- `90_decisions/0003_timeline_as_spine.md`
-- `90_decisions/0009_agent_first_copilot_cockpit.md`
-- `90_decisions/0010_spaces_for_scoped_shared_access.md`
-
-decision:
-
-- confirm which entities and modules are required for v1.
-- confirm whether spaces and shared access are v1 or later.
-- confirm whether ai is central to v1 or staged after manual workflows.
-
-### ui direction
-
-review:
-
-- `10_qiaccess/_10_qiaccess.md`
-- `60_qiapp_qilife/_60_qiapp_qilife.md`
-- `50_modules/*/overview.md`
-- `50_modules/*/ui_flow.md`
-- `60_ai_layer/02_ai_review_workflow.md`
-
-decision:
-
-- confirm the primary navigation and first screens to implement.
-- confirm whether qiaccess and qilife are separate applications or one shell with embedded modules.
-- confirm the minimum capture, inbox, timeline, action, and review workflows for v1.
+1. validate the baseline migration locally.
+2. approve identity, rls, grants, and access boundaries.
+3. define and test the transitional data mapping.
+4. approve backup, rollback, and cutover.
+5. integrate qilife against supabase.
+6. complete the ui blueprint.
 
 ## exit criteria
 
-database and ui work may proceed when:
-
-- one root vocabulary is accepted
-- contradictory documents are labeled or reconciled
-- the actual database schema is available and mapped to the entity catalog
-- v1 entities, statuses, and relationships are approved
-- v1 routes, screens, and workflows are approved
-- the generated site contains the complete active blueprint without presenting legacy material as current authority
-
-## readiness estimate
-
-- governance and architecture foundation: approximately 70 percent.
-- implementation-level database and ui specification: approximately 40-50 percent.
-- current status: documentation consolidation and decision review required before implementation expansion.
+the chronicle becomes implementation-complete when the supabase access/cutover contracts and the v1 ui contracts are approved, tested, and represented by one canonical document each.
 ">
     <a class="nav-link" href="#01-qidna-reconciliation-2026-06-10-blueprint-readiness-and-decision-gate"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">QiDNA Blueprint Readiness and Decision Gate</span><span class="nav-status status-evidence">Evidence</span></a>
   </li><li class="nav-item" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-10_site_coverage_report.md # qidna site coverage report
@@ -2713,118 +2841,31 @@ the site is acceptable for blueprint review when:
     <a class="nav-link" href="#01-qidna-reconciliation-2026-06-10-site-coverage-report"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">QiDNA Site Coverage Report</span><span class="nav-status status-evidence">Evidence</span></a>
   </li><li class="nav-item" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-10_qilife_schema_source_report.md # qilife schema source report
 
-## scope
+## status
 
-assessment date: 2026-06-10.
+the missing-repository blocker was resolved on 2026-06-12. adr-0018 reclassified the inspected sqlite system as legacy implementation and migration evidence on 2026-06-14.
 
-this audit performed three targeted searches for the actual qilife implementation schema. dependency, build, cache, virtual-environment, git, and generated-site directories were excluded.
+## verified legacy source
 
-## result
+- repository: `/home/qiadmin/qi_workspace/qilife`
+- inspected commit: `c589e1e`
+- models: `backend/app/db/models.py`
+- database: `data/db/qilife.sqlite`
+- orm metadata: `sqlmodel.metadata`
+- migration integration: `backend/alembic/env.py`
 
-the actual qilife database or implementation schema was **not found**.
+the implementation contains 15 tables. it proves existing data shapes and workflows but is no longer canonical authority.
 
-the expected local application repositories are missing:
+## canonical source
 
-```text
-/home/qiadmin/qi_workspace/qilife
-/home/qiadmin/qi_workspace/qilife
-```
+- decision: `01_qidna/architecture/decisions/adr-0018_supabase_qilife_data_authority.md`
+- field contract: `20_qisystem/schemas/qilife_data_spine.mdx`
+- catalog: `20_qisystem/schemas/schema_catalog.md`
+- migration: `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`
 
-no separate qilife application repository was found under:
+## transition rule
 
-```text
-/home/qiadmin/qi_workspace
-/srv/qios/apps
-/srv/qios/repos
-/home/qiadmin
-```
-
-## sources found
-
-### qilife documentation only
-
-```text
-/home/qiadmin/qi_workspace/_qios_dna/60_qiapp_qilife
-/home/qiadmin/qi_workspace/_qios_dna/60_qiapps/qilife
-```
-
-these locations contain documentation, not executable database definitions.
-
-### unrelated sql
-
-```text
-/srv/qios/apps/_qiaccess_start/worker/schema.sql
-/srv/qios/repos/_qiaccess_start/worker/schema.sql
-```
-
-these files belong to the qiaccess worker and are not evidence of the qilife schema.
-
-### schema types found
-
-| schema type | found for qilife |
-|---|---|
-| sqlite database file | no |
-| sql migrations | no |
-| orm models | no |
-| api models | no |
-| database initialization code | no |
-| documentation-only schema | yes |
-
-## documented entities discovered
-
-the active qidna data spine and governing documents name these intended entities:
-
-```text
-qibits
-buckets
-threads
-actions
-action_steps
-people
-transactions
-obligations
-knowledge_items
-documents
-events
-links
-activity_log
-ai_outputs
-daily_summaries
-```
-
-these names are documented intent and must not be treated as proof that matching tables exist.
-
-## alignment with adr-0017
-
-the documentation-only model is directionally consistent with adr-0017:
-
-- sqlite is identified as the intended current structured-data authority.
-- qinexus remains file, export, reference, and archive storage.
-- supabase remains legacy import or possible future integration.
-- the named entities support the manual-first v1 workflows.
-
-implementation compliance cannot be verified because no sqlite database, migration history, orm model, or initialization code was found.
-
-## what is still missing
-
-- the actual qilife application repository and current commit.
-- the runtime `qilife.sqlite` file or a read-only schema dump.
-- sql migration history, if migrations exist.
-- orm or database model definitions.
-- database creation and initialization code.
-- the canonical runtime database path.
-
-## next exact step
-
-provide or restore the actual qilife implementation repository and identify its path. the preferred expected path is:
-
-```text
-/home/qiadmin/qi_workspace/qilife
-```
-
-if the repository exists elsewhere, provide that exact path. it must contain at least one verified schema source: the sqlite database, a `.schema` dump, migrations, orm models, or database initialization code.
-
-database blueprint work remains blocked until that source is available. no schema should be invented from the documentation.
+no automatic conversion or deletion is authorized. legacy tables must be mapped, validated, backed up, and cut over through a separate approved transition plan.
 ">
     <a class="nav-link" href="#01-qidna-reconciliation-2026-06-10-qilife-schema-source-report"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">QiLife Schema Source Report</span><span class="nav-status status-evidence">Evidence</span></a>
   </li><li class="nav-item" data-status="Active" data-search="active 01_qidna/reconciliation/_reconciliation.md # reconciliation
@@ -2961,34 +3002,92 @@ qiaccess -&gt; qilife -&gt; (qisystem + qinexus + qicapture + qiconnect)
     <button class="folder-toggle" type="button" aria-expanded="false"><span class="tree-caret" aria-hidden="true"></span><span class="folder-icon" aria-hidden="true"></span><span class="folder-label">10_QiAccess</span></button>
     <ul class="tree-children"><li class="nav-item" data-status="Active" data-search="active 10_qiaccess/_10_qiaccess.md # qiaccess
 
-## overview
+## status and authority
 
-qiaccess is the portal and navigation shell for the system. it is the daily entry point for opening tools, seeing what needs attention, capturing quickly, and reaching system services.
+**active.** qiaccess is the homepage-powered front door and operational launcher for the qi ecosystem.
 
-## responsibilities
+verified on 2026-06-12:
 
-- provide the main portal and dashboard.
-- open real tools and services quickly.
-- present the seven-root navigation contract.
-- surface capture as a fast path.
-- point knowledge to canonical docs and references.
-- show system visibility without becoming the system layer itself.
+- live stack: `/srv/qios/stacks/_qiaccess_start`
+- live service: `homepage`, healthy when inspected
+- runtime bind: `127.0.0.1:3001 -&gt; 3000`
+- implementation repository: `/srv/qios/repos/_qiaccess_start`
+- inspected repository commit: `07268d4`
+- live deployed configuration is authoritative for working routes and current grouping.
+- repository configuration is the maintained deployment source but may lag the live stack until synchronized.
 
-## flows
+## role
+
+qiaccess answers:
 
 ```text
-open qiaccess
-  -&gt; see home for attention items
-  -&gt; use start to open tools
-  -&gt; use capture for immediate input
-  -&gt; use knowledge for references
-  -&gt; use system for runtime visibility
+where do i go next, and how do i safely reach the correct system surface?
 ```
 
-## structure
+it provides one dashboard for services, documentation, control surfaces, recovery references, and external tools. it does not own the systems it links to.
 
-qiaccess active navigation has seven roots: home, start, capture, knowledge, memory, insights, and system. system subroutes stay nested under system.
+## ownership boundaries
 
+- homepage owns the dashboard ui and grouping.
+- qiserver owns container runtime and service execution.
+- cloudflare owns the protected public edge route and offline/recovery edge behavior.
+- tailscale owns private network reachability.
+- terminal, cockpit, portainer, and linked applications own real control actions.
+- qidna owns canonical system documentation.
+- qiaccess must not become a duplicate database, documentation authority, or runtime control plane.
+
+## active dashboard groups
+
+the live configuration currently defines:
+
+1. qiaccess
+2. core services
+3. knowledge + archive
+4. data + workflows
+5. finance
+6. server control
+7. attention + recovery
+8. external / mobile functions
+9. admin bookmarks
+10. docs &amp; references
+
+these are dashboard presentation groups, not new qios architecture roots.
+
+## configuration
+
+canonical live files:
+
+```text
+/srv/qios/stacks/_qiaccess_start/
+├── docker-compose.yml
+└── config/
+    ├── settings.yaml
+    ├── services.yaml
+    ├── bookmarks.yaml
+    ├── widgets.yaml
+    ├── docker.yaml
+    ├── custom.css
+    └── custom.js
+```
+
+maintained repository source:
+
+```text
+/srv/qios/repos/_qiaccess_start/qiaccess/
+```
+
+## deployment rules
+
+- runtime facts and deployed config beat planning notes and stale repo urls.
+- repository changes do not become live until deliberately synchronized to the stack.
+- never commit service tokens, widget credentials, passwords, or other secrets.
+- public, tailnet-only, and recovery routes must remain visibly distinct.
+- a launcher link is navigation, not proof that the target service is healthy.
+- legacy custom react portal material must not be redeployed unless explicitly salvaged and documented.
+
+## documentation boundary
+
+chronicle qidna remains the canonical documentation reader under adr-0015. wiki.js and bookstack may provide operational knowledge surfaces, but automated publication plans do not override source markdown/mdx or create a second doctrine authority.
 ">
     <a class="nav-link" href="#10-qiaccess-10-qiaccess"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">QiAccess</span><span class="nav-status status-active">Active</span></a>
   </li></ul>
@@ -2997,6 +3096,8 @@ qiaccess active navigation has seven roots: home, start, capture, knowledge, mem
     <ul class="tree-children"><li class="tree-node" data-path="10_QiOS_Start/QiAccess_Start" data-depth="2">
     <button class="folder-toggle" type="button" aria-expanded="false"><span class="tree-caret" aria-hidden="true"></span><span class="folder-icon" aria-hidden="true"></span><span class="folder-label">QiAccess_Start</span></button>
     <ul class="tree-children"><li class="nav-item" data-status="Legacy" data-search="legacy 10_qios_start/qiaccess_start/index.mdx # qiaccess start
+
+&gt; **legacy - superseded.** reconciled on 2026-06-12. stable front-door and boundary meaning was merged into `10_qiaccess/_10_qiaccess.md`; the qiaccess start name is superseded by adr-0017. retained in place as hierarchy-preserving archive evidence.
 
 qiaccess start is the qios front door, cockpit, launcher, access dashboard, and docs surface.
 
@@ -3234,41 +3335,150 @@ exports are snapshots.
   </li></ul>
   </li><li class="tree-node" data-path="20_QiSystem/schemas" data-depth="2">
     <button class="folder-toggle" type="button" aria-expanded="false"><span class="tree-caret" aria-hidden="true"></span><span class="folder-icon" aria-hidden="true"></span><span class="folder-label">schemas</span></button>
-    <ul class="tree-children"><li class="nav-item" data-status="Active" data-search="active 20_qisystem/schemas/qilife_data_spine.mdx # qilife data spine
+    <ul class="tree-children"><li class="nav-item" data-status="Active" data-search="active 20_qisystem/schemas/database_overview.md # database overview
 
-qilife is the living operational data spine of qios.
+## authority
 
-the qilife implementation repo contains the active app and detailed data-model docs. in qios dna, this page is the canonical system-level summary.
+supabase postgres is the canonical structured-data store for qilife under adr-0018. sqlite is deprecated and may support legacy, local, or transitional operation only.
 
-## v1 core tables
+## why supabase
 
-```text
-qibits
-buckets
-threads
-actions
-action_steps
-people
-transactions
-obligations
-knowledge_items
-documents
-events
-links
-activity_log
-ai_outputs
-daily_summaries
-```
+- centralized relational data.
+- cross-device and api access.
+- normalized csv import targets.
+- database-enforced relationships and constraints.
+- controlled migration history.
 
-## canonical conventions
+## schema per module
 
-- ids use ulids where possible.
-- notes and reflections are qibit types, not separate doctrine roots.
-- monetary values use integer cents.
-- timeline is a projection over timestamped records, not its own source-of-truth table.
-- repo docs imported into app knowledge views are read-only unless edited at source.
+postgres schemas make ownership and security boundaries explicit without inventing separate databases:
+
+- `qi_entities` owns persistent who/what records.
+- `qi_events` owns qibits.
+
+a new schema requires a proven ownership need and accepted reconciliation decision.
+
+## api exposure
+
+the custom schemas are private by default. rls is enabled, but data api exposure, grants, and policies are deferred until user identity and authorization rules are approved.
+
+## files
+
+qinexus remains authoritative for files, exports, references, archives, and backups. paperless is a document-processing and application surface. supabase stores references and structured metadata, not duplicate file authority.
+
+## transition
+
+the existing sqlite database and sqlmodel models are migration evidence. this baseline does not deploy, copy, transform, or delete sqlite data. a later cutover plan must define mapping, validation, backup, rollback, and application integration.
+">
+    <a class="nav-link" href="#20-qisystem-schemas-database-overview"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">Database Overview</span><span class="nav-status status-active">Active</span></a>
+  </li><li class="nav-item" data-status="Active" data-search="active 20_qisystem/schemas/qilife_data_spine.mdx # qilife data spine
+
+## status and authority
+
+**active.** adr-0018 establishes supabase postgres as the canonical qilife structured-data authority.
+
+the baseline migration is `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`. it is migration-ready but has not been deployed by this repository change.
+
+## canonical model
+
+- **entity:** a who or what that persists through time.
+- **qibit:** an event, observation, state change, fact, or unit of reality.
+- every canonical structured record is represented as an entity or qibit.
+- qibits may reference entities.
+
+this is a classification rule, not permission to discard domain meaning. type-specific meaning remains governed in payloads until proven constraints or query needs justify dedicated columns or tables.
+
+## storage boundaries
+
+- supabase stores canonical structured records and relationships.
+- qinexus stores files, exports, references, archives, and backups.
+- paperless may ingest, ocr, classify, and expose documents; it does not replace qinexus file authority.
+- sqlite is deprecated and limited to legacy, local, or transitional use.
+
+## tables
+
+### `qi_entities.entities`
+
+| column | type | rule | purpose |
+|---|---|---|---|
+| `id` | uuid | pk, generated | stable entity identity |
+| `entity_type` | text | required, nonblank | governed entity classification |
+| `display_name` | text | required, nonblank | human-readable identity |
+| `attributes` | jsonb | default `{}` | source-specific attributes |
+| `created_at` | timestamptz | default now | creation time |
+| `updated_at` | timestamptz | default now | application-managed update time |
+
+### `qi_entities.relationships`
+
+| column | type | rule | purpose |
+|---|---|---|---|
+| `id` | uuid | pk, generated | relationship identity |
+| `source_entity_id` | uuid | fk -&gt; entities | relationship origin |
+| `target_entity_id` | uuid | fk -&gt; entities | relationship target |
+| `relationship_type` | text | required, nonblank | governed relationship meaning |
+| `attributes` | jsonb | default `{}` | evidence or qualifiers |
+| `created_at` | timestamptz | default now | creation time |
+| `updated_at` | timestamptz | default now | application-managed update time |
+
+duplicate source, target, and type combinations are prevented. foreign-key columns are indexed.
+
+### `qi_events.qibits`
+
+| column | type | rule | purpose |
+|---|---|---|---|
+| `id` | uuid | pk, generated | qibit identity |
+| `qibit_type` | text | required, nonblank | governed unit classification |
+| `title` | text | required, nonblank | human-readable label |
+| `summary` | text | optional | concise interpretation |
+| `occurred_at` | timestamptz | default now | when the reality occurred |
+| `primary_entity_id` | uuid | optional fk -&gt; entities | primary who/what reference |
+| `payload` | jsonb | default `{}` | type-specific structured content |
+| `created_at` | timestamptz | default now | creation time |
+| `updated_at` | timestamptz | default now | application-managed update time |
+
+the baseline supports one optional primary entity reference. a many-entity participant model requires evidence and a later adr.
+
+## security
+
+- rls is enabled on all three tables.
+- no permissive client policies are included.
+- custom schemas are not granted to `anon` or `authenticated`.
+- identity ownership and access policies must be approved before data api exposure.
+
+## expansion rules
+
+add columns or tables only when a required invariant, proven query, workflow constraint, or accepted adr requires them. do not create tagging, automation, ai, ingestion, or module schemas as part of this baseline.
+
+## legacy sqlite evidence
+
+qilife commit `c589e1e` contains a 15-table sqlmodel/sqlite implementation. it remains evidence and a potential migration source, not canonical authority. no automatic conversion or data deletion is authorized.
 ">
     <a class="nav-link" href="#20-qisystem-schemas-qilife-data-spine"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">QiLife Data Spine</span><span class="nav-status status-active">Active</span></a>
+  </li><li class="nav-item" data-status="Active" data-search="active 20_qisystem/schemas/schema_catalog.md # schema catalog
+
+## status
+
+**active.** minimal canonical supabase catalog accepted by adr-0018.
+
+| schema | table | purpose |
+|---|---|---|
+| `qi_entities` | `entities` | persistent people, organizations, places, objects, systems, and other who/what records |
+| `qi_entities` | `relationships` | typed directed relationships between entities |
+| `qi_events` | `qibits` | events and units of reality, optionally tied to one primary entity |
+
+## deliberately absent
+
+there is no canonical `qi_capture` schema, tagging engine, automation schema, ai schema, file-blob table, or module-specific table in this baseline.
+
+## security posture
+
+all tables have rls enabled. no client grants or policies are defined until identity and authorization are approved.
+
+## source
+
+migration: `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`.
+">
+    <a class="nav-link" href="#20-qisystem-schemas-schema-catalog"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">Schema Catalog</span><span class="nav-status status-active">Active</span></a>
   </li></ul>
   </li></ul>
   </li><li class="tree-node" data-path="30_qiarchive" data-depth="1">
@@ -4224,40 +4434,27 @@ response:
 
 ## overview
 
-qilife is the private life operating app. it turns life chaos into qibits that can be captured, triaged, routed, acted on, documented, resolved, reflected on, and retrieved.
+qilife is the private operational app and data spine. it captures reality as qibits and relates those qibits to persistent entities.
 
-## responsibilities
+## canonical concepts
 
-- qibits.
-- timeline projection.
-- buckets.
-- threads.
-- actions and steps.
-- people, money, documents, events, and knowledge items.
-- context dock.
-- activity log.
-- ai outputs and retrieval.
+- **entity:** who or what.
+- **qibit:** event or unit of reality.
+- every canonical structured record is represented as an entity or qibit.
+- qibits may reference entities.
+- files remain in qinexus; paperless may process documents without replacing file authority.
 
-## flows
+## data authority
 
-```text
-capture
-  -&gt; bucket
-  -&gt; interpret
-  -&gt; relate
-  -&gt; slot
-  -&gt; breakdown
-  -&gt; enrich
-  -&gt; act
-  -&gt; resolve
-  -&gt; reflect
-  -&gt; retrieve
-```
+supabase postgres is canonical under adr-0018. sqlite is deprecated and limited to legacy, local, or transitional use.
 
-## structure
+## baseline structure
 
-core v1 tables: `qibits`, `buckets`, `threads`, `actions`, `action_steps`, `people`, `transactions`, `obligations`, `knowledge_items`, `documents`, `events`, `links`, `activity_log`, `ai_outputs`, and `daily_summaries`.
+- `qi_entities.entities`
+- `qi_entities.relationships`
+- `qi_events.qibits`
 
+the field contract is maintained in `20_qisystem/schemas/qilife_data_spine.mdx`. additional tables require proven constraints or query needs and an accepted reconciliation decision.
 ">
     <a class="nav-link" href="#60-qiapp-qilife-60-qiapp-qilife"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">QiApp QiLife</span><span class="nav-status status-active">Active</span></a>
   </li></ul>
@@ -4266,6 +4463,8 @@ core v1 tables: `qibits`, `buckets`, `threads`, `actions`, `action_steps`, `peop
     <ul class="tree-children"><li class="tree-node" data-path="60_qiapps/qiaccess_start" data-depth="2">
     <button class="folder-toggle" type="button" aria-expanded="false"><span class="tree-caret" aria-hidden="true"></span><span class="folder-icon" aria-hidden="true"></span><span class="folder-label">qiaccess_start</span></button>
     <ul class="tree-children"><li class="nav-item" data-status="Legacy" data-search="legacy 60_qiapps/qiaccess_start/overview.md # qiaccess start overview
+
+&gt; **legacy - superseded implementation evidence.** reconciled on 2026-06-12 against the live homepage stack. valid deployment-boundary and no-secrets rules were merged into `10_qiaccess/_10_qiaccess.md`. recorded urls and repo assumptions are historical and non-authoritative.
 
 this document provides a high-level overview of the **repo-side canonical qiaccess homepage configuration** prepared on cody's local pc. it is not a claim that the live qiserver homepage config already matches this repo.
 
@@ -4335,6 +4534,8 @@ this document provides a high-level overview of the **repo-side canonical qiacce
 ">
     <a class="nav-link" href="#60-qiapps-qiaccess-start-overview"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">QiAccess Start Overview</span><span class="nav-status status-legacy">Legacy</span></a>
   </li><li class="nav-item" data-status="Legacy" data-search="legacy 60_qiapps/qiaccess_start/wiki_publish_plan.md # wiki.js publish plan
+
+&gt; **legacy - superseded proposal.** reconciled on 2026-06-12. adr-0015 establishes generated `site/index.html` as the supported chronicle reader. no wiki.js synchronization implementation is approved by this document.
 
 this document details the plan to automatically synchronize static markdown files from the local git repository to the operational **wiki.js** database.
 
@@ -5145,6 +5346,8 @@ we will treat the markdown files in the repository's `docs/` folder as the canon
     <a class="nav-link" href="#90-decisions-0005-repo-docs-indexed-in-app"><span class="document-icon" aria-hidden="true"></span><span class="nav-label">ADR 0005: Repo Docs Indexed in App</span><span class="nav-status status-evidence">Evidence</span></a>
   </li><li class="nav-item" data-status="Evidence" data-search="evidence 90_decisions/0006_clean_core_with_legacy_bridge.md # decision 0006: clean core with legacy bridge
 
+&gt; **superseded by adr-0018 on 2026-06-14.** retained as historical decision evidence. supabase is now canonical; sqlite is transitional only.
+
 ## context
 qilife is replacing an older supabase-backed system that has a messy schema.
 
@@ -5380,7 +5583,7 @@ site/
   </li></ul>
 </nav>
 <main><div class="content">
-  <header class="intro"><h1>QiOS DNA</h1><p>127 source documents rendered. Active documentation is shown by default.</p><div class="status" aria-live="polite"></div></header>
+  <header class="intro"><h1>QiOS DNA</h1><p>131 source documents rendered. Active documentation is shown by default.</p><div class="status" aria-live="polite"></div></header>
 
     <article id="repository-root" class="doc" data-status="Active" data-search="active _..md # qios dna repository
 
@@ -5457,9 +5660,11 @@ the `site/` folder contains the single-page system mirror viewer.
     </article>
     <article id="00-qieos-decisions-adr-0001-qios-dna-as-master-doctrine-repo" class="doc" data-status="Legacy" data-search="legacy 00_qieos/decisions/adr-0001_qios_dna_as_master_doctrine_repo.mdx # adr-0001: qios dna as master doctrine repo
 
+&gt; **legacy - superseded.** reconciled on 2026-06-12. repository-authority doctrine was promoted to `01_qidna/qieos/_qieos.md`. root vocabulary and locations are superseded by adr-0017. retained in place as hierarchy-preserving archive evidence.
+
 ## status
 
-accepted.
+superseded by adr-0017.
 
 ## decision
 
@@ -5491,8 +5696,11 @@ toolbox
 ">
       <div class="doc-meta"><span class="status-badge status-legacy">Legacy</span><span class="source-path">00_QiEOS/decisions/ADR-0001_QiOS_DNA_As_Master_Doctrine_Repo.mdx</span></div>
       <h1>ADR-0001: QiOS DNA as Master Doctrine Repo</h1>
+<blockquote>
+<p><strong>Legacy - Superseded.</strong> Reconciled on 2026-06-12. Repository-authority doctrine was promoted to <code>01_QiDNA/QiEOS/_QiEOS.md</code>. Root vocabulary and locations are superseded by ADR-0017. Retained in place as hierarchy-preserving archive evidence.</p>
+</blockquote>
 <h2>Status</h2>
-<p>Accepted.</p>
+<p>Superseded by ADR-0017.</p>
 <h2>Decision</h2>
 <p><code>_QiOS_DNA</code> is the portable master doctrine repository for the QiOS ecosystem.</p>
 <p>It mirrors the locked QiLabs root logic:</p>
@@ -5519,6 +5727,8 @@ toolbox
 
     </article>
     <article id="00-qieos-doctrine-qios-core-doctrine" class="doc" data-status="Legacy" data-search="legacy 00_qieos/doctrine/qios_core_doctrine.mdx # qios core doctrine
+
+&gt; **legacy - superseded.** reconciled on 2026-06-12. operating-truth and promotion rules were promoted to `01_qidna/qieos/_qieos.md`. layer names are superseded by adr-0017. retained in place as hierarchy-preserving archive evidence.
 
 qios is the master operating system for the qi ecosystem.
 
@@ -5552,6 +5762,9 @@ exports are snapshots.
 ">
       <div class="doc-meta"><span class="status-badge status-legacy">Legacy</span><span class="source-path">00_QiEOS/doctrine/QiOS_Core_Doctrine.mdx</span></div>
       <h1>QiOS Core Doctrine</h1>
+<blockquote>
+<p><strong>Legacy - Superseded.</strong> Reconciled on 2026-06-12. Operating-truth and promotion rules were promoted to <code>01_QiDNA/QiEOS/_QiEOS.md</code>. Layer names are superseded by ADR-0017. Retained in place as hierarchy-preserving archive evidence.</p>
+</blockquote>
 <p>QiOS is the master operating system for the Qi ecosystem.</p>
 <h2>Layer definitions</h2>
 <ul>
@@ -6601,6 +6814,8 @@ site/
     </article>
     <article id="00-qieos-system-map-qios-master-map" class="doc" data-status="Legacy" data-search="legacy 00_qieos/system_map/qios_master_map.mdx # qios master map
 
+&gt; **legacy - superseded.** reconciled on 2026-06-12. the canonical root map is maintained by adr-0017 and the active root documents. this historical map is retained in place as hierarchy-preserving archive evidence.
+
 ```text
 qios
 ├── 00_qieos        brain / doctrine / decisions / receipts / system map
@@ -6630,6 +6845,9 @@ qios
 ">
       <div class="doc-meta"><span class="status-badge status-legacy">Legacy</span><span class="source-path">00_QiEOS/system_map/QiOS_Master_Map.mdx</span></div>
       <h1>QiOS Master Map</h1>
+<blockquote>
+<p><strong>Legacy - Superseded.</strong> Reconciled on 2026-06-12. The canonical root map is maintained by ADR-0017 and the active root documents. This historical map is retained in place as hierarchy-preserving archive evidence.</p>
+</blockquote>
 <pre><code class="language-text">QiOS
 ├── 00_QiEOS        brain / doctrine / decisions / receipts / system map
 ├── 10_QiOS_Start  cockpit / launcher / front door / docs surface
@@ -6849,7 +7067,7 @@ use `adr-nnnn_short_descriptive_name.md`.
 
 ## status
 
-accepted.
+superseded on 2026-06-14 by adr-0018 for database authority. retained as decision history.
 
 ## context
 
@@ -6878,7 +7096,7 @@ this matches the accepted clean-core decision and prevents folder placement from
       <div class="doc-meta"><span class="status-badge status-active">Active</span><span class="source-path">01_QiDNA/Architecture/Decisions/ADR-0012_data_strategy.md</span></div>
       <h1>ADR-0012: Data Strategy Across Supabase and QiNexus</h1>
 <h2>Status</h2>
-<p>Accepted.</p>
+<p>Superseded on 2026-06-14 by ADR-0018 for database authority. Retained as decision history.</p>
 <h2>Context</h2>
 <p>QiDNA references an older Supabase-backed system, current QiLife documentation names SQLite as the v1 runtime database, and QiNexus is defined as durable storage and folder discipline. No Supabase migrations, local configuration, or live schema were available during the 2026-06-10 audit.</p>
 <p>Supabase and QiNexus are not interchangeable: one can hold relational application state while the other organizes durable files and exports.</p>
@@ -7104,7 +7322,7 @@ ai improves consistency and scale but can be incomplete or wrong. qidna must rem
 
 ## status
 
-accepted on 2026-06-10.
+accepted on 2026-06-10. database-authority bullets superseded by adr-0018 on 2026-06-14; all other decisions remain active.
 
 ## context
 
@@ -7129,26 +7347,28 @@ the canonical roots are:
 - qieos is doctrine inside `01_qidna`, not a top-level root.
 - qiaccess is the canonical front-door name and remains separate from qilife.
 - qiapp qilife and `60_qiapp_qilife` are the canonical app name and root.
-- sqlite is the current structured-data authority.
-- qinexus owns file, export, reference, and archive storage, not relational data.
-- supabase is legacy import or possible future integration only.
+- supabase postgres is the canonical structured-data authority under adr-0018.
+- qinexus owns file, export, reference, archive, and backup storage, not relational data.
+- sqlite is deprecated and limited to legacy, local, or transitional use.
 - v1 is manual-first: capture, inbox and triage, qibit review, timeline projection, actions, documents and evidence links, people and entities, and daily summaries.
 - ai may assist but must use review and approval; it is not silent authority.
 
-## rationale
+## verified implementation
 
-these choices remove naming ambiguity, separate shell and product responsibilities, and establish a conservative implementation sequence that can be verified against the actual sqlite schema.
+qilife commit `c589e1e` implements the legacy 15-table sqlite catalog. adr-0018 replaces it with the minimal supabase entity/qibit spine documented in `20_qisystem/schemas/qilife_data_spine.mdx`.
 
 ## consequences
 
 - all documents receive an explicit active, legacy, proposed, generated, or evidence status.
 - legacy content remains preserved and cannot override active documentation.
-- broad database or ui implementation remains blocked until the actual schema and approved implementation blueprints are available.
+- the missing-schema blocker is closed.
+- schema hardening remains gated on accepted categorical values, constraints, indexes, lifecycle rules, migrations, privacy, retention, and backup contracts.
+- ui implementation remains gated on the approved route, screen, workflow, and entity-to-view blueprint.
 ">
       <div class="doc-meta"><span class="status-badge status-active">Active</span><span class="source-path">01_QiDNA/Architecture/Decisions/ADR-0017_canonical_vocabulary_and_v1_direction.md</span></div>
       <h1>ADR-0017: Canonical Vocabulary and V1 Direction</h1>
 <h2>Status</h2>
-<p>Accepted on 2026-06-10.</p>
+<p>Accepted on 2026-06-10. Database-authority bullets superseded by ADR-0018 on 2026-06-14; all other decisions remain active.</p>
 <h2>Context</h2>
 <p>QiDNA contained competing top-level names, overlapping app locations, and inconsistent data and product direction. Database and UI work require one vocabulary and one approved v1 boundary.</p>
 <h2>Decision</h2>
@@ -7167,20 +7387,89 @@ these choices remove naming ambiguity, separate shell and product responsibiliti
 <li>QiEOS is doctrine inside <code>01_QiDNA</code>, not a top-level root.</li>
 <li>QiAccess is the canonical front-door name and remains separate from QiLife.</li>
 <li>QiApp QiLife and <code>60_QiApp_QiLife</code> are the canonical app name and root.</li>
-<li>SQLite is the current structured-data authority.</li>
-<li>QiNexus owns file, export, reference, and archive storage, not relational data.</li>
-<li>Supabase is legacy import or possible future integration only.</li>
+<li>Supabase Postgres is the canonical structured-data authority under ADR-0018.</li>
+<li>QiNexus owns file, export, reference, archive, and backup storage, not relational data.</li>
+<li>SQLite is deprecated and limited to legacy, local, or transitional use.</li>
 <li>V1 is manual-first: capture, inbox and triage, QiBit review, timeline projection, actions, documents and evidence links, people and entities, and daily summaries.</li>
 <li>AI may assist but must use review and approval; it is not silent authority.</li>
 </ul>
-<h2>Rationale</h2>
-<p>These choices remove naming ambiguity, separate shell and product responsibilities, and establish a conservative implementation sequence that can be verified against the actual SQLite schema.</p>
+<h2>Verified Implementation</h2>
+<p>QiLife commit <code>c589e1e</code> implements the legacy 15-table SQLite catalog. ADR-0018 replaces it with the minimal Supabase Entity/QiBit spine documented in <code>20_QiSystem/schemas/QiLife_Data_Spine.mdx</code>.</p>
 <h2>Consequences</h2>
 <ul>
 <li>All documents receive an explicit Active, Legacy, Proposed, Generated, or Evidence status.</li>
 <li>Legacy content remains preserved and cannot override Active documentation.</li>
-<li>Broad database or UI implementation remains blocked until the actual schema and approved implementation blueprints are available.</li>
+<li>The missing-schema blocker is closed.</li>
+<li>Schema hardening remains gated on accepted categorical values, constraints, indexes, lifecycle rules, migrations, privacy, retention, and backup contracts.</li>
+<li>UI implementation remains gated on the approved route, screen, workflow, and entity-to-view blueprint.</li>
 </ul>
+
+    </article>
+    <article id="01-qidna-architecture-decisions-adr-0018-supabase-qilife-data-authority" class="doc" data-status="Active" data-search="active 01_qidna/architecture/decisions/adr-0018_supabase_qilife_data_authority.md # adr-0018: supabase as qilife data authority
+
+## status
+
+accepted on 2026-06-14.
+
+## context
+
+qilife needs centralized, queryable, cross-device structured data and a stable api surface for normalized imports. the existing sqlite implementation proved the earlier 15-table model, but it is no longer the canonical direction.
+
+## decision
+
+- supabase postgres is the canonical qilife structured-data authority.
+- sqlite is deprecated and may be used only for legacy, local, or transitional operation.
+- the canonical minimum model has two concepts: an **entity** is a who or what; a **qibit** is an event or unit of reality.
+- every canonical structured record is represented as an entity or qibit.
+- qibits may reference one primary entity in the baseline. additional participation models require a later decision.
+- entity-to-entity meaning is stored in `qi_entities.relationships`.
+- files remain outside the relational spine in qinexus. paperless may process and manage documents but does not replace qinexus authority.
+- the baseline contains only `qi_entities.entities`, `qi_entities.relationships`, and `qi_events.qibits`.
+
+## security boundary
+
+the custom schemas are private by default. row-level security is enabled, but no client policies or schema grants are created until identity and authorization rules are approved.
+
+## migration boundary
+
+this decision authorizes a migration-ready baseline, not deployment or automatic sqlite conversion. cutover, data mapping, validation, backup, rollback, and application integration remain separate work.
+
+## supersedes
+
+- adr-0012's sqlite/supabase authority decision.
+- adr-0017's sqlite/supabase authority bullets.
+- decision 0006's sqlite clean-core direction.
+
+all unrelated vocabulary, hierarchy, qinexus, manual-first, and review requirements remain in force.
+">
+      <div class="doc-meta"><span class="status-badge status-active">Active</span><span class="source-path">01_QiDNA/Architecture/Decisions/ADR-0018_supabase_qilife_data_authority.md</span></div>
+      <h1>ADR-0018: Supabase as QiLife Data Authority</h1>
+<h2>Status</h2>
+<p>Accepted on 2026-06-14.</p>
+<h2>Context</h2>
+<p>QiLife needs centralized, queryable, cross-device structured data and a stable API surface for normalized imports. The existing SQLite implementation proved the earlier 15-table model, but it is no longer the canonical direction.</p>
+<h2>Decision</h2>
+<ul>
+<li>Supabase Postgres is the canonical QiLife structured-data authority.</li>
+<li>SQLite is deprecated and may be used only for legacy, local, or transitional operation.</li>
+<li>The canonical minimum model has two concepts: an <strong>Entity</strong> is a who or what; a <strong>QiBit</strong> is an event or unit of reality.</li>
+<li>Every canonical structured record is represented as an Entity or QiBit.</li>
+<li>QiBits may reference one primary Entity in the baseline. Additional participation models require a later decision.</li>
+<li>Entity-to-Entity meaning is stored in <code>qi_entities.relationships</code>.</li>
+<li>Files remain outside the relational spine in QiNexus. Paperless may process and manage documents but does not replace QiNexus authority.</li>
+<li>The baseline contains only <code>qi_entities.entities</code>, <code>qi_entities.relationships</code>, and <code>qi_events.qibits</code>.</li>
+</ul>
+<h2>Security Boundary</h2>
+<p>The custom schemas are private by default. Row-level security is enabled, but no client policies or schema grants are created until identity and authorization rules are approved.</p>
+<h2>Migration Boundary</h2>
+<p>This decision authorizes a migration-ready baseline, not deployment or automatic SQLite conversion. Cutover, data mapping, validation, backup, rollback, and application integration remain separate work.</p>
+<h2>Supersedes</h2>
+<ul>
+<li>ADR-0012&#39;s SQLite/Supabase authority decision.</li>
+<li>ADR-0017&#39;s SQLite/Supabase authority bullets.</li>
+<li>Decision 0006&#39;s SQLite clean-core direction.</li>
+</ul>
+<p>All unrelated vocabulary, hierarchy, QiNexus, manual-first, and review requirements remain in force.</p>
 
     </article>
     <article id="01-qidna-qieos-qieos" class="doc" data-status="Active" data-search="active 01_qidna/qieos/_qieos.md # qieos
@@ -7204,6 +7493,22 @@ core rules:
 - keep system layer names fixed.
 - explain why the mirror structure exists.
 - resolve conflicts by aligning old material to the active system model.
+- preserve system memory and reduce drift across implementation repositories.
+- govern system-level interpretation while allowing child repositories to own local implementation details.
+
+## repository authority
+
+chronicle qidna is the portable governance and doctrine repository for the qios ecosystem. implementation repositories may keep local documentation, but local material does not override accepted qidna doctrine or architecture decisions.
+
+promotion follows this rule:
+
+```text
+raw imports are evidence.
+reviewed canonical documents govern.
+generated exports are snapshots.
+```
+
+unique valid meaning is promoted into the matching canonical document. superseded sources remain visible as legacy or evidence so history is preserved without creating a second authority.
 
 ## flows
 
@@ -7239,7 +7544,17 @@ system layer names are fixed: qidna, qiaccess, qisystem, qiserver, qicapture, qi
 <li>Keep system layer names fixed.</li>
 <li>Explain why the mirror structure exists.</li>
 <li>Resolve conflicts by aligning old material to the active system model.</li>
+<li>Preserve system memory and reduce drift across implementation repositories.</li>
+<li>Govern system-level interpretation while allowing child repositories to own local implementation details.</li>
 </ul>
+<h2>Repository Authority</h2>
+<p>Chronicle QiDNA is the portable governance and doctrine repository for the QiOS ecosystem. Implementation repositories may keep local documentation, but local material does not override accepted QiDNA doctrine or architecture decisions.</p>
+<p>Promotion follows this rule:</p>
+<pre><code class="language-text">Raw imports are evidence.
+Reviewed canonical documents govern.
+Generated exports are snapshots.
+</code></pre>
+<p>Unique valid meaning is promoted into the matching canonical document. Superseded sources remain visible as Legacy or Evidence so history is preserved without creating a second authority.</p>
 <h2>Flows</h2>
 <pre><code class="language-text">Doctrine or decision question
   -&gt; 01_QiDNA/QiEOS/_folder.md
@@ -7278,477 +7593,144 @@ system layer names are fixed: qidna, qiaccess, qisystem, qiserver, qicapture, qi
     </article>
     <article id="01-qidna-reconciliation-2026-06-10-blueprint-readiness-and-decision-gate" class="doc" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-10_blueprint_readiness_and_decision_gate.md # qidna blueprint readiness and decision gate
 
-## purpose
+## status
 
-this document states whether qidna is ready to govern database and ui implementation and identifies the decisions required before that work continues.
+original assessment: 2026-06-10. supabase authority update: 2026-06-14.
 
-assessment date: 2026-06-10.
+qidna has one accepted vocabulary, complete markdown/mdx site coverage, visible document statuses, and an accepted minimal supabase spine. database deployment and application cutover remain gated.
 
-## current position
+## resolved gates
 
-qidna has a sound governance foundation, but it is not yet a contradiction-free or implementation-complete master blueprint.
+- adr-0017 defines the canonical mirrored roots.
+- adr-0018 defines supabase postgres as qilife's canonical structured-data authority.
+- the canonical minimum is entity, entity relationship, and qibit.
+- the local migration contains only `qi_entities.entities`, `qi_entities.relationships`, and `qi_events.qibits`.
+- qinexus remains file/export/reference/archive authority.
+- sqlite is legacy, local, or transitional evidence only.
 
-the repository is synchronized, the active `01-70` domains are documented, the architecture adrs are in place, and the single-page site builds successfully. structural reconciliation and implementation specifications remain incomplete.
+## open database gate
 
-## established foundations
+before deployment:
 
-- eight primary domains define the current system boundary.
-- adrs define data strategy, folder documentation, topology, build strategy, and the ai auditor role.
-- the reconciliation report records naming, ownership, topology, and persistence conflicts.
-- sqlite, qinexus, and legacy supabase have separate intended responsibilities.
-- the generated site provides a searchable single-page documentation reader.
+1. approve user identity and ownership columns.
+2. approve custom-schema data api exposure.
+3. define rls policies and role grants.
+4. define sqlite-to-supabase mapping and validation.
+5. define backup, rollback, cutover, and offline behavior.
+6. test the migration against a local or linked supabase project.
 
-## blocking issues
+## open ui gate
 
-### 1. competing root models
+the route, screen, workflow, loading, empty, error, offline, permission, visibility, accessibility, and entity-to-view contracts remain incomplete.
 
-the repository still presents two architectures as if both are current:
+## required sequence
 
-```text
-current: 01_qidna, 10_qiaccess, 60_qiapp_qilife
-legacy:  00_qieos, 10_qios_start, 60_qiapps
-```
-
-`readme.md`, `docs.json`, doctrine, manifests, and module documents do not yet use one canonical vocabulary.
-
-### 2. incomplete site coverage
-
-the current node builder renders `.md` files but omits `.mdx` files. fourteen mdx documents are absent from the site, including the historical master map, source-of-truth rules, qilife data spine, and several module pages.
-
-the site also renders current and legacy markdown together without visible status labels.
-
-### 3. incomplete database blueprint
-
-the entity catalog exists, but the following are not yet canonical and complete:
-
-- field definitions and types
-- primary and foreign keys
-- relationship cardinality
-- status values and transition rules
-- uniqueness and validation constraints
-- indexes and query requirements
-- ownership and provenance rules
-- retention, archive, and deletion behavior
-- migration and backup rules
-- authorization and sensitive-data boundaries
-
-the actual qilife sqlite schema and legacy supabase schema were not available for comparison.
-
-### 4. incomplete ui blueprint
-
-module flows exist, but the following are not yet unified:
-
-- application route map
-- screen and view inventory
-- component ownership
-- navigation hierarchy
-- loading, empty, error, and offline states
-- create, review, approve, edit, archive, and delete flows
-- entity-to-screen and api-to-screen mappings
-- permissions and visibility rules
-- accessibility and responsive behavior requirements
-- acceptance criteria for each workflow
-
-## readiness decision
-
-broad database and ui implementation should not begin from the current documentation alone.
-
-the required sequence is:
-
-1. select and document the canonical root vocabulary.
-2. label all competing documents as active, legacy, proposed, generated, or evidence.
-3. consolidate active domain documentation without deleting historical evidence.
-4. make the generated site include all supported canonical formats and display document status.
-5. complete and verify the database blueprint against the actual implementation schema.
-6. complete the route, screen, workflow, and ui-to-entity blueprint.
-7. implement database changes, then api contracts, then ui behavior.
-
-## decision package required from cody
-
-review the documents listed below and provide explicit decisions for each question.
-
-### canonical structure
-
-review:
-
-- `01_qidna/_01_qidna.md`
-- `01_qidna/qieos/_qieos.md`
-- `00_qieos/system_map/qios_master_map.mdx`
-- `00_qieos/doctrine/qios_core_doctrine.mdx`
-- `readme.md`
-
-decision:
-
-- is the canonical root model the current `01_qidna` through `70_qiconnect` structure?
-- is `qieos` a doctrine section inside qidna rather than a separate top-level root?
-- is the canonical front-door name `qiaccess` rather than `qios start` or `qiaccess start`?
-- is the canonical application name and root `qiapp qilife` / `60_qiapp_qilife`?
-
-### data authority
-
-review:
-
-- `01_qidna/architecture/decisions/adr-0012_data_strategy.md`
-- `20_qisystem/schemas/qilife_data_spine.mdx`
-- `90_decisions/0006_clean_core_with_legacy_bridge.md`
-- `70_deployment/00_local_dev.md`
-
-decision:
-
-- confirm sqlite as the current qilife structured-data authority.
-- confirm qinexus as file, export, reference, and archive storage rather than a database.
-- confirm supabase as legacy/import or future integration only.
-- provide or identify the actual qilife schema repository and database path.
-
-### product scope
-
-review:
-
-- `60_qiapp_qilife/_60_qiapp_qilife.md`
-- `90_decisions/0001_personal_lifedesk_model.md`
-- `90_decisions/0002_qibit_as_atomic_unit.md`
-- `90_decisions/0003_timeline_as_spine.md`
-- `90_decisions/0009_agent_first_copilot_cockpit.md`
-- `90_decisions/0010_spaces_for_scoped_shared_access.md`
-
-decision:
-
-- confirm which entities and modules are required for v1.
-- confirm whether spaces and shared access are v1 or later.
-- confirm whether ai is central to v1 or staged after manual workflows.
-
-### ui direction
-
-review:
-
-- `10_qiaccess/_10_qiaccess.md`
-- `60_qiapp_qilife/_60_qiapp_qilife.md`
-- `50_modules/*/overview.md`
-- `50_modules/*/ui_flow.md`
-- `60_ai_layer/02_ai_review_workflow.md`
-
-decision:
-
-- confirm the primary navigation and first screens to implement.
-- confirm whether qiaccess and qilife are separate applications or one shell with embedded modules.
-- confirm the minimum capture, inbox, timeline, action, and review workflows for v1.
+1. validate the baseline migration locally.
+2. approve identity, rls, grants, and access boundaries.
+3. define and test the transitional data mapping.
+4. approve backup, rollback, and cutover.
+5. integrate qilife against supabase.
+6. complete the ui blueprint.
 
 ## exit criteria
 
-database and ui work may proceed when:
-
-- one root vocabulary is accepted
-- contradictory documents are labeled or reconciled
-- the actual database schema is available and mapped to the entity catalog
-- v1 entities, statuses, and relationships are approved
-- v1 routes, screens, and workflows are approved
-- the generated site contains the complete active blueprint without presenting legacy material as current authority
-
-## readiness estimate
-
-- governance and architecture foundation: approximately 70 percent.
-- implementation-level database and ui specification: approximately 40-50 percent.
-- current status: documentation consolidation and decision review required before implementation expansion.
+the chronicle becomes implementation-complete when the supabase access/cutover contracts and the v1 ui contracts are approved, tested, and represented by one canonical document each.
 ">
       <div class="doc-meta"><span class="status-badge status-evidence">Evidence</span><span class="source-path">01_QiDNA/Reconciliation/2026-06-10_blueprint_readiness_and_decision_gate.md</span></div>
       <h1>QiDNA Blueprint Readiness and Decision Gate</h1>
-<h2>Purpose</h2>
-<p>This document states whether QiDNA is ready to govern database and UI implementation and identifies the decisions required before that work continues.</p>
-<p>Assessment date: 2026-06-10.</p>
-<h2>Current Position</h2>
-<p>QiDNA has a sound governance foundation, but it is not yet a contradiction-free or implementation-complete master blueprint.</p>
-<p>The repository is synchronized, the active <code>01-70</code> domains are documented, the architecture ADRs are in place, and the single-page site builds successfully. Structural reconciliation and implementation specifications remain incomplete.</p>
-<h2>Established Foundations</h2>
+<h2>Status</h2>
+<p>Original assessment: 2026-06-10. Supabase authority update: 2026-06-14.</p>
+<p>QiDNA has one accepted vocabulary, complete Markdown/MDX site coverage, visible document statuses, and an accepted minimal Supabase spine. Database deployment and application cutover remain gated.</p>
+<h2>Resolved Gates</h2>
 <ul>
-<li>Eight primary domains define the current system boundary.</li>
-<li>ADRs define data strategy, folder documentation, topology, build strategy, and the AI auditor role.</li>
-<li>The reconciliation report records naming, ownership, topology, and persistence conflicts.</li>
-<li>SQLite, QiNexus, and legacy Supabase have separate intended responsibilities.</li>
-<li>The generated site provides a searchable single-page documentation reader.</li>
+<li>ADR-0017 defines the canonical mirrored roots.</li>
+<li>ADR-0018 defines Supabase Postgres as QiLife&#39;s canonical structured-data authority.</li>
+<li>The canonical minimum is Entity, Entity Relationship, and QiBit.</li>
+<li>The local migration contains only <code>qi_entities.entities</code>, <code>qi_entities.relationships</code>, and <code>qi_events.qibits</code>.</li>
+<li>QiNexus remains file/export/reference/archive authority.</li>
+<li>SQLite is legacy, local, or transitional evidence only.</li>
 </ul>
-<h2>Blocking Issues</h2>
-<h3>1. Competing Root Models</h3>
-<p>The repository still presents two architectures as if both are current:</p>
-<pre><code class="language-text">Current: 01_QiDNA, 10_QiAccess, 60_QiApp_QiLife
-Legacy:  00_QiEOS, 10_QiOS_Start, 60_QiApps
-</code></pre>
-<p><code>README.md</code>, <code>docs.json</code>, doctrine, manifests, and module documents do not yet use one canonical vocabulary.</p>
-<h3>2. Incomplete Site Coverage</h3>
-<p>The current Node builder renders <code>.md</code> files but omits <code>.mdx</code> files. Fourteen MDX documents are absent from the site, including the historical master map, source-of-truth rules, QiLife data spine, and several module pages.</p>
-<p>The site also renders current and legacy Markdown together without visible status labels.</p>
-<h3>3. Incomplete Database Blueprint</h3>
-<p>The entity catalog exists, but the following are not yet canonical and complete:</p>
-<ul>
-<li>field definitions and types</li>
-<li>primary and foreign keys</li>
-<li>relationship cardinality</li>
-<li>status values and transition rules</li>
-<li>uniqueness and validation constraints</li>
-<li>indexes and query requirements</li>
-<li>ownership and provenance rules</li>
-<li>retention, archive, and deletion behavior</li>
-<li>migration and backup rules</li>
-<li>authorization and sensitive-data boundaries</li>
-</ul>
-<p>The actual QiLife SQLite schema and legacy Supabase schema were not available for comparison.</p>
-<h3>4. Incomplete UI Blueprint</h3>
-<p>Module flows exist, but the following are not yet unified:</p>
-<ul>
-<li>application route map</li>
-<li>screen and view inventory</li>
-<li>component ownership</li>
-<li>navigation hierarchy</li>
-<li>loading, empty, error, and offline states</li>
-<li>create, review, approve, edit, archive, and delete flows</li>
-<li>entity-to-screen and API-to-screen mappings</li>
-<li>permissions and visibility rules</li>
-<li>accessibility and responsive behavior requirements</li>
-<li>acceptance criteria for each workflow</li>
-</ul>
-<h2>Readiness Decision</h2>
-<p>Broad database and UI implementation should not begin from the current documentation alone.</p>
-<p>The required sequence is:</p>
+<h2>Open Database Gate</h2>
+<p>Before deployment:</p>
 <ol>
-<li>Select and document the canonical root vocabulary.</li>
-<li>Label all competing documents as Active, Legacy, Proposed, Generated, or Evidence.</li>
-<li>Consolidate active domain documentation without deleting historical evidence.</li>
-<li>Make the generated site include all supported canonical formats and display document status.</li>
-<li>Complete and verify the database blueprint against the actual implementation schema.</li>
-<li>Complete the route, screen, workflow, and UI-to-entity blueprint.</li>
-<li>Implement database changes, then API contracts, then UI behavior.</li>
+<li>Approve user identity and ownership columns.</li>
+<li>Approve custom-schema Data API exposure.</li>
+<li>Define RLS policies and role grants.</li>
+<li>Define SQLite-to-Supabase mapping and validation.</li>
+<li>Define backup, rollback, cutover, and offline behavior.</li>
+<li>Test the migration against a local or linked Supabase project.</li>
 </ol>
-<h2>Decision Package Required From Cody</h2>
-<p>Review the documents listed below and provide explicit decisions for each question.</p>
-<h3>Canonical Structure</h3>
-<p>Review:</p>
-<ul>
-<li><code>01_QiDNA/_01_QiDNA.md</code></li>
-<li><code>01_QiDNA/QiEOS/_QiEOS.md</code></li>
-<li><code>00_QiEOS/system_map/QiOS_Master_Map.mdx</code></li>
-<li><code>00_QiEOS/doctrine/QiOS_Core_Doctrine.mdx</code></li>
-<li><code>README.md</code></li>
-</ul>
-<p>Decision:</p>
-<ul>
-<li>Is the canonical root model the current <code>01_QiDNA</code> through <code>70_QiConnect</code> structure?</li>
-<li>Is <code>QiEOS</code> a doctrine section inside QiDNA rather than a separate top-level root?</li>
-<li>Is the canonical front-door name <code>QiAccess</code> rather than <code>QiOS Start</code> or <code>QiAccess Start</code>?</li>
-<li>Is the canonical application name and root <code>QiApp QiLife</code> / <code>60_QiApp_QiLife</code>?</li>
-</ul>
-<h3>Data Authority</h3>
-<p>Review:</p>
-<ul>
-<li><code>01_QiDNA/Architecture/Decisions/ADR-0012_data_strategy.md</code></li>
-<li><code>20_QiSystem/schemas/QiLife_Data_Spine.mdx</code></li>
-<li><code>90_decisions/0006_clean_core_with_legacy_bridge.md</code></li>
-<li><code>70_deployment/00_local_dev.md</code></li>
-</ul>
-<p>Decision:</p>
-<ul>
-<li>Confirm SQLite as the current QiLife structured-data authority.</li>
-<li>Confirm QiNexus as file, export, reference, and archive storage rather than a database.</li>
-<li>Confirm Supabase as legacy/import or future integration only.</li>
-<li>Provide or identify the actual QiLife schema repository and database path.</li>
-</ul>
-<h3>Product Scope</h3>
-<p>Review:</p>
-<ul>
-<li><code>60_QiApp_QiLife/_60_QiApp_QiLife.md</code></li>
-<li><code>90_decisions/0001_personal_lifedesk_model.md</code></li>
-<li><code>90_decisions/0002_qibit_as_atomic_unit.md</code></li>
-<li><code>90_decisions/0003_timeline_as_spine.md</code></li>
-<li><code>90_decisions/0009_agent_first_copilot_cockpit.md</code></li>
-<li><code>90_decisions/0010_spaces_for_scoped_shared_access.md</code></li>
-</ul>
-<p>Decision:</p>
-<ul>
-<li>Confirm which entities and modules are required for v1.</li>
-<li>Confirm whether Spaces and shared access are v1 or later.</li>
-<li>Confirm whether AI is central to v1 or staged after manual workflows.</li>
-</ul>
-<h3>UI Direction</h3>
-<p>Review:</p>
-<ul>
-<li><code>10_QiAccess/_10_QiAccess.md</code></li>
-<li><code>60_QiApp_QiLife/_60_QiApp_QiLife.md</code></li>
-<li><code>50_modules/*/overview.md</code></li>
-<li><code>50_modules/*/ui_flow.md</code></li>
-<li><code>60_ai_layer/02_ai_review_workflow.md</code></li>
-</ul>
-<p>Decision:</p>
-<ul>
-<li>Confirm the primary navigation and first screens to implement.</li>
-<li>Confirm whether QiAccess and QiLife are separate applications or one shell with embedded modules.</li>
-<li>Confirm the minimum capture, inbox, timeline, action, and review workflows for v1.</li>
-</ul>
+<h2>Open UI Gate</h2>
+<p>The route, screen, workflow, loading, empty, error, offline, permission, visibility, accessibility, and entity-to-view contracts remain incomplete.</p>
+<h2>Required Sequence</h2>
+<ol>
+<li>Validate the baseline migration locally.</li>
+<li>Approve identity, RLS, grants, and access boundaries.</li>
+<li>Define and test the transitional data mapping.</li>
+<li>Approve backup, rollback, and cutover.</li>
+<li>Integrate QiLife against Supabase.</li>
+<li>Complete the UI blueprint.</li>
+</ol>
 <h2>Exit Criteria</h2>
-<p>Database and UI work may proceed when:</p>
-<ul>
-<li>one root vocabulary is accepted</li>
-<li>contradictory documents are labeled or reconciled</li>
-<li>the actual database schema is available and mapped to the entity catalog</li>
-<li>v1 entities, statuses, and relationships are approved</li>
-<li>v1 routes, screens, and workflows are approved</li>
-<li>the generated site contains the complete active blueprint without presenting legacy material as current authority</li>
-</ul>
-<h2>Readiness Estimate</h2>
-<ul>
-<li>Governance and architecture foundation: approximately 70 percent.</li>
-<li>Implementation-level database and UI specification: approximately 40-50 percent.</li>
-<li>Current status: documentation consolidation and decision review required before implementation expansion.</li>
-</ul>
+<p>The Chronicle becomes implementation-complete when the Supabase access/cutover contracts and the v1 UI contracts are approved, tested, and represented by one canonical document each.</p>
 
     </article>
     <article id="01-qidna-reconciliation-2026-06-10-database-blueprint-gap-report" class="doc" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-10_database_blueprint_gap_report.md # database blueprint gap report
 
-## accepted direction
+## status
 
-- sqlite is the current qilife structured-data authority.
-- qinexus owns files, exports, references, and archives.
-- supabase is legacy import or possible future integration only.
-- v1 is manual-first and ai writes require review and approval.
+the 2026-06-12 sqlite inventory is retained as legacy implementation evidence. adr-0018 superseded it as canonical design on 2026-06-14.
 
-## evidence available
+## canonical baseline
 
-qidna names these intended entities:
+- authority: supabase postgres.
+- schemas: `qi_entities`, `qi_events`.
+- tables: `entities`, `relationships`, `qibits`.
+- keys: generated uuid primary keys.
+- security: rls enabled, no permissive client policies.
+- files: qinexus authority; paperless processing surface.
+- migration: `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`.
 
-```text
-qibits
-buckets
-threads
-actions
-action_steps
-people
-transactions
-obligations
-knowledge_items
-documents
-events
-links
-activity_log
-ai_outputs
-daily_summaries
-```
+## remaining gaps
 
-module and decision documents describe provenance, timeline projection, capture, triage, documents, people, actions, and summaries.
+1. user ownership and identity mapping.
+2. rls policies and custom-schema grants.
+3. governed entity, relationship, and qibit type vocabularies.
+4. sqlite-to-supabase mapping, validation, and duplicate handling.
+5. backup, rollback, cutover, and offline behavior.
+6. application integration and end-to-end tests.
+7. retention, archive, restoration, and purge rules.
 
-## blocking evidence missing
+## legacy evidence
 
-no sqlite database, sql schema, migration files, orm model, or database configuration exists in this repository. the actual schema cannot be reconstructed safely from prose.
-
-required implementation evidence:
-
-- actual `qilife.sqlite` database or a read-only schema dump
-- migration directory, if one exists
-- orm or model definitions
-- database creation/bootstrap code
-- canonical runtime database path
-- current application repository and commit
-- sample data only if sanitized and necessary for constraint discovery
-
-## blueprint gaps
-
-for every v1 entity, approval is still required for:
-
-- table and column names
-- types, nullability, and defaults
-- primary and foreign keys
-- cardinality and delete behavior
-- unique and check constraints
-- status enums and state transitions
-- timestamps and timeline projection field
-- indexes and required queries
-- provenance and audit fields
-- file-reference rules
-- archive, retention, restoration, and purge behavior
-- backup and migration procedure
-- privacy and authorization boundaries
-
-## v1 mapping priority
-
-1. qibit and raw capture provenance.
-2. inbox and triage state.
-3. actions and action steps.
-4. documents and evidence links.
-5. people and entity relationships.
-6. timeline projection rules.
-7. daily summaries.
-8. ai output staging and approval records.
-
-## exit criteria
-
-database implementation may continue only after the real schema is inspected, mapped to the entity catalog, discrepancies are documented, and v1 fields, statuses, relationships, and migrations are approved.
+qilife commit `c589e1e` contains 15 sqlite tables. those tables are not automatically recreated or discarded. their useful data and constraints require an explicit migration map.
 ">
       <div class="doc-meta"><span class="status-badge status-evidence">Evidence</span><span class="source-path">01_QiDNA/Reconciliation/2026-06-10_database_blueprint_gap_report.md</span></div>
       <h1>Database Blueprint Gap Report</h1>
-<h2>Accepted Direction</h2>
+<h2>Status</h2>
+<p>The 2026-06-12 SQLite inventory is retained as legacy implementation evidence. ADR-0018 superseded it as canonical design on 2026-06-14.</p>
+<h2>Canonical Baseline</h2>
 <ul>
-<li>SQLite is the current QiLife structured-data authority.</li>
-<li>QiNexus owns files, exports, references, and archives.</li>
-<li>Supabase is legacy import or possible future integration only.</li>
-<li>V1 is manual-first and AI writes require review and approval.</li>
+<li>Authority: Supabase Postgres.</li>
+<li>Schemas: <code>qi_entities</code>, <code>qi_events</code>.</li>
+<li>Tables: <code>entities</code>, <code>relationships</code>, <code>qibits</code>.</li>
+<li>Keys: generated UUID primary keys.</li>
+<li>Security: RLS enabled, no permissive client policies.</li>
+<li>Files: QiNexus authority; Paperless processing surface.</li>
+<li>Migration: <code>supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql</code>.</li>
 </ul>
-<h2>Evidence Available</h2>
-<p>QiDNA names these intended entities:</p>
-<pre><code class="language-text">qibits
-buckets
-threads
-actions
-action_steps
-people
-transactions
-obligations
-knowledge_items
-documents
-events
-links
-activity_log
-ai_outputs
-daily_summaries
-</code></pre>
-<p>Module and decision documents describe provenance, timeline projection, capture, triage, documents, people, actions, and summaries.</p>
-<h2>Blocking Evidence Missing</h2>
-<p>No SQLite database, SQL schema, migration files, ORM model, or database configuration exists in this repository. The actual schema cannot be reconstructed safely from prose.</p>
-<p>Required implementation evidence:</p>
-<ul>
-<li>actual <code>qilife.sqlite</code> database or a read-only schema dump</li>
-<li>migration directory, if one exists</li>
-<li>ORM or model definitions</li>
-<li>database creation/bootstrap code</li>
-<li>canonical runtime database path</li>
-<li>current application repository and commit</li>
-<li>sample data only if sanitized and necessary for constraint discovery</li>
-</ul>
-<h2>Blueprint Gaps</h2>
-<p>For every v1 entity, approval is still required for:</p>
-<ul>
-<li>table and column names</li>
-<li>types, nullability, and defaults</li>
-<li>primary and foreign keys</li>
-<li>cardinality and delete behavior</li>
-<li>unique and check constraints</li>
-<li>status enums and state transitions</li>
-<li>timestamps and timeline projection field</li>
-<li>indexes and required queries</li>
-<li>provenance and audit fields</li>
-<li>file-reference rules</li>
-<li>archive, retention, restoration, and purge behavior</li>
-<li>backup and migration procedure</li>
-<li>privacy and authorization boundaries</li>
-</ul>
-<h2>V1 Mapping Priority</h2>
+<h2>Remaining Gaps</h2>
 <ol>
-<li>QiBit and raw capture provenance.</li>
-<li>Inbox and triage state.</li>
-<li>Actions and action steps.</li>
-<li>Documents and evidence links.</li>
-<li>People and entity relationships.</li>
-<li>Timeline projection rules.</li>
-<li>Daily summaries.</li>
-<li>AI output staging and approval records.</li>
+<li>User ownership and identity mapping.</li>
+<li>RLS policies and custom-schema grants.</li>
+<li>Governed Entity, relationship, and QiBit type vocabularies.</li>
+<li>SQLite-to-Supabase mapping, validation, and duplicate handling.</li>
+<li>Backup, rollback, cutover, and offline behavior.</li>
+<li>Application integration and end-to-end tests.</li>
+<li>Retention, archive, restoration, and purge rules.</li>
 </ol>
-<h2>Exit Criteria</h2>
-<p>Database implementation may continue only after the real schema is inspected, mapped to the entity catalog, discrepancies are documented, and v1 fields, statuses, relationships, and migrations are approved.</p>
+<h2>Legacy Evidence</h2>
+<p>QiLife commit <code>c589e1e</code> contains 15 SQLite tables. Those tables are not automatically recreated or discarded. Their useful data and constraints require an explicit migration map.</p>
 
     </article>
     <article id="01-qidna-reconciliation-2026-06-10-documentation-status-map" class="doc" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-10_documentation_status_map.md # documentation status map
@@ -7960,6 +7942,8 @@ status: implemented in the site classifier.
 
 ## phase 3: content promotion
 
+status: in progress. the `00_qieos` doctrine, master map, and adr-0001 set was reconciled on 2026-06-12.
+
 for each legacy document:
 
 1. identify unique claims.
@@ -7968,7 +7952,7 @@ for each legacy document:
 4. merge compatible unique content into one canonical destination.
 5. record the legacy source path in the reconciliation receipt.
 6. resolve conflicts through an adr or explicit owner decision.
-7. leave the legacy source unchanged and labeled legacy or evidence.
+7. add an explicit supersession notice to the legacy source and retain it in place as hierarchy-preserving archive evidence unless a later approved move preserves its source path and provenance.
 
 priority promotion sets:
 
@@ -7991,11 +7975,10 @@ status: builder updated.
 
 ## phase 5: database blueprint
 
-status: blocked on actual sqlite evidence.
+status: physical schema inventory complete; behavioral contracts remain open.
 
-- obtain the database or schema dump.
-- inventory tables, columns, keys, indexes, triggers, and migrations.
-- map implementation to the approved entity catalog.
+- the qilife repository, sqlmodel metadata, and canonical sqlite database were inspected on 2026-06-12.
+- tables, columns, keys, relationships, indexes, constraints, and migration state are mapped in `20_qisystem/schemas/qilife_data_spine.mdx`.
 - produce add, merge, update, or delete recommendations.
 - approve v1 schema before migration or application changes.
 
@@ -8034,6 +8017,7 @@ reconciliation is complete when one active document answers each architectural q
 <li>Never infer authority from file age or build visibility.</li>
 </ul>
 <h2>Phase 3: Content Promotion</h2>
+<p>Status: in progress. The <code>00_QiEOS</code> doctrine, master map, and ADR-0001 set was reconciled on 2026-06-12.</p>
 <p>For each legacy document:</p>
 <ol>
 <li>Identify unique claims.</li>
@@ -8042,7 +8026,7 @@ reconciliation is complete when one active document answers each architectural q
 <li>Merge compatible unique content into one canonical destination.</li>
 <li>Record the legacy source path in the reconciliation receipt.</li>
 <li>Resolve conflicts through an ADR or explicit owner decision.</li>
-<li>Leave the legacy source unchanged and labeled Legacy or Evidence.</li>
+<li>Add an explicit supersession notice to the legacy source and retain it in place as hierarchy-preserving archive evidence unless a later approved move preserves its source path and provenance.</li>
 </ol>
 <p>Priority promotion sets:</p>
 <ul>
@@ -8063,11 +8047,10 @@ reconciliation is complete when one active document answers each architectural q
 <li>Regenerate after every accepted documentation change.</li>
 </ul>
 <h2>Phase 5: Database Blueprint</h2>
-<p>Status: blocked on actual SQLite evidence.</p>
+<p>Status: physical schema inventory complete; behavioral contracts remain open.</p>
 <ul>
-<li>Obtain the database or schema dump.</li>
-<li>Inventory tables, columns, keys, indexes, triggers, and migrations.</li>
-<li>Map implementation to the approved entity catalog.</li>
+<li>The QiLife repository, SQLModel metadata, and canonical SQLite database were inspected on 2026-06-12.</li>
+<li>Tables, columns, keys, relationships, indexes, constraints, and migration state are mapped in <code>20_QiSystem/schemas/QiLife_Data_Spine.mdx</code>.</li>
 <li>Produce ADD, MERGE, UPDATE, or DELETE recommendations.</li>
 <li>Approve v1 schema before migration or application changes.</li>
 </ul>
@@ -8357,223 +8340,55 @@ Canonical Markdown -&gt; npm run build -&gt; site/index.html
     </article>
     <article id="01-qidna-reconciliation-2026-06-10-qilife-schema-source-report" class="doc" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-10_qilife_schema_source_report.md # qilife schema source report
 
-## scope
+## status
 
-assessment date: 2026-06-10.
+the missing-repository blocker was resolved on 2026-06-12. adr-0018 reclassified the inspected sqlite system as legacy implementation and migration evidence on 2026-06-14.
 
-this audit performed three targeted searches for the actual qilife implementation schema. dependency, build, cache, virtual-environment, git, and generated-site directories were excluded.
+## verified legacy source
 
-## result
+- repository: `/home/qiadmin/qi_workspace/qilife`
+- inspected commit: `c589e1e`
+- models: `backend/app/db/models.py`
+- database: `data/db/qilife.sqlite`
+- orm metadata: `sqlmodel.metadata`
+- migration integration: `backend/alembic/env.py`
 
-the actual qilife database or implementation schema was **not found**.
+the implementation contains 15 tables. it proves existing data shapes and workflows but is no longer canonical authority.
 
-the expected local application repositories are missing:
+## canonical source
 
-```text
-/home/qiadmin/qi_workspace/qilife
-/home/qiadmin/qi_workspace/qilife
-```
+- decision: `01_qidna/architecture/decisions/adr-0018_supabase_qilife_data_authority.md`
+- field contract: `20_qisystem/schemas/qilife_data_spine.mdx`
+- catalog: `20_qisystem/schemas/schema_catalog.md`
+- migration: `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`
 
-no separate qilife application repository was found under:
+## transition rule
 
-```text
-/home/qiadmin/qi_workspace
-/srv/qios/apps
-/srv/qios/repos
-/home/qiadmin
-```
-
-## sources found
-
-### qilife documentation only
-
-```text
-/home/qiadmin/qi_workspace/_qios_dna/60_qiapp_qilife
-/home/qiadmin/qi_workspace/_qios_dna/60_qiapps/qilife
-```
-
-these locations contain documentation, not executable database definitions.
-
-### unrelated sql
-
-```text
-/srv/qios/apps/_qiaccess_start/worker/schema.sql
-/srv/qios/repos/_qiaccess_start/worker/schema.sql
-```
-
-these files belong to the qiaccess worker and are not evidence of the qilife schema.
-
-### schema types found
-
-| schema type | found for qilife |
-|---|---|
-| sqlite database file | no |
-| sql migrations | no |
-| orm models | no |
-| api models | no |
-| database initialization code | no |
-| documentation-only schema | yes |
-
-## documented entities discovered
-
-the active qidna data spine and governing documents name these intended entities:
-
-```text
-qibits
-buckets
-threads
-actions
-action_steps
-people
-transactions
-obligations
-knowledge_items
-documents
-events
-links
-activity_log
-ai_outputs
-daily_summaries
-```
-
-these names are documented intent and must not be treated as proof that matching tables exist.
-
-## alignment with adr-0017
-
-the documentation-only model is directionally consistent with adr-0017:
-
-- sqlite is identified as the intended current structured-data authority.
-- qinexus remains file, export, reference, and archive storage.
-- supabase remains legacy import or possible future integration.
-- the named entities support the manual-first v1 workflows.
-
-implementation compliance cannot be verified because no sqlite database, migration history, orm model, or initialization code was found.
-
-## what is still missing
-
-- the actual qilife application repository and current commit.
-- the runtime `qilife.sqlite` file or a read-only schema dump.
-- sql migration history, if migrations exist.
-- orm or database model definitions.
-- database creation and initialization code.
-- the canonical runtime database path.
-
-## next exact step
-
-provide or restore the actual qilife implementation repository and identify its path. the preferred expected path is:
-
-```text
-/home/qiadmin/qi_workspace/qilife
-```
-
-if the repository exists elsewhere, provide that exact path. it must contain at least one verified schema source: the sqlite database, a `.schema` dump, migrations, orm models, or database initialization code.
-
-database blueprint work remains blocked until that source is available. no schema should be invented from the documentation.
+no automatic conversion or deletion is authorized. legacy tables must be mapped, validated, backed up, and cut over through a separate approved transition plan.
 ">
       <div class="doc-meta"><span class="status-badge status-evidence">Evidence</span><span class="source-path">01_QiDNA/Reconciliation/2026-06-10_qilife_schema_source_report.md</span></div>
       <h1>QiLife Schema Source Report</h1>
-<h2>Scope</h2>
-<p>Assessment date: 2026-06-10.</p>
-<p>This audit performed three targeted searches for the actual QiLife implementation schema. Dependency, build, cache, virtual-environment, Git, and generated-site directories were excluded.</p>
-<h2>Result</h2>
-<p>The actual QiLife database or implementation schema was <strong>not found</strong>.</p>
-<p>The expected local application repositories are missing:</p>
-<pre><code class="language-text">/home/qiadmin/qi_workspace/qilife
-/home/qiadmin/qi_workspace/QiLife
-</code></pre>
-<p>No separate QiLife application repository was found under:</p>
-<pre><code class="language-text">/home/qiadmin/qi_workspace
-/srv/qios/apps
-/srv/qios/repos
-/home/qiadmin
-</code></pre>
-<h2>Sources Found</h2>
-<h3>QiLife Documentation Only</h3>
-<pre><code class="language-text">/home/qiadmin/qi_workspace/_QiOS_DNA/60_QiApp_QiLife
-/home/qiadmin/qi_workspace/_QiOS_DNA/60_QiApps/QiLife
-</code></pre>
-<p>These locations contain documentation, not executable database definitions.</p>
-<h3>Unrelated SQL</h3>
-<pre><code class="language-text">/srv/qios/apps/_QiAccess_Start/worker/schema.sql
-/srv/qios/repos/_QiAccess_Start/worker/schema.sql
-</code></pre>
-<p>These files belong to the QiAccess worker and are not evidence of the QiLife schema.</p>
-<h3>Schema Types Found</h3>
-<table>
-<thead>
-<tr>
-<th>Schema type</th>
-<th>Found for QiLife</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>SQLite database file</td>
-<td>No</td>
-</tr>
-<tr>
-<td>SQL migrations</td>
-<td>No</td>
-</tr>
-<tr>
-<td>ORM models</td>
-<td>No</td>
-</tr>
-<tr>
-<td>API models</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Database initialization code</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Documentation-only schema</td>
-<td>Yes</td>
-</tr>
-</tbody></table>
-<h2>Documented Entities Discovered</h2>
-<p>The active QiDNA data spine and governing documents name these intended entities:</p>
-<pre><code class="language-text">qibits
-buckets
-threads
-actions
-action_steps
-people
-transactions
-obligations
-knowledge_items
-documents
-events
-links
-activity_log
-ai_outputs
-daily_summaries
-</code></pre>
-<p>These names are documented intent and must not be treated as proof that matching tables exist.</p>
-<h2>Alignment With ADR-0017</h2>
-<p>The documentation-only model is directionally consistent with ADR-0017:</p>
+<h2>Status</h2>
+<p>The missing-repository blocker was resolved on 2026-06-12. ADR-0018 reclassified the inspected SQLite system as legacy implementation and migration evidence on 2026-06-14.</p>
+<h2>Verified Legacy Source</h2>
 <ul>
-<li>SQLite is identified as the intended current structured-data authority.</li>
-<li>QiNexus remains file, export, reference, and archive storage.</li>
-<li>Supabase remains legacy import or possible future integration.</li>
-<li>The named entities support the manual-first v1 workflows.</li>
+<li>Repository: <code>/home/qiadmin/qi_workspace/qilife</code></li>
+<li>Inspected commit: <code>c589e1e</code></li>
+<li>Models: <code>backend/app/db/models.py</code></li>
+<li>Database: <code>data/db/qilife.sqlite</code></li>
+<li>ORM metadata: <code>SQLModel.metadata</code></li>
+<li>Migration integration: <code>backend/alembic/env.py</code></li>
 </ul>
-<p>Implementation compliance cannot be verified because no SQLite database, migration history, ORM model, or initialization code was found.</p>
-<h2>What Is Still Missing</h2>
+<p>The implementation contains 15 tables. It proves existing data shapes and workflows but is no longer canonical authority.</p>
+<h2>Canonical Source</h2>
 <ul>
-<li>The actual QiLife application repository and current commit.</li>
-<li>The runtime <code>qilife.sqlite</code> file or a read-only schema dump.</li>
-<li>SQL migration history, if migrations exist.</li>
-<li>ORM or database model definitions.</li>
-<li>Database creation and initialization code.</li>
-<li>The canonical runtime database path.</li>
+<li>Decision: <code>01_QiDNA/Architecture/Decisions/ADR-0018_supabase_qilife_data_authority.md</code></li>
+<li>Field contract: <code>20_QiSystem/schemas/QiLife_Data_Spine.mdx</code></li>
+<li>Catalog: <code>20_QiSystem/schemas/SCHEMA_CATALOG.md</code></li>
+<li>Migration: <code>supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql</code></li>
 </ul>
-<h2>Next Exact Step</h2>
-<p>Provide or restore the actual QiLife implementation repository and identify its path. The preferred expected path is:</p>
-<pre><code class="language-text">/home/qiadmin/qi_workspace/qilife
-</code></pre>
-<p>If the repository exists elsewhere, provide that exact path. It must contain at least one verified schema source: the SQLite database, a <code>.schema</code> dump, migrations, ORM models, or database initialization code.</p>
-<p>Database blueprint work remains blocked until that source is available. No schema should be invented from the documentation.</p>
+<h2>Transition Rule</h2>
+<p>No automatic conversion or deletion is authorized. Legacy tables must be mapped, validated, backed up, and cut over through a separate approved transition plan.</p>
 
     </article>
     <article id="01-qidna-reconciliation-2026-06-10-site-coverage-report" class="doc" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-10_site_coverage_report.md # qidna site coverage report
@@ -8829,6 +8644,195 @@ ui implementation may continue only after the route catalog, screen inventory, w
 <p>UI implementation may continue only after the route catalog, screen inventory, workflow state machines, entity mappings, and acceptance criteria are approved.</p>
 
     </article>
+    <article id="01-qidna-reconciliation-2026-06-12-document-reconciliation-ledger" class="doc" data-status="Evidence" data-search="evidence 01_qidna/reconciliation/2026-06-12_document_reconciliation_ledger.md # chronicle qidna document reconciliation ledger
+
+## purpose
+
+this ledger tracks every source document through review, promotion, supersession, and verification. reconciliation is complete only when every document has one explicit disposition and every valid governing claim has one canonical destination.
+
+## dispositions
+
+- **canonical:** current governing document.
+- **merged:** unique valid meaning was promoted into a canonical document.
+- **superseded:** retained only for history; cannot govern current work.
+- **evidence:** factual receipt or audit retained without governing authority.
+- **generated:** derived output; rebuildable and non-canonical.
+- **pending:** not yet reviewed claim by claim.
+
+legacy sources are retained in their mirrored source location as archive evidence unless an approved archive move can preserve hierarchy, provenance, and links. this avoids flattening and prevents archive organization from becoming a competing system map.
+
+## progress summary
+
+| domain | reconciled | pending | status |
+|---|---:|---:|---|
+| `00_qieos` -&gt; `01_qidna` | 3 | 0 | complete |
+| `10_qios_start` + legacy qiaccess -&gt; `10_qiaccess` | 3 | 0 | complete |
+| remaining repository | 0 | 121 | pending |
+
+## reconciliation entries
+
+### `00_qieos/decisions/adr-0001_qios_dna_as_master_doctrine_repo.mdx`
+
+- previous status: legacy, accepted under obsolete vocabulary.
+- valid unique claims: qidna is portable system doctrine; local implementation docs cannot override system doctrine; system-level interpretation belongs in qidna.
+- merged into: `01_qidna/qieos/_qieos.md`.
+- superseded claims: old root names and old reconciliation/export locations.
+- current disposition: **merged + superseded**, retained in place as legacy archive evidence.
+
+### `00_qieos/doctrine/qios_core_doctrine.mdx`
+
+- previous status: legacy.
+- valid unique claims: reduce drift, preserve system memory, review raw imports before promotion, exports are snapshots.
+- merged into: `01_qidna/qieos/_qieos.md`.
+- superseded claims: qieos as a top-level root, qios start, and qiapps vocabulary.
+- current disposition: **merged + superseded**, retained in place as legacy archive evidence.
+
+### `00_qieos/system_map/qios_master_map.mdx`
+
+- previous status: legacy.
+- valid unique claims: none not already governed by active root documents and adr-0017.
+- superseded claims: the old root map, qiaccess start location, qilife legacy location, qijourney as a major active module, and top-level `packages`, `scripts`, and `toolbox` doctrine.
+- canonical destination: `01_qidna/architecture/decisions/adr-0017_canonical_vocabulary_and_v1_direction.md` and active root documents.
+- current disposition: **superseded**, retained in place as legacy archive evidence.
+
+
+### `10_qios_start/qiaccess_start/index.mdx`
+
+- previous status: legacy.
+- valid unique claims: qiaccess is the front door and interface layer, while runtime, doctrine, rules, and storage remain owned by their respective layers.
+- merged into: `10_qiaccess/_10_qiaccess.md`.
+- superseded claims: qiaccess start naming and old root location.
+- current disposition: **merged + superseded**, retained in place as legacy archive evidence.
+
+### `60_qiapps/qiaccess_start/overview.md`
+
+- previous status: legacy implementation evidence.
+- verified against: healthy live homepage stack at `/srv/qios/stacks/_qiaccess_start` and implementation repository commit `07268d4`.
+- valid unique claims: homepage implementation, repository-to-live synchronization boundary, and no-secrets rule.
+- merged into: `10_qiaccess/_10_qiaccess.md`.
+- superseded claims: repo config as runtime authority and historical url inventory.
+- current disposition: **merged + superseded**, retained in place as legacy archive evidence.
+
+### `60_qiapps/qiaccess_start/wiki_publish_plan.md`
+
+- previous status: legacy proposal.
+- valid unique claims: none required by the accepted build.
+- conflict: proposes a wiki.js publication authority while adr-0015 selects the generated static chronicle reader.
+- current disposition: **superseded**, retained in place as legacy archive evidence.
+
+## verification rule
+
+after each domain:
+
+1. confirm every reviewed source has a ledger entry.
+2. confirm promoted claims appear in one canonical destination.
+3. confirm superseded sources carry a visible notice.
+4. rebuild the site and verify active remains the printable governing view.
+5. update counts and the next bounded domain.
+">
+      <div class="doc-meta"><span class="status-badge status-evidence">Evidence</span><span class="source-path">01_QiDNA/Reconciliation/2026-06-12_document_reconciliation_ledger.md</span></div>
+      <h1>Chronicle QiDNA Document Reconciliation Ledger</h1>
+<h2>Purpose</h2>
+<p>This ledger tracks every source document through review, promotion, supersession, and verification. Reconciliation is complete only when every document has one explicit disposition and every valid governing claim has one canonical destination.</p>
+<h2>Dispositions</h2>
+<ul>
+<li><strong>Canonical:</strong> current governing document.</li>
+<li><strong>Merged:</strong> unique valid meaning was promoted into a canonical document.</li>
+<li><strong>Superseded:</strong> retained only for history; cannot govern current work.</li>
+<li><strong>Evidence:</strong> factual receipt or audit retained without governing authority.</li>
+<li><strong>Generated:</strong> derived output; rebuildable and non-canonical.</li>
+<li><strong>Pending:</strong> not yet reviewed claim by claim.</li>
+</ul>
+<p>Legacy sources are retained in their mirrored source location as archive evidence unless an approved archive move can preserve hierarchy, provenance, and links. This avoids flattening and prevents archive organization from becoming a competing system map.</p>
+<h2>Progress Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th align="right">Reconciled</th>
+<th align="right">Pending</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>00_QiEOS</code> -&gt; <code>01_QiDNA</code></td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td><code>10_QiOS_Start</code> + legacy QiAccess -&gt; <code>10_QiAccess</code></td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>Remaining repository</td>
+<td align="right">0</td>
+<td align="right">121</td>
+<td>Pending</td>
+</tr>
+</tbody></table>
+<h2>Reconciliation Entries</h2>
+<h3><code>00_QiEOS/decisions/ADR-0001_QiOS_DNA_As_Master_Doctrine_Repo.mdx</code></h3>
+<ul>
+<li>Previous status: Legacy, accepted under obsolete vocabulary.</li>
+<li>Valid unique claims: QiDNA is portable system doctrine; local implementation docs cannot override system doctrine; system-level interpretation belongs in QiDNA.</li>
+<li>Merged into: <code>01_QiDNA/QiEOS/_QiEOS.md</code>.</li>
+<li>Superseded claims: old root names and old reconciliation/export locations.</li>
+<li>Current disposition: <strong>Merged + Superseded</strong>, retained in place as Legacy archive evidence.</li>
+</ul>
+<h3><code>00_QiEOS/doctrine/QiOS_Core_Doctrine.mdx</code></h3>
+<ul>
+<li>Previous status: Legacy.</li>
+<li>Valid unique claims: reduce drift, preserve system memory, review raw imports before promotion, exports are snapshots.</li>
+<li>Merged into: <code>01_QiDNA/QiEOS/_QiEOS.md</code>.</li>
+<li>Superseded claims: QiEOS as a top-level root, QiOS Start, and QiApps vocabulary.</li>
+<li>Current disposition: <strong>Merged + Superseded</strong>, retained in place as Legacy archive evidence.</li>
+</ul>
+<h3><code>00_QiEOS/system_map/QiOS_Master_Map.mdx</code></h3>
+<ul>
+<li>Previous status: Legacy.</li>
+<li>Valid unique claims: none not already governed by active root documents and ADR-0017.</li>
+<li>Superseded claims: the old root map, QiAccess Start location, QiLife legacy location, QiJourney as a major active module, and top-level <code>packages</code>, <code>scripts</code>, and <code>toolbox</code> doctrine.</li>
+<li>Canonical destination: <code>01_QiDNA/Architecture/Decisions/ADR-0017_canonical_vocabulary_and_v1_direction.md</code> and active root documents.</li>
+<li>Current disposition: <strong>Superseded</strong>, retained in place as Legacy archive evidence.</li>
+</ul>
+<h3><code>10_QiOS_Start/QiAccess_Start/index.mdx</code></h3>
+<ul>
+<li>Previous status: Legacy.</li>
+<li>Valid unique claims: QiAccess is the front door and interface layer, while runtime, doctrine, rules, and storage remain owned by their respective layers.</li>
+<li>Merged into: <code>10_QiAccess/_10_QiAccess.md</code>.</li>
+<li>Superseded claims: QiAccess Start naming and old root location.</li>
+<li>Current disposition: <strong>Merged + Superseded</strong>, retained in place as Legacy archive evidence.</li>
+</ul>
+<h3><code>60_qiapps/qiaccess_start/overview.md</code></h3>
+<ul>
+<li>Previous status: Legacy implementation evidence.</li>
+<li>Verified against: healthy live Homepage stack at <code>/srv/qios/stacks/_qiaccess_start</code> and implementation repository commit <code>07268d4</code>.</li>
+<li>Valid unique claims: Homepage implementation, repository-to-live synchronization boundary, and no-secrets rule.</li>
+<li>Merged into: <code>10_QiAccess/_10_QiAccess.md</code>.</li>
+<li>Superseded claims: repo config as runtime authority and historical URL inventory.</li>
+<li>Current disposition: <strong>Merged + Superseded</strong>, retained in place as Legacy archive evidence.</li>
+</ul>
+<h3><code>60_qiapps/qiaccess_start/wiki_publish_plan.md</code></h3>
+<ul>
+<li>Previous status: Legacy proposal.</li>
+<li>Valid unique claims: none required by the accepted build.</li>
+<li>Conflict: proposes a Wiki.js publication authority while ADR-0015 selects the generated static Chronicle reader.</li>
+<li>Current disposition: <strong>Superseded</strong>, retained in place as Legacy archive evidence.</li>
+</ul>
+<h2>Verification Rule</h2>
+<p>After each domain:</p>
+<ol>
+<li>Confirm every reviewed source has a ledger entry.</li>
+<li>Confirm promoted claims appear in one canonical destination.</li>
+<li>Confirm superseded sources carry a visible notice.</li>
+<li>Rebuild the site and verify Active remains the printable governing view.</li>
+<li>Update counts and the next bounded domain.</li>
+</ol>
+
+    </article>
     <article id="01-qidna-schema-schema" class="doc" data-status="Active" data-search="active 01_qidna/schema/_schema.md # schema
 
 ## overview
@@ -8870,61 +8874,169 @@ qiaccess -&gt; qilife -&gt; (qisystem + qinexus + qicapture + qiconnect)
     </article>
     <article id="10-qiaccess-10-qiaccess" class="doc" data-status="Active" data-search="active 10_qiaccess/_10_qiaccess.md # qiaccess
 
-## overview
+## status and authority
 
-qiaccess is the portal and navigation shell for the system. it is the daily entry point for opening tools, seeing what needs attention, capturing quickly, and reaching system services.
+**active.** qiaccess is the homepage-powered front door and operational launcher for the qi ecosystem.
 
-## responsibilities
+verified on 2026-06-12:
 
-- provide the main portal and dashboard.
-- open real tools and services quickly.
-- present the seven-root navigation contract.
-- surface capture as a fast path.
-- point knowledge to canonical docs and references.
-- show system visibility without becoming the system layer itself.
+- live stack: `/srv/qios/stacks/_qiaccess_start`
+- live service: `homepage`, healthy when inspected
+- runtime bind: `127.0.0.1:3001 -&gt; 3000`
+- implementation repository: `/srv/qios/repos/_qiaccess_start`
+- inspected repository commit: `07268d4`
+- live deployed configuration is authoritative for working routes and current grouping.
+- repository configuration is the maintained deployment source but may lag the live stack until synchronized.
 
-## flows
+## role
+
+qiaccess answers:
 
 ```text
-open qiaccess
-  -&gt; see home for attention items
-  -&gt; use start to open tools
-  -&gt; use capture for immediate input
-  -&gt; use knowledge for references
-  -&gt; use system for runtime visibility
+where do i go next, and how do i safely reach the correct system surface?
 ```
 
-## structure
+it provides one dashboard for services, documentation, control surfaces, recovery references, and external tools. it does not own the systems it links to.
 
-qiaccess active navigation has seven roots: home, start, capture, knowledge, memory, insights, and system. system subroutes stay nested under system.
+## ownership boundaries
 
+- homepage owns the dashboard ui and grouping.
+- qiserver owns container runtime and service execution.
+- cloudflare owns the protected public edge route and offline/recovery edge behavior.
+- tailscale owns private network reachability.
+- terminal, cockpit, portainer, and linked applications own real control actions.
+- qidna owns canonical system documentation.
+- qiaccess must not become a duplicate database, documentation authority, or runtime control plane.
+
+## active dashboard groups
+
+the live configuration currently defines:
+
+1. qiaccess
+2. core services
+3. knowledge + archive
+4. data + workflows
+5. finance
+6. server control
+7. attention + recovery
+8. external / mobile functions
+9. admin bookmarks
+10. docs &amp; references
+
+these are dashboard presentation groups, not new qios architecture roots.
+
+## configuration
+
+canonical live files:
+
+```text
+/srv/qios/stacks/_qiaccess_start/
+├── docker-compose.yml
+└── config/
+    ├── settings.yaml
+    ├── services.yaml
+    ├── bookmarks.yaml
+    ├── widgets.yaml
+    ├── docker.yaml
+    ├── custom.css
+    └── custom.js
+```
+
+maintained repository source:
+
+```text
+/srv/qios/repos/_qiaccess_start/qiaccess/
+```
+
+## deployment rules
+
+- runtime facts and deployed config beat planning notes and stale repo urls.
+- repository changes do not become live until deliberately synchronized to the stack.
+- never commit service tokens, widget credentials, passwords, or other secrets.
+- public, tailnet-only, and recovery routes must remain visibly distinct.
+- a launcher link is navigation, not proof that the target service is healthy.
+- legacy custom react portal material must not be redeployed unless explicitly salvaged and documented.
+
+## documentation boundary
+
+chronicle qidna remains the canonical documentation reader under adr-0015. wiki.js and bookstack may provide operational knowledge surfaces, but automated publication plans do not override source markdown/mdx or create a second doctrine authority.
 ">
       <div class="doc-meta"><span class="status-badge status-active">Active</span><span class="source-path">10_QiAccess/_10_QiAccess.md</span></div>
       <h1>QiAccess</h1>
-<h2>Overview</h2>
-<p>QiAccess is the portal and navigation shell for the system. It is the daily entry point for opening tools, seeing what needs attention, capturing quickly, and reaching system services.</p>
-<h2>Responsibilities</h2>
+<h2>Status and Authority</h2>
+<p><strong>Active.</strong> QiAccess is the Homepage-powered front door and operational launcher for the Qi ecosystem.</p>
+<p>Verified on 2026-06-12:</p>
 <ul>
-<li>Provide the main portal and dashboard.</li>
-<li>Open real tools and services quickly.</li>
-<li>Present the seven-root navigation contract.</li>
-<li>Surface Capture as a fast path.</li>
-<li>Point Knowledge to canonical docs and references.</li>
-<li>Show System visibility without becoming the system layer itself.</li>
+<li>Live stack: <code>/srv/qios/stacks/_qiaccess_start</code></li>
+<li>Live service: <code>homepage</code>, healthy when inspected</li>
+<li>Runtime bind: <code>127.0.0.1:3001 -&gt; 3000</code></li>
+<li>Implementation repository: <code>/srv/qios/repos/_QiAccess_Start</code></li>
+<li>Inspected repository commit: <code>07268d4</code></li>
+<li>Live deployed configuration is authoritative for working routes and current grouping.</li>
+<li>Repository configuration is the maintained deployment source but may lag the live stack until synchronized.</li>
 </ul>
-<h2>Flows</h2>
-<pre><code class="language-text">Open QiAccess
-  -&gt; see Home for attention items
-  -&gt; use Start to open tools
-  -&gt; use Capture for immediate input
-  -&gt; use Knowledge for references
-  -&gt; use System for runtime visibility
+<h2>Role</h2>
+<p>QiAccess answers:</p>
+<pre><code class="language-text">Where do I go next, and how do I safely reach the correct system surface?
 </code></pre>
-<h2>Structure</h2>
-<p>QiAccess active navigation has seven roots: Home, Start, Capture, Knowledge, Memory, Insights, and System. System subroutes stay nested under System.</p>
+<p>It provides one dashboard for services, documentation, control surfaces, recovery references, and external tools. It does not own the systems it links to.</p>
+<h2>Ownership Boundaries</h2>
+<ul>
+<li>Homepage owns the dashboard UI and grouping.</li>
+<li>QiServer owns container runtime and service execution.</li>
+<li>Cloudflare owns the protected public edge route and offline/recovery edge behavior.</li>
+<li>Tailscale owns private network reachability.</li>
+<li>Terminal, Cockpit, Portainer, and linked applications own real control actions.</li>
+<li>QiDNA owns canonical system documentation.</li>
+<li>QiAccess must not become a duplicate database, documentation authority, or runtime control plane.</li>
+</ul>
+<h2>Active Dashboard Groups</h2>
+<p>The live configuration currently defines:</p>
+<ol>
+<li>QiAccess</li>
+<li>Core Services</li>
+<li>Knowledge + Archive</li>
+<li>Data + Workflows</li>
+<li>Finance</li>
+<li>Server Control</li>
+<li>Attention + Recovery</li>
+<li>External / Mobile Functions</li>
+<li>Admin Bookmarks</li>
+<li>Docs &amp; References</li>
+</ol>
+<p>These are dashboard presentation groups, not new QiOS architecture roots.</p>
+<h2>Configuration</h2>
+<p>Canonical live files:</p>
+<pre><code class="language-text">/srv/qios/stacks/_qiaccess_start/
+├── docker-compose.yml
+└── config/
+    ├── settings.yaml
+    ├── services.yaml
+    ├── bookmarks.yaml
+    ├── widgets.yaml
+    ├── docker.yaml
+    ├── custom.css
+    └── custom.js
+</code></pre>
+<p>Maintained repository source:</p>
+<pre><code class="language-text">/srv/qios/repos/_QiAccess_Start/qiaccess/
+</code></pre>
+<h2>Deployment Rules</h2>
+<ul>
+<li>Runtime facts and deployed config beat planning notes and stale repo URLs.</li>
+<li>Repository changes do not become live until deliberately synchronized to the stack.</li>
+<li>Never commit service tokens, widget credentials, passwords, or other secrets.</li>
+<li>Public, tailnet-only, and recovery routes must remain visibly distinct.</li>
+<li>A launcher link is navigation, not proof that the target service is healthy.</li>
+<li>Legacy custom React portal material must not be redeployed unless explicitly salvaged and documented.</li>
+</ul>
+<h2>Documentation Boundary</h2>
+<p>Chronicle QiDNA remains the canonical documentation reader under ADR-0015. Wiki.js and BookStack may provide operational knowledge surfaces, but automated publication plans do not override source Markdown/MDX or create a second doctrine authority.</p>
 
     </article>
     <article id="10-qios-start-qiaccess-start-index" class="doc" data-status="Legacy" data-search="legacy 10_qios_start/qiaccess_start/index.mdx # qiaccess start
+
+&gt; **legacy - superseded.** reconciled on 2026-06-12. stable front-door and boundary meaning was merged into `10_qiaccess/_10_qiaccess.md`; the qiaccess start name is superseded by adr-0017. retained in place as hierarchy-preserving archive evidence.
 
 qiaccess start is the qios front door, cockpit, launcher, access dashboard, and docs surface.
 
@@ -8953,6 +9065,9 @@ it is the interface layer for qios.
 ">
       <div class="doc-meta"><span class="status-badge status-legacy">Legacy</span><span class="source-path">10_QiOS_Start/QiAccess_Start/index.mdx</span></div>
       <h1>QiAccess Start</h1>
+<blockquote>
+<p><strong>Legacy - Superseded.</strong> Reconciled on 2026-06-12. Stable front-door and boundary meaning was merged into <code>10_QiAccess/_10_QiAccess.md</code>; the QiAccess Start name is superseded by ADR-0017. Retained in place as hierarchy-preserving archive evidence.</p>
+</blockquote>
 <p>QiAccess Start is the QiOS front door, cockpit, launcher, access dashboard, and docs surface.</p>
 <h2>Role</h2>
 <p>QiAccess Start answers:</p>
@@ -9313,69 +9428,409 @@ Exports are snapshots.
 </code></pre>
 
     </article>
+    <article id="20-qisystem-schemas-database-overview" class="doc" data-status="Active" data-search="active 20_qisystem/schemas/database_overview.md # database overview
+
+## authority
+
+supabase postgres is the canonical structured-data store for qilife under adr-0018. sqlite is deprecated and may support legacy, local, or transitional operation only.
+
+## why supabase
+
+- centralized relational data.
+- cross-device and api access.
+- normalized csv import targets.
+- database-enforced relationships and constraints.
+- controlled migration history.
+
+## schema per module
+
+postgres schemas make ownership and security boundaries explicit without inventing separate databases:
+
+- `qi_entities` owns persistent who/what records.
+- `qi_events` owns qibits.
+
+a new schema requires a proven ownership need and accepted reconciliation decision.
+
+## api exposure
+
+the custom schemas are private by default. rls is enabled, but data api exposure, grants, and policies are deferred until user identity and authorization rules are approved.
+
+## files
+
+qinexus remains authoritative for files, exports, references, archives, and backups. paperless is a document-processing and application surface. supabase stores references and structured metadata, not duplicate file authority.
+
+## transition
+
+the existing sqlite database and sqlmodel models are migration evidence. this baseline does not deploy, copy, transform, or delete sqlite data. a later cutover plan must define mapping, validation, backup, rollback, and application integration.
+">
+      <div class="doc-meta"><span class="status-badge status-active">Active</span><span class="source-path">20_QiSystem/schemas/DATABASE_OVERVIEW.md</span></div>
+      <h1>Database Overview</h1>
+<h2>Authority</h2>
+<p>Supabase Postgres is the canonical structured-data store for QiLife under ADR-0018. SQLite is deprecated and may support legacy, local, or transitional operation only.</p>
+<h2>Why Supabase</h2>
+<ul>
+<li>Centralized relational data.</li>
+<li>Cross-device and API access.</li>
+<li>Normalized CSV import targets.</li>
+<li>Database-enforced relationships and constraints.</li>
+<li>Controlled migration history.</li>
+</ul>
+<h2>Schema Per Module</h2>
+<p>Postgres schemas make ownership and security boundaries explicit without inventing separate databases:</p>
+<ul>
+<li><code>qi_entities</code> owns persistent who/what records.</li>
+<li><code>qi_events</code> owns QiBits.</li>
+</ul>
+<p>A new schema requires a proven ownership need and accepted reconciliation decision.</p>
+<h2>API Exposure</h2>
+<p>The custom schemas are private by default. RLS is enabled, but Data API exposure, grants, and policies are deferred until user identity and authorization rules are approved.</p>
+<h2>Files</h2>
+<p>QiNexus remains authoritative for files, exports, references, archives, and backups. Paperless is a document-processing and application surface. Supabase stores references and structured metadata, not duplicate file authority.</p>
+<h2>Transition</h2>
+<p>The existing SQLite database and SQLModel models are migration evidence. This baseline does not deploy, copy, transform, or delete SQLite data. A later cutover plan must define mapping, validation, backup, rollback, and application integration.</p>
+
+    </article>
     <article id="20-qisystem-schemas-qilife-data-spine" class="doc" data-status="Active" data-search="active 20_qisystem/schemas/qilife_data_spine.mdx # qilife data spine
 
-qilife is the living operational data spine of qios.
+## status and authority
 
-the qilife implementation repo contains the active app and detailed data-model docs. in qios dna, this page is the canonical system-level summary.
+**active.** adr-0018 establishes supabase postgres as the canonical qilife structured-data authority.
 
-## v1 core tables
+the baseline migration is `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`. it is migration-ready but has not been deployed by this repository change.
 
-```text
-qibits
-buckets
-threads
-actions
-action_steps
-people
-transactions
-obligations
-knowledge_items
-documents
-events
-links
-activity_log
-ai_outputs
-daily_summaries
-```
+## canonical model
 
-## canonical conventions
+- **entity:** a who or what that persists through time.
+- **qibit:** an event, observation, state change, fact, or unit of reality.
+- every canonical structured record is represented as an entity or qibit.
+- qibits may reference entities.
 
-- ids use ulids where possible.
-- notes and reflections are qibit types, not separate doctrine roots.
-- monetary values use integer cents.
-- timeline is a projection over timestamped records, not its own source-of-truth table.
-- repo docs imported into app knowledge views are read-only unless edited at source.
+this is a classification rule, not permission to discard domain meaning. type-specific meaning remains governed in payloads until proven constraints or query needs justify dedicated columns or tables.
+
+## storage boundaries
+
+- supabase stores canonical structured records and relationships.
+- qinexus stores files, exports, references, archives, and backups.
+- paperless may ingest, ocr, classify, and expose documents; it does not replace qinexus file authority.
+- sqlite is deprecated and limited to legacy, local, or transitional use.
+
+## tables
+
+### `qi_entities.entities`
+
+| column | type | rule | purpose |
+|---|---|---|---|
+| `id` | uuid | pk, generated | stable entity identity |
+| `entity_type` | text | required, nonblank | governed entity classification |
+| `display_name` | text | required, nonblank | human-readable identity |
+| `attributes` | jsonb | default `{}` | source-specific attributes |
+| `created_at` | timestamptz | default now | creation time |
+| `updated_at` | timestamptz | default now | application-managed update time |
+
+### `qi_entities.relationships`
+
+| column | type | rule | purpose |
+|---|---|---|---|
+| `id` | uuid | pk, generated | relationship identity |
+| `source_entity_id` | uuid | fk -&gt; entities | relationship origin |
+| `target_entity_id` | uuid | fk -&gt; entities | relationship target |
+| `relationship_type` | text | required, nonblank | governed relationship meaning |
+| `attributes` | jsonb | default `{}` | evidence or qualifiers |
+| `created_at` | timestamptz | default now | creation time |
+| `updated_at` | timestamptz | default now | application-managed update time |
+
+duplicate source, target, and type combinations are prevented. foreign-key columns are indexed.
+
+### `qi_events.qibits`
+
+| column | type | rule | purpose |
+|---|---|---|---|
+| `id` | uuid | pk, generated | qibit identity |
+| `qibit_type` | text | required, nonblank | governed unit classification |
+| `title` | text | required, nonblank | human-readable label |
+| `summary` | text | optional | concise interpretation |
+| `occurred_at` | timestamptz | default now | when the reality occurred |
+| `primary_entity_id` | uuid | optional fk -&gt; entities | primary who/what reference |
+| `payload` | jsonb | default `{}` | type-specific structured content |
+| `created_at` | timestamptz | default now | creation time |
+| `updated_at` | timestamptz | default now | application-managed update time |
+
+the baseline supports one optional primary entity reference. a many-entity participant model requires evidence and a later adr.
+
+## security
+
+- rls is enabled on all three tables.
+- no permissive client policies are included.
+- custom schemas are not granted to `anon` or `authenticated`.
+- identity ownership and access policies must be approved before data api exposure.
+
+## expansion rules
+
+add columns or tables only when a required invariant, proven query, workflow constraint, or accepted adr requires them. do not create tagging, automation, ai, ingestion, or module schemas as part of this baseline.
+
+## legacy sqlite evidence
+
+qilife commit `c589e1e` contains a 15-table sqlmodel/sqlite implementation. it remains evidence and a potential migration source, not canonical authority. no automatic conversion or data deletion is authorized.
 ">
       <div class="doc-meta"><span class="status-badge status-active">Active</span><span class="source-path">20_QiSystem/schemas/QiLife_Data_Spine.mdx</span></div>
       <h1>QiLife Data Spine</h1>
-<p>QiLife is the living operational data spine of QiOS.</p>
-<p>The QiLife implementation repo contains the active app and detailed data-model docs. In QiOS DNA, this page is the canonical system-level summary.</p>
-<h2>V1 core tables</h2>
-<pre><code class="language-text">qibits
-buckets
-threads
-actions
-action_steps
-people
-transactions
-obligations
-knowledge_items
-documents
-events
-links
-activity_log
-ai_outputs
-daily_summaries
-</code></pre>
-<h2>Canonical conventions</h2>
+<h2>Status and Authority</h2>
+<p><strong>Active.</strong> ADR-0018 establishes Supabase Postgres as the canonical QiLife structured-data authority.</p>
+<p>The baseline migration is <code>supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql</code>. It is migration-ready but has not been deployed by this repository change.</p>
+<h2>Canonical Model</h2>
 <ul>
-<li>IDs use ULIDs where possible.</li>
-<li>Notes and reflections are QiBit types, not separate doctrine roots.</li>
-<li>Monetary values use integer cents.</li>
-<li>Timeline is a projection over timestamped records, not its own source-of-truth table.</li>
-<li>Repo docs imported into app knowledge views are read-only unless edited at source.</li>
+<li><strong>Entity:</strong> a who or what that persists through time.</li>
+<li><strong>QiBit:</strong> an event, observation, state change, fact, or unit of reality.</li>
+<li>Every canonical structured record is represented as an Entity or QiBit.</li>
+<li>QiBits may reference Entities.</li>
 </ul>
+<p>This is a classification rule, not permission to discard domain meaning. Type-specific meaning remains governed in payloads until proven constraints or query needs justify dedicated columns or tables.</p>
+<h2>Storage Boundaries</h2>
+<ul>
+<li>Supabase stores canonical structured records and relationships.</li>
+<li>QiNexus stores files, exports, references, archives, and backups.</li>
+<li>Paperless may ingest, OCR, classify, and expose documents; it does not replace QiNexus file authority.</li>
+<li>SQLite is deprecated and limited to legacy, local, or transitional use.</li>
+</ul>
+<h2>Tables</h2>
+<h3><code>qi_entities.entities</code></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Rule</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>uuid</td>
+<td>PK, generated</td>
+<td>Stable Entity identity</td>
+</tr>
+<tr>
+<td><code>entity_type</code></td>
+<td>text</td>
+<td>required, nonblank</td>
+<td>Governed Entity classification</td>
+</tr>
+<tr>
+<td><code>display_name</code></td>
+<td>text</td>
+<td>required, nonblank</td>
+<td>Human-readable identity</td>
+</tr>
+<tr>
+<td><code>attributes</code></td>
+<td>jsonb</td>
+<td>default <code>{}</code></td>
+<td>Source-specific attributes</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>timestamptz</td>
+<td>default now</td>
+<td>Creation time</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>timestamptz</td>
+<td>default now</td>
+<td>Application-managed update time</td>
+</tr>
+</tbody></table>
+<h3><code>qi_entities.relationships</code></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Rule</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>uuid</td>
+<td>PK, generated</td>
+<td>Relationship identity</td>
+</tr>
+<tr>
+<td><code>source_entity_id</code></td>
+<td>uuid</td>
+<td>FK -&gt; entities</td>
+<td>Relationship origin</td>
+</tr>
+<tr>
+<td><code>target_entity_id</code></td>
+<td>uuid</td>
+<td>FK -&gt; entities</td>
+<td>Relationship target</td>
+</tr>
+<tr>
+<td><code>relationship_type</code></td>
+<td>text</td>
+<td>required, nonblank</td>
+<td>Governed relationship meaning</td>
+</tr>
+<tr>
+<td><code>attributes</code></td>
+<td>jsonb</td>
+<td>default <code>{}</code></td>
+<td>Evidence or qualifiers</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>timestamptz</td>
+<td>default now</td>
+<td>Creation time</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>timestamptz</td>
+<td>default now</td>
+<td>Application-managed update time</td>
+</tr>
+</tbody></table>
+<p>Duplicate source, target, and type combinations are prevented. Foreign-key columns are indexed.</p>
+<h3><code>qi_events.qibits</code></h3>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Type</th>
+<th>Rule</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>id</code></td>
+<td>uuid</td>
+<td>PK, generated</td>
+<td>QiBit identity</td>
+</tr>
+<tr>
+<td><code>qibit_type</code></td>
+<td>text</td>
+<td>required, nonblank</td>
+<td>Governed unit classification</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>text</td>
+<td>required, nonblank</td>
+<td>Human-readable label</td>
+</tr>
+<tr>
+<td><code>summary</code></td>
+<td>text</td>
+<td>optional</td>
+<td>Concise interpretation</td>
+</tr>
+<tr>
+<td><code>occurred_at</code></td>
+<td>timestamptz</td>
+<td>default now</td>
+<td>When the reality occurred</td>
+</tr>
+<tr>
+<td><code>primary_entity_id</code></td>
+<td>uuid</td>
+<td>optional FK -&gt; entities</td>
+<td>Primary who/what reference</td>
+</tr>
+<tr>
+<td><code>payload</code></td>
+<td>jsonb</td>
+<td>default <code>{}</code></td>
+<td>Type-specific structured content</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>timestamptz</td>
+<td>default now</td>
+<td>Creation time</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>timestamptz</td>
+<td>default now</td>
+<td>Application-managed update time</td>
+</tr>
+</tbody></table>
+<p>The baseline supports one optional primary Entity reference. A many-Entity participant model requires evidence and a later ADR.</p>
+<h2>Security</h2>
+<ul>
+<li>RLS is enabled on all three tables.</li>
+<li>No permissive client policies are included.</li>
+<li>Custom schemas are not granted to <code>anon</code> or <code>authenticated</code>.</li>
+<li>Identity ownership and access policies must be approved before Data API exposure.</li>
+</ul>
+<h2>Expansion Rules</h2>
+<p>Add columns or tables only when a required invariant, proven query, workflow constraint, or accepted ADR requires them. Do not create tagging, automation, AI, ingestion, or module schemas as part of this baseline.</p>
+<h2>Legacy SQLite Evidence</h2>
+<p>QiLife commit <code>c589e1e</code> contains a 15-table SQLModel/SQLite implementation. It remains evidence and a potential migration source, not canonical authority. No automatic conversion or data deletion is authorized.</p>
+
+    </article>
+    <article id="20-qisystem-schemas-schema-catalog" class="doc" data-status="Active" data-search="active 20_qisystem/schemas/schema_catalog.md # schema catalog
+
+## status
+
+**active.** minimal canonical supabase catalog accepted by adr-0018.
+
+| schema | table | purpose |
+|---|---|---|
+| `qi_entities` | `entities` | persistent people, organizations, places, objects, systems, and other who/what records |
+| `qi_entities` | `relationships` | typed directed relationships between entities |
+| `qi_events` | `qibits` | events and units of reality, optionally tied to one primary entity |
+
+## deliberately absent
+
+there is no canonical `qi_capture` schema, tagging engine, automation schema, ai schema, file-blob table, or module-specific table in this baseline.
+
+## security posture
+
+all tables have rls enabled. no client grants or policies are defined until identity and authorization are approved.
+
+## source
+
+migration: `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`.
+">
+      <div class="doc-meta"><span class="status-badge status-active">Active</span><span class="source-path">20_QiSystem/schemas/SCHEMA_CATALOG.md</span></div>
+      <h1>Schema Catalog</h1>
+<h2>Status</h2>
+<p><strong>Active.</strong> Minimal canonical Supabase catalog accepted by ADR-0018.</p>
+<table>
+<thead>
+<tr>
+<th>Schema</th>
+<th>Table</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>qi_entities</code></td>
+<td><code>entities</code></td>
+<td>Persistent people, organizations, places, objects, systems, and other who/what records</td>
+</tr>
+<tr>
+<td><code>qi_entities</code></td>
+<td><code>relationships</code></td>
+<td>Typed directed relationships between Entities</td>
+</tr>
+<tr>
+<td><code>qi_events</code></td>
+<td><code>qibits</code></td>
+<td>Events and units of reality, optionally tied to one primary Entity</td>
+</tr>
+</tbody></table>
+<h2>Deliberately Absent</h2>
+<p>There is no canonical <code>qi_capture</code> schema, tagging engine, automation schema, AI schema, file-blob table, or module-specific table in this baseline.</p>
+<h2>Security Posture</h2>
+<p>All tables have RLS enabled. No client grants or policies are defined until identity and authorization are approved.</p>
+<h2>Source</h2>
+<p>Migration: <code>supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql</code>.</p>
 
     </article>
     <article id="30-qiarchive-70-memory-50-context-packs-index" class="doc" data-status="Legacy" data-search="legacy 30_qiarchive/70_memory/50_context_packs/_index.md # 50 context packs
@@ -11086,75 +11541,54 @@ the frontend must visually distinguish between three categories of data:
 
 ## overview
 
-qilife is the private life operating app. it turns life chaos into qibits that can be captured, triaged, routed, acted on, documented, resolved, reflected on, and retrieved.
+qilife is the private operational app and data spine. it captures reality as qibits and relates those qibits to persistent entities.
 
-## responsibilities
+## canonical concepts
 
-- qibits.
-- timeline projection.
-- buckets.
-- threads.
-- actions and steps.
-- people, money, documents, events, and knowledge items.
-- context dock.
-- activity log.
-- ai outputs and retrieval.
+- **entity:** who or what.
+- **qibit:** event or unit of reality.
+- every canonical structured record is represented as an entity or qibit.
+- qibits may reference entities.
+- files remain in qinexus; paperless may process documents without replacing file authority.
 
-## flows
+## data authority
 
-```text
-capture
-  -&gt; bucket
-  -&gt; interpret
-  -&gt; relate
-  -&gt; slot
-  -&gt; breakdown
-  -&gt; enrich
-  -&gt; act
-  -&gt; resolve
-  -&gt; reflect
-  -&gt; retrieve
-```
+supabase postgres is canonical under adr-0018. sqlite is deprecated and limited to legacy, local, or transitional use.
 
-## structure
+## baseline structure
 
-core v1 tables: `qibits`, `buckets`, `threads`, `actions`, `action_steps`, `people`, `transactions`, `obligations`, `knowledge_items`, `documents`, `events`, `links`, `activity_log`, `ai_outputs`, and `daily_summaries`.
+- `qi_entities.entities`
+- `qi_entities.relationships`
+- `qi_events.qibits`
 
+the field contract is maintained in `20_qisystem/schemas/qilife_data_spine.mdx`. additional tables require proven constraints or query needs and an accepted reconciliation decision.
 ">
       <div class="doc-meta"><span class="status-badge status-active">Active</span><span class="source-path">60_QiApp_QiLife/_60_QiApp_QiLife.md</span></div>
       <h1>QiApp QiLife</h1>
 <h2>Overview</h2>
-<p>QiLife is the private life operating app. It turns life chaos into QiBits that can be captured, triaged, routed, acted on, documented, resolved, reflected on, and retrieved.</p>
-<h2>Responsibilities</h2>
+<p>QiLife is the private operational app and data spine. It captures reality as QiBits and relates those QiBits to persistent Entities.</p>
+<h2>Canonical Concepts</h2>
 <ul>
-<li>QiBits.</li>
-<li>Timeline projection.</li>
-<li>Buckets.</li>
-<li>Threads.</li>
-<li>Actions and steps.</li>
-<li>People, money, documents, events, and knowledge items.</li>
-<li>Context Dock.</li>
-<li>Activity log.</li>
-<li>AI outputs and retrieval.</li>
+<li><strong>Entity:</strong> who or what.</li>
+<li><strong>QiBit:</strong> event or unit of reality.</li>
+<li>Every canonical structured record is represented as an Entity or QiBit.</li>
+<li>QiBits may reference Entities.</li>
+<li>Files remain in QiNexus; Paperless may process documents without replacing file authority.</li>
 </ul>
-<h2>Flows</h2>
-<pre><code class="language-text">Capture
-  -&gt; Bucket
-  -&gt; Interpret
-  -&gt; Relate
-  -&gt; Slot
-  -&gt; Breakdown
-  -&gt; Enrich
-  -&gt; Act
-  -&gt; Resolve
-  -&gt; Reflect
-  -&gt; Retrieve
-</code></pre>
-<h2>Structure</h2>
-<p>Core v1 tables: <code>qibits</code>, <code>buckets</code>, <code>threads</code>, <code>actions</code>, <code>action_steps</code>, <code>people</code>, <code>transactions</code>, <code>obligations</code>, <code>knowledge_items</code>, <code>documents</code>, <code>events</code>, <code>links</code>, <code>activity_log</code>, <code>ai_outputs</code>, and <code>daily_summaries</code>.</p>
+<h2>Data Authority</h2>
+<p>Supabase Postgres is canonical under ADR-0018. SQLite is deprecated and limited to legacy, local, or transitional use.</p>
+<h2>Baseline Structure</h2>
+<ul>
+<li><code>qi_entities.entities</code></li>
+<li><code>qi_entities.relationships</code></li>
+<li><code>qi_events.qibits</code></li>
+</ul>
+<p>The field contract is maintained in <code>20_QiSystem/schemas/QiLife_Data_Spine.mdx</code>. Additional tables require proven constraints or query needs and an accepted reconciliation decision.</p>
 
     </article>
     <article id="60-qiapps-qiaccess-start-overview" class="doc" data-status="Legacy" data-search="legacy 60_qiapps/qiaccess_start/overview.md # qiaccess start overview
+
+&gt; **legacy - superseded implementation evidence.** reconciled on 2026-06-12 against the live homepage stack. valid deployment-boundary and no-secrets rules were merged into `10_qiaccess/_10_qiaccess.md`. recorded urls and repo assumptions are historical and non-authoritative.
 
 this document provides a high-level overview of the **repo-side canonical qiaccess homepage configuration** prepared on cody's local pc. it is not a claim that the live qiserver homepage config already matches this repo.
 
@@ -11224,6 +11658,9 @@ this document provides a high-level overview of the **repo-side canonical qiacce
 ">
       <div class="doc-meta"><span class="status-badge status-legacy">Legacy</span><span class="source-path">60_qiapps/qiaccess_start/overview.md</span></div>
       <h1>QiAccess Start Overview</h1>
+<blockquote>
+<p><strong>Legacy - Superseded implementation evidence.</strong> Reconciled on 2026-06-12 against the live Homepage stack. Valid deployment-boundary and no-secrets rules were merged into <code>10_QiAccess/_10_QiAccess.md</code>. Recorded URLs and repo assumptions are historical and non-authoritative.</p>
+</blockquote>
 <p>This document provides a high-level overview of the <strong>repo-side canonical QiAccess Homepage configuration</strong> prepared on Cody&#39;s local PC. It is not a claim that the live qiserver Homepage config already matches this repo.</p>
 <hr>
 <h2>1. Verified Facts</h2>
@@ -11297,6 +11734,8 @@ this document provides a high-level overview of the **repo-side canonical qiacce
     </article>
     <article id="60-qiapps-qiaccess-start-wiki-publish-plan" class="doc" data-status="Legacy" data-search="legacy 60_qiapps/qiaccess_start/wiki_publish_plan.md # wiki.js publish plan
 
+&gt; **legacy - superseded proposal.** reconciled on 2026-06-12. adr-0015 establishes generated `site/index.html` as the supported chronicle reader. no wiki.js synchronization implementation is approved by this document.
+
 this document details the plan to automatically synchronize static markdown files from the local git repository to the operational **wiki.js** database.
 
 ---
@@ -11348,6 +11787,9 @@ this document details the plan to automatically synchronize static markdown file
 ">
       <div class="doc-meta"><span class="status-badge status-legacy">Legacy</span><span class="source-path">60_qiapps/qiaccess_start/wiki_publish_plan.md</span></div>
       <h1>Wiki.js Publish Plan</h1>
+<blockquote>
+<p><strong>Legacy - Superseded proposal.</strong> Reconciled on 2026-06-12. ADR-0015 establishes generated <code>site/index.html</code> as the supported Chronicle reader. No Wiki.js synchronization implementation is approved by this document.</p>
+</blockquote>
 <p>This document details the plan to automatically synchronize static markdown files from the local Git repository to the operational <strong>Wiki.js</strong> database.</p>
 <hr>
 <h2>1. Verified Facts</h2>
@@ -12835,6 +13277,8 @@ we will treat the markdown files in the repository's `docs/` folder as the canon
     </article>
     <article id="90-decisions-0006-clean-core-with-legacy-bridge" class="doc" data-status="Evidence" data-search="evidence 90_decisions/0006_clean_core_with_legacy_bridge.md # decision 0006: clean core with legacy bridge
 
+&gt; **superseded by adr-0018 on 2026-06-14.** retained as historical decision evidence. supabase is now canonical; sqlite is transitional only.
+
 ## context
 qilife is replacing an older supabase-backed system that has a messy schema.
 
@@ -12848,6 +13292,9 @@ qilife will use a clean canonical schema locally in sqlite, avoiding inheritance
 ">
       <div class="doc-meta"><span class="status-badge status-evidence">Evidence</span><span class="source-path">90_decisions/0006_clean_core_with_legacy_bridge.md</span></div>
       <h1>Decision 0006: Clean Core with Legacy Bridge</h1>
+<blockquote>
+<p><strong>Superseded by ADR-0018 on 2026-06-14.</strong> Retained as historical decision evidence. Supabase is now canonical; SQLite is transitional only.</p>
+</blockquote>
 <h2>Context</h2>
 <p>QiLife is replacing an older Supabase-backed system that has a messy schema.</p>
 <h2>Decision</h2>
@@ -13247,9 +13694,9 @@ treat these as current unless a newer adr contradicts them:
   - `70_qiconnect`
 - qiaccess is the front door / cockpit / docs surface.
 - qilife is the private life operating app and data spine.
-- sqlite is the current qilife structured-data authority.
+- supabase postgres is the current qilife structured-data authority under adr-0018.
 - qinexus is file/export/reference/archive storage.
-- supabase is legacy/import/future integration only unless a later adr says otherwise.
+- sqlite is deprecated and allowed only for legacy, local, or transitional use.
 
 do not reopen these decisions unless the task explicitly asks for architecture review.
 
@@ -13384,6 +13831,41 @@ audit only. no building.
 ## 🟢 section 2 — resolved / archive
 
 (none yet)
+
+
+---
+
+## 🔵 section 3 — current status and next actions
+
+### [status-2026-06-14] supabase authority and qidna reconciliation
+
+**verified status:**
+
+- canonical mirrored hierarchy remains unchanged.
+- adr-0018 supersedes prior sqlite authority decisions.
+- supabase postgres is the canonical qilife structured-data authority.
+- sqlite and the 15-table sqlmodel implementation are legacy/local/transitional evidence.
+- canonical baseline: entity, entity relationship, and qibit.
+- local migration created at `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`.
+- migration contains exactly two schemas and three tables.
+- migration was syntax-applied successfully in disposable postgresql 16; the validation container was removed.
+- rls is enabled; no client grants or policies are defined.
+- no deployment or sqlite data conversion was run.
+- qidna tree navigation and mind map usability repairs are built into the generated site.
+- referral side quest found no matching source in qidna, `/home/qiadmin/qi_workspace`, or `/srv/qios/repos`.
+
+### next actions - in order
+
+1. approve identity ownership, custom-schema exposure, rls policies, and grants.
+2. define sqlite-to-supabase mapping, backup, rollback, and cutover.
+3. continue document-by-document qilife reconciliation.
+4. complete the route, screen, workflow, permission, and entity-to-view ui blueprint.
+
+### questions for cody
+
+- what supabase user/tenant ownership column should protect each entity and qibit?
+- should the custom schemas be exposed through the supabase data api, or accessed only by trusted backend code?
+- where is the referral/bonus page repository if it is outside the three searched roots?
 ">
       <div class="doc-meta"><span class="status-badge status-evidence">Evidence</span><span class="source-path">codex.md</span></div>
       <h1>CODEX SYSTEM CONTROL FILE</h1>
@@ -13448,9 +13930,9 @@ rg &quot;keyword&quot; path/to/relevant/folder
 </li>
 <li>QiAccess is the front door / cockpit / docs surface.</li>
 <li>QiLife is the private life operating app and data spine.</li>
-<li>SQLite is the current QiLife structured-data authority.</li>
+<li>Supabase Postgres is the current QiLife structured-data authority under ADR-0018.</li>
 <li>QiNexus is file/export/reference/archive storage.</li>
-<li>Supabase is legacy/import/future integration only unless a later ADR says otherwise.</li>
+<li>SQLite is deprecated and allowed only for legacy, local, or transitional use.</li>
 </ul>
 <p>Do not reopen these decisions unless the task explicitly asks for architecture review.</p>
 <h3>5. Read known reconciliation files before scanning the whole repo</h3>
@@ -13562,6 +14044,37 @@ rg &quot;keyword&quot; path/to/relevant/folder
 <hr>
 <h2>🟢 SECTION 2 — RESOLVED / ARCHIVE</h2>
 <p>(None yet)</p>
+<hr>
+<h2>🔵 SECTION 3 — CURRENT STATUS AND NEXT ACTIONS</h2>
+<h3>[STATUS-2026-06-14] Supabase Authority and QiDNA Reconciliation</h3>
+<p><strong>Verified status:</strong></p>
+<ul>
+<li>Canonical mirrored hierarchy remains unchanged.</li>
+<li>ADR-0018 supersedes prior SQLite authority decisions.</li>
+<li>Supabase Postgres is the canonical QiLife structured-data authority.</li>
+<li>SQLite and the 15-table SQLModel implementation are legacy/local/transitional evidence.</li>
+<li>Canonical baseline: Entity, Entity Relationship, and QiBit.</li>
+<li>Local migration created at <code>supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql</code>.</li>
+<li>Migration contains exactly two schemas and three tables.</li>
+<li>Migration was syntax-applied successfully in disposable PostgreSQL 16; the validation container was removed.</li>
+<li>RLS is enabled; no client grants or policies are defined.</li>
+<li>No deployment or SQLite data conversion was run.</li>
+<li>QiDNA tree navigation and mind map usability repairs are built into the generated site.</li>
+<li>Referral side quest found no matching source in QiDNA, <code>/home/qiadmin/qi_workspace</code>, or <code>/srv/qios/repos</code>.</li>
+</ul>
+<h3>Next Actions - In Order</h3>
+<ol>
+<li>Approve identity ownership, custom-schema exposure, RLS policies, and grants.</li>
+<li>Define SQLite-to-Supabase mapping, backup, rollback, and cutover.</li>
+<li>Continue document-by-document QiLife reconciliation.</li>
+<li>Complete the route, screen, workflow, permission, and entity-to-view UI blueprint.</li>
+</ol>
+<h3>Questions for Cody</h3>
+<ul>
+<li>What Supabase user/tenant ownership column should protect each Entity and QiBit?</li>
+<li>Should the custom schemas be exposed through the Supabase Data API, or accessed only by trusted backend code?</li>
+<li>Where is the referral/bonus page repository if it is outside the three searched roots?</li>
+</ul>
 
     </article>
     <article id="index" class="doc" data-status="Active" data-search="active index.md
@@ -14088,109 +14601,99 @@ _last updated: 2025-10-25_
 <p>[[README|⬆ Back]]</p>
 
     </article>
-    <article id="readme" class="doc" data-status="Legacy" data-search="legacy readme.md # qios dna
+    <article id="readme" class="doc" data-status="Active" data-search="active readme.md # chronicle qidna
 
-qios dna is the portable master manual for the qios ecosystem.
+chronicle qidna is the portable, status-labeled master manual for the qios ecosystem. it preserves current doctrine, architecture, schemas, decisions, evidence, and reconciliation work needed to understand or rebuild the system.
 
-it preserves the origin doctrine, system map, rules, schemas, decisions, receipts, and reconciliation work needed to understand or rebuild the system.
+## canonical structure
 
-## core doctrine
-
-- **qios** = the overall ecosystem / operating system.
-- **qieos** = the origin brain / dna / doctrine layer.
-- **qios start** = the cockpit / launcher / front door / docs surface.
-- **qisystem** = rules, schemas, naming, database doctrine, and lifecycle rules.
-- **qiserver** = infrastructure, runtime, docker, cloudflare, monitoring, and backups.
-- **qicapture** = ingestion, ocr, parsing, embeddings, and pipelines.
-- **qinexus** = storage backbone and file system model.
-- **qiapps** = standalone apps, sites, and tools.
-- **qiconnect** = external integrations, apis, workers, and connector surfaces.
-
-## locked qilabs structure
+- **qios**: the overall ecosystem.
+- **qidna**: governance and documentation.
+- **qieos**: doctrine inside `01_qidna/qieos`.
+- **qiaccess**: cockpit, launcher, front door, and documentation surface.
+- **qisystem**: rules, schemas, naming, database doctrine, and lifecycle rules.
+- **qiserver**: infrastructure, runtime, networking, monitoring, and backups.
+- **qicapture**: ingestion, ocr, parsing, embeddings, and pipelines.
+- **qinexus**: file, export, reference, and archive storage.
+- **qiapp qilife**: private life operating app and structured-data spine.
+- **qiconnect**: external integrations, apis, workers, and connectors.
 
 ```text
-c:\qilabs\
-  .github\
-  .qios\
-  .vscode\
-  00_qieos\
-  10_qios_start\
-  20_qisystem\
-  30_qiserver\
-  40_qicapture\
-  50_qinexus\
-    my drive\
-  60_qiapps\
-  70_qiconnect\
-  packages\
-  scripts\
-  toolbox\
+01_qidna/
+10_qiaccess/
+20_qisystem/
+30_qiserver/
+40_qicapture/
+50_qinexus/
+60_qiapp_qilife/
+70_qiconnect/
 ```
 
-## repo rule
+older roots such as `00_qieos`, `10_qios_start`, and `60_qiapps` are retained as legacy or evidence. they cannot override active documentation.
 
-this repo mirrors the qilabs root logic for doctrine and documentation. it is not the actual file-storage root and does not duplicate the full qinexus `my drive` bucket system.
+## data authority
 
-raw imported docs stay under:
+- supabase postgres is the canonical qilife structured-data authority.
+- qinexus stores files, exports, references, archives, and backups.
+- sqlite is deprecated and limited to legacy, local, or transitional use.
+- the canonical schema reference is `20_qisystem/schemas/qilife_data_spine.mdx`.
 
-```text
-00_qieos/receipts/raw_imports/
-```
+## repository rule
 
-canonical doctrine is promoted only after review.
+this repository mirrors the system's ownership boundaries for governance and documentation. it is not the runtime file-storage root and does not duplicate the full qinexus bucket tree.
+
+documents are explicitly classified as active, legacy, proposed, generated, or evidence. historical material is preserved, while current authority is kept singular and visible.
 
 ## truth rule
 
 ```text
-raw imports are evidence.
-canonical docs are law.
-exports are snapshots.
+runtime facts beat planning notes.
+active canonical docs govern.
+legacy and evidence explain history.
+generated exports are snapshots.
 ```
 ">
-      <div class="doc-meta"><span class="status-badge status-legacy">Legacy</span><span class="source-path">README.md</span></div>
-      <h1>QiOS DNA</h1>
-<p>QiOS DNA is the portable master manual for the QiOS ecosystem.</p>
-<p>It preserves the origin doctrine, system map, rules, schemas, decisions, receipts, and reconciliation work needed to understand or rebuild the system.</p>
-<h2>Core doctrine</h2>
+      <div class="doc-meta"><span class="status-badge status-active">Active</span><span class="source-path">README.md</span></div>
+      <h1>Chronicle QiDNA</h1>
+<p>Chronicle QiDNA is the portable, status-labeled master manual for the QiOS ecosystem. It preserves current doctrine, architecture, schemas, decisions, evidence, and reconciliation work needed to understand or rebuild the system.</p>
+<h2>Canonical Structure</h2>
 <ul>
-<li><strong>QiOS</strong> = the overall ecosystem / operating system.</li>
-<li><strong>QiEOS</strong> = the origin brain / DNA / doctrine layer.</li>
-<li><strong>QiOS Start</strong> = the cockpit / launcher / front door / docs surface.</li>
-<li><strong>QiSystem</strong> = rules, schemas, naming, database doctrine, and lifecycle rules.</li>
-<li><strong>QiServer</strong> = infrastructure, runtime, Docker, Cloudflare, monitoring, and backups.</li>
-<li><strong>QiCapture</strong> = ingestion, OCR, parsing, embeddings, and pipelines.</li>
-<li><strong>QiNexus</strong> = storage backbone and file system model.</li>
-<li><strong>QiApps</strong> = standalone apps, sites, and tools.</li>
-<li><strong>QiConnect</strong> = external integrations, APIs, workers, and connector surfaces.</li>
+<li><strong>QiOS</strong>: the overall ecosystem.</li>
+<li><strong>QiDNA</strong>: governance and documentation.</li>
+<li><strong>QiEOS</strong>: doctrine inside <code>01_QiDNA/QiEOS</code>.</li>
+<li><strong>QiAccess</strong>: cockpit, launcher, front door, and documentation surface.</li>
+<li><strong>QiSystem</strong>: rules, schemas, naming, database doctrine, and lifecycle rules.</li>
+<li><strong>QiServer</strong>: infrastructure, runtime, networking, monitoring, and backups.</li>
+<li><strong>QiCapture</strong>: ingestion, OCR, parsing, embeddings, and pipelines.</li>
+<li><strong>QiNexus</strong>: file, export, reference, and archive storage.</li>
+<li><strong>QiApp QiLife</strong>: private life operating app and structured-data spine.</li>
+<li><strong>QiConnect</strong>: external integrations, APIs, workers, and connectors.</li>
 </ul>
-<h2>Locked QiLabs structure</h2>
-<pre><code class="language-text">C:\QiLabs\
-  .github\
-  .qios\
-  .vscode\
-  00_QiEOS\
-  10_QiOS_Start\
-  20_QiSystem\
-  30_QiServer\
-  40_QiCapture\
-  50_QiNexus\
-    My Drive\
-  60_QiApps\
-  70_QiConnect\
-  packages\
-  scripts\
-  toolbox\
+<pre><code class="language-text">01_QiDNA/
+10_QiAccess/
+20_QiSystem/
+30_QiServer/
+40_QiCapture/
+50_QiNexus/
+60_QiApp_QiLife/
+70_QiConnect/
 </code></pre>
-<h2>Repo rule</h2>
-<p>This repo mirrors the QiLabs root logic for doctrine and documentation. It is not the actual file-storage root and does not duplicate the full QiNexus <code>My Drive</code> bucket system.</p>
-<p>Raw imported docs stay under:</p>
-<pre><code class="language-text">00_QiEOS/receipts/raw_imports/
-</code></pre>
-<p>Canonical doctrine is promoted only after review.</p>
-<h2>Truth rule</h2>
-<pre><code class="language-text">Raw imports are evidence.
-Canonical docs are law.
-Exports are snapshots.
+<p>Older roots such as <code>00_QiEOS</code>, <code>10_QiOS_Start</code>, and <code>60_QiApps</code> are retained as Legacy or Evidence. They cannot override Active documentation.</p>
+<h2>Data Authority</h2>
+<ul>
+<li>Supabase Postgres is the canonical QiLife structured-data authority.</li>
+<li>QiNexus stores files, exports, references, archives, and backups.</li>
+<li>SQLite is deprecated and limited to legacy, local, or transitional use.</li>
+<li>The canonical schema reference is <code>20_QiSystem/schemas/QiLife_Data_Spine.mdx</code>.</li>
+</ul>
+<h2>Repository Rule</h2>
+<p>This repository mirrors the system&#39;s ownership boundaries for governance and documentation. It is not the runtime file-storage root and does not duplicate the full QiNexus bucket tree.</p>
+<p>Documents are explicitly classified as Active, Legacy, Proposed, Generated, or Evidence. Historical material is preserved, while current authority is kept singular and visible.</p>
+<h2>Truth Rule</h2>
+<pre><code class="language-text">Runtime facts beat planning notes.
+Active canonical docs govern.
+Legacy and evidence explain history.
+Generated exports are snapshots.
 </code></pre>
 
     </article>
@@ -14353,6 +14856,7 @@ site/
   const items = Array.from(document.querySelectorAll('.nav-item'));
   const treeNodes = Array.from(document.querySelectorAll('.tree-node'));
   const folderButtons = Array.from(document.querySelectorAll('.folder-toggle'));
+  const treeHeading = document.querySelector('.tree-heading');
   const docMap = new Map(docs.map((doc) => [doc.id, doc]));
   const index = docs.map((doc) => ({
     id: doc.id,
@@ -14495,18 +14999,31 @@ site/
     updateUrl();
     if (scroll) docMap.get(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-  function filter() {
-    const query = search.value.trim();
-    const terms = termsFor(query);
-    const selectedStatus = statusFilter.value;
-    const allowed = index.filter((doc) => selectedStatus === 'All' || doc.status === selectedStatus);
+  function setTreeExpanded(expanded) {
+    treeNodes.forEach((node) => {
+      if (node.classList.contains('tree-root-node') || node.classList.contains('hidden')) return;
+      node.classList.toggle('collapsed', !expanded);
+      node.querySelector(':scope > .folder-toggle')?.setAttribute('aria-expanded', String(expanded));
+    });
+  }
+
+  function refreshTreeVisibility(selectedStatus) {
     items.forEach((item) => item.classList.toggle('hidden', selectedStatus !== 'All' && item.dataset.status !== selectedStatus));
+    treeNodes.forEach((node) => node.classList.remove('hidden'));
     [...treeNodes].reverse().forEach((node) => {
       if (node.classList.contains('tree-root-node')) return;
       const hasVisibleDocument = Boolean(node.querySelector(':scope > .tree-children > .nav-item:not(.hidden)'));
       const hasVisibleFolder = Boolean(node.querySelector(':scope > .tree-children > .tree-node:not(.hidden)'));
       node.classList.toggle('hidden', !hasVisibleDocument && !hasVisibleFolder);
     });
+  }
+
+  function filter() {
+    const query = search.value.trim();
+    const terms = termsFor(query);
+    const selectedStatus = statusFilter.value;
+    const allowed = index.filter((doc) => selectedStatus === 'All' || doc.status === selectedStatus);
+    refreshTreeVisibility(selectedStatus);
 
     if (terms.length) {
       currentResults = allowed.map((doc) => ({ doc, score: rank(doc, terms) }))
@@ -14553,6 +15070,13 @@ site/
     closeNav();
   }
 
+  const treeActions = document.createElement('div');
+  treeActions.className = 'tree-actions';
+  treeActions.innerHTML = '<button type="button" id="tree-expand">Expand all</button><button type="button" id="tree-collapse">Collapse all</button>';
+  treeHeading.insertAdjacentElement('afterend', treeActions);
+  treeActions.querySelector('#tree-expand').addEventListener('click', () => setTreeExpanded(true));
+  treeActions.querySelector('#tree-collapse').addEventListener('click', () => setTreeExpanded(false));
+
   const mindMapButton = document.createElement('button');
   mindMapButton.id = 'mind-map-toggle';
   mindMapButton.className = 'tool';
@@ -14563,12 +15087,23 @@ site/
 
   const mindMapView = document.createElement('section');
   mindMapView.className = 'mind-map-view hidden';
-  mindMapView.innerHTML = '<header class="mind-map-header"><div><h2 class="mind-map-title">QiDNA Mind Map</h2><p class="mind-map-subtitle">Select a folder to expand it. Select a document to open its page.</p></div><div class="mind-map-actions"><button class="map-action" id="map-collapse" type="button">Collapse</button><button class="map-action" id="map-fit" type="button">Fit</button><button class="map-action" id="map-close" type="button">Document view</button></div></header><div class="mind-map-viewport"><svg class="mind-map-svg" role="img" aria-label="Interactive QiDNA folder and document mind map"></svg></div>';
+  mindMapView.innerHTML = '<header class="mind-map-header"><div><h2 class="mind-map-title">QiDNA Mind Map</h2><p class="mind-map-subtitle">Select a folder to expand it. Select a document to open its page.</p></div><div class="mind-map-actions"><button class="map-action" id="map-collapse" type="button">Collapse</button><button class="map-action" id="map-zoom-out" type="button" aria-label="Zoom out">−</button><button class="map-action" id="map-fit" type="button">Fit</button><button class="map-action" id="map-zoom-in" type="button" aria-label="Zoom in">+</button><button class="map-action" id="map-close" type="button">Document view</button></div></header><div class="mind-map-viewport"><svg class="mind-map-svg" role="img" aria-label="Interactive QiDNA folder and document mind map"></svg></div>';
   intro.insertAdjacentElement('afterend', mindMapView);
   const mindMapSvg = mindMapView.querySelector('.mind-map-svg');
   const mindMapViewport = mindMapView.querySelector('.mind-map-viewport');
   const mapExpanded = new Set();
   let mapScale = 1;
+  let mapBounds = { x: -450, y: -310, width: 900, height: 620 };
+  let mapResizeTimer;
+
+  function applyMapViewBox() {
+    const scale = Math.max(0.65, Math.min(mapScale, 3));
+    const width = mapBounds.width / scale;
+    const height = mapBounds.height / scale;
+    const x = mapBounds.x + (mapBounds.width - width) / 2;
+    const y = mapBounds.y + (mapBounds.height - height) / 2;
+    mindMapSvg.setAttribute('viewBox', [x, y, width, height].join(' '));
+  }
 
   function mindTree() {
     const selectedStatus = statusFilter.value;
@@ -14662,9 +15197,11 @@ site/
     const maxY = Math.max(...all.map((p) => p.y)) + 85;
     const width = Math.max(900, maxX - minX);
     const height = Math.max(620, maxY - minY);
-    mindMapSvg.setAttribute('viewBox', [minX, minY, width, height].join(' '));
-    mindMapSvg.setAttribute('width', width * mapScale);
-    mindMapSvg.setAttribute('height', height * mapScale);
+    mapBounds = { x: minX, y: minY, width, height };
+    mindMapSvg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    mindMapSvg.removeAttribute('width');
+    mindMapSvg.removeAttribute('height');
+    applyMapViewBox();
     mindMapSvg.replaceChildren();
 
     const ns = 'http://www.w3.org/2000/svg';
@@ -14745,10 +15282,7 @@ site/
       });
       mindMapSvg.append(group);
     });
-    requestAnimationFrame(() => {
-      mindMapViewport.scrollLeft = Math.max(0, (mindMapViewport.scrollWidth - mindMapViewport.clientWidth) / 2);
-      mindMapViewport.scrollTop = Math.max(0, (mindMapViewport.scrollHeight - mindMapViewport.clientHeight) / 2);
-    });
+    requestAnimationFrame(applyMapViewBox);
   }
 
   function openMindMap() {
@@ -14777,8 +15311,27 @@ site/
   });
   mindMapView.querySelector('#map-fit').addEventListener('click', () => {
     mapScale = 1;
-    renderMindMap();
-    mindMapViewport.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+    applyMapViewBox();
+  });
+  mindMapView.querySelector('#map-zoom-in').addEventListener('click', () => {
+    mapScale = Math.min(3, mapScale * 1.2);
+    applyMapViewBox();
+  });
+  mindMapView.querySelector('#map-zoom-out').addEventListener('click', () => {
+    mapScale = Math.max(0.65, mapScale / 1.2);
+    applyMapViewBox();
+  });
+  mindMapViewport.addEventListener('wheel', (event) => {
+    if (!event.ctrlKey && !event.metaKey) return;
+    event.preventDefault();
+    mapScale = event.deltaY < 0 ? Math.min(3, mapScale * 1.12) : Math.max(0.65, mapScale / 1.12);
+    applyMapViewBox();
+  }, { passive: false });
+  window.addEventListener('resize', () => {
+    clearTimeout(mapResizeTimer);
+    mapResizeTimer = setTimeout(() => {
+      if (body.classList.contains('mind-map-mode')) applyMapViewBox();
+    }, 100);
   });
 
   menu.addEventListener('click', () => nav.classList.contains('open') ? closeNav() : openNav());

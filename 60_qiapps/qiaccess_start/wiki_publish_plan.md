@@ -1,5 +1,7 @@
 # Wiki.js Publish Plan
 
+> **Legacy - Superseded proposal.** Reconciled on 2026-06-12. ADR-0015 establishes generated `site/index.html` as the supported Chronicle reader. No Wiki.js synchronization implementation is approved by this document.
+
 This document details the plan to automatically synchronize static markdown files from the local Git repository to the operational **Wiki.js** database.
 
 ---

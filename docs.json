@@ -1,36 +1,42 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "QiOS DNA",
-  "colors": { "primary": "#7C3AED" },
+  "name": "Chronicle QiDNA",
+  "colors": {
+    "primary": "#7C3AED"
+  },
   "navigation": {
     "groups": [
       {
         "group": "Start Here",
         "pages": [
-          "index",
-          "00_QiEOS/system_map/QiOS_Master_Map",
-          "00_QiEOS/doctrine/QiOS_Core_Doctrine",
+          "01_QiDNA/_01_QiDNA",
+          "01_QiDNA/Architecture/Decisions/ADR-0017_canonical_vocabulary_and_v1_direction",
+          "01_QiDNA/Architecture/Decisions/ADR-0018_supabase_qilife_data_authority",
           "20_QiSystem/rules/Source_of_Truth_Rules"
         ]
       },
       {
-        "group": "QiSystem",
+        "group": "Schema and Reconciliation",
         "pages": [
-          "20_QiSystem/manifests/QiOS_DNA_File_Manifest",
-          "20_QiSystem/schemas/QiLife_Data_Spine"
+          "20_QiSystem/schemas/QiLife_Data_Spine",
+          "20_QiSystem/schemas/DATABASE_OVERVIEW",
+          "20_QiSystem/schemas/SCHEMA_CATALOG",
+          "01_QiDNA/Reconciliation/2026-06-10_qilife_schema_source_report",
+          "01_QiDNA/Reconciliation/2026-06-10_database_blueprint_gap_report",
+          "01_QiDNA/Reconciliation/2026-06-10_documentation_status_map"
         ]
       },
       {
-        "group": "QiLabs Layers",
+        "group": "Canonical Layers",
         "pages": [
-          "10_QiOS_Start/QiAccess_Start/index",
-          "30_QiServer/index",
-          "40_QiCapture/index",
-          "50_QiNexus/My_Drive_Model/index",
-          "60_QiApps/QiLife/index",
-          "60_QiApps/QiJourney/index",
-          "70_QiConnect/index"
+          "10_QiAccess/_10_QiAccess",
+          "20_QiSystem/_20_QiSystem",
+          "30_QiServer/_30_QiServer",
+          "40_QiCapture/_40_QiCapture",
+          "50_QiNexus/_50_QiNexus",
+          "60_QiApp_QiLife/_60_QiApp_QiLife",
+          "70_QiConnect/_70_QiConnect"
         ]
       }
     ]

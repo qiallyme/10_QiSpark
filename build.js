@@ -10,6 +10,7 @@ const required = [
   '_..md',
   '01_QiDNA/_01_QiDNA.md',
   '01_QiDNA/Architecture/Decisions/ADR-0017_canonical_vocabulary_and_v1_direction.md',
+  '01_QiDNA/Architecture/Decisions/ADR-0018_supabase_qilife_data_authority.md',
   '20_QiSystem/schemas/QiLife_Data_Spine.mdx',
   '60_QiApp_QiLife/_60_QiApp_QiLife.md'
 ];
@@ -46,7 +47,7 @@ function slug(value) {
 function documentStatus(relativePath) {
   if (relativePath.startsWith('00_QiEOS/exports/')) return 'Generated';
   if (relativePath.startsWith('00_QiEOS/reconciliation/')) return 'Evidence';
-  if (relativePath === 'README.md' || relativePath.startsWith('00_QiEOS/') || relativePath.startsWith('10_QiOS_Start/') ||
+  if (relativePath.startsWith('00_QiEOS/') || relativePath.startsWith('10_QiOS_Start/') ||
       relativePath.startsWith('60_QiApps/') || relativePath.startsWith('20_qinexus/') ||
       relativePath.startsWith('30_qiarchive/') || relativePath.startsWith('50_qiserver/') ||
       relativePath.startsWith('60_qiapps/') || relativePath.startsWith('70_qiconnect/')) return 'Legacy';
