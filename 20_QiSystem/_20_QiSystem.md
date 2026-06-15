@@ -24,7 +24,22 @@ Runtime or service check
   -> retained QiSystem record
 ```
 
-## Structure
+## Folder Structure & Table of Contents
 
-QiSystem may contain physical subfolders for real operational records when needed. Each subfolder must contain its own `_folder.md` when created.
+### Mirrored Subfolders
+- [10 Logs](10_logs/): Runtime and operational logs.
+- [20 Audits](20_audits/): Validation and audit outputs.
+- [30 Backups](30_backups/): Backup and restore references.
+- [40 Health Checks](40_health_checks/): Verification and health inspection results.
+- [50 Generated Reports](50_generated_reports/): Generated summaries and report artifacts.
+- [60 Generated Indexes](60_generated_indexes/): Machine-readable indexes and inventories.
+- [70 Maintenance](70_maintenance/): Maintenance notes and cleanup tasks.
 
+### Core Documentation
+- [Cloudflare Map](cloudflare.md): Cloudflare networking config and configuration details.
+- [Docker Compose Stack Map](docker_compose.md): Mirror reference of Docker Compose configurations.
+- [GetHomepage dashboard](gethomepage.md): Configurations for the homepage cockpit service.
+- [Portainer manager](portainer.md): Portainer stack and container manager references.
+- [Public Interfaces Contract](public_interfaces.md): Public domain mapping and certificates.
+- [Tailscale mesh network](tailscale.md): Tailnet and private machine configuration.
+- [Uptime Kuma dashboard](uptime_kuma.md): Configuration for monitor heartbeat status.

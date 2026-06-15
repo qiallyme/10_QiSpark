@@ -1,0 +1,93 @@
+version: 1.1.0
+
+root_allowlist:
+  - apps
+  - workers
+  - components
+  - data
+  - realms
+  - sites
+  - docs
+  - templates
+  - projects
+  # System files (protected by Layer 1 Dark Matter Physics)
+  - .git
+  - .obsidian
+  - .gitignore
+  - .env
+  - env.example
+  - .cursorrules
+  - '*.canvas'
+  - '*kanban*.md'
+
+required_roots:
+  - apps
+  - workers
+  - components
+  - data
+  - realms
+  - sites
+  - docs
+  - templates
+
+realm_required_subtrees:
+  common:
+    - kb
+    - data
+    - assets
+    - assets/images
+    - assets/videos
+    - assets/audio
+    - assets/documents
+
+  qiclients_template:
+    - kb
+    - data
+    - data/sheets
+    - data/cache
+    - assets
+    - assets/images
+    - assets/videos
+    - assets/audio
+    - assets/documents
+    - apps
+    - workers
+    - rules
+    - sites/astro/src
+    - sites/astro/content
+    - sites/astro/public
+    - sites/astro/scripts
+    - projects/active
+    - projects/archived
+    - sys/config
+    - sys/policies
+    - sys/routing
+    - .meta
+    - .archive
+
+folders:
+  - path: "QiOS/"
+    title: "QiOS Root"
+    qi_decimal: "0.00.00-SYS"
+    purpose: "Top-level universe root for the Qi Operating System."
+    owned_by: "qios"
+    realm_bound: false
+    realm_mirror: false
+    client_excluded: false
+    allowed_types: [".md", ".yaml", ".csv", ".sql"]
+    workers: ["gina-orchestrator", "tree-compiler"]
+    rules: ["ROT.001"]
+    examples: ["QiOS_v1/0.00.00-qios_genesis.md"]
+
+  - path: "realms/qivault/kb/"
+    title: "Knowledge Base"
+    qi_decimal: "1.00.00-KB"
+    purpose: "Canonical knowledge text for the realm."
+    owned_by: "realm"
+    realm_bound: true
+    realm_mirror: true
+    client_excluded: false
+    allowed_types: [".md", ".pdf"]
+    workers: ["semantic-ingestion", "embedder"]
+    rules: ["RLM.010", "FID.020"]
+    examples: ["policies.md", "sops.md"]

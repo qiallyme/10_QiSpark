@@ -30,7 +30,22 @@ Doctrine or decision question
 
 QiEOS explains why. Each system folder documents what it owns and how it operates.
 
-## Structure
+## System progression and structure
 
-System layer names are fixed: QiDNA, QiAccess, QiSystem, QiServer, QiCapture, QiNexus, QiApp QiLife, and QiConnect.
+### Primary documents
 
+- [QiOS Core Doctrine](QiOS_Core_Doctrine.mdx): Foundational doctrine and core tenets.
+- [QiAccess Start Blueprint](QiAccess_Start_Blueprint.md): Specification and plan for QiAccess cockpit dashboard.
+- [README](README.md): Governance readme context.
+
+### Mirror subfolders
+
+- [10 Governance](10_governance/): The Soul (Rules, Principles, Standards)
+- [20 Structure](20_structure/): The Body (Architecture, Identity, Models)
+- [30 Data](30_data/): The Blood (Schemas, Objects, Storage)
+- [40 Service Apps](40_service_apps/): The Function (Tools, Apps, Infrastructure)
+- [50 Operations](50_operations/): The Action (Runbooks, Cases, Templates)
+- [60 Knowledge](60_knowledge/): The Memory (Changelog, Glossary, History)
+- [70 Assets](70_assets/): The Resources (Diagrams, Templates)
+- [Workers](workers/): Distributed workflow and compute workers.
+- [Workflows](workflows/): Workflow definitions and execution states.

@@ -1,0 +1,22 @@
+# Workspace Realms
+#
+# DOCTRINE:
+# Realms are strictly non-canonical UX/workspace labels used for filtering views,
+# folders, or dashboards. They DO NOT override the Band -> Domain -> Subdomain 
+# object placement model or the QiArchive ID model.
+
+version: 1.0.0
+
+realms:
+  - id: personal
+    display_name: "Personal Life"
+  - id: work
+    display_name: "Professional"
+  - id: legal
+    display_name: "Legal & Case"
+  - id: infrastructure
+    display_name: "System & Core"
+
+rules:
+  - "Realms cannot be used to determine database schema routing."
+  - "Realms are optional UI-layer attributes."

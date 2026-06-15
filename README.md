@@ -30,8 +30,9 @@ C:\QiLabs\
   40_QiCapture\
   50_QiNexus\
     My Drive\
-  60_QiApps\
-  70_QiConnect\
+  60_QiConnect\
+  1000_QiApps\
+  1100_QiLife\
   packages\
   scripts\
   toolbox\

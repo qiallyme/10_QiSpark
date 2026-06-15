@@ -3,7 +3,7 @@ const path = require('path');
 const { marked } = require('marked');
 
 const root = __dirname;
-const siteDir = path.join(root, '60_QiApps', 'site');
+const siteDir = path.join(root, '1000_QiApps', 'site');
 const outputFile = path.join(siteDir, 'index.html');
 const excluded = new Set(['.git', '.github', 'node_modules', '_staging_write_test']);
 const duplicateFilePattern = /\s\(\d+\)\.(mdx?|json|bat|mmd)$/i;
@@ -13,9 +13,9 @@ const explicitlySkippedFilePatterns = [
 ];
 const required = [
   'README.md',
-  '00_QiEOS/_index.md',
+  '00_QiEOS/_QiEOS.md',
   '00_QiEOS/QiOS_Core_Doctrine.mdx',
-  '60_QiApps/site/_site.md'
+  '1000_QiApps/site/_site.md'
 ];
 const statuses = ['Active', 'Legacy', 'Proposed', 'Generated', 'Evidence'];
 

@@ -50,9 +50,9 @@ _QiOS_DNA/
 |-- 30_QiServer/
 |-- 40_QiCapture/
 |-- 50_QiNexus/
-|-- 60_QiApps/
-|-- 60_QiApp_QiLife/
-|-- 70_QiConnect/
+|-- 60_QiConnect/
+|-- 1000_QiApps/
+|-- 1100_QiLife/
 |-- Reconciliation/
 `-- Schema/
 ```

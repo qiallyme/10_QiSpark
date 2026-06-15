@@ -1,0 +1,83 @@
+{
+  "projects": [
+    {
+      "id": "builtbyrays-cfo",
+      "title": "BuiltByRays CFO Operations",
+      "client": "BuiltByRays",
+      "slug": "builtbyrays-cfo-operations",
+      "category": "Financial Operations",
+      "description": "Complete CFO operations system with automated financial reporting, client management, and document processing.",
+      "challenge": "Manual financial processes taking 20+ hours per week, scattered client data, inconsistent reporting.",
+      "solution": "Built integrated CFO operations platform with automated workflows, centralized client portal, and real-time reporting dashboard.",
+      "results": [
+        "Reduced reporting time by 70%",
+        "Automated invoice processing",
+        "Centralized client communications",
+        "Real-time financial dashboards",
+        "Saved 15+ hours per week"
+      ],
+      "technologies": ["React", "Node.js", "PostgreSQL", "Zapier", "QuickBooks API"],
+      "image": "/images/portfolio/builtbyrays.jpg",
+      "featured": true,
+      "date": "2024-Q3",
+      "testimonial": {
+        "quote": "The system transformed how we operate. What used to take days now takes hours.",
+        "author": "Ray Smith",
+        "title": "CEO, BuiltByRays"
+      }
+    },
+    {
+      "id": "innovahire-hr-platform",
+      "title": "Innovahire HR Platform",
+      "client": "Innovahire",
+      "slug": "innovahire-hr-platform",
+      "category": "HR Technology",
+      "description": "Comprehensive HR management system with applicant tracking, employee onboarding, and performance management.",
+      "challenge": "Inefficient hiring process, manual onboarding, no centralized employee data, slow time-to-hire.",
+      "solution": "Custom HR platform with ATS, automated onboarding workflows, employee portal, and AI-powered candidate screening.",
+      "results": [
+        "Reduced time-to-hire by 50%",
+        "Automated candidate screening",
+        "Streamlined onboarding process",
+        "Centralized employee records",
+        "Improved candidate experience"
+      ],
+      "technologies": ["React", "Supabase", "Cloudflare Workers", "OpenAI API"],
+      "image": "/images/portfolio/innovahire.jpg",
+      "featured": true,
+      "date": "2024-Q2",
+      "testimonial": {
+        "quote": "We've cut our hiring time in half and candidates love the experience.",
+        "author": "Sarah Johnson",
+        "title": "VP of HR, Innovahire"
+      }
+    },
+    {
+      "id": "rosa-lucas-esteban-legal",
+      "title": "Rosa Lucas Esteban Legal Practice",
+      "client": "Rosa Lucas Esteban Law",
+      "slug": "rosa-lucas-esteban-legal-practice",
+      "category": "Legal Technology",
+      "description": "Digital transformation for legal practice with case management, client portal, and document automation.",
+      "challenge": "Manual document processing, scattered case files, inefficient client communication, paper-heavy processes.",
+      "solution": "Integrated legal practice management system with automated document generation, secure client portal, and digital case management.",
+      "results": [
+        "Automated document processing",
+        "90% reduction in paper usage",
+        "Faster case preparation",
+        "Secure client communications",
+        "Improved case organization"
+      ],
+      "technologies": ["React", "Node.js", "Document AI", "PostgreSQL", "DocuSign"],
+      "image": "/images/portfolio/rosa-lucas.jpg",
+      "featured": true,
+      "date": "2024-Q1",
+      "testimonial": {
+        "quote": "The portal has transformed how we work with clients. Everything is organized and accessible.",
+        "author": "Rosa Lucas Esteban",
+        "title": "Attorney"
+      }
+    }
+  ]
+}
+

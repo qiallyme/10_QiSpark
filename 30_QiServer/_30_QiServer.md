@@ -25,7 +25,10 @@ Inspect qiserver
   -> verify routes
 ```
 
-## Structure
+## Folder Structure & Table of Contents
 
-Known runtime paths include `/srv/qios/stacks/_qiaccess_start`, `/srv/qios/stacks/_qiaccess_start/docker-compose.yml`, and `/srv/qios/apps/_QiAccess_Start/qiaccess/config`.
-
+### Primary Documents
+- [Service Map](Service_Map.md): Configuration mappings, ports, and route definitions for services.
+- [QiServer Runbook](qiserver_runbook.md): Manual procedures, commands, and backup/restore steps.
+- [Runtime Environment](runtime.md): Paths, locations, and setup details for runtime containers.
+- [Runtime Profile](runtime_profile.md): Hardware, specs, and environment facts of host servers.

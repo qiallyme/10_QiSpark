@@ -1,0 +1,680 @@
+{
+  "constitution": {
+    "version": "1.0.0",
+    "compiled_at": "2025-11-24T23:52:02Z",
+    "hash": "6ff70a15c3b4c0151a1a6ba23d9ded98346b39a9a0adac6a024ab252df8387ba",
+    "naming_strategy_default": "slug_only",
+    "qid_rpc": "qios_next_qid"
+  },
+  "front_matter_schema": [
+    {
+      "prop_name": "title",
+      "type": "string",
+      "options": "",
+      "required": "true",
+      "default": "",
+      "description": "Human-readable title of the node."
+    },
+    {
+      "prop_name": "slug",
+      "type": "string",
+      "options": "lowercase_underscored",
+      "required": "true",
+      "default": "",
+      "description": "Unique filename-safe identifier (lowercase, underscores)."
+    },
+    {
+      "prop_name": "realm",
+      "type": "string",
+      "options": "QiPersonal|QiBusiness|QiClients|QiVault|QiPlayground|QiResearch|QiTemp|Archives|QiPublish|QiLegal",
+      "required": "true",
+      "default": "",
+      "description": "Meaning universe this node belongs to."
+    },
+    {
+      "prop_name": "realm_slug",
+      "type": "string",
+      "options": "",
+      "required": "false",
+      "default": "",
+      "description": "Specific realm instance (e.g., inh, punchpro, qios, genesis)."
+    },
+    {
+      "prop_name": "qi_decimal",
+      "type": "string",
+      "options": "##.##.##-TYPE",
+      "required": "false",
+      "default": "",
+      "description": "Sorting + categorical identity code."
+    },
+    {
+      "prop_name": "qid",
+      "type": "string",
+      "options": "",
+      "required": "false",
+      "default": "",
+      "description": "Autopopulated immutable node ID claimed from qid_counter via Layer 5 worker."
+    },
+    {
+      "prop_name": "type",
+      "type": "string",
+      "options": "doc|asset|schema|workflow|worker|rule|site|project",
+      "required": "true",
+      "default": "doc",
+      "description": "Object class in QiOS ontology."
+    },
+    {
+      "prop_name": "node",
+      "type": "string",
+      "options": "concept|file|asset|rule|task|entity",
+      "required": "true",
+      "default": "concept",
+      "description": "Graph classification."
+    },
+    {
+      "prop_name": "keywords",
+      "type": "array[string]",
+      "options": "",
+      "required": "false",
+      "default": "[]",
+      "description": "Search and retrieval descriptors."
+    },
+    {
+      "prop_name": "tags",
+      "type": "array[string]",
+      "options": "",
+      "required": "false",
+      "default": "[]",
+      "description": "Organizational tags for grouping/filtering."
+    },
+    {
+      "prop_name": "context",
+      "type": "string",
+      "options": "",
+      "required": "false",
+      "default": "",
+      "description": "Short semantic context for routing/RAG."
+    },
+    {
+      "prop_name": "aliases",
+      "type": "array[string]",
+      "options": "",
+      "required": "false",
+      "default": "[]",
+      "description": "Alternative names for lookup/backlinks."
+    },
+    {
+      "prop_name": "created",
+      "type": "datetime",
+      "options": "",
+      "required": "true",
+      "default": "",
+      "description": "Creation timestamp (system-generated)."
+    },
+    {
+      "prop_name": "updated",
+      "type": "datetime",
+      "options": "",
+      "required": "true",
+      "default": "",
+      "description": "Last modification timestamp."
+    },
+    {
+      "prop_name": "version",
+      "type": "string",
+      "options": "semver",
+      "required": "false",
+      "default": "0.0.0",
+      "description": "Semantic version number."
+    },
+    {
+      "prop_name": "status",
+      "type": "string",
+      "options": "draft|active|canonical|archived",
+      "required": "false",
+      "default": "draft",
+      "description": "Lifecycle state."
+    },
+    {
+      "prop_name": "system",
+      "type": "string",
+      "options": "qinote|qios|qiclient|qipersonal|realm-local",
+      "required": "false",
+      "default": "realm-local",
+      "description": "Logical subsystem grouping label."
+    },
+    {
+      "prop_name": "naming_strategy",
+      "type": "string",
+      "options": "slug_only|qidecimal_slug",
+      "required": "false",
+      "default": "slug_only",
+      "description": "Filename generation strategy."
+    },
+    {
+      "prop_name": "sort",
+      "type": "number",
+      "options": "",
+      "required": "false",
+      "default": "0",
+      "description": "Manual sorting override for tables/lists."
+    },
+    {
+      "prop_name": "related",
+      "type": "array[string]",
+      "options": "",
+      "required": "false",
+      "default": "[]",
+      "description": "QIDs of related nodes."
+    },
+    {
+      "prop_name": "parents",
+      "type": "array[string]",
+      "options": "",
+      "required": "false",
+      "default": "[]",
+      "description": "Parent nodes in graph."
+    },
+    {
+      "prop_name": "children",
+      "type": "array[string]",
+      "options": "",
+      "required": "false",
+      "default": "[]",
+      "description": "Child nodes in graph."
+    },
+    {
+      "prop_name": "siblings",
+      "type": "array[string]",
+      "options": "",
+      "required": "false",
+      "default": "[]",
+      "description": "Peer nodes in graph."
+    },
+    {
+      "prop_name": "references",
+      "type": "array[string]",
+      "options": "",
+      "required": "false",
+      "default": "[]",
+      "description": "External references or citations."
+    },
+    {
+      "prop_name": "graph_weight",
+      "type": "number",
+      "options": "1-10",
+      "required": "false",
+      "default": "1",
+      "description": "Importance weighting in QiGraph."
+    },
+    {
+      "prop_name": "orbit",
+      "type": "string",
+      "options": "core|inner|mid|outer",
+      "required": "false",
+      "default": "mid",
+      "description": "Conceptual influence layer."
+    },
+    {
+      "prop_name": "entangled",
+      "type": "array[string]",
+      "options": "",
+      "required": "false",
+      "default": "[]",
+      "description": "Nodes with intrinsically linked identity."
+    },
+    {
+      "prop_name": "summary",
+      "type": "string",
+      "options": "auto-generated",
+      "required": "false",
+      "default": "",
+      "description": "Auto-generated semantic summary (never manually edited)."
+    },
+    {
+      "prop_name": "sensitivity",
+      "type": "string",
+      "options": "public|internal|confidential|restricted|secret",
+      "required": "false",
+      "default": "",
+      "description": "Visibility/privacy level for access/redaction."
+    },
+    {
+      "prop_name": "classification",
+      "type": "string",
+      "options": "personal_health|personal_finance|legal|immigration|client_confidential|business_internal|marketing_public|system_darkmatter|other",
+      "required": "false",
+      "default": "",
+      "description": "Domain classification for routing boosts and safe views."
+    }
+  ],
+  "realms": [
+    {
+      "realm": "QiVault",
+      "realm_slug": "qivault",
+      "enabled": true,
+      "description": "Knowledge universe. Canonical notes, specs, SOPs, diagrams.",
+      "routing_priority": 90,
+      "default_sensitivity": "internal"
+    },
+    {
+      "realm": "QiPersonal",
+      "realm_slug": "qipersonal",
+      "enabled": true,
+      "description": "Private life universe. Personal docs, journals, home ops.",
+      "routing_priority": 80,
+      "default_sensitivity": "confidential"
+    },
+    {
+      "realm": "QiBusiness",
+      "realm_slug": "qibusiness",
+      "enabled": true,
+      "description": "Business universe for all ventures + founders docs + brand assets.",
+      "routing_priority": 85,
+      "default_sensitivity": "internal"
+    },
+    {
+      "realm": "QiClients",
+      "realm_slug": "qiclients",
+      "enabled": true,
+      "description": "Client universes. Each client is a realm instance under this root.",
+      "routing_priority": 95,
+      "default_sensitivity": "client_confidential"
+    },
+    {
+      "realm": "QiPlayground",
+      "realm_slug": "qiplayground",
+      "enabled": true,
+      "description": "Semi-organized sandbox for experiments, random projects, prototypes.",
+      "routing_priority": 60,
+      "default_sensitivity": "internal"
+    },
+    {
+      "realm": "QiResearch",
+      "realm_slug": "qiresearch",
+      "enabled": true,
+      "description": "Raw intake + sources + research notes. Keeps QiVault clean.",
+      "routing_priority": 70,
+      "default_sensitivity": "internal"
+    },
+    {
+      "realm": "Archives",
+      "realm_slug": "archives",
+      "enabled": true,
+      "description": "Cold/retired universes. Read-only by default.",
+      "routing_priority": 10,
+      "default_sensitivity": "restricted"
+    },
+    {
+      "realm": "QiPublish",
+      "realm_slug": "qipublish",
+      "enabled": false,
+      "description": "Public release candidates, outbound content, publishing surfaces.",
+      "routing_priority": 50,
+      "default_sensitivity": "public"
+    },
+    {
+      "realm": "QiLegal",
+      "realm_slug": "qilegal",
+      "enabled": false,
+      "description": "High-stakes legal/immigration universe. Extra access controls.",
+      "routing_priority": 75,
+      "default_sensitivity": "restricted"
+    }
+  ],
+  "folders": [
+    {
+      "path": "QiOS/",
+      "title": "QiOS Root",
+      "qi_decimal": "0.00.00-SYS",
+      "purpose": "Top-level universe root for the Qi Operating System.",
+      "owned_by": "qios",
+      "realm_bound": false,
+      "realm_mirror": false,
+      "client_excluded": false,
+      "allowed_types": [
+        ".md",
+        ".yaml",
+        ".csv",
+        ".sql"
+      ],
+      "workers": [
+        "gina-orchestrator",
+        "tree-compiler"
+      ],
+      "rules": [
+        "ROT.001"
+      ],
+      "examples": [
+        "QiOS_v1/0.00.00-qios_genesis.md"
+      ]
+    },
+    {
+      "path": "realms/qivault/kb/",
+      "title": "Knowledge Base",
+      "qi_decimal": "1.00.00-KB",
+      "purpose": "Canonical knowledge text for the realm.",
+      "owned_by": "realm",
+      "realm_bound": true,
+      "realm_mirror": true,
+      "client_excluded": false,
+      "allowed_types": [
+        ".md",
+        ".pdf"
+      ],
+      "workers": [
+        "semantic-ingestion",
+        "embedder"
+      ],
+      "rules": [
+        "RLM.010",
+        "FID.020"
+      ],
+      "examples": [
+        "policies.md",
+        "sops.md"
+      ]
+    }
+  ],
+  "rules": {
+    "layers": []
+  },
+  "ignore": {
+    "patterns": [
+      "**/.meta/**",
+      "**/.infra/**",
+      "**/.cache/**",
+      "**/.logs/**",
+      "**/darkmatter/**",
+      "**/.git/**",
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/.wrangler/**",
+      "**/.obsidian/**",
+      "**/.trash/**",
+      "**/.DS_Store",
+      "**/Thumbs.db",
+      "**/*.tmp",
+      "**/*.part",
+      "**/*.crdownload"
+    ]
+  },
+  "sensitivity": {
+    "registry": [
+      {
+        "category": "sensitivity",
+        "code": "public",
+        "label": "Public",
+        "description": "Safe for broad sharing and publishing",
+        "default": "false"
+      },
+      {
+        "category": "sensitivity",
+        "code": "internal",
+        "label": "Internal",
+        "description": "Visible inside your org/systems",
+        "default": "true"
+      },
+      {
+        "category": "sensitivity",
+        "code": "confidential",
+        "label": "Confidential",
+        "description": "Private to you or trusted collaborators",
+        "default": "false"
+      },
+      {
+        "category": "sensitivity",
+        "code": "restricted",
+        "label": "Restricted",
+        "description": "High-risk or scoped access only",
+        "default": "false"
+      },
+      {
+        "category": "sensitivity",
+        "code": "secret",
+        "label": "Secret",
+        "description": "Do-not-expose unless explicitly authorized",
+        "default": "false"
+      },
+      {
+        "category": "classification",
+        "code": "personal_health",
+        "label": "Personal Health",
+        "description": "Medical/mental health related",
+        "default": "false"
+      },
+      {
+        "category": "classification",
+        "code": "personal_finance",
+        "label": "Personal Finance",
+        "description": "Private banking/tax/financial",
+        "default": "false"
+      },
+      {
+        "category": "classification",
+        "code": "legal",
+        "label": "Legal",
+        "description": "Contracts",
+        "default": " legal strategy",
+        "null": [
+          " general legal",
+          "false"
+        ]
+      },
+      {
+        "category": "classification",
+        "code": "immigration",
+        "label": "Immigration",
+        "description": "Immigration/asylum/SIV casework",
+        "default": "false"
+      },
+      {
+        "category": "classification",
+        "code": "client_confidential",
+        "label": "Client Confidential",
+        "description": "Client-owned sensitive materials",
+        "default": "true"
+      },
+      {
+        "category": "classification",
+        "code": "business_internal",
+        "label": "Business Internal",
+        "description": "Internal ops",
+        "default": " strategy",
+        "null": [
+          " private business docs",
+          "true"
+        ]
+      },
+      {
+        "category": "classification",
+        "code": "marketing_public",
+        "label": "Marketing Public",
+        "description": "Deliberately public-facing collateral",
+        "default": "false"
+      },
+      {
+        "category": "classification",
+        "code": "system_darkmatter",
+        "label": "System DarkMatter",
+        "description": "Infrastructure/system substrate",
+        "default": "false"
+      },
+      {
+        "category": "classification",
+        "code": "other",
+        "label": "Other/Unclassified",
+        "description": "Default fallback",
+        "default": "false"
+      }
+    ],
+    "matrix": [
+      {
+        "version": "1",
+        "sensitivity": "public",
+        "classification": "standard",
+        "default_visibility": "all",
+        "allowed_realms": "all",
+        "mask_rules": "none",
+        "notes": "Default open content."
+      },
+      {
+        "version": "1",
+        "sensitivity": "internal",
+        "classification": "system_darkmatter",
+        "default_visibility": "admins_only",
+        "allowed_realms": "QiOS|QiBusiness",
+        "mask_rules": "hide_in_clients",
+        "notes": "System substrates, registries, infra. Never route outside DM."
+      },
+      {
+        "version": "1",
+        "sensitivity": "confidential",
+        "classification": "client_private",
+        "default_visibility": "client_owner_only",
+        "allowed_realms": "QiClients",
+        "mask_rules": "mask_non_owner",
+        "notes": "Client owned. Visible only to owner + admins."
+      },
+      {
+        "version": "1",
+        "sensitivity": "restricted",
+        "classification": "legal_hold",
+        "default_visibility": "admins_only",
+        "allowed_realms": "QiLegal|Archives",
+        "mask_rules": "lock_no_merge",
+        "notes": "No dedupe merges or deletes without explicit approval."
+      },
+      {
+        "version": "1",
+        "sensitivity": "secret",
+        "classification": "personal_health",
+        "default_visibility": "self_only",
+        "allowed_realms": "QiPersonal",
+        "mask_rules": "mask_everyone_else",
+        "notes": "Personal sensitive data. Do not surface in shared UIs."
+      },
+      {
+        "version": "1",
+        "sensitivity": "export",
+        "classification": "rendered_output",
+        "default_visibility": "all",
+        "allowed_realms": "all",
+        "mask_rules": "none",
+        "notes": "Non-canonical outputs (html/json/csv renders). Stored as assets unless flagged schema."
+      }
+    ]
+  },
+  "matrix": {
+    "raw": [
+      {
+        "id": "L0",
+        "name": "Root Integrity",
+        "type": "governance_layer",
+        "governs": "folder_structure|root_paths|darkmatter_existence",
+        "depends_on": "",
+        "touched_by": "gina-orchestrator|tree-compiler",
+        "produces": "root_validation_events",
+        "realm_effect": "global"
+      },
+      {
+        "id": "L1",
+        "name": "Dark Matter Physics",
+        "type": "governance_layer",
+        "governs": "system_darkmatter|internal_only|substrate",
+        "depends_on": "L0",
+        "touched_by": "darkmatter-worker",
+        "produces": "dm_protection_events",
+        "realm_effect": "qios"
+      },
+      {
+        "id": "L2",
+        "name": "Realm Schema",
+        "type": "governance_layer",
+        "governs": "realm_structure|client_mirroring",
+        "depends_on": "L0|L1",
+        "touched_by": "realm-worker",
+        "produces": "realm_validation_events",
+        "realm_effect": "all_realms"
+      },
+      {
+        "id": "L3",
+        "name": "File Identity",
+        "type": "governance_layer",
+        "governs": "filetype|asset_routes|metadata_presence",
+        "depends_on": "L0|L2",
+        "touched_by": "identity-worker",
+        "produces": "identity_events",
+        "realm_effect": "all"
+      },
+      {
+        "id": "L4",
+        "name": "Naming Law",
+        "type": "governance_layer",
+        "governs": "filename|slug|qidecimal",
+        "depends_on": "L3",
+        "touched_by": "naming-worker",
+        "produces": "rename_events",
+        "realm_effect": "all"
+      },
+      {
+        "id": "L5",
+        "name": "Metadata Layer",
+        "type": "governance_layer",
+        "governs": "frontmatter_schema|qid|classification",
+        "depends_on": "L4",
+        "touched_by": "metadata-worker",
+        "produces": "metadata_events",
+        "realm_effect": "all"
+      },
+      {
+        "id": "L6",
+        "name": "Semantic Routing",
+        "type": "governance_layer",
+        "governs": "routing|similarity|vector_profile",
+        "depends_on": "L5",
+        "touched_by": "semantic-ingest|embedder",
+        "produces": "semantic_events",
+        "realm_effect": "all_realms"
+      },
+      {
+        "id": "L7",
+        "name": "Self-Healing",
+        "type": "governance_layer",
+        "governs": "dedupe|quarantine|versioning",
+        "depends_on": "L6",
+        "touched_by": "healing-worker",
+        "produces": "healing_events",
+        "realm_effect": "all"
+      }
+    ]
+  },
+  "directory_ast": {
+    "root": "QiOS/",
+    "children": [
+      {
+        "name": "QiOS",
+        "path": "QiOS/",
+        "children": []
+      },
+      {
+        "name": "realms",
+        "path": "realms/",
+        "children": [
+          {
+            "name": "qivault",
+            "path": "realms/qivault/",
+            "children": [
+              {
+                "name": "kb",
+                "path": "realms/qivault/kb/",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

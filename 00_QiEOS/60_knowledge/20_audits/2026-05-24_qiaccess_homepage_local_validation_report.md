@@ -1,0 +1,134 @@
+# QiAccess Homepage Local Validation Report
+
+Date: 2026-05-24
+
+## Scope
+
+Validate the local Homepage-powered QiAccess repo in place, with `qiaccess/` as the active deployment/config layer and without touching server, Cloudflare, or Tailscale deployment.
+
+## Files Cleaned
+
+- Removed duplicate root/public copies that were clearly redundant:
+  - `public/* (2).*`
+  - `public/locales/en/common (2).json`
+  - `public/locales/es/common (2).json`
+- Removed generated root build artifacts:
+  - `tailwind.config.d.ts`
+  - `tailwind.config.js`
+  - `tsconfig.app.tsbuildinfo`
+  - `tsconfig.node.tsbuildinfo`
+- Removed generated validation artifacts:
+  - root `.next/`
+  - root `config/`
+  - `_audit/tmp_dev_check/`
+  - `qiaccess/config/logs/`
+
+## Files Retained As Legacy / Reference
+
+- `.legacy/_QiAccess_Start/`
+- `.legacy/_QiAccess_Start/_audit/...`
+- `.legacy/_QiAccess_Start/root_pre_homepage/package.vite-portal.json`
+- `.legacy/_QiAccess_Start/root_pre_homepage/package-lock.vite-portal.json`
+- `README.md`
+- `docs/notes/ADR-0011_homepage_powered_qiaccess.md`
+- `_audit/2026-05-24_qiaccess_homepage_conversion_report.md`
+
+## Active Root Fixes Applied
+
+- Promoted the Homepage root package file into the active filename:
+  - `package (2).json` -> `package.json`
+- Promoted the Homepage Tailwind config into the active filename:
+  - `tailwind.config (2).js` -> `tailwind.config.js`
+- Fixed malformed `jsconfig.json` JSON syntax.
+- Replaced the old Vite portal root `tsconfig.json` stub with a Next-compatible root config, then let Next normalize it during build.
+- Added a committed non-secret `.env` file:
+  - `HOMEPAGE_CONFIG_DIR=./qiaccess/config`
+  - This makes plain local `npm run build` / `npm run dev` target the active QiAccess config by default.
+
+## Commands Run
+
+1. `git status --short`
+2. `pnpm install`
+3. `npm run build`
+4. `HOMEPAGE_CONFIG_DIR=... npm run build`
+5. `npm run build` after `.env` was added
+6. `npm run dev`
+7. Background dev startup probes against the repo-local Next dev server
+8. YAML parse check for:
+   - `qiaccess/config/settings.yaml`
+   - `qiaccess/config/services.yaml`
+   - `qiaccess/config/bookmarks.yaml`
+   - `qiaccess/config/widgets.yaml`
+   - `qiaccess/config/docker.yaml`
+
+## Build Result
+
+- Final result: success
+- Verified plain `npm run build` works from the repo root after `.env` was added.
+- Build target used the active `qiaccess/config` layer.
+
+## Dev Result
+
+- Final result: success
+- Verified `npm run dev` reaches a ready state with `.env` loaded.
+- During validation, port selection shifted because existing local ports were occupied:
+  - a prior repo-local Next dev instance was already on `3001`
+  - the latest validation run reported ready on `3002`
+- Repo-local validation dev processes were then stopped, and `3001` / `3002` no longer responded at the end of the run.
+
+## Errors Fixed
+
+1. `spawn EPERM` during build/dev inside the sandbox
+   - Cause: local environment/sandbox restriction, not source breakage
+   - Resolution: reran build/dev validation outside the sandbox
+
+2. Homepage package collision at repo root
+   - Cause: old Vite portal `package.json` was still active while the actual Homepage package sat at `package (2).json`
+   - Resolution: moved the old portal package files into `.legacy/_QiAccess_Start/root_pre_homepage/` and promoted the Homepage package to `package.json`
+
+3. Tailwind config collision
+   - Cause: Homepage Tailwind config was stranded at `tailwind.config (2).js`
+   - Resolution: promoted it to `tailwind.config.js`
+
+4. Build import resolution failure
+   - Exact failure: `Module not found: Can't resolve 'utils/...`
+   - Cause:
+     - malformed `jsconfig.json`
+     - old Vite-style root `tsconfig.json` prevented Next from using the intended alias base
+   - Resolution:
+     - fixed `jsconfig.json`
+     - replaced the root `tsconfig.json` with a Next-compatible root config
+
+5. Wrong config directory during local build
+   - Cause: Homepage defaults to root `config/` unless `HOMEPAGE_CONFIG_DIR` is set
+   - Resolution: added `.env` with `HOMEPAGE_CONFIG_DIR=./qiaccess/config`
+
+## YAML / Config Validation
+
+- Parsed successfully:
+  - `qiaccess/config/settings.yaml`
+  - `qiaccess/config/services.yaml`
+  - `qiaccess/config/bookmarks.yaml`
+  - `qiaccess/config/widgets.yaml`
+  - `qiaccess/config/docker.yaml`
+- Homepage also generated `qiaccess/config/kubernetes.yaml` during build because it expects that config file to exist.
+- No secrets were added.
+- Placeholder URLs and TODO widget notes remain placeholder-only.
+
+## Remaining Issues
+
+- Next still warns that it inferred the workspace root from `C:\QiLabs\pnpm-workspace.yaml`.
+- Next still warns that `middleware` is deprecated in favor of `proxy`.
+- The working tree is still a large intentional conversion diff, not a tiny patch.
+- `qiaccess/config/kubernetes.yaml` is currently just the default sample file generated by Homepage.
+
+## Ready To Push?
+
+- Yes, from a local repo validation standpoint.
+- Reason: dependency install succeeded, plain local build succeeded, dev boot succeeded, and the active QiAccess YAML set parses cleanly.
+- Caveat: review `git status` before commit because the conversion includes many intentional tracked deletions and untracked additions, not just the files touched in this validation pass.
+
+## Server Deployment Ready?
+
+- No.
+- Server deployment was not attempted and should remain a separate step after commit/push.
