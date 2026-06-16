@@ -15,7 +15,7 @@ Documentation for the system architecture, component maps, and service boundarie
 
 ## Navigation
 
-- [Cases](cases/_index.md)
+- [Index](cases/_index.md)
 - [Identity and Multi-Tenancy Architecture](10_identity (2).md)
 - [Identity and Multi-Tenancy Architecture](10_identity.md)
 - [Infrastructure Layout (Node-Local)](10_infrastructure_layout.md)

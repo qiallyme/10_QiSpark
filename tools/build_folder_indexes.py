@@ -26,9 +26,8 @@ def get_md_title(path: Path) -> str:
         stem = stem[1:]
     return stem.replace("_", " ").title()
 
-def generate_hierarchy(current_dir: Path, base_dir: Path, depth: int = 0) -> list[str]:
+def generate_hierarchy(current_dir: Path) -> list[str]:
     lines = []
-    indent = "  " * depth
     
     # List immediate files and subdirectories
     try:
@@ -40,8 +39,8 @@ def generate_hierarchy(current_dir: Path, base_dir: Path, depth: int = 0) -> lis
         if item.is_file():
             if item.suffix in [".md", ".mdx"] and item.name not in ["_index.md", "index.md"]:
                 title = get_md_title(item)
-                rel_path = item.relative_to(base_dir).as_posix()
-                lines.append(f"{indent}- [{title}]({rel_path})")
+                # Link directly to the file name in the same folder
+                lines.append(f"- [{title}]({item.name})")
         elif item.is_dir():
             # Skip special directories
             if item.name.startswith(".") or item.name in ["node_modules", "assets"]:
@@ -55,10 +54,9 @@ def generate_hierarchy(current_dir: Path, base_dir: Path, depth: int = 0) -> lis
                 if index_file.exists():
                     folder_title = get_md_title(index_file)
                 
-                rel_path = (item / "_index.md").relative_to(base_dir).as_posix()
-                lines.append(f"{indent}- [{folder_title}]({rel_path})")
-                # Recurse
-                lines.extend(generate_hierarchy(item, base_dir, depth + 1))
+                # Link to the subdirectory's index file
+                rel_path = f"{item.name}/_index.md"
+                lines.append(f"- [{folder_title}]({rel_path})")
     return lines
 
 def write_index_for_dir(dir_path: Path):
@@ -101,7 +99,7 @@ def write_index_for_dir(dir_path: Path):
     else:
         body = f"{header}\n\nFolder index for {title}."
 
-    hierarchy_lines = generate_hierarchy(dir_path, dir_path, depth=0)
+    hierarchy_lines = generate_hierarchy(dir_path)
     
     if hierarchy_lines:
         body += "\n\n## Navigation\n\n" + "\n".join(hierarchy_lines)

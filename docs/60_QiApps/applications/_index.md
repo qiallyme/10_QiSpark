@@ -32,9 +32,8 @@ Every new app in the personal system should get:
 
 ## Navigation
 
-- [CareLite Dev Documentation](CareLite/_index.md)
+- [Index](CareLite/_index.md)
 - [Qinote](qinote/_index.md)
-  - [QiNote Salvage Extract](qinote/qinote_salvage_extract.md)
 - [Admin](admin.md)
 - [CareLite](carelite.md)
 - [Firefly](firefly.md)
