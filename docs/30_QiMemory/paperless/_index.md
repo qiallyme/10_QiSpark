@@ -1,5 +1,3 @@
-# Paperless-ngx
-
 ## Purpose
 Document intake, OCR, and metadata organization.
 
@@ -19,3 +17,5 @@ Private
 
 ## Notes / TODOs
 - Metadata must be configured before bulk import.`n- Test with 10 documents max before large ingestion.
+
+(No sub-items found)

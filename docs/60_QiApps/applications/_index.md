@@ -1,4 +1,5 @@
 # 120 Applications
+
 <sub>Top-level apps and project blueprints for the QiAccess personal system</sub>
 
 This section is the application portfolio layer for QiAccess.
@@ -28,3 +29,14 @@ Every new app in the personal system should get:
 1. a roadmap entry
 2. a dedicated application page
 3. a clear relationship back to QiAccess
+
+## Navigation
+
+- [CareLite Dev Documentation](CareLite/_index.md)
+- [Qinote](qinote/_index.md)
+  - [QiNote Salvage Extract](qinote/qinote_salvage_extract.md)
+- [Admin](admin.md)
+- [CareLite](carelite.md)
+- [Firefly](firefly.md)
+- [QiAccess Start Portal](portal.md)
+- [Applications Roadmap](roadmap.md)

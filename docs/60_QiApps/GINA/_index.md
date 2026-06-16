@@ -1,5 +1,3 @@
-# GINA Desktop — Developer Documentation (MVP v1)
-
 ## Overview
 
 GINA Desktop is a lightweight standalone desktop assistant for the QiOS ecosystem.
@@ -18,7 +16,6 @@ This is intentionally a **thin client MVP**, not the full orchestration stack.
 
 ---
 
-# 1. System Goals
 
 ## MVP Requirements
 
@@ -33,7 +30,6 @@ GINA Desktop must:
 
 ---
 
-# 2. Architecture
 
 ## MVP Architecture
 
@@ -54,7 +50,6 @@ GINA Desktop must:
 
 ---
 
-# 3. Technology Stack
 
 | Layer         | Technology               |
 | ------------- | ------------------------ |
@@ -70,7 +65,6 @@ GINA Desktop must:
 
 ---
 
-# 4. Repository Structure
 
 ## Recommended Location
 
@@ -113,7 +107,6 @@ gina_desktop/
 
 ---
 
-# 5. Environment Variables
 
 ## `.env.local`
 
@@ -125,7 +118,6 @@ VITE_OPENAI_API_KEY=
 
 ---
 
-# 6. Supabase Requirements
 
 ## Required Tables
 
@@ -166,7 +158,6 @@ create table if not exists gina_journal (
 
 ---
 
-# 7. Core Retrieval Pipeline
 
 ## Flow
 
@@ -188,7 +179,6 @@ Optional Save to Supabase
 
 ---
 
-# 8. Retrieval Logic
 
 ## Initial Retrieval Strategy
 
@@ -214,7 +204,6 @@ Replace with:
 
 ---
 
-# 9. OpenAI Prompting Strategy
 
 ## Structure
 
@@ -241,7 +230,6 @@ Actual user message
 
 ---
 
-# 10. CRUD Permissions
 
 ## Allowed Operations (MVP)
 
@@ -256,7 +244,6 @@ Actual user message
 
 ---
 
-# 11. Security Rules
 
 ## IMPORTANT
 
@@ -288,7 +275,6 @@ Later versions should:
 
 ---
 
-# 12. UI/UX Principles
 
 ## UX Priorities
 
@@ -314,7 +300,6 @@ Later versions should:
 
 ---
 
-# 13. Window Behavior
 
 ## Required
 
@@ -329,7 +314,6 @@ Later versions should:
 
 ---
 
-# 14. Speech-to-Text
 
 ## MVP Choice
 
@@ -367,7 +351,6 @@ Possible replacements:
 
 ---
 
-# 15. Future Architecture Evolution
 
 ## Phase 1 — Current MVP
 
@@ -408,7 +391,6 @@ RAG + Graph + Memory
 
 ---
 
-# 16. Logging
 
 ## MVP Logging
 
@@ -428,7 +410,6 @@ Store:
 
 ---
 
-# 17. Recommended Initial Features
 
 ## Build Order
 
@@ -460,7 +441,6 @@ Store:
 
 ---
 
-# 18. Recommended Commands
 
 ## Development
 
@@ -479,7 +459,6 @@ npm run tauri build
 
 ---
 
-# 19. Known MVP Constraints
 
 ## Expected Limitations
 
@@ -494,7 +473,6 @@ npm run tauri build
 
 ---
 
-# 20. Success Criteria
 
 GINA Desktop MVP succeeds if:
 
@@ -516,7 +494,6 @@ Those come later.
 
 ---
 
-# 21. Strategic Note
 
 This app is not the final architecture.
 
@@ -527,3 +504,5 @@ The real purpose is:
 > give immediate operational relief and restore cognitive continuity.
 
 That matters more right now than perfect architecture.
+
+(No sub-items found)

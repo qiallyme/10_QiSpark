@@ -1,5 +1,3 @@
-# CareLite Dev Documentation
-
 ## 1. Purpose
 
 CareLite is the lightweight daily-use layer for Mom’s care.
@@ -1733,3 +1731,5 @@ Do not make a “smart medical app.”
 Make a clean daily button board that captures reality and prevents obvious timing mistakes.
 
 That is the win.
+
+(No sub-items found)

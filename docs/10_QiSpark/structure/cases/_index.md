@@ -1,5 +1,3 @@
-# Cases
-
 ## Case Domain Overview
 
 Cases are the core operational unit in `qicase`. A case represents a bounded legal or operational matter with a defined lifecycle.
@@ -40,3 +38,5 @@ open → active → review → resolved → closed → archived
 * Deadlines linked to `qichronicle` events must have a valid `chronicle_event_id`
 * Case phases must be sequential within a case or explicitly marked as parallel
 * No case may have documents without a registered archive record
+
+(No sub-items found)
