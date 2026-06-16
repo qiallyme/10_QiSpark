@@ -1,4 +1,6 @@
 {
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
   "name": "QiOS DNA Knowledge Base",
   "logo": {
     "dark": "/logo/dark.svg",

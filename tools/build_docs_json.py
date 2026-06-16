@@ -60,6 +60,8 @@ nav = [
 nav = [g for g in nav if len(g["pages"]) > 0]
 
 docs = {
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
   "name": "QiOS DNA Knowledge Base",
   "logo": {
     "dark": "/logo/dark.svg",
