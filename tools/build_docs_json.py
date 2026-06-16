@@ -83,4 +83,10 @@ docs = {
 with open("docs.json", "w", encoding="utf-8") as f:
     json.dump(docs, f, indent=2)
 
-print("docs.json successfully regenerated.")
+# Also write to docs/docs.json for Mintlify subdirectory support
+docs_dir = Path("docs")
+if docs_dir.exists() and docs_dir.is_dir():
+    with open(docs_dir / "docs.json", "w", encoding="utf-8") as f:
+        json.dump(docs, f, indent=2)
+
+print("docs.json successfully regenerated in root and docs/ subfolder.")

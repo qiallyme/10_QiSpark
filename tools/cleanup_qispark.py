@@ -158,11 +158,50 @@ def main():
         ensure_dir(docs / folder)
 
     # ---------------------------------------------------------------------
-    # Root files that Mintlify / QiSpark expects at root
+    # Root files that Mintlify / QiSpark expects in both Root and docs/ subdirectory
     # ---------------------------------------------------------------------
-    move_path(docs / "assistant.md", ROOT / ".mintlify" / "Assistant.md")
-    move_path(docs / "docs.json", ROOT / "docs.json")
-    move_path(docs / "codex.md", ROOT / "codex.md")
+    # Define candidate source paths (could be in docs/ or at root)
+    src_assistant = docs / "Assistant.md" if (docs / "Assistant.md").exists() else \
+                    docs / "assistant.md" if (docs / "assistant.md").exists() else \
+                    ROOT / ".mintlify" / "Assistant.md" if (ROOT / ".mintlify" / "Assistant.md").exists() else \
+                    ROOT / "assistant.md"
+
+    src_docs_json = docs / "docs.json" if (docs / "docs.json").exists() else ROOT / "docs.json"
+    src_codex = docs / "codex.md" if (docs / "codex.md").exists() else ROOT / "codex.md"
+
+    # Duplication helper that handles copying safely
+    def copy_file_safe(src, dest):
+        if not src.exists():
+            return
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            # Only copy if different
+            if not dest.exists() or file_hash(src) != file_hash(dest):
+                shutil.copy2(src, dest)
+                log(f"COPIED/SYNCED: {src} -> {dest}")
+        except Exception as e:
+            log(f"FAILED TO COPY {src} -> {dest}: {e}")
+
+    # Write Assistant.md to all potential search locations
+    for target in [
+        ROOT / ".mintlify" / "Assistant.md",
+        ROOT / ".mintlify" / "assistant.md",
+        docs / ".mintlify" / "Assistant.md",
+        docs / ".mintlify" / "assistant.md",
+        docs / "Assistant.md",
+        docs / "assistant.md",
+        ROOT / "Assistant.md",
+        ROOT / "assistant.md",
+    ]:
+        copy_file_safe(src_assistant, target)
+
+    # Write docs.json to both root and docs/ subfolder
+    copy_file_safe(src_docs_json, ROOT / "docs.json")
+    copy_file_safe(src_docs_json, docs / "docs.json")
+
+    # Write codex.md to both root and docs/ subfolder
+    copy_file_safe(src_codex, ROOT / "codex.md")
+    copy_file_safe(src_codex, docs / "codex.md")
 
     # ---------------------------------------------------------------------
     # Start Here should be static HTML
