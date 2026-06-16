@@ -28,7 +28,7 @@ def get_markdown_files(paths):
 nav = [
     {
         "group": "QiLabs Workspace",
-        "pages": get_markdown_files(["README.md", "codex.md", "docs/00_QiLabs.workspace"])
+        "pages": ["00_start_here/index"] + get_markdown_files(["README.md", "codex.md", "docs/00_QiLabs.workspace"])
     },
     {
         "group": "QiSpark",
