@@ -1,0 +1,37 @@
+# QiNexus My Drive Model
+
+QiNexus is the storage and workspace backbone.
+
+This repo documents the model. It does not duplicate the actual storage tree.
+
+## Canonical buckets
+
+```text
+00_inbox
+01_workbench
+02_timeline
+03_life
+04_people
+05_business
+06_finance
+07_legal
+08_tech
+09_assets
+10_data
+11_reference
+12_archive
+13_system
+```
+
+## Hard rule
+
+Do not create duplicate roots inside `My Drive` such as:
+
+```text
+20_qinexus
+30_qiarchive
+40_qisystem
+70_qiconnect
+```
+
+Those belong in the QiLabs root model, not inside QiNexus storage buckets.
