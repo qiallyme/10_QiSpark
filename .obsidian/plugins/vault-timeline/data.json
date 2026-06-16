@@ -99,12 +99,12 @@
       "folder": "docs/10_QiSpark/decisions"
     },
     {
-      "id": "docs/codex.md",
+      "id": "codex.md",
       "title": "codex",
       "date": 1781346770575,
       "tags": [],
       "excerpt": "CODEX SYSTEM CONTROL FILE --- 🔴 SECTION 0 — ACTIVE INSTRUCTIONS - Always reconcile existing systems before creating new…",
-      "folder": "docs"
+      "folder": "/"
     },
     {
       "id": "docs/10_QiSpark/00_principles.md",
@@ -3667,14 +3667,6 @@
       "tags": [],
       "excerpt": "Schema Overview Schema/ describes QiOS domains, entities, relationships, flows, and boundaries while distinguishing inte…",
       "folder": "docs/10_QiSpark/schemas"
-    },
-    {
-      "id": "docs/Assistant.md",
-      "title": "AI Assistant Settings",
-      "date": 1781639621080,
-      "tags": [],
-      "excerpt": "QiLabs Assistant You are the official documentation AI for QiLabs.  Your goal is to help developers and users navigate t…",
-      "folder": "docs"
     },
     {
       "id": "docs/00_QiLabs.workspace/index.md",
