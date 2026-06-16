@@ -67,14 +67,17 @@ Treat these as current unless a newer ADR contradicts them:
 - QiDNA is the governance and documentation layer.
 - QiEOS is doctrine inside QiDNA.
 - Active root structure:
-  - `01_QiDNA`
+  - `_QILABS.workspace`
+  - `_QiOS_DNA`
+  - `_05_creative`
   - `10_QiAccess`
   - `20_QiSystem`
   - `30_QiServer`
   - `40_QiCapture`
   - `50_QiNexus`
-  - `60_QiApp_QiLife`
   - `70_QiConnect`
+  - `1000_QiApps`
+  - `1100_QiApp_QiLife`
 - QiAccess is the front door / cockpit / docs surface.
 - QiLife is the private life operating app and data spine.
 - Supabase Postgres is the current QiLife structured-data authority under ADR-0018.
