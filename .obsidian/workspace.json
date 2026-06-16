@@ -196,6 +196,7 @@
   },
   "active": "2c2acda5d4cece47",
   "lastOpenFiles": [
+    "docs/Assistant.md",
     "docs/10_QiSpark/structure/cases/_index.md",
     "docs/10_QiSpark/structure/_index.md",
     "docs/10_QiSpark/structure/_index (2).md",
@@ -224,7 +225,6 @@
     "docs/10_QiSpark/standards/rules/operations/legacy_quarantine_policy.md",
     "docs/10_QiSpark/standards/rules/operations/lifecycle_policy.md",
     "docs/10_QiSpark/standards/rules/development/merge_policy.md",
-    "docs/10_QiSpark/standards/rules/development/bootstrap_policy.md",
     "docs/10_QiSpark/standards/rules/security",
     "docs/10_QiSpark/standards/rules/repo_rules.yaml",
     "docs/10_QiSpark/standards/rules/operations",
