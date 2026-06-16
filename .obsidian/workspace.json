@@ -11,10 +11,14 @@
             "id": "2668bb471ec11c32",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "docs/codex.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "codex"
             }
           }
         ],
@@ -194,8 +198,13 @@
       "vault-timeline:Open Vault Timeline": false
     }
   },
-  "active": "2c2acda5d4cece47",
+  "active": "2668bb471ec11c32",
   "lastOpenFiles": [
+    "docs/Assistant.md",
+    "docs/registries/2026-05-18_qios_namespace_registry_merged_v2.md",
+    "docs/codex.md",
+    "Assistant.md",
+    "docs/docs.json",
     "codex__dup2.md",
     "codex.md",
     "assistant.md",
@@ -203,7 +212,6 @@
     "site",
     "00_start_here",
     "docs.json",
-    "docs/Assistant.md",
     "docs/10_QiSpark/structure/cases/_index.md",
     "docs/10_QiSpark/structure/_index.md",
     "docs/10_QiSpark/structure/_index (2).md",
@@ -225,13 +233,9 @@
     "docs/10_QiSpark/structure/20_structure.md",
     "docs/10_QiSpark/structure/10_infrastructure_layout.md",
     "docs/10_QiSpark/structure/10_identity.md",
-    "docs/10_QiSpark/structure/10_identity (2).md",
     "docs/10_QiSpark/structure",
-    "docs/10_QiSpark/standards/rules/security/security_data_access_policy.md",
-    "docs/10_QiSpark/standards/rules/operations/qinexus_freeze_policy.md",
     "docs/10_QiSpark/standards/rules/security",
     "docs/10_QiSpark/standards/rules/repo_rules.yaml",
-    "docs/10_QiSpark/standards/rules/operations",
     "docs/10_QiSpark/reports/superseeded/from_30_qiserver_legacy/legacy/qios_runtime_mindmap.canvas",
     "docs/10_QiSpark/reports/superseeded/from_30_qiserver_legacy/legacy/qios_00_genesis.canvas",
     "docs/reports/superseeded/from_30_qiserver_legacy/legacy/qios_runtime_mindmap.canvas",

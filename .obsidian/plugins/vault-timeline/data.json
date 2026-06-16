@@ -3675,6 +3675,30 @@
       "tags": [],
       "excerpt": "",
       "folder": "docs/00_QiLabs.workspace"
+    },
+    {
+      "id": "docs/Assistant.md",
+      "title": "AI Assistant Settings",
+      "date": 1781644831732,
+      "tags": [],
+      "excerpt": "QiLabs Assistant You are the official documentation AI for QiLabs.  Your goal is to help developers and users navigate t…",
+      "folder": "docs"
+    },
+    {
+      "id": "Assistant.md",
+      "title": "AI Assistant Settings",
+      "date": 1781644831736,
+      "tags": [],
+      "excerpt": "---\r title: \"AI Assistant Settings\"\r description: \"Instructions for the Mintlify AI Assistant\"\r ---\r \r QiLabs Assistant\r…",
+      "folder": "/"
+    },
+    {
+      "id": "docs/codex.md",
+      "title": "codex",
+      "date": 1781644831772,
+      "tags": [],
+      "excerpt": "CODEX SYSTEM CONTROL FILE --- 🔴 SECTION 0 — ACTIVE INSTRUCTIONS - Always reconcile existing systems before creating new…",
+      "folder": "docs"
     }
   ]
 }
