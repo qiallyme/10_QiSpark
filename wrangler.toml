@@ -1,6 +1,2 @@
 name = "qios-dna"
-compatibility_date = "2024-01-01"
 pages_build_output_dir = "1000_QiApps/site"
-
-[build]
-command = "npm run build"

@@ -6,7 +6,7 @@ Active.
 
 ## Overview
 
-`60_QiApps/site/` contains the generated single-page reader for the QiDNA master blueprint. Source Markdown and MDX remain canonical according to their document status; `60_QiApps/site/index.html` is a derived reading surface.
+`1000_QiApps/site/` contains the generated single-page reader for the QiDNA master blueprint. Source Markdown and MDX remain canonical according to their document status; `1000_QiApps/site/index.html` is a derived reading surface.
 
 ## Responsibilities
 
@@ -49,8 +49,8 @@ The Mind Map button opens a separate center-screen visual navigator. It suppleme
 Markdown and MDX sources
   -> build.js discovers and classifies documents
   -> folder paths become tree and mind-map data
-  -> 60_QiApps/site/style.css and 60_QiApps/site/script.js are embedded
-  -> 60_QiApps/site/index.html is generated
+  -> 1000_QiApps/site/style.css and 1000_QiApps/site/script.js are embedded
+  -> 1000_QiApps/site/index.html is generated
 ```
 
 Run:
@@ -62,7 +62,7 @@ npm run build
 ## File Roles
 
 ```text
-60_QiApps/site/
+1000_QiApps/site/
 |- _site.md     active documentation for the reader
 |- script.js    source behavior for search, tree, and mind map
 |- style.css    source presentation for the reader
