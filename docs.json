@@ -1,0 +1,29 @@
+{
+  "name": "QiOS DNA Knowledge Base",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#2D3748",
+    "light": "#4A5568",
+    "dark": "#1A202C"
+  },
+  "topbarLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Overview",
+      "pages": [
+        "README",
+        "_01_QiDNA",
+        "_Architecture"
+      ]
+    }
+  ]
+}
