@@ -133,6 +133,7 @@ def main():
     for folder in [
         ".agents",
         ".obsidian",
+        ".mintlify",
         "00_start_here",
         "assets",
         "docs",
@@ -159,7 +160,7 @@ def main():
     # ---------------------------------------------------------------------
     # Root files that Mintlify / QiSpark expects at root
     # ---------------------------------------------------------------------
-    move_path(docs / "assistant.md", ROOT / "assistant.md")
+    move_path(docs / "assistant.md", ROOT / ".mintlify" / "Assistant.md")
     move_path(docs / "docs.json", ROOT / "docs.json")
     move_path(docs / "codex.md", ROOT / "codex.md")
 
