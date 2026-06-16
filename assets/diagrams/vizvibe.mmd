@@ -1,0 +1,79 @@
+flowchart TD
+    %% === PROJECT GOALS ===
+    %% Ultimate Goal: The Constitutional Source of Truth for the QiLabs Ecosystem.
+    %% Current Goal: Pivot to Single-Account Modular Runtime.
+
+    %% === START ===
+    %% @project_start [start, closed, 2026-03-20, user]
+    project_start("Project Start<br/><sub>Initial commit and genesis of<br/>the QiOS Master Blueprint to<br/>govern the expanding ecosystem</sub>")
+
+    %% @ultimate_goal [end, opened, 2026-04-04, user]
+    ultimate_goal("Ultimate Goal<br/><sub>A fully governed, machine-enforceable<br/>blueprint that ensures integrity<br/>across all QiOS environments</sub>")
+
+    %% === COMPLETED MILESTONES ===
+    %% @blueprint_genesis [ai-task, closed, 2026-03-25, Cody]
+    blueprint_genesis("Blueprint Genesis<br/><sub>Completed all 50 canonical pages<br/>for v0.4, establishing Core, Platform,<br/>and Domain band definitions</sub>")
+
+    %% @qially_theme_sync [ai-task, closed, 2026-04-01, Cody]
+    qially_theme_sync("Qially Theme Sync<br/><sub>Overhauled the blueprint UI with<br/>glassmorphism, emerald/indigo palette,<br/>and left-nav navigation structure</sub>")
+
+    %% @fleet_orchestration_doctrine [ai-task, closed, 2026-04-02, Cody]
+    fleet_orchestration_doctrine("Fleet Orchestration Doctrine<br/><sub>Pivoted to orchestrated edge node<br/>mapping, defining how decentralized<br/>nodes sync with the canonical spine</sub>")
+
+    %% @ideal_structure_integration [ai-task, closed, 2026-04-03, Cody]
+    ideal_structure_integration("Ideal Structure Integration<br/><sub>Refined the physical directory topology<br/>to eliminate stubs and ensure<br/>progressive reading of doctrine</sub>")
+
+    %% @modular_mode_pivot [ai-task, closed, 2026-04-04, Cody]
+    modular_mode_pivot("Modular Mode Pivot<br/><sub>ADR-0004: Shifted active runtime<br/>from multi-tenant to single-account<br/>using owner_user_id for isolation</sub>")
+
+    %% @infra_control_plane [ai-task, closed, 2026-04-09, Antigravity]
+    infra_control_plane("Infra Control Plane Update<br/><sub>Integrated Backup Server pattern<br/>defining dual-path access, 4-zone<br/>runtime, and node-local persistence</sub>")
+
+    %% @qispark_restructuring [ai-task, closed, 2026-06-16, Antigravity]
+    qispark_restructuring("QiSpark Restructuring<br/><sub>Reorganized the documentation layer<br/>into the canonical 7-group model,<br/>moved app code to legacy, and<br/>generated an accurate docs.json mapping</sub>")
+
+    %% === FUTURE WORK ===
+    %% @doctrine_alignment_update [ai-task, opened, 2026-04-04, Cody]
+    doctrine_alignment_update("Doctrine Alignment Update<br/><sub>Update all governance, structure,<br/>and data docs to remove active<br/>multi-tenant 'tenant_id' mandates</sub>")
+
+    %% @runtime_implementation_sync [ai-task, opened, 2026-04-04, Cody]
+    runtime_implementation_sync("Runtime Implementation Sync<br/><sub>Coordinate with IDE 2 to apply<br/>schema migrations and RLS rewrites<br/>in the active application repository</sub>")
+
+    %% === CONNECTIONS ===
+    project_start --> blueprint_genesis
+    blueprint_genesis --> qially_theme_sync
+    qially_theme_sync --> fleet_orchestration_doctrine
+    fleet_orchestration_doctrine --> ideal_structure_integration
+    ideal_structure_integration --> modular_mode_pivot
+    modular_mode_pivot --> infra_control_plane
+    infra_control_plane --> qispark_restructuring
+    qispark_restructuring --> doctrine_alignment_update
+    qispark_restructuring --> runtime_implementation_sync
+    doctrine_alignment_update -.-> ultimate_goal
+    runtime_implementation_sync -.-> ultimate_goal
+
+    %% === RECENT WORK HIGHLIGHT ===
+    subgraph recent [RECENT]
+        qispark_restructuring
+    end
+
+    %% === STYLES ===
+    %% Closed tasks
+    style project_start fill:#1a1a2e,stroke:#a78bfa,color:#c4b5fd,stroke-width:1px
+    style blueprint_genesis fill:#1a1a2e,stroke:#a78bfa,color:#c4b5fd,stroke-width:1px
+    style qially_theme_sync fill:#1a1a2e,stroke:#a78bfa,color:#c4b5fd,stroke-width:1px
+    style fleet_orchestration_doctrine fill:#1a1a2e,stroke:#a78bfa,color:#c4b5fd,stroke-width:1px
+    style ideal_structure_integration fill:#1a1a2e,stroke:#a78bfa,color:#c4b5fd,stroke-width:1px
+    style modular_mode_pivot fill:#1a1a2e,stroke:#a78bfa,color:#c4b5fd,stroke-width:1px
+    style infra_control_plane fill:#1a1a2e,stroke:#a78bfa,color:#c4b5fd,stroke-width:1px
+
+    %% Recent node
+    style qispark_restructuring fill:#2d1f4e,stroke:#c084fc,color:#e9d5ff,stroke-width:2px
+
+    %% Recent subgraph
+    style recent fill:transparent,stroke:#c084fc,color:#c084fc,stroke-width:2px,stroke-dasharray:5 5
+
+    %% Open tasks
+    style ultimate_goal fill:#1a1a2e,stroke:#4ade80,color:#86efac,stroke-width:1px
+    style doctrine_alignment_update fill:#1a1a2e,stroke:#4ade80,color:#86efac,stroke-width:1px
+    style runtime_implementation_sync fill:#1a1a2e,stroke:#4ade80,color:#86efac,stroke-width:1px

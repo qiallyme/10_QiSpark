@@ -11,14 +11,10 @@
             "id": "2668bb471ec11c32",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "README"
+              "title": "New tab"
             }
           }
         ],
@@ -172,8 +168,8 @@
             "state": {
               "type": "view-notes-merger",
               "state": {},
-              "icon": "lucide-file",
-              "title": "Notes Merger"
+              "icon": "lucide-ghost",
+              "title": "view-notes-merger"
             }
           }
         ],
@@ -198,33 +194,48 @@
       "vault-timeline:Open Vault Timeline": false
     }
   },
-  "active": "2668bb471ec11c32",
+  "active": "2c2acda5d4cece47",
   "lastOpenFiles": [
-    "Folder_Canvas.canvas",
-    "README.md",
-    "_01_QiDNA.md",
-    "_Architecture.md",
-    "codex.md",
-    "60_QiApp_QiLife/30_data_model/01_qibits.md",
-    "00_QiEOS/50_operations/40_dev_testing/momscare/2026-05-17_momcare_app_qa_checklist.md",
-    "00_QiEOS/50_operations/40_dev_testing/momscare/momscare.md",
-    "00_QiEOS/50_operations/40_dev_testing/momscare/_Index_of_momscare.md",
-    "00_QiEOS/50_operations/40_dev_testing/qiaccessstart/qiaccessstart.md",
-    "00_QiEOS/50_operations/40_dev_testing/qiaccessstart/_Index_of_qiaccessstart.md",
-    "00_QiEOS/50_operations/_Index_of_50_operations.md",
-    "00_QiEOS/50_operations/40_dev_testing/_Index_of_40_dev_testing.md",
-    "00_QiEOS/50_operations/40_dev_testing/40_dev_testing.md",
-    "00_QiEOS/50_operations/50_operations.md",
-    "00_QiEOS/50_operations/QiAccess_Server_Runbook.md",
-    "00_QiEOS/50_operations/Access_And_Exposure_Rules.md",
-    "00_QiEOS/50_operations/_index.md",
-    "00_QiEOS/10_governance/40_policies/40_policies.md",
-    "00_QiEOS/10_governance/40_policies/_Index_of_40_policies.md",
-    "00_QiEOS/10_governance/40_policies/_index.md",
-    "00_QiEOS/10_governance/_Index_of_10_governance.md",
-    "00_QiEOS/10_governance/10_principles/_Index_of_10_principles.md",
-    "00_QiEOS/10_governance/20_rules/_Index_of_20_rules.md",
-    "00_QiEOS/10_governance/30_standards/_Index_of_30_standards.md",
-    "00_QiEOS/10_governance/50_decisions/_Index_of_50_decisions.md"
+    "docs/10_QiSpark/structure/cases/_index.md",
+    "docs/10_QiSpark/structure/_index.md",
+    "docs/10_QiSpark/structure/_index (2).md",
+    "docs/10_QiSpark/structure/system_map",
+    "docs/10_QiSpark/structure/qilabs_final_target_tree.md",
+    "docs/10_QiSpark/structure/cases",
+    "docs/10_QiSpark/structure/70_runtime_zones.md",
+    "docs/10_QiSpark/structure/70_runtime_zones (2).md",
+    "docs/10_QiSpark/structure/60_device_model.md",
+    "docs/10_QiSpark/structure/60_device_model (2).md",
+    "docs/10_QiSpark/structure/50_data_flow.md",
+    "docs/10_QiSpark/structure/50_data_flow (2).md",
+    "docs/10_QiSpark/structure/40_service_boundaries.md",
+    "docs/10_QiSpark/structure/40_service_boundaries (2).md",
+    "docs/10_QiSpark/structure/30_component_map.md",
+    "docs/10_QiSpark/structure/30_component_map (2).md",
+    "docs/10_QiSpark/structure/20_system_model.md",
+    "docs/10_QiSpark/structure/20_system_model (2).md",
+    "docs/10_QiSpark/structure/20_structure.md",
+    "docs/10_QiSpark/structure/10_infrastructure_layout.md",
+    "docs/10_QiSpark/structure/10_identity.md",
+    "docs/10_QiSpark/structure/10_identity (2).md",
+    "docs/10_QiSpark/structure",
+    "docs/10_QiSpark/standards/rules/security/security_data_access_policy.md",
+    "docs/10_QiSpark/standards/rules/operations/qinexus_freeze_policy.md",
+    "docs/10_QiSpark/standards/rules/operations/legacy_quarantine_policy.md",
+    "docs/10_QiSpark/standards/rules/operations/lifecycle_policy.md",
+    "docs/10_QiSpark/standards/rules/development/merge_policy.md",
+    "docs/10_QiSpark/standards/rules/development/bootstrap_policy.md",
+    "docs/10_QiSpark/standards/rules/security",
+    "docs/10_QiSpark/standards/rules/repo_rules.yaml",
+    "docs/10_QiSpark/standards/rules/operations",
+    "docs/10_QiSpark/standards/rules/naming_rules.yaml",
+    "docs/10_QiSpark/standards/rules/development",
+    "docs/10_QiSpark/standards/rules/content_metadata_profile.yaml",
+    "docs/10_QiSpark/standards/rules/architecture",
+    "docs/10_QiSpark/reports/superseeded/from_30_qiserver_legacy/legacy/qios_runtime_mindmap.canvas",
+    "docs/10_QiSpark/reports/superseeded/from_30_qiserver_legacy/legacy/qios_00_genesis.canvas",
+    "docs/reports/superseeded/from_30_qiserver_legacy/legacy/qios_runtime_mindmap.canvas",
+    "docs/reports/superseeded/from_30_qiserver_legacy/legacy/qios_00_genesis.canvas",
+    "Folder_Canvas.canvas"
   ]
 }
