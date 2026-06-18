@@ -73,13 +73,17 @@ docs = {
     "light": "#4A5568",
     "dark": "#1A202C"
   },
-  "topbarLinks": [
-    {
-      "name": "GitHub",
-      "url": "https://github.com"
-    }
-  ],
-  "navigation": nav
+  "navbar": {
+    "links": [
+      {
+        "type": "github",
+        "href": "https://github.com"
+      }
+    ]
+  },
+  "navigation": {
+    "groups": nav
+  }
 }
 
 with open("docs.json", "w", encoding="utf-8") as f:
