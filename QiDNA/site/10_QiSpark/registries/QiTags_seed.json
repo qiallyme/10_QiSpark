@@ -1,0 +1,466 @@
+[
+  {
+    "tag": "realm-eos",
+    "class": "realm",
+    "description": "Documents belonging to the EOS preamble and structural governance realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "eos",
+    "status": "active"
+  },
+  {
+    "tag": "realm-found",
+    "class": "realm",
+    "description": "Documents belonging to the Foundations realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "found",
+    "status": "active"
+  },
+  {
+    "tag": "realm-spirit",
+    "class": "realm",
+    "description": "Documents belonging to the Spirit & Faith realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "spirit",
+    "status": "active"
+  },
+  {
+    "tag": "realm-health",
+    "class": "realm",
+    "description": "Documents belonging to the Health & Wellbeing realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "health",
+    "status": "active"
+  },
+  {
+    "tag": "realm-learn",
+    "class": "realm",
+    "description": "Documents belonging to the Learning & Development realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "learn",
+    "status": "active"
+  },
+  {
+    "tag": "realm-work",
+    "class": "realm",
+    "description": "Documents belonging to the Work & Creation realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "work",
+    "status": "active"
+  },
+  {
+    "tag": "realm-relate",
+    "class": "realm",
+    "description": "Documents belonging to the Relationships & Exchange realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "relate",
+    "status": "active"
+  },
+  {
+    "tag": "realm-tech",
+    "class": "realm",
+    "description": "Documents belonging to the Technology & Innovation realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "tech",
+    "status": "active"
+  },
+  {
+    "tag": "realm-fin",
+    "class": "realm",
+    "description": "Documents belonging to the Finance & Stewardship realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "fin",
+    "status": "active"
+  },
+  {
+    "tag": "realm-ethic",
+    "class": "realm",
+    "description": "Documents belonging to the Ethics & Evolution realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "ethic",
+    "status": "active"
+  },
+  {
+    "tag": "realm-cycle",
+    "class": "realm",
+    "description": "Documents belonging to the Cycles & Closure realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "cycle",
+    "status": "active"
+  },
+  {
+    "tag": "realm-one",
+    "class": "realm",
+    "description": "Documents belonging to the Oneness & Integration realm.",
+    "recommended_prefix": "sys-",
+    "related_slug": "one",
+    "status": "active"
+  },
+  {
+    "tag": "protocol",
+    "class": "structural",
+    "description": "Governance or procedural document defining rules or standards.",
+    "recommended_prefix": "sys-",
+    "related_slug": "system",
+    "status": "active"
+  },
+  {
+    "tag": "system",
+    "class": "structural",
+    "description": "System-level configuration, architecture, or governance.",
+    "recommended_prefix": "sys-",
+    "related_slug": "system",
+    "status": "active"
+  },
+  {
+    "tag": "reference",
+    "class": "structural",
+    "description": "Non-governing reference material or registry.",
+    "recommended_prefix": "sys-",
+    "related_slug": "system",
+    "status": "active"
+  },
+  {
+    "tag": "governance",
+    "class": "structural",
+    "description": "Relates to EOS, QiCode, or constitutional rules.",
+    "recommended_prefix": "sys-",
+    "related_slug": "system",
+    "status": "active"
+  },
+  {
+    "tag": "kb",
+    "class": "structural",
+    "description": "Knowledge base content or library articles.",
+    "recommended_prefix": "kb-",
+    "related_slug": "kb",
+    "status": "active"
+  },
+  {
+    "tag": "client",
+    "class": "structural",
+    "description": "Client-specific content, files, or configurations.",
+    "recommended_prefix": "cli-",
+    "related_slug": "clients",
+    "status": "active"
+  },
+  {
+    "tag": "entity",
+    "class": "structural",
+    "description": "Entity-wide context across multiple clients or domains.",
+    "recommended_prefix": "sys-",
+    "related_slug": "system",
+    "status": "active"
+  },
+  {
+    "tag": "topic",
+    "class": "structural",
+    "description": "Thematic or subject-based grouping of content.",
+    "recommended_prefix": "",
+    "related_slug": "",
+    "status": "active"
+  },
+  {
+    "tag": "immigration",
+    "class": "domain",
+    "description": "Immigration-related workflows, cases, or evidence.",
+    "recommended_prefix": "imm-",
+    "related_slug": "imm",
+    "status": "active"
+  },
+  {
+    "tag": "finance",
+    "class": "domain",
+    "description": "Financial workflows, accounting, and money movement.",
+    "recommended_prefix": "fin-",
+    "related_slug": "fin",
+    "status": "active"
+  },
+  {
+    "tag": "legal",
+    "class": "domain",
+    "description": "Legal compliance, contracts, and formal obligations.",
+    "recommended_prefix": "sys-",
+    "related_slug": "legal",
+    "status": "active"
+  },
+  {
+    "tag": "operations",
+    "class": "domain",
+    "description": "Internal operations, admin, logistics, and process.",
+    "recommended_prefix": "ops-",
+    "related_slug": "ops",
+    "status": "active"
+  },
+  {
+    "tag": "marketing",
+    "class": "domain",
+    "description": "Brand, outreach, campaigns, and content marketing.",
+    "recommended_prefix": "",
+    "related_slug": "mark",
+    "status": "active"
+  },
+  {
+    "tag": "technology",
+    "class": "domain",
+    "description": "Technical stack, infrastructure, and automation.",
+    "recommended_prefix": "tech-",
+    "related_slug": "tech",
+    "status": "active"
+  },
+  {
+    "tag": "hr",
+    "class": "domain",
+    "description": "People operations, HR files, and employment matters.",
+    "recommended_prefix": "hr-",
+    "related_slug": "hr",
+    "status": "active"
+  },
+  {
+    "tag": "tax-returns",
+    "class": "domain",
+    "description": "Tax return workflows, filings, and compliance.",
+    "recommended_prefix": "fin-",
+    "related_slug": "returns",
+    "status": "active"
+  },
+  {
+    "tag": "evidence",
+    "class": "domain",
+    "description": "Evidence collections and document sets.",
+    "recommended_prefix": "evd-",
+    "related_slug": "evd",
+    "status": "active"
+  },
+  {
+    "tag": "sop",
+    "class": "workflow",
+    "description": "Standard operating procedures and step-by-step instructions.",
+    "recommended_prefix": "",
+    "related_slug": "",
+    "status": "active"
+  },
+  {
+    "tag": "policy",
+    "class": "workflow",
+    "description": "Binding policies and non-optional rules.",
+    "recommended_prefix": "",
+    "related_slug": "",
+    "status": "active"
+  },
+  {
+    "tag": "agreement",
+    "class": "workflow",
+    "description": "Contracts and agreed terms between parties.",
+    "recommended_prefix": "",
+    "related_slug": "",
+    "status": "active"
+  },
+  {
+    "tag": "form",
+    "class": "workflow",
+    "description": "Forms and structured input templates.",
+    "recommended_prefix": "",
+    "related_slug": "",
+    "status": "active"
+  },
+  {
+    "tag": "checklist",
+    "class": "workflow",
+    "description": "Checklists for recurring or critical workflows.",
+    "recommended_prefix": "",
+    "related_slug": "",
+    "status": "active"
+  },
+  {
+    "tag": "log",
+    "class": "workflow",
+    "description": "Chronological logs and journals.",
+    "recommended_prefix": "",
+    "related_slug": "",
+    "status": "active"
+  },
+  {
+    "tag": "summary",
+    "class": "workflow",
+    "description": "Summary or digest documents.",
+    "recommended_prefix": "",
+    "related_slug": "",
+    "status": "active"
+  },
+  {
+    "tag": "evd-status",
+    "class": "evidence",
+    "description": "Evidence of status or eligibility.",
+    "recommended_prefix": "evd-",
+    "related_slug": "evd-sta",
+    "status": "active"
+  },
+  {
+    "tag": "evd-relationship",
+    "class": "evidence",
+    "description": "Evidence of relationship between parties.",
+    "recommended_prefix": "evd-",
+    "related_slug": "evd-rel",
+    "status": "active"
+  },
+  {
+    "tag": "evd-service",
+    "class": "evidence",
+    "description": "Evidence of service, support, or contributions.",
+    "recommended_prefix": "evd-",
+    "related_slug": "evd-ser",
+    "status": "active"
+  },
+  {
+    "tag": "evd-eligibility",
+    "class": "evidence",
+    "description": "Evidence that supports eligibility criteria.",
+    "recommended_prefix": "evd-",
+    "related_slug": "evd-eli",
+    "status": "active"
+  },
+  {
+    "tag": "bbr",
+    "class": "client",
+    "description": "BuiltByRays client ecosystem.",
+    "recommended_prefix": "cli-",
+    "related_slug": "bbr",
+    "status": "active"
+  },
+  {
+    "tag": "qia",
+    "class": "client",
+    "description": "QiAlly core ecosystem.",
+    "recommended_prefix": "cli-",
+    "related_slug": "qia",
+    "status": "active"
+  },
+  {
+    "tag": "zjk",
+    "class": "client",
+    "description": "Zaitullah Jan Khebarkhil cases and ecosystem.",
+    "recommended_prefix": "cli-",
+    "related_slug": "zjk",
+    "status": "active"
+  },
+  {
+    "tag": "lumara",
+    "class": "client",
+    "description": "Lumara ecosystem and operations.",
+    "recommended_prefix": "cli-",
+    "related_slug": "lumara",
+    "status": "active"
+  },
+  {
+    "tag": "meta",
+    "class": "meta",
+    "description": "Meta-level commentary, diagnostics, or debug notes.",
+    "recommended_prefix": "sys-",
+    "related_slug": "",
+    "status": "active"
+  },
+  {
+    "tag": "contract",
+    "class": "legal",
+    "description": "Contractual agreements and binding terms.",
+    "recommended_prefix": "",
+    "related_slug": "con",
+    "status": "active"
+  },
+  {
+    "tag": "msa",
+    "class": "legal",
+    "description": "Master service agreements.",
+    "recommended_prefix": "",
+    "related_slug": "msa",
+    "status": "active"
+  },
+  {
+    "tag": "invoice",
+    "class": "financial",
+    "description": "Invoices and payable items.",
+    "recommended_prefix": "",
+    "related_slug": "inv",
+    "status": "active"
+  },
+  {
+    "tag": "receipt",
+    "class": "financial",
+    "description": "Receipts and transactional confirmations.",
+    "recommended_prefix": "",
+    "related_slug": "rcpt",
+    "status": "active"
+  },
+  {
+    "tag": "onboarding",
+    "class": "hr",
+    "description": "Onboarding processes, docs, and workflows.",
+    "recommended_prefix": "",
+    "related_slug": "onboarding",
+    "status": "active"
+  },
+  {
+    "tag": "asylum",
+    "class": "immigration",
+    "description": "Asylum-specific workflows and filings.",
+    "recommended_prefix": "asy-",
+    "related_slug": "asy",
+    "status": "active"
+  },
+  {
+    "tag": "special-immigrant",
+    "class": "immigration",
+    "description": "Special immigrant categories and cases.",
+    "recommended_prefix": "imm-",
+    "related_slug": "spec-imm",
+    "status": "active"
+  },
+  {
+    "tag": "media",
+    "class": "media",
+    "description": "Images, audio, video, and supporting media files.",
+    "recommended_prefix": "",
+    "related_slug": "",
+    "status": "active"
+  },
+  {
+    "tag": "docs",
+    "class": "docs",
+    "description": "Document libraries and general documentation.",
+    "recommended_prefix": "",
+    "related_slug": "doc",
+    "status": "active"
+  },
+  {
+    "tag": "identity",
+    "class": "identity",
+    "description": "Identity, ID docs, and verification.",
+    "recommended_prefix": "",
+    "related_slug": "bio-ids",
+    "status": "active"
+  },
+  {
+    "tag": "ops",
+    "class": "operations",
+    "description": "Ops-wide processes and runbooks.",
+    "recommended_prefix": "ops-",
+    "related_slug": "ops",
+    "status": "active"
+  },
+  {
+    "tag": "product",
+    "class": "product",
+    "description": "Productized services and SKUs.",
+    "recommended_prefix": "",
+    "related_slug": "",
+    "status": "active"
+  },
+  {
+    "tag": "tech-stack",
+    "class": "tech",
+    "description": "Technical stack, libraries, dependencies.",
+    "recommended_prefix": "tech-",
+    "related_slug": "tech",
+    "status": "active"
+  }
+]

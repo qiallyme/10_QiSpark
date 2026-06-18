@@ -1,0 +1,105 @@
+{
+  "constitution": {
+    "version": "1.0.0",
+    "compiled_at": "YYYY-MM-DDTHH:MM:SSZ",
+    "hash": "sha256-of-inputs",
+    "naming_strategy_default": "slug_only",
+    "qid_rpc": "qios_next_qid"
+  },
+  "front_matter_schema": [
+    {
+      "prop": "title",
+      "type": "string",
+      "required": true,
+      "options": null,
+      "description": "Human-readable title."
+    }
+  ],
+  "realms": [
+    {
+      "realm": "QiClients",
+      "realm_slug": "qiclients",
+      "enabled": true,
+      "root_path": "realms/qiclients/",
+      "mirrors_os_tree": true,
+      "notes": ""
+    }
+  ],
+  "folders": [
+    {
+      "path": "apps/",
+      "title": "QiApps",
+      "qi_decimal": "2.00.00-APP",
+      "owned_by": "qios",
+      "realm_bound": false,
+      "realm_mirror": false,
+      "client_excluded": false,
+      "allowed_types": [".md", ".ts", ".tsx"],
+      "workers": ["gina-orchestrator"],
+      "rules": ["ROT.001"]
+    }
+  ],
+  "rules": {
+    "layers": [
+      {
+        "layer": 0,
+        "prefix": "ROT",
+        "rules": [
+          {
+            "rule_id": "ROT.001",
+            "priority": 10,
+            "condition": "missing_root",
+            "action": "create_root",
+            "severity": "block",
+            "message": "Created missing root."
+          }
+        ]
+      }
+    ]
+  },
+  "ignore": {
+    "patterns": [
+      {"pattern": "**/.git/**", "reason": "tooling"}
+    ]
+  },
+  "sensitivity": {
+    "registry": [
+      {"sensitivity": "internal", "classification": "system_darkmatter"}
+    ],
+    "matrix": [
+      {
+        "sensitivity": "internal",
+        "classification": "system_darkmatter",
+        "default_visibility": "admins_only",
+        "allowed_realms": ["QiOS", "QiBusiness"],
+        "mask_rules": ["hide_in_clients"]
+      }
+    ]
+  },
+  "matrix": {
+    "layers": [
+      {
+        "id": "L6",
+        "name": "Semantic Routing",
+        "depends_on": ["L5"],
+        "touched_by": ["semantic-ingest", "embedder"]
+      }
+    ],
+    "workers": {
+      "gina-orchestrator": {
+        "runs_layers": ["L0","L1","L2","L3","L4","L5","L6","L7"]
+      }
+    }
+  },
+  "directory_ast": {
+    "root": "QiOS/",
+    "children": [
+      {
+        "name": "apps",
+        "path": "apps/",
+        "children": []
+      }
+    ]
+  }
+}
+

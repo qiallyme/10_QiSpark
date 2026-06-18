@@ -1,0 +1,75 @@
+{
+  "title": "Unified Intake Form Schema",
+  "version": "1.0",
+  "sections": [
+    {
+      "id": "client",
+      "fields": [
+        {
+          "key": "first_name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "key": "last_name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "key": "dob",
+          "type": "date"
+        },
+        {
+          "key": "ssn_itin",
+          "type": "string"
+        },
+        {
+          "key": "email",
+          "type": "string"
+        },
+        {
+          "key": "phone",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "tax",
+      "fields": [
+        {
+          "key": "tax_year",
+          "type": "number"
+        },
+        {
+          "key": "amended_year",
+          "type": "number"
+        },
+        {
+          "key": "has_w2",
+          "type": "boolean"
+        },
+        {
+          "key": "has_1099",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "id": "immigration",
+      "fields": [
+        {
+          "key": "i94_number",
+          "type": "string"
+        },
+        {
+          "key": "a_number",
+          "type": "string"
+        },
+        {
+          "key": "marital_status",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}

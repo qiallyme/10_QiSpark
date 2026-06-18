@@ -1,0 +1,81 @@
+# QiLife Data Spine
+
+## Status and Authority
+
+**Active.** ADR-0018 establishes Supabase Postgres as the canonical QiLife structured-data authority.
+
+The baseline migration is `supabase/migrations/20260614162319_establish_qilife_entity_qibit_spine.sql`. It is migration-ready but has not been deployed by this repository change.
+
+## Canonical Model
+
+- **Entity:** a who or what that persists through time.
+- **QiBit:** an event, observation, state change, fact, or unit of reality.
+- Every canonical structured record is represented as an Entity or QiBit.
+- QiBits may reference Entities.
+
+This is a classification rule, not permission to discard domain meaning. Type-specific meaning remains governed in payloads until proven constraints or query needs justify dedicated columns or tables.
+
+## Storage Boundaries
+
+- Supabase stores canonical structured records and relationships.
+- QiNexus stores files, exports, references, archives, and backups.
+- Paperless may ingest, OCR, classify, and expose documents; it does not replace QiNexus file authority.
+- SQLite is deprecated and limited to legacy, local, or transitional use.
+
+## Tables
+
+### `qi_entities.entities`
+
+| Column | Type | Rule | Purpose |
+|---|---|---|---|
+| `id` | uuid | PK, generated | Stable Entity identity |
+| `entity_type` | text | required, nonblank | Governed Entity classification |
+| `display_name` | text | required, nonblank | Human-readable identity |
+| `attributes` | jsonb | default `{}` | Source-specific attributes |
+| `created_at` | timestamptz | default now | Creation time |
+| `updated_at` | timestamptz | default now | Application-managed update time |
+
+### `qi_entities.relationships`
+
+| Column | Type | Rule | Purpose |
+|---|---|---|---|
+| `id` | uuid | PK, generated | Relationship identity |
+| `source_entity_id` | uuid | FK -> entities | Relationship origin |
+| `target_entity_id` | uuid | FK -> entities | Relationship target |
+| `relationship_type` | text | required, nonblank | Governed relationship meaning |
+| `attributes` | jsonb | default `{}` | Evidence or qualifiers |
+| `created_at` | timestamptz | default now | Creation time |
+| `updated_at` | timestamptz | default now | Application-managed update time |
+
+Duplicate source, target, and type combinations are prevented. Foreign-key columns are indexed.
+
+### `qi_events.qibits`
+
+| Column | Type | Rule | Purpose |
+|---|---|---|---|
+| `id` | uuid | PK, generated | QiBit identity |
+| `qibit_type` | text | required, nonblank | Governed unit classification |
+| `title` | text | required, nonblank | Human-readable label |
+| `summary` | text | optional | Concise interpretation |
+| `occurred_at` | timestamptz | default now | When the reality occurred |
+| `primary_entity_id` | uuid | optional FK -> entities | Primary who/what reference |
+| `payload` | jsonb | default `{}` | Type-specific structured content |
+| `created_at` | timestamptz | default now | Creation time |
+| `updated_at` | timestamptz | default now | Application-managed update time |
+
+The baseline supports one optional primary Entity reference. A many-Entity participant model requires evidence and a later ADR.
+
+## Security
+
+- RLS is enabled on all three tables.
+- No permissive client policies are included.
+- Custom schemas are not granted to `anon` or `authenticated`.
+- Identity ownership and access policies must be approved before Data API exposure.
+
+## Expansion Rules
+
+Add columns or tables only when a required invariant, proven query, workflow constraint, or accepted ADR requires them. Do not create tagging, automation, AI, ingestion, or module schemas as part of this baseline.
+
+## Legacy SQLite Evidence
+
+QiLife commit `c589e1e` contains a 15-table SQLModel/SQLite implementation. It remains evidence and a potential migration source, not canonical authority. No automatic conversion or data deletion is authorized.

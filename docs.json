@@ -24,8 +24,6 @@
     {
         "group": "QiLabs Workspace",
         "pages": [
-          "00_start_here/index",
-          "codex",
           "docs/00_QiLabs.workspace/_index",
           "docs/00_QiLabs.workspace/index"
         ]

@@ -1,0 +1,289 @@
+{
+  "hero": {
+    "title": "QiAlly",
+    "subtitle": "Business Operations & Technology Solutions",
+    "description": "Streamlining business operations through intelligent automation, custom development, and strategic technology implementation. Your partner in digital transformation.",
+    "tagline": "Systems that turn chaos into clarity.",
+    "cta": {
+      "primary": "Explore Services",
+      "secondary": "View Portfolio"
+    },
+    "resume": "/files/qially-capabilities.pdf"
+  },
+  "about": {
+    "title": "About QiAlly",
+    "description": "We specialize in transforming business operations through intelligent automation, custom development, and strategic technology implementation. Our mission is to streamline your workflow and maximize efficiency.",
+    "values": [
+      "Intelligent Automation",
+      "Custom Development", 
+      "Strategic Implementation",
+      "Continuous Optimization"
+    ]
+  },
+  "services": [
+    {
+      "id": "business-automation",
+      "title": "Business Process Automation",
+      "slug": "business-process-automation",
+      "description": "Streamline your operations with intelligent automation solutions that reduce manual work and increase efficiency.",
+      "longDescription": "Transform repetitive tasks into automated workflows. We design, implement, and optimize automation solutions that free your team to focus on high-value work.",
+      "features": [
+        "Workflow Design & Analysis",
+        "Integration Setup & Configuration",
+        "Performance Monitoring & Optimization",
+        "Custom Automation Scripts",
+        "Process Documentation"
+      ],
+      "benefits": [
+        "Reduce manual data entry by 80%",
+        "Eliminate repetitive tasks",
+        "Improve accuracy and consistency",
+        "Save 10-20 hours per week"
+      ],
+      "technologies": ["Zapier", "Make.com", "Python", "Node.js", "APIs"],
+      "pricing": {
+        "starting": "$2,500",
+        "type": "project"
+      }
+    },
+    {
+      "id": "web-development",
+      "title": "Custom Web Development",
+      "slug": "custom-web-development",
+      "description": "Build scalable web applications tailored to your business needs with modern technologies.",
+      "longDescription": "From client portals to internal tools, we build web applications that solve real business problems. Modern, fast, and maintainable.",
+      "features": [
+        "React & Node.js Development",
+        "Database Design & Optimization",
+        "API Development & Integration",
+        "Responsive Design",
+        "Cloud Deployment"
+      ],
+      "benefits": [
+        "Custom solutions for unique needs",
+        "Scalable architecture",
+        "Modern tech stack",
+        "Ongoing support & maintenance"
+      ],
+      "technologies": ["React", "Node.js", "PostgreSQL", "Supabase", "Cloudflare"],
+      "pricing": {
+        "starting": "$5,000",
+        "type": "project"
+      }
+    },
+    {
+      "id": "knowledge-management",
+      "title": "Knowledge Management Systems",
+      "slug": "knowledge-management",
+      "description": "Organize and leverage your business knowledge with AI-powered RAG systems and intelligent search.",
+      "longDescription": "Turn your scattered knowledge into an organized, searchable asset. AI-powered search and retrieval makes finding information instant.",
+      "features": [
+        "Content Organization & Structure",
+        "AI Integration (RAG Systems)",
+        "Search Optimization",
+        "Knowledge Base Design",
+        "Documentation Systems"
+      ],
+      "benefits": [
+        "Find information in seconds",
+        "Reduce knowledge silos",
+        "Onboard new team members faster",
+        "Capture institutional knowledge"
+      ],
+      "technologies": ["RAG/Vector DBs", "AI APIs", "Markdown", "Search Engines"],
+      "pricing": {
+        "starting": "$3,000",
+        "type": "project"
+      }
+    },
+    {
+      "id": "client-portals",
+      "title": "Client Portal Development",
+      "slug": "client-portal-development",
+      "description": "Create secure, user-friendly portals that enhance client experience and streamline communication.",
+      "longDescription": "Give your clients a branded, secure space to collaborate, share documents, and track progress. Improve client satisfaction and reduce admin overhead.",
+      "features": [
+        "User Authentication & Security",
+        "Real-time Collaboration Tools",
+        "Document Management System",
+        "Custom Branding",
+        "Mobile-Responsive Design"
+      ],
+      "benefits": [
+        "Professional client experience",
+        "Secure document sharing",
+        "Reduce email overload",
+        "Track client interactions"
+      ],
+      "technologies": ["React", "Supabase", "Auth0", "Cloudflare", "S3/Storage"],
+      "pricing": {
+        "starting": "$4,000",
+        "type": "project"
+      }
+    }
+  ],
+  "portfolio": [
+    {
+      "title": "BuiltByRays CFO Operations",
+      "description": "Complete CFO operations system with automated financial reporting, client management, and document processing.",
+      "technologies": ["React", "Node.js", "PostgreSQL", "Automation"],
+      "image": "/images/builtbyrays.jpg",
+      "category": "Financial Operations",
+      "results": "Streamlined financial processes, reduced reporting time by 70%"
+    },
+    {
+      "title": "Innovahire HR Platform",
+      "description": "Comprehensive HR management system with applicant tracking, employee onboarding, and performance management.",
+      "technologies": ["React", "Supabase", "Cloudflare", "AI Integration"],
+      "image": "/images/innovahire.jpg",
+      "category": "HR Technology",
+      "results": "Improved hiring efficiency, reduced time-to-hire by 50%"
+    },
+    {
+      "title": "Rosa Lucas Esteban Legal Practice",
+      "description": "Digital transformation for legal practice with case management, client portal, and document automation.",
+      "technologies": ["React", "Node.js", "Document AI", "Automation"],
+      "image": "/images/rosa-lucas.jpg",
+      "category": "Legal Technology",
+      "results": "Automated document processing, improved case management efficiency"
+    }
+  ],
+  "codex": {
+    "title": "Knowledge Base",
+    "description": "Access our comprehensive knowledge base with guides, best practices, and technical resources.",
+    "categories": [
+      {
+        "title": "Business Operations",
+        "description": "Guides for optimizing business processes and workflows",
+        "articles": ["Process Automation", "Workflow Design", "Performance Metrics"]
+      },
+      {
+        "title": "Technology Solutions",
+        "description": "Technical resources and implementation guides",
+        "articles": ["Web Development", "Database Design", "API Integration"]
+      },
+      {
+        "title": "AI & Automation",
+        "description": "Resources for implementing AI and automation solutions",
+        "articles": ["RAG Systems", "Process Automation", "Knowledge Management"]
+      }
+    ]
+  },
+  "support": {
+    "title": "Client Support",
+    "description": "Get help with your QiAlly solutions and access our support resources.",
+    "supportHours": "Monday - Friday, 9 AM - 6 PM EST",
+    "responseTime": "Within 4 business hours",
+    "resources": [
+      {
+        "id": "documentation",
+        "title": "Documentation",
+        "description": "Comprehensive guides and technical documentation for all our solutions",
+        "link": "/docs",
+        "icon": "📚"
+      },
+      {
+        "id": "video-tutorials",
+        "title": "Video Tutorials",
+        "description": "Step-by-step video guides for common tasks and workflows",
+        "link": "/tutorials",
+        "icon": "🎥"
+      },
+      {
+        "id": "knowledge-base",
+        "title": "Knowledge Base",
+        "description": "Search our knowledge base for answers to common questions",
+        "link": "/codex",
+        "icon": "💡"
+      },
+      {
+        "id": "community",
+        "title": "Community Forum",
+        "description": "Connect with other users and get community support",
+        "link": "/community",
+        "icon": "👥"
+      },
+      {
+        "id": "direct-support",
+        "title": "Direct Support",
+        "description": "Get personalized help from our support team",
+        "link": "/contact",
+        "icon": "💬"
+      }
+    ],
+    "faq": [
+      {
+        "question": "What's included in ongoing support?",
+        "answer": "All projects include 30 days of post-launch support. After that, we offer monthly support packages starting at $500/month."
+      },
+      {
+        "question": "How quickly can you respond to issues?",
+        "answer": "We respond to all support requests within 4 business hours. Critical issues are addressed immediately."
+      },
+      {
+        "question": "Do you offer training?",
+        "answer": "Yes! Every project includes training sessions and documentation. Additional training is available at $150/hour."
+      },
+      {
+        "question": "Can you help with maintenance and updates?",
+        "answer": "Absolutely. We offer monthly maintenance packages that include updates, monitoring, and improvements."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "description": "Ready to transform your business operations? Let's discuss your project and how we can help streamline your workflow.",
+    "email": "hello@qially.com",
+    "phone": "+1 (317) 205-4383",
+    "location": "Remote / Global",
+    "availability": "Monday - Friday, 9 AM - 5 PM EST",
+    "form": {
+      "title": "Start Your Project",
+      "description": "Tell us about your business needs and we'll get back to you within 24 hours.",
+      "fields": [
+        {
+          "name": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true
+        },
+        {
+          "name": "company",
+          "label": "Company",
+          "type": "text",
+          "required": false
+        },
+        {
+          "name": "projectType",
+          "label": "Project Type",
+          "type": "select",
+          "options": [
+            "Business Automation",
+            "Web Development",
+            "Knowledge Management",
+            "Client Portal",
+            "Not Sure / Consultation"
+          ],
+          "required": true
+        },
+        {
+          "name": "message",
+          "label": "Tell us about your project",
+          "type": "textarea",
+          "required": true
+        }
+      ]
+    },
+    "social": {
+      "github": "https://github.com/qiallyme",
+      "linkedin": "https://linkedin.com/company/qially",
+      "twitter": "https://twitter.com/qially"
+    }
+  }
+}

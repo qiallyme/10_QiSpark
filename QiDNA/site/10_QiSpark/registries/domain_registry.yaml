@@ -1,0 +1,121 @@
+registry: domains
+version: 1.0
+description: >
+  Reference registry for historical and future-conditional relational domain boundaries.
+  The active doctrine is QiAccess Start plus qiserver plus QiNexus plus Markdown/YAML docs.
+  Supabase/Postgres schemas are not active unless a specific job requires them.
+
+domains:
+  - id: qione
+    schema: qione
+    name: QiOne Core Platform
+    description: Legacy/future platform kernel reference. Tenants, members, roles, and modules are not current active doctrine.
+    tables: [tenants, tenant_members, tenant_modules, member_roles, module_role_access]
+    band: b_platform
+    status: future_conditional
+
+  - id: qiarchive
+    schema: qiarchive
+    name: QiArchive
+    description: File registration and archival identity spine. Canonical identity for all ingested objects.
+    tables: [archive_files, archive_chunks, ingest_jobs, file_history]
+    band: b_core
+    status: active
+
+  - id: qicase
+    schema: qicase
+    name: QiCase
+    description: Legal and operational case management. Cases, phases, issues, documents.
+    tables: [cases, phases, issues, deadlines, case_documents, document_issues]
+    band: b_domain
+    status: active
+
+  - id: qichronicle
+    schema: qichronicle
+    name: QiChronicle
+    description: Time, events, and calendar intelligence layer.
+    tables: [events, calendar_feeds]
+    band: b_domain
+    status: active
+
+  - id: qicms
+    schema: qicms
+    name: QiCMS
+    description: Content management. Posts and structured content.
+    tables: [posts]
+    band: b_domain
+    status: active
+
+  - id: qigraph
+    schema: qigraph
+    name: QiGraph
+    description: Derived knowledge graph reference. Nodes, edges, and master index remain downstream only and are not current active doctrine.
+    tables: [edges, master_index]
+    band: b_core
+    status: future_conditional
+
+  - id: qihome
+    schema: qihome
+    name: QiHome
+    description: Household and personal finance management.
+    tables: [chores, chore_assignments, expenses, expense_shares, settlements]
+    band: b_domain
+    status: active
+
+  - id: qiknowledge
+    schema: qiknowledge
+    name: QiKnowledge
+    description: Notes, knowledge, and local-first writing layer.
+    tables: [notes]
+    band: b_domain
+    status: active
+
+  - id: qially
+    schema: qially
+    name: QiAlly
+    description: AI assistant relational reference. Sessions, messages, and memory embeddings are future/conditional rather than active doctrine.
+    tables: [sessions, messages, memory_embeddings]
+    band: b_core
+    status: future_conditional
+
+  - id: qisys
+    schema: qisys
+    name: QiSys
+    description: System operations. Jobs, events, and worker status.
+    tables: [jobs, system_events, worker_status]
+    band: b_core
+    status: active
+
+  - id: qitax
+    schema: qitax
+    name: QiTax
+    description: Tax return management. Returns and associated files.
+    tables: [returns, return_files]
+    band: b_domain
+    status: active
+
+  - id: qievidence
+    schema: qievidence
+    name: QiEvidence
+    description: Local-first evidence intelligence. Transcription, visual extraction, and neutral narration.
+    tables: [evidence_records, evidence_segments, evidence_entities, evidence_entity_mentions, evidence_events, evidence_claims, evidence_observations, evidence_links, evidence_conflicts, evidence_timelines, evidence_timeline_items, evidence_reviews]
+    band: b_domain
+    status: active
+
+  - id: qivault
+    schema: qivault
+    name: QiVault
+    description: Secure document vault reference. Document storage remains a domain concept; tenant-scoped assumptions are legacy/future only.
+    tables: [documents]
+    band: b_domain
+    status: future_conditional
+
+  - id: public
+    schema: public
+    name: Public / Legacy
+    description: >
+      Legacy stubs and global auth-adjacent data. Contains profiles, todos (legacy),
+      nods_page (legacy docs search). Do not place new domain logic here.
+    tables: [profiles, todos, nods_page, nods_page_section]
+    band: b_platform
+    status: legacy

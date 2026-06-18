@@ -1,0 +1,2029 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>QiOS Namespace Registry - QiDNA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#namespace-registry" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="QiDNA" class="md-header__button md-logo" aria-label="QiDNA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            QiDNA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              QiOS Namespace Registry
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../00_QiLabs.workspace/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiLabs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiSpark
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../20_QiServer/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiServer
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../30_QiMemory/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiMemory
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../40_QiVault/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiVault
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../50_QiConnect/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiConnect
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../60_QiApps/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiApps
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../codex/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Codex
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="QiDNA" class="md-nav__button md-logo" aria-label="QiDNA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    QiDNA
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00_QiLabs.workspace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiLabs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiSpark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_QiServer/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_QiMemory/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiMemory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_QiVault/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiVault
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_QiConnect/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiConnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60_QiApps/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiApps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../codex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="namespace-registry">Namespace Registry</h1>
+<h2 id="00-operating-decision">00. Operating Decision</h2>
+<p>The QiOS Namespace Registry is the active routing and metadata layer for QiAccess Start, QiNexus, Paperless-ngx, Wiki.js, Google Drive, RAG/vector indexing, graph indexing, manifests, and automation routing.</p>
+<p>It does <strong>not</strong> define the visible folder tree.</p>
+<p>QiNexus defines storage placement. The namespace defines machine-readable routing, classification, grouping, and rollup logic.</p>
+<p>Plain English:</p>
+<ul>
+<li><strong>QiNexus answers:</strong> “Where does this live?”</li>
+<li><strong>Namespace route answers:</strong> “Where does this work belong?”</li>
+<li><strong>Relational ID answers:</strong> “What exact thing is this?”</li>
+<li><strong>QID/QiDecimal answers:</strong> “What stable object or artifact is this in the system?”</li>
+</ul>
+<p>This prevents the old mistake: turning every useful classification into another folder.</p>
+<hr />
+<h2 id="01-purpose">01. Purpose</h2>
+<p>QiOS uses a governed namespace registry to route work, artifacts, and workspace containers.</p>
+<p>Namespace codes are routing allocations for governed containers of work. They are not identifiers for every person, contact, login, message, raw database row, or random file.</p>
+<p>Current active doctrine uses these routes to organize and classify:</p>
+<ul>
+<li>QiNexus work</li>
+<li>QiAccess Start documentation</li>
+<li>Paperless-ngx document tags</li>
+<li>Wiki.js pages</li>
+<li>local operational containers</li>
+<li>graph/RAG records</li>
+<li>project and matter workspaces</li>
+<li>archive blocks</li>
+<li>future automations</li>
+</ul>
+<p>Old tenant/platform language is reference-only unless a future shared-container model is explicitly activated by ADR.</p>
+<hr />
+<h2 id="02-core-doctrine">02. Core Doctrine</h2>
+<ol>
+<li>Namespace codes are <strong>container routes</strong>, not universal entity identifiers.</li>
+<li>Contacts, users, clients, vendors, organizations, and other entities must exist as relational records first.</li>
+<li>Namespace allocation happens only when a governed workspace, matter, project, archive block, legacy tenant container, or approved routed container is required.</li>
+<li>Namespace bands are finite, explicit, and registry-controlled.</li>
+<li>No new top-level band may be created without blueprint update or ADR approval.</li>
+<li>Namespace aliases may exist for legacy interpretation, but full canonical names remain authoritative.</li>
+<li>Visible folders should remain shallow. Do not recreate the namespace as a folder cathedral.</li>
+<li>Metadata can carry more specificity than folders.</li>
+<li>Machine routing should support human clarity, not replace it.</li>
+<li>QiAccess Start, QiNexus, and the namespace registry are separate layers of the same system.</li>
+</ol>
+<hr />
+<h2 id="03-layer-boundaries">03. Layer Boundaries</h2>
+<h3 id="0301-qiaccess-start">03.01 QiAccess Start</h3>
+<p>QiAccess Start is the front door, launcher, dashboard, and control panel.</p>
+<p>It answers:</p>
+<blockquote>
+<p>“Where do I go next?”</p>
+</blockquote>
+<h3 id="0302-qinexus">03.02 QiNexus</h3>
+<p>QiNexus is the visible storage/workspace model, primarily on Google Drive.</p>
+<p>It answers:</p>
+<blockquote>
+<p>“Where does this live?”</p>
+</blockquote>
+<p>Canonical QiNexus roots remain the active visible storage roots:</p>
+<ol>
+<li><code>00_inbox</code></li>
+<li><code>01_workbench</code></li>
+<li><code>02_timeline</code></li>
+<li><code>03_life</code></li>
+<li><code>04_people</code></li>
+<li><code>05_business</code></li>
+<li><code>06_finance</code></li>
+<li><code>07_legal</code></li>
+<li><code>08_tech</code></li>
+<li><code>09_assets</code></li>
+<li><code>10_data</code></li>
+<li><code>11_reference</code></li>
+<li><code>12_archive</code></li>
+<li><code>13_system</code></li>
+</ol>
+<h3 id="0303-namespace-registry">03.03 Namespace Registry</h3>
+<p>The namespace registry is the routing/classification layer.</p>
+<p>It answers:</p>
+<blockquote>
+<p>“Where does this work belong in the governed system?”</p>
+</blockquote>
+<p>Example:</p>
+<p>A foreclosure impact summary may live in QiNexus under:</p>
+<p><code>07_legal/...</code></p>
+<p>but carry a namespace route like:</p>
+<p><code>0330LGL.011</code></p>
+<p>The folder serves human storage. The route serves metadata, indexing, automation, and rollup.</p>
+<h3 id="0304-relational-identity">03.04 Relational Identity</h3>
+<p>Relational identity belongs in databases, manifests, indexes, and entity tables.</p>
+<p>It answers:</p>
+<blockquote>
+<p>“What exact person, organization, record, matter, file, or object is this?”</p>
+</blockquote>
+<p>A person is not assigned a namespace just because they exist. A person can be related to a routed matter, project, document, or workspace.</p>
+<hr />
+<h2 id="04-locked-syntax">04. Locked Syntax</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Syntax</th>
+<th>Example</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structural Node</td>
+<td><code>####AAA</code></td>
+<td><code>0300LGL</code></td>
+<td>top-level routed node</td>
+</tr>
+<tr>
+<td>Section Node / Folder Label</td>
+<td><code>####AAA_Label_Name</code></td>
+<td><code>0330LGL_Impact</code></td>
+<td>human-readable routed container</td>
+</tr>
+<tr>
+<td>Decimal Bucket</td>
+<td><code>####AAA.###</code></td>
+<td><code>0330LGL.010</code></td>
+<td>group/bucket under node</td>
+</tr>
+<tr>
+<td>Artifact Route</td>
+<td><code>####AAA.###_YYYY-MM-DD_title_detail.ext</code></td>
+<td><code>0330LGL.011_2026-04-04_summary.md</code></td>
+<td>routed artifact filename pattern</td>
+</tr>
+</tbody>
+</table>
+<p>Rules:</p>
+<ul>
+<li><code>####</code> = four-digit numeric namespace allocation.</li>
+<li><code>AAA</code> = three-letter canonical band or route code.</li>
+<li><code>.###</code> = three-digit decimal bucket or artifact route.</li>
+<li>Use lowercase descriptive file titles after the date.</li>
+<li>Use underscores in routed filenames.</li>
+<li>Do not use namespace routes as a replacement for relational IDs.</li>
+</ul>
+<hr />
+<h2 id="05-structural-syntax">05. Structural Syntax</h2>
+<h3 id="0501-structural-node">05.01 Structural Node</h3>
+<p>Pattern:</p>
+<p><code>####AAA</code></p>
+<p>Examples:</p>
+<ul>
+<li><code>0000ROOT</code></li>
+<li><code>0300LGL</code></li>
+<li><code>0400FIN</code></li>
+<li><code>0600SYS</code></li>
+</ul>
+<h3 id="0502-structural-node-with-label">05.02 Structural Node With Label</h3>
+<p>Pattern:</p>
+<p><code>####AAA_Label_Name</code></p>
+<p>Examples:</p>
+<ul>
+<li><code>0330LGL_Impact</code></li>
+<li><code>0410FIN_Accounts</code></li>
+<li><code>0610SYS_Architecture</code></li>
+</ul>
+<h3 id="0503-decimal-route">05.03 Decimal Route</h3>
+<p>Pattern:</p>
+<p><code>####AAA.###</code></p>
+<p>Examples:</p>
+<ul>
+<li><code>0330LGL.010</code></li>
+<li><code>0330LGL.011</code></li>
+<li><code>5441MAT.020</code></li>
+<li><code>5601PRJ.010</code></li>
+</ul>
+<h3 id="0504-artifact-file">05.04 Artifact File</h3>
+<p>Pattern:</p>
+<p><code>####AAA.###_YYYY-MM-DD_title_detail.ext</code></p>
+<p>Example:</p>
+<p><code>0330LGL.011_2026-04-04_foreclosure_impact_summary.md</code></p>
+<p>This pattern is for routed artifacts where the namespace route must be visible in the filename.</p>
+<p>It is not required for every file in QiNexus. Many files can carry the route in front matter or metadata only.</p>
+<hr />
+<h2 id="06-decimal-rules">06. Decimal Rules</h2>
+<p>The three-digit decimal structure allows soft grouping without extra folder depth.</p>
+<table>
+<thead>
+<tr>
+<th>Decimal</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.000</code></td>
+<td>base/default/index under node</td>
+</tr>
+<tr>
+<td><code>.010</code>, <code>.020</code>, <code>.030</code>, <code>.040</code>, <code>.050</code></td>
+<td>grouping buckets</td>
+</tr>
+<tr>
+<td><code>.011-.019</code></td>
+<td>descendants/items under <code>.010</code></td>
+</tr>
+<tr>
+<td><code>.021-.029</code></td>
+<td>descendants/items under <code>.020</code></td>
+</tr>
+<tr>
+<td><code>.031-.039</code></td>
+<td>descendants/items under <code>.030</code></td>
+</tr>
+<tr>
+<td><code>.041-.049</code></td>
+<td>descendants/items under <code>.040</code></td>
+</tr>
+<tr>
+<td><code>.051-.059</code></td>
+<td>descendants/items under <code>.050</code></td>
+</tr>
+</tbody>
+</table>
+<p>Trailing zeroes are reserved for grouping buckets unless explicitly used as an index node.</p>
+<p>Do not solve ambiguity by creating more folders first. Use decimal groups, metadata, or relational links.</p>
+<hr />
+<h2 id="07-rollup-rule">07. Rollup Rule</h2>
+<p>Descendants roll up numerically.</p>
+<p>Example:</p>
+<p><code>0330LGL.011</code> → <code>0330LGL.010</code> → <code>0330LGL</code> → <code>0300LGL</code></p>
+<p>This allows rollups by:</p>
+<ul>
+<li>band</li>
+<li>domain</li>
+<li>routed container</li>
+<li>matter</li>
+<li>project</li>
+<li>bucket</li>
+<li>artifact group</li>
+<li>archive block</li>
+<li>reporting class</li>
+<li>automation target</li>
+</ul>
+<hr />
+<h2 id="08-allocation-rule">08. Allocation Rule</h2>
+<p>Namespace blocks are assigned only to governed containers requiring durable routing.</p>
+<p>Approved allocation targets include:</p>
+<ul>
+<li>system roots</li>
+<li>official bands</li>
+<li>governed workspaces</li>
+<li>matters</li>
+<li>projects</li>
+<li>archival containers</li>
+<li>approved operational partitions</li>
+<li>durable system containers</li>
+<li>reusable routing groups</li>
+<li>automation targets</li>
+</ul>
+<p>Namespace blocks must <strong>not</strong> be assigned to:</p>
+<ul>
+<li>every contact</li>
+<li>every portal login</li>
+<li>every CRM row</li>
+<li>every raw record</li>
+<li>every message or event</li>
+<li>every client unless a governed workspace exists</li>
+<li>every file by default</li>
+<li>every thought, note, or capture item</li>
+<li>every database row</li>
+</ul>
+<p>The allocation test:</p>
+<blockquote>
+<p>Does this thing need a durable governed route that multiple systems can use?</p>
+</blockquote>
+<p>If no, use metadata, tags, relational links, or ordinary filenames instead.</p>
+<hr />
+<h2 id="09-registry-bands">09. Registry Bands</h2>
+<h3 id="0901-reserved-ranges">09.01 Reserved Ranges</h3>
+<table>
+<thead>
+<tr>
+<th>Range</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0000–1999</code></td>
+<td>Global / shared constitutional bands</td>
+</tr>
+<tr>
+<td><code>2000–4999</code></td>
+<td>future shared domain expansion</td>
+</tr>
+<tr>
+<td><code>5000–7999</code></td>
+<td>workspace allocation bands</td>
+</tr>
+<tr>
+<td><code>8000–8999</code></td>
+<td>lab / sandbox</td>
+</tr>
+<tr>
+<td><code>9000–9999</code></td>
+<td>archive / legacy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="0902-range-meanings">09.02 Range Meanings</h3>
+<h4 id="00001999-global-shared-constitutional-bands"><code>0000–1999</code> — Global / Shared Constitutional Bands</h4>
+<p>Reserved for stable top-level routing bands.</p>
+<h4 id="20004999-future-shared-domain-expansion"><code>2000–4999</code> — Future Shared Domain Expansion</h4>
+<p>Reserved for future major approved domains.</p>
+<h4 id="50007999-workspace-allocation-bands"><code>5000–7999</code> — Workspace Allocation Bands</h4>
+<p>Reserved for matter, project, governed workspace, or equivalent routed allocation. Tenant wording is legacy/future only.</p>
+<h4 id="80008999-lab-sandbox"><code>8000–8999</code> — Lab / Sandbox</h4>
+<p>Reserved for experimental and non-canonical routing.</p>
+<h4 id="90009999-archive-legacy"><code>9000–9999</code> — Archive / Legacy</h4>
+<p>Reserved for deprecated, frozen, migrated, or cold-storage routing.</p>
+<hr />
+<h2 id="10-canonical-band-manifest">10. Canonical Band Manifest</h2>
+<table>
+<thead>
+<tr>
+<th>Range</th>
+<th>Code</th>
+<th>Canonical Name</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0000</code></td>
+<td><code>ROOT</code></td>
+<td>Root</td>
+<td>system root</td>
+</tr>
+<tr>
+<td><code>0100</code></td>
+<td><code>KBS</code></td>
+<td>Knowledge Base</td>
+<td>doctrine, references, templates</td>
+</tr>
+<tr>
+<td><code>0200</code></td>
+<td><code>VLT</code></td>
+<td>Vault</td>
+<td>records, entities, durable holdings</td>
+</tr>
+<tr>
+<td><code>0300</code></td>
+<td><code>LGL</code></td>
+<td>Legal</td>
+<td>legal work and litigation support</td>
+</tr>
+<tr>
+<td><code>0400</code></td>
+<td><code>FIN</code></td>
+<td>Finance</td>
+<td>financial routing and financial artifacts</td>
+</tr>
+<tr>
+<td><code>0500</code></td>
+<td><code>OPS</code></td>
+<td>Operations</td>
+<td>tasks, projects, requests, schedules</td>
+</tr>
+<tr>
+<td><code>0600</code></td>
+<td><code>SYS</code></td>
+<td>Systems</td>
+<td>architecture, schemas, automations, deployments</td>
+</tr>
+<tr>
+<td><code>0700</code></td>
+<td><code>HUM</code></td>
+<td>Human</td>
+<td>household, support, relationships, routines</td>
+</tr>
+<tr>
+<td><code>0800</code></td>
+<td><code>HLT</code></td>
+<td>Health</td>
+<td>logs, care, regulation, recovery</td>
+</tr>
+<tr>
+<td><code>0900</code></td>
+<td><code>MED</code></td>
+<td>Media</td>
+<td>writing, publishing, campaigns, reusable media</td>
+</tr>
+<tr>
+<td><code>1000</code></td>
+<td><code>CRM</code></td>
+<td>CRM</td>
+<td>leads, active clients, engagements, closeout</td>
+</tr>
+<tr>
+<td><code>1100</code></td>
+<td><code>TPL</code></td>
+<td>Templates</td>
+<td>prompts, forms, packets, boilerplates</td>
+</tr>
+<tr>
+<td><code>1200</code></td>
+<td><code>REF</code></td>
+<td>Reference</td>
+<td>laws, cases, snapshots, citations</td>
+</tr>
+<tr>
+<td><code>8000</code></td>
+<td><code>LAB</code></td>
+<td>Lab</td>
+<td>experiments and prototypes</td>
+</tr>
+<tr>
+<td><code>9000</code></td>
+<td><code>ARC</code></td>
+<td>Archive</td>
+<td>legacy and frozen materials</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-active-band-detail">11. Active Band Detail</h2>
+<h3 id="1101-0000root-system-root">11.01 <code>0000ROOT</code> — System Root</h3>
+<p>Purpose: master system control, global registries, indexes, staging, inboxes, exports, and base governance.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0010ROOT</code></td>
+<td>System</td>
+<td>global system records</td>
+</tr>
+<tr>
+<td><code>0020ROOT</code></td>
+<td>Registry</td>
+<td>registries and manifests</td>
+</tr>
+<tr>
+<td><code>0030ROOT</code></td>
+<td>Indexes</td>
+<td>generated indexes</td>
+</tr>
+<tr>
+<td><code>0040ROOT</code></td>
+<td>Inbox</td>
+<td>global intake</td>
+</tr>
+<tr>
+<td><code>0050ROOT</code></td>
+<td>Staging</td>
+<td>temporary staging</td>
+</tr>
+<tr>
+<td><code>0060ROOT</code></td>
+<td>Exports</td>
+<td>system exports</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1102-0100kbs-knowledge-base">11.02 <code>0100KBS</code> — Knowledge Base</h3>
+<p>Purpose: doctrine, operating manuals, references, standards, and templates.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0110KBS</code></td>
+<td>Start Here</td>
+<td>entry and orientation</td>
+</tr>
+<tr>
+<td><code>0120KBS</code></td>
+<td>Ops</td>
+<td>operating pages</td>
+</tr>
+<tr>
+<td><code>0130KBS</code></td>
+<td>Systems</td>
+<td>system explanations</td>
+</tr>
+<tr>
+<td><code>0140KBS</code></td>
+<td>Standards</td>
+<td>active standards</td>
+</tr>
+<tr>
+<td><code>0150KBS</code></td>
+<td>References</td>
+<td>reference pages</td>
+</tr>
+<tr>
+<td><code>0160KBS</code></td>
+<td>Templates</td>
+<td>knowledge templates</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1103-0200vlt-vault">11.03 <code>0200VLT</code> — Vault</h3>
+<p>Purpose: durable records, people, entities, places, assets, documents, and media records.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0210VLT</code></td>
+<td>People</td>
+<td>people records</td>
+</tr>
+<tr>
+<td><code>0220VLT</code></td>
+<td>Entities</td>
+<td>organizations and entities</td>
+</tr>
+<tr>
+<td><code>0230VLT</code></td>
+<td>Places</td>
+<td>locations and places</td>
+</tr>
+<tr>
+<td><code>0240VLT</code></td>
+<td>Assets</td>
+<td>durable asset records</td>
+</tr>
+<tr>
+<td><code>0250VLT</code></td>
+<td>Documents</td>
+<td>document records</td>
+</tr>
+<tr>
+<td><code>0260VLT</code></td>
+<td>Media</td>
+<td>durable media records</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1104-0300lgl-legal">11.04 <code>0300LGL</code> — Legal</h3>
+<p>Purpose: legal work, cases, evidence, procedure, filings, orders, and legal impact.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0310LGL</code></td>
+<td>Case</td>
+<td>case/matter work</td>
+</tr>
+<tr>
+<td><code>0320LGL</code></td>
+<td>Evidence</td>
+<td>evidence</td>
+</tr>
+<tr>
+<td><code>0330LGL</code></td>
+<td>Impact</td>
+<td>damages, harm, consequences</td>
+</tr>
+<tr>
+<td><code>0340LGL</code></td>
+<td>Procedure</td>
+<td>procedural notes</td>
+</tr>
+<tr>
+<td><code>0370LGL</code></td>
+<td>Filings</td>
+<td>filed/drafted filings</td>
+</tr>
+<tr>
+<td><code>0380LGL</code></td>
+<td>Orders</td>
+<td>court orders</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1105-0400fin-finance">11.05 <code>0400FIN</code> — Finance</h3>
+<p>Purpose: accounts, bills, income, expenses, tax, reporting, reconciliation, and financial artifacts.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0410FIN</code></td>
+<td>Accounts</td>
+<td>bank/card/account records</td>
+</tr>
+<tr>
+<td><code>0420FIN</code></td>
+<td>Bills</td>
+<td>bills and obligations</td>
+</tr>
+<tr>
+<td><code>0430FIN</code></td>
+<td>Income</td>
+<td>income streams</td>
+</tr>
+<tr>
+<td><code>0440FIN</code></td>
+<td>Expenses</td>
+<td>expenses</td>
+</tr>
+<tr>
+<td><code>0450FIN</code></td>
+<td>Tax</td>
+<td>tax prep and filings</td>
+</tr>
+<tr>
+<td><code>0470FIN</code></td>
+<td>Reports</td>
+<td>reports and dashboards</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1106-0500ops-operations">11.06 <code>0500OPS</code> — Operations</h3>
+<p>Purpose: dashboards, tasks, projects, schedules, logistics, reviews, and operating execution.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0510OPS</code></td>
+<td>Dashboard</td>
+<td>operations overview</td>
+</tr>
+<tr>
+<td><code>0520OPS</code></td>
+<td>Tasks</td>
+<td>task execution</td>
+</tr>
+<tr>
+<td><code>0530OPS</code></td>
+<td>Projects</td>
+<td>project containers</td>
+</tr>
+<tr>
+<td><code>0540OPS</code></td>
+<td>Schedules</td>
+<td>calendars/schedules</td>
+</tr>
+<tr>
+<td><code>0560OPS</code></td>
+<td>Logistics</td>
+<td>movement and coordination</td>
+</tr>
+<tr>
+<td><code>0570OPS</code></td>
+<td>Reviews</td>
+<td>reviews and retrospectives</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1107-0600sys-systems">11.07 <code>0600SYS</code> — Systems</h3>
+<p>Purpose: architecture, automations, schemas, scripts, integrations, deployments, and runtime systems.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0610SYS</code></td>
+<td>Architecture</td>
+<td>system architecture</td>
+</tr>
+<tr>
+<td><code>0630SYS</code></td>
+<td>Automations</td>
+<td>automations</td>
+</tr>
+<tr>
+<td><code>0640SYS</code></td>
+<td>Schemas</td>
+<td>schemas</td>
+</tr>
+<tr>
+<td><code>0650SYS</code></td>
+<td>Scripts</td>
+<td>scripts</td>
+</tr>
+<tr>
+<td><code>0660SYS</code></td>
+<td>Integrations</td>
+<td>integrations</td>
+</tr>
+<tr>
+<td><code>0670SYS</code></td>
+<td>Deployments</td>
+<td>deployments</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1108-0700hum-human-household">11.08 <code>0700HUM</code> — Human &amp; Household</h3>
+<p>Purpose: household, relationships, care, communication, routines, and conflict operations.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0710HUM</code></td>
+<td>Household</td>
+<td>household operations</td>
+</tr>
+<tr>
+<td><code>0720HUM</code></td>
+<td>Relationships</td>
+<td>relationship context</td>
+</tr>
+<tr>
+<td><code>0740HUM</code></td>
+<td>Care</td>
+<td>care coordination</td>
+</tr>
+<tr>
+<td><code>0750HUM</code></td>
+<td>Communication</td>
+<td>messages and scripts</td>
+</tr>
+<tr>
+<td><code>0760HUM</code></td>
+<td>Routines</td>
+<td>routines</td>
+</tr>
+<tr>
+<td><code>0770HUM</code></td>
+<td>Conflict</td>
+<td>conflict logs/processes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1109-0800hlt-health-regulation">11.09 <code>0800HLT</code> — Health &amp; Regulation</h3>
+<p>Purpose: logs, symptoms, medical records, mental state, recovery, regulation, and care-related context.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0810HLT</code></td>
+<td>Logs</td>
+<td>health/event logs</td>
+</tr>
+<tr>
+<td><code>0820HLT</code></td>
+<td>Symptoms</td>
+<td>symptom notes</td>
+</tr>
+<tr>
+<td><code>0850HLT</code></td>
+<td>Medical</td>
+<td>medical docs</td>
+</tr>
+<tr>
+<td><code>0860HLT</code></td>
+<td>Mental State</td>
+<td>mental/emotional state logs</td>
+</tr>
+<tr>
+<td><code>0870HLT</code></td>
+<td>Recovery</td>
+<td>recovery plans and notes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1110-0900med-media-publishing">11.10 <code>0900MED</code> — Media &amp; Publishing</h3>
+<p>Purpose: writing, audio, video, brands, publishing, campaigns, and reusable media.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0910MED</code></td>
+<td>Writing</td>
+<td>writing projects</td>
+</tr>
+<tr>
+<td><code>0920MED</code></td>
+<td>Audio</td>
+<td>audio</td>
+</tr>
+<tr>
+<td><code>0930MED</code></td>
+<td>Video</td>
+<td>video</td>
+</tr>
+<tr>
+<td><code>0950MED</code></td>
+<td>Brands</td>
+<td>brand material</td>
+</tr>
+<tr>
+<td><code>0970MED</code></td>
+<td>Publishing</td>
+<td>publishing workflows</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1111-1000crm-crm">11.11 <code>1000CRM</code> — CRM</h3>
+<p>Purpose: leads, active client work, engagements, deliverables, portals, billing, and client closeout.</p>
+<p>Important: CRM routing does not make business the center of the system. CRM is only active where business/client work exists.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1010CRM</code></td>
+<td>Leads</td>
+<td>leads</td>
+</tr>
+<tr>
+<td><code>1020CRM</code></td>
+<td>Active</td>
+<td>active clients</td>
+</tr>
+<tr>
+<td><code>1030CRM</code></td>
+<td>Engagements</td>
+<td>engagement records</td>
+</tr>
+<tr>
+<td><code>1040CRM</code></td>
+<td>Deliverables</td>
+<td>deliverables</td>
+</tr>
+<tr>
+<td><code>1050CRM</code></td>
+<td>Portal</td>
+<td>client portal</td>
+</tr>
+<tr>
+<td><code>1060CRM</code></td>
+<td>Billing</td>
+<td>billing</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1112-1100tpl-templates">11.12 <code>1100TPL</code> — Templates</h3>
+<p>Purpose: reusable documents, emails, forms, checklists, prompts, and packets.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1110TPL</code></td>
+<td>Documents</td>
+<td>document templates</td>
+</tr>
+<tr>
+<td><code>1120TPL</code></td>
+<td>Emails</td>
+<td>email templates</td>
+</tr>
+<tr>
+<td><code>1130TPL</code></td>
+<td>Forms</td>
+<td>forms</td>
+</tr>
+<tr>
+<td><code>1140TPL</code></td>
+<td>Checklists</td>
+<td>checklists</td>
+</tr>
+<tr>
+<td><code>1160TPL</code></td>
+<td>Prompts</td>
+<td>prompts</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1113-1200ref-reference">11.13 <code>1200REF</code> — Reference</h3>
+<p>Purpose: laws, cases, standards, notes, citations, snapshots, and external reference material.</p>
+<p>Recommended section routes:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1210REF</code></td>
+<td>Laws</td>
+<td>laws/statutes</td>
+</tr>
+<tr>
+<td><code>1220REF</code></td>
+<td>Cases</td>
+<td>case references</td>
+</tr>
+<tr>
+<td><code>1230REF</code></td>
+<td>Standards</td>
+<td>external standards</td>
+</tr>
+<tr>
+<td><code>1240REF</code></td>
+<td>Notes</td>
+<td>reference notes</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12-workspace-allocation-bands">12. Workspace Allocation Bands</h2>
+<p>Workspace allocations must use controlled registry assignment from the <code>5000–7999</code> range.</p>
+<p>Recommended patterns:</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>5xxxTNT</code></td>
+<td>legacy/future tenant workspace alias</td>
+</tr>
+<tr>
+<td><code>54xxMAT</code></td>
+<td>matter workspace</td>
+</tr>
+<tr>
+<td><code>56xxPRJ</code></td>
+<td>project workspace</td>
+</tr>
+<tr>
+<td><code>58xxORG</code></td>
+<td>organization-specific governed workspace</td>
+</tr>
+</tbody>
+</table>
+<p>These are routing classes, not relational identity classes.</p>
+<p>Examples:</p>
+<ul>
+<li><code>5441MAT</code> = a specific legal matter workspace route</li>
+<li><code>5601PRJ</code> = a specific project workspace route</li>
+<li><code>5801ORG</code> = a specific organization-governed workspace route</li>
+</ul>
+<p>Do not allocate one of these unless there is an actual governed workspace.</p>
+<hr />
+<h2 id="13-alias-policy">13. Alias Policy</h2>
+<p>Abbreviated legacy codes may be recognized as aliases for interpretation only.</p>
+<p>Examples:</p>
+<table>
+<thead>
+<tr>
+<th>Alias</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ARC</code></td>
+<td>QiArchive alias only</td>
+</tr>
+<tr>
+<td><code>ALY</code></td>
+<td>QiAlly alias only</td>
+</tr>
+<tr>
+<td><code>CAS</code></td>
+<td>QiCase alias only</td>
+</tr>
+</tbody>
+</table>
+<p>Aliases are not canonical replacements for official blueprint names.</p>
+<p>If an alias is used in old material, preserve it for interpretation, then map it to the canonical route in the registry.</p>
+<hr />
+<h2 id="14-front-matter-profile">14. Front Matter Profile</h2>
+<p>Markdown artifacts that participate in QiOS routing should use front matter.</p>
+<p>Minimum recommended fields:</p>
+<pre><code class="language-yaml">---
+title: Foreclosure Impact Summary
+created: 2026-04-04
+updated: 2026-04-04
+status: active
+qid: QID-EXAMPLE-0001
+qid_route: 0330LGL.011
+route_band: LGL
+route_node: 0330LGL
+route_bucket: 0330LGL.010
+domain: legal
+bucket: impact
+artifact_type: summary
+source_system: qinexus
+storage_path: 07_legal/...
+related_entities: []
+related_matters: []
+tags:
+  - legal
+  - impact
+---
+</code></pre>
+<p>Rules:</p>
+<ul>
+<li><code>qid</code> identifies the object/artifact.</li>
+<li><code>qid_route</code> routes the artifact.</li>
+<li><code>route_node</code> identifies the structural node.</li>
+<li><code>route_bucket</code> identifies the grouping bucket.</li>
+<li><code>domain</code> should use plain human-readable naming.</li>
+<li><code>bucket</code> should describe the functional bucket.</li>
+<li><code>storage_path</code> points to the QiNexus location when useful.</li>
+<li><code>related_entities</code> should reference entity IDs, not namespace routes.</li>
+</ul>
+<hr />
+<h2 id="15-paperless-ngx-tagging-profile">15. Paperless-ngx Tagging Profile</h2>
+<p>Paperless-ngx should use namespace-aware tags sparingly.</p>
+<p>Recommended tag categories:</p>
+<table>
+<thead>
+<tr>
+<th>Tag Type</th>
+<th>Example</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Route</td>
+<td><code>route:0330LGL.011</code></td>
+<td>exact namespace route</td>
+</tr>
+<tr>
+<td>Band</td>
+<td><code>band:LGL</code></td>
+<td>legal band</td>
+</tr>
+<tr>
+<td>Domain</td>
+<td><code>domain:legal</code></td>
+<td>human-readable domain</td>
+</tr>
+<tr>
+<td>Bucket</td>
+<td><code>bucket:impact</code></td>
+<td>functional bucket</td>
+</tr>
+<tr>
+<td>Matter</td>
+<td><code>matter:MAT-2026-001</code></td>
+<td>relational matter ID</td>
+</tr>
+<tr>
+<td>Sensitivity</td>
+<td><code>sensitivity:private</code></td>
+<td>access classification</td>
+</tr>
+</tbody>
+</table>
+<p>Do not create Paperless tags for every possible route unless they are actively useful. Paperless tag clutter becomes its own little goblin. Starve the goblin.</p>
+<hr />
+<h2 id="16-wikijs-profile">16. Wiki.js Profile</h2>
+<p>Wiki.js pages may reference namespace routes in page metadata or page headers.</p>
+<p>Recommended pattern:</p>
+<pre><code class="language-yaml">---
+title: Legal Impact Routing
+qid_route: 0330LGL.000
+route_band: LGL
+doc_type: operating_page
+source_of_truth: repo
+---
+</code></pre>
+<p>Wiki.js is the readable operating library. It does not silently override the repo doctrine.</p>
+<p>If a Wiki page changes doctrine, update the repo document or create an ADR.</p>
+<hr />
+<h2 id="17-rag-graph-indexing-profile">17. RAG / Graph Indexing Profile</h2>
+<p>Vector and graph records should preserve namespace metadata.</p>
+<p>Recommended fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>qid</code></td>
+<td>object/artifact identity</td>
+</tr>
+<tr>
+<td><code>qid_route</code></td>
+<td>route</td>
+</tr>
+<tr>
+<td><code>route_band</code></td>
+<td>band code</td>
+</tr>
+<tr>
+<td><code>route_node</code></td>
+<td>structural node</td>
+</tr>
+<tr>
+<td><code>route_bucket</code></td>
+<td>decimal bucket</td>
+</tr>
+<tr>
+<td><code>domain</code></td>
+<td>human-readable domain</td>
+</tr>
+<tr>
+<td><code>artifact_type</code></td>
+<td>type classification</td>
+</tr>
+<tr>
+<td><code>source_system</code></td>
+<td>source system</td>
+</tr>
+<tr>
+<td><code>storage_path</code></td>
+<td>source path</td>
+</tr>
+<tr>
+<td><code>source_uri</code></td>
+<td>source URI if applicable</td>
+</tr>
+<tr>
+<td><code>related_entities</code></td>
+<td>relational links</td>
+</tr>
+<tr>
+<td><code>related_matters</code></td>
+<td>matter links</td>
+</tr>
+<tr>
+<td><code>sensitivity</code></td>
+<td>access classification</td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>creation date</td>
+</tr>
+<tr>
+<td><code>updated</code></td>
+<td>last update date</td>
+</tr>
+</tbody>
+</table>
+<p>Graph rule:</p>
+<ul>
+<li>Entities are nodes.</li>
+<li>Documents are nodes.</li>
+<li>Matters/projects/workspaces are nodes.</li>
+<li>Namespace routes are classification/routing properties.</li>
+<li>Do not make every route into a fake entity unless it has operational meaning.</li>
+</ul>
+<hr />
+<h2 id="18-folder-placement-rule">18. Folder Placement Rule</h2>
+<p>Namespace bands must not become QiNexus root folders.</p>
+<p>Correct:</p>
+<ul>
+<li>QiNexus root: <code>07_legal</code></li>
+<li>Namespace route: <code>0330LGL.011</code></li>
+<li>Front matter: <code>qid_route: 0330LGL.011</code></li>
+</ul>
+<p>Wrong:</p>
+<ul>
+<li>Creating a new Drive root folder called <code>0300LGL</code></li>
+<li>Duplicating every namespace node as a folder</li>
+<li>Turning <code>0330LGL.010</code> into another folder unless there is a concrete usability reason</li>
+</ul>
+<p>Folders are for human retrieval. Namespace routes are for system routing.</p>
+<hr />
+<h2 id="19-adhd-safe-structural-constraint">19. ADHD-Safe Structural Constraint</h2>
+<p>To prevent system rot:</p>
+<ul>
+<li>maximum structural folder depth = 3 levels from root</li>
+<li>use decimal buckets before adding new folders</li>
+<li>avoid sibling overlap</li>
+<li>organize by function, not theme</li>
+<li>do not turn feelings, moods, or vibes into folders</li>
+<li>do not create a new root for a temporary panic</li>
+<li>route first, then place</li>
+<li>when in doubt, ask: “What job does this object do?”</li>
+</ul>
+<hr />
+<h2 id="20-compliance-requirement">20. Compliance Requirement</h2>
+<p>All namespace allocations must be:</p>
+<ul>
+<li>registry-valid</li>
+<li>unique within scope</li>
+<li>mapped to an approved owner type</li>
+<li>documented in the allocation registry</li>
+<li>consistent with blueprint band doctrine</li>
+<li>connected to relational identity when the item is an entity, matter, organization, client, vendor, person, or record</li>
+<li>safe for future automation and indexing</li>
+</ul>
+<hr />
+<h2 id="21-allocation-review-checklist">21. Allocation Review Checklist</h2>
+<p>Before assigning a namespace route, answer:</p>
+<ol>
+<li>Is this a governed workspace, matter, project, archive block, or durable routed container?</li>
+<li>Does it need to be found across multiple systems?</li>
+<li>Does it need rollup reporting?</li>
+<li>Does it need automation routing?</li>
+<li>Is there already a valid route?</li>
+<li>Is this actually an entity that belongs in a database instead?</li>
+<li>Is this just a file that only needs front matter?</li>
+<li>Is this better handled by tags?</li>
+<li>Would creating this route reduce friction or create future clutter?</li>
+<li>Is the allocation documented in the registry?</li>
+</ol>
+<p>If the answer is not clearly useful, do not allocate a new route.</p>
+<hr />
+<h2 id="22-implementation-targets">22. Implementation Targets</h2>
+<h3 id="2201-canonical-document">22.01 Canonical Document</h3>
+<p>Save this file as:</p>
+<p><code>docs/10_core/30_data/50_namespace_registry.md</code></p>
+<h3 id="2202-machine-registry">22.02 Machine Registry</h3>
+<p>Maintain machine-readable band data at:</p>
+<p><code>docs/10_core/10_governance/60_registry/band_registry.yaml</code></p>
+<h3 id="2203-adr">22.03 ADR</h3>
+<p>Create or update:</p>
+<p><code>docs/10_core/10_governance/50_decisions/ADR-0010_qios_namespace_as_routing_metadata_layer.md</code></p>
+<h3 id="2204-related-docs-to-update">22.04 Related Docs To Update</h3>
+<p>Update these documents to reference this doctrine:</p>
+<ul>
+<li><code>docs/10_core/30_data/20_bands.md</code></li>
+<li><code>docs/10_core/30_data/30_domains.md</code></li>
+<li><code>docs/10_core/30_data/40_subdomains.md</code></li>
+<li><code>docs/10_core/30_data/70_object_model.md</code></li>
+<li><code>docs/10_core/30_data/100_metadata.md</code></li>
+<li><code>docs/10_core/30_data/110_front_matter.md</code></li>
+<li><code>docs/10_core/30_data/130_placement_rules.md</code></li>
+<li><code>docs/10_core/10_governance/30_standards/metadata_rules.yaml</code></li>
+<li><code>docs/10_core/10_governance/30_standards/naming_rules.yaml</code></li>
+</ul>
+<hr />
+<h2 id="23-final-operating-rule">23. Final Operating Rule</h2>
+<p>Do not build a folder tree for every thought.</p>
+<p>QiNexus keeps the visible system navigable.</p>
+<p>The namespace keeps the machine-readable system coherent.</p>
+<p>Relational identity keeps real-world entities accurate.</p>
+<p>The win is not more structure. The win is the right layer doing the right job.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

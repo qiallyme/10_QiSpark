@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "asr_tips": [
+    "Ask one question at a time",
+    "Confirm numbers by repeating back"
+  ],
+  "mapping": [
+    {
+      "listen_for": [
+        "my social is",
+        "ITIN"
+      ],
+      "to_field": "ssn_itin",
+      "validator": "^\\d{3}-?\\d{2}-?\\d{4}$"
+    },
+    {
+      "listen_for": [
+        "tax year",
+        "for year"
+      ],
+      "to_field": "tax_year"
+    },
+    {
+      "listen_for": [
+        "amend",
+        "amended year"
+      ],
+      "to_field": "amended_year"
+    },
+    {
+      "listen_for": [
+        "i ninety four",
+        "i-94"
+      ],
+      "to_field": "i94_number"
+    }
+  ]
+}

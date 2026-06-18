@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QiOne Frontmatter Schema",
+  "type": "object",
+  "required": [
+    "title",
+    "slug",
+    "date_created",
+    "last_updated",
+    "owner",
+    "realm",
+    "file_doc_type",
+    "qi_decimal",
+    "tags",
+    "summary",
+    "file_name",
+    "status",
+    "sort_order"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9\\-\\.]*$"
+    },
+    "date_created": {
+      "type": "string"
+    },
+    "last_updated": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "realm": {
+      "type": "string"
+    },
+    "file_doc_type": {
+      "type": "string"
+    },
+    "qi_decimal": {
+      "type": "string",
+      "pattern": "^[0-9]{1,2}\\.[0-9]{2}(\\.[0-9]{2})?(\\.[0-9]{2})?$"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "name_mode": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "file_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "parent": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sort_order": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,29 @@
+# Source of Truth Rules
+
+## Core rule
+
+If it defines the whole system, it belongs in `_QiOS_DNA`.
+
+If it explains how one app works, it can live in that app repo and may also be summarized here under the matching module.
+
+If it is readable operator guidance, it can be published to the docs site or Wiki.js.
+
+If it is generated, exported, summarized, indexed, embedded, or visually rendered, it is not canonical by itself.
+
+## Truth hierarchy
+
+```text
+1. Canonical source docs in _QiOS_DNA
+2. Child repo implementation docs
+3. Database migrations / schemas / runtime config
+4. Docs-site or wiki operator pages
+5. Generated exports and AI summaries
+```
+
+## Raw / canon / export distinction
+
+```text
+Raw imports are evidence.
+Canonical docs are law.
+Exports are snapshots.
+```

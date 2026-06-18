@@ -1,0 +1,1218 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../60_QiApps/_index/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Codex - QiDNA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#codex-system-control-file" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="QiDNA" class="md-header__button md-logo" aria-label="QiDNA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            QiDNA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Codex
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../00_QiLabs.workspace/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiLabs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../10_QiSpark/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiSpark
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../20_QiServer/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiServer
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../30_QiMemory/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiMemory
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../40_QiVault/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiVault
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../50_QiConnect/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiConnect
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../60_QiApps/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiApps
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Codex
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="QiDNA" class="md-nav__button md-logo" aria-label="QiDNA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    QiDNA
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00_QiLabs.workspace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiLabs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_QiSpark/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiSpark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20_QiServer/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../30_QiMemory/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiMemory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../40_QiVault/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiVault
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../50_QiConnect/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiConnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../60_QiApps/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiApps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codex
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#section-0-active-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔴 SECTION 0 — ACTIVE INSTRUCTIONS
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-05-lean-execution-budget-discipline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟡 SECTION 0.5 — LEAN EXECUTION / BUDGET DISCIPLINE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟡 SECTION 0.5 — LEAN EXECUTION / BUDGET DISCIPLINE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-start-with-a-short-plan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Start with a short plan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-use-targeted-searches-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Use targeted searches first
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ask-instead-of-wandering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Ask instead of wandering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-do-not-rediscover-accepted-qidna-doctrine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Do not rediscover accepted QiDNA doctrine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-read-known-reconciliation-files-before-scanning-the-whole-repo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Read known reconciliation files before scanning the whole repo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-limit-reconnaissance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Limit reconnaissance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-avoid-junk-folders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Avoid junk folders
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-edit-discipline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Edit discipline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-verify-with-the-smallest-useful-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Verify with the smallest useful check
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-stop-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Stop conditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-end-every-task-with-a-short-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. End every task with a short report
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-active-audit-queue-newest-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟡 SECTION 1 — ACTIVE AUDIT QUEUE (NEWEST FIRST)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🟡 SECTION 1 — ACTIVE AUDIT QUEUE (NEWEST FIRST)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aq-001-relationship-intelligence-trust-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [AQ-001] Relationship Intelligence / Trust Tracking
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-resolved-archive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🟢 SECTION 2 — RESOLVED / ARCHIVE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-3-current-status-and-next-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔵 SECTION 3 — CURRENT STATUS AND NEXT ACTIONS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔵 SECTION 3 — CURRENT STATUS AND NEXT ACTIONS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status-2026-06-14-supabase-authority-and-qidna-reconciliation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [STATUS-2026-06-14] Supabase Authority and QiDNA Reconciliation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#next-actions-in-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Actions - In Order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questions-for-cody" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions for Cody
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="codex-system-control-file">CODEX SYSTEM CONTROL FILE</h1>
+<hr />
+<h2 id="section-0-active-instructions">🔴 SECTION 0 — ACTIVE INSTRUCTIONS</h2>
+<ul>
+<li>Always reconcile existing systems before creating new ones</li>
+<li>Prefer reuse over new implementation</li>
+<li>Identify contradictions explicitly</li>
+<li>Separate facts vs assumptions</li>
+<li>Do NOT implement unless explicitly instructed</li>
+<li>Always read this file fully before acting</li>
+</ul>
+<hr />
+<h2 id="section-05-lean-execution-budget-discipline">🟡 SECTION 0.5 — LEAN EXECUTION / BUDGET DISCIPLINE</h2>
+<p>Codex usage is limited. Work lean, but do not work sloppy.</p>
+<p><strong>Primary rule:</strong></p>
+<p>Spend budget on understanding decisions, making correct edits, and verifying results.
+Do not spend budget wandering, repeatedly searching, or trying random commands.</p>
+<h3 id="1-start-with-a-short-plan">1. Start with a short plan</h3>
+<p>Before editing, state:</p>
+<ol>
+<li>Goal</li>
+<li>Files likely involved</li>
+<li>Commands you plan to run</li>
+<li>Risks / unknowns</li>
+<li>Stop conditions</li>
+</ol>
+<p>Do not begin broad repo work without a plan.</p>
+<h3 id="2-use-targeted-searches-first">2. Use targeted searches first</h3>
+<p>Prefer:</p>
+<pre><code class="language-bash">git status --short --branch
+git log --oneline -8
+find . -maxdepth 3 -type f
+rg &quot;exact phrase&quot;
+rg &quot;keyword&quot; path/to/relevant/folder
+</code></pre>
+<p>Avoid repeated broad searches.</p>
+<p>If three targeted searches do not find the answer, stop and ask the user or record the missing information.</p>
+<h3 id="3-ask-instead-of-wandering">3. Ask instead of wandering</h3>
+<p>If a fact depends on the user's environment, server, credentials, SSH setup, private path, deployment target, or account configuration, do not guess endlessly.</p>
+<p>Ask a direct question.</p>
+<p>Example:</p>
+<blockquote>
+<p>I need the server path or repo location. Should I check <code>/home/qiadmin/qi_workspace</code>, <code>/srv/qios</code>, or another path?</p>
+</blockquote>
+<h3 id="4-do-not-rediscover-accepted-qidna-doctrine">4. Do not rediscover accepted QiDNA doctrine</h3>
+<p>Treat these as current unless a newer ADR contradicts them:</p>
+<ul>
+<li>QiDNA is the governance and documentation layer.</li>
+<li>QiEOS is doctrine inside QiDNA.</li>
+<li>Active root structure:</li>
+<li><code>_QILABS.workspace</code></li>
+<li><code>01_QiDNA</code></li>
+<li><code>_05_creative</code></li>
+<li><code>10_QiAccess</code></li>
+<li><code>20_QiSystem</code></li>
+<li><code>30_QiServer</code></li>
+<li><code>40_QiCapture</code></li>
+<li><code>50_QiNexus</code></li>
+<li><code>70_QiConnect</code></li>
+<li><code>1000_QiApps</code></li>
+<li><code>1100_QiApp_QiLife</code></li>
+<li>QiAccess is the front door / cockpit / docs surface.</li>
+<li>QiLife is the private life operating app and data spine.</li>
+<li>Supabase Postgres is the current QiLife structured-data authority under ADR-0018.</li>
+<li>QiNexus is file/export/reference/archive storage.</li>
+<li>SQLite is deprecated and allowed only for legacy, local, or transitional use.</li>
+</ul>
+<p>Do not reopen these decisions unless the task explicitly asks for architecture review.</p>
+<h3 id="5-read-known-reconciliation-files-before-scanning-the-whole-repo">5. Read known reconciliation files before scanning the whole repo</h3>
+<p>Before broad repo searches, read:</p>
+<ul>
+<li><code>codex.md</code></li>
+<li><code>README.md</code></li>
+<li><code>docs.json</code></li>
+<li><code>01_QiDNA/_01_QiDNA.md</code></li>
+<li><code>01_QiDNA/Reconciliation/2026-06-10_blueprint_readiness_and_decision_gate.md</code></li>
+<li><code>01_QiDNA/Architecture/Decisions/ADR-0012_data_strategy.md</code></li>
+<li><code>60_QiApp_QiLife/_60_QiApp_QiLife.md</code></li>
+</ul>
+<p>If those files answer the question, stop searching.</p>
+<h3 id="6-limit-reconnaissance">6. Limit reconnaissance</h3>
+<p>For most tasks:</p>
+<ul>
+<li>Max 5 minutes: inspect repo status and known docs.</li>
+<li>Max 10 minutes: search for missing files.</li>
+<li>After that, summarize what is missing and ask or proceed with a bounded assumption.</li>
+</ul>
+<p>Do not spend the whole session investigating.</p>
+<h3 id="7-avoid-junk-folders">7. Avoid junk folders</h3>
+<p>Do not search or process:</p>
+<ul>
+<li><code>.git</code></li>
+<li><code>node_modules</code></li>
+<li><code>dist</code></li>
+<li><code>build</code></li>
+<li><code>.next</code></li>
+<li><code>.venv</code></li>
+<li><code>venv</code></li>
+<li><code>__pycache__</code></li>
+<li><code>.cache</code></li>
+<li><code>.wrangler</code></li>
+<li><code>.pytest_cache</code></li>
+<li><code>*.log</code></li>
+<li><code>*.tsbuildinfo</code></li>
+</ul>
+<h3 id="8-edit-discipline">8. Edit discipline</h3>
+<p>Prefer small, reviewable edits.</p>
+<p>Before editing, state:</p>
+<ul>
+<li>Files to edit</li>
+<li>Why each file matters</li>
+<li>What will not be touched</li>
+</ul>
+<p>Do not perform mass renames, deletes, or folder moves unless explicitly instructed.</p>
+<p>For QiDNA:</p>
+<ul>
+<li>Do not delete legacy/evidence docs.</li>
+<li>Do not silently merge conflicting docs.</li>
+<li>Do not flatten the repo.</li>
+<li>Do not duplicate the QiNexus My Drive bucket tree.</li>
+<li>Label uncertain docs as Active / Legacy / Proposed / Generated / Evidence instead of guessing.</li>
+</ul>
+<h3 id="9-verify-with-the-smallest-useful-check">9. Verify with the smallest useful check</h3>
+<p>After edits, run only the smallest relevant verification first.</p>
+<p>Examples:</p>
+<ul>
+<li>Docs: check <code>docs.json</code> and referenced files.</li>
+<li>Scripts: run the script directly.</li>
+<li>Frontend: run lint/typecheck only if relevant.</li>
+<li>Database: inspect schema/migrations before editing.</li>
+</ul>
+<p>Do not run full builds repeatedly unless necessary.</p>
+<h3 id="10-stop-conditions">10. Stop conditions</h3>
+<p>Stop and ask or summarize when:</p>
+<ul>
+<li>You cannot locate the source after 3 targeted searches.</li>
+<li>Credentials/server access is required.</li>
+<li>The task depends on a user decision.</li>
+<li>Multiple docs contradict each other.</li>
+<li>A command fails twice for the same reason.</li>
+<li>The next step would be destructive.</li>
+<li>You are about to run a long install/build/test without clear need.</li>
+</ul>
+<h3 id="11-end-every-task-with-a-short-report">11. End every task with a short report</h3>
+<p>End with:</p>
+<ol>
+<li>What changed</li>
+<li>Files changed</li>
+<li>Commands run</li>
+<li>What was verified</li>
+<li>What remains uncertain</li>
+<li>Recommended next step</li>
+</ol>
+<p>Keep it short unless asked for detail.</p>
+<hr />
+<h2 id="section-1-active-audit-queue-newest-first">🟡 SECTION 1 — ACTIVE AUDIT QUEUE (NEWEST FIRST)</h2>
+<hr />
+<h3 id="aq-001-relationship-intelligence-trust-tracking">[AQ-001] Relationship Intelligence / Trust Tracking</h3>
+<p><strong>Status:</strong> Pending<br />
+<strong>Created:</strong> 2026-06-09  </p>
+<p><strong>Context:</strong><br />
+Need system to track individuals, interactions, and derive trust/reliability.</p>
+<p><strong>Ask Codex:</strong><br />
+- What exists in DNA/docs for:
+  - entity tracking<br />
+  - interaction/event logs<br />
+  - trust/reliability evaluation<br />
+- Where is it located?<br />
+- Is it complete, partial, or conceptual?<br />
+- Are there contradictions?<br />
+- What’s missing?</p>
+<p><strong>Constraints:</strong><br />
+Audit only. No building.</p>
+<hr />
+<h2 id="section-2-resolved-archive">🟢 SECTION 2 — RESOLVED / ARCHIVE</h2>
+<p>(None yet)</p>
+<hr />
+<h2 id="section-3-current-status-and-next-actions">🔵 SECTION 3 — CURRENT STATUS AND NEXT ACTIONS</h2>
+<h3 id="status-2026-06-14-supabase-authority-and-qidna-reconciliation">[STATUS-2026-06-14] Supabase Authority and QiDNA Reconciliation</h3>
+<p><strong>Verified status:</strong></p>
+<ul>
+<li>Canonical mirrored hierarchy remains unchanged.</li>
+<li>ADR-0018 supersedes prior SQLite authority decisions.</li>
+<li>Supabase Postgres is the canonical QiLife structured-data authority.</li>
+<li>SQLite and the 15-table SQLModel implementation are legacy/local/transitional evidence.</li>
+<li>Canonical baseline: Entity, Entity Relationship, and QiBit.</li>
+<li>Local migration created at <code>supabase/migrations/20260614162319_establish110_QiApp_QiLife_entity_qibit_spine.sql</code>.</li>
+<li>Migration contains exactly two schemas and three tables.</li>
+<li>Migration was syntax-applied successfully in disposable PostgreSQL 16; the validation container was removed.</li>
+<li>RLS is enabled; no client grants or policies are defined.</li>
+<li>No deployment or SQLite data conversion was run.</li>
+<li>QiDNA tree navigation and mind map usability repairs are built into the generated site.</li>
+<li>Referral side quest found no matching source in QiDNA, <code>/home/qiadmin/qi_workspace</code>, or <code>/srv/qios/repos</code>.</li>
+</ul>
+<h3 id="next-actions-in-order">Next Actions - In Order</h3>
+<ol>
+<li>Approve identity ownership, custom-schema exposure, RLS policies, and grants.</li>
+<li>Define SQLite-to-Supabase mapping, backup, rollback, and cutover.</li>
+<li>Continue document-by-document QiLife reconciliation.</li>
+<li>Complete the route, screen, workflow, permission, and entity-to-view UI blueprint.</li>
+</ol>
+<h3 id="questions-for-cody">Questions for Cody</h3>
+<ul>
+<li>What Supabase user/tenant ownership column should protect each Entity and QiBit?</li>
+<li>Should the custom schemas be exposed through the Supabase Data API, or accessed only by trusted backend code?</li>
+<li>Where is the referral/bonus page repository if it is outside the three searched roots?</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "toc.integrate"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

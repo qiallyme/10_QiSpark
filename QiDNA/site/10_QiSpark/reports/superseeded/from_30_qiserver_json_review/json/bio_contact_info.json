@@ -1,0 +1,276 @@
+{
+  "title": "Biographical & Contact Information",
+  "type": "reference",
+  "author": "Cody Rice-Velasquez",
+  "created": "2025-11-02",
+  "last_updated": "2025-11-02",
+  "status": "active",
+  "qi_decimal_id": "20.20.01",
+  "scope": "personal",
+  "slug": "bio-contact-info",
+  "tags": ["bio", "contact", "reference", "personal-info"],
+  "realm": "2_QsKb",
+  "owner": "CRV",
+  "privacy": "private",
+  "qi_decimal": "2.99.00-01.SYS",
+  "description": "Master reference document for all personal information, contact details, and links. This document serves as the single source of truth for biographical and contact information that can be referenced across all systems and documents.",
+  "location": {
+    "current_address": "4817 Shadow Pointe Dr, Indianapolis, IN 46254, USA",
+    "state": "Indiana",
+    "time_zone": "Eastern Time (ET) - America/Indiana/Indianapolis"
+  },
+  "phone_numbers": {
+    "primary": {
+      "number": "+1 317-205-4383",
+      "format": "tel:+13172054383",
+      "verified": "Recently updated (Zoho account)",
+      "active": true,
+      "type": "Mobile (Primary)"
+    },
+    "secondary": {
+      "number": "+1 317-209-7884",
+      "format": "tel:+13172097884",
+      "verified": "2 months ago (Zoho cody@qially.com account)",
+      "active": true,
+      "type": "Mobile (Secondary)"
+    }
+  },
+  "email_addresses": {
+    "primary": {
+      "email": "cody@qially.com",
+      "type": "Personal/Business hybrid",
+      "description": "Primary contact for most matters",
+      "zoho_user_id": "897874347"
+    },
+    "business": {
+      "email": "hello@qially.com",
+      "type": "Business inquiries",
+      "description": "For professional services at qially.com"
+    },
+    "personal": {
+      "email": "cody@qially.me",
+      "type": "Personal correspondence",
+      "description": "For personal matters and connections"
+    },
+    "additional": [
+      {
+        "email": "info@qially.me",
+        "type": "Personal site inquiries"
+      },
+      {
+        "email": "support@qially.me",
+        "type": "Personal site support"
+      },
+      {
+        "email": "info@qially.com",
+        "type": "Business inquiries (alternative)"
+      },
+      {
+        "email": "support@qially.com",
+        "type": "Business support"
+      },
+      {
+        "email": "admin@qially.com",
+        "type": "Administrative contact"
+      },
+      {
+        "email": "crice4485@gmail.com",
+        "type": "Personal Gmail (legacy/personal use)"
+      },
+      {
+        "email": "qiallyme@gmail.com",
+        "type": "Backup/recovery email (linked to Zoho)"
+      }
+    ]
+  },
+  "address_history": [
+    {
+      "location": "4817 Shadow Pointe Dr, Indianapolis, IN 46254",
+      "period": "2024 - Present",
+      "notes": "Current residence"
+    },
+    {
+      "location": "701 E 21st St, Apt 20, Indianapolis, IN 46202",
+      "period": "2022 - 2024",
+      "notes": "Previous Indianapolis location"
+    },
+    {
+      "location": "Austin, TX, USA",
+      "period": "2019 - 2023",
+      "notes": "Previous location"
+    },
+    {
+      "location": "Dallas, TX, USA",
+      "period": "2015 - 2019",
+      "notes": "Earlier location"
+    }
+  ],
+  "social_media": {
+    "professional": {
+      "linkedin": {
+        "url": "https://www.linkedin.com/in/cody-rice-velasquez-qially/",
+        "description": "Professional networking and business updates"
+      },
+      "github": {
+        "url": "https://github.com/codyrice",
+        "description": "Code repositories and technical work"
+      },
+      "portfolio": {
+        "url": "https://portfolio.qially.com/",
+        "description": "Professional portfolio and case studies"
+      }
+    },
+    "social": {
+      "twitter": {
+        "url": "https://twitter.com/codyrice",
+        "handle": "@codyrice",
+        "description": "General thoughts and updates"
+      },
+      "personal_website": {
+        "url": "https://qially.me",
+        "description": "Personal wiki, timeline, and digital garden"
+      }
+    }
+  },
+  "websites": {
+    "personal": {
+      "qially_me": {
+        "url": "https://qially.me",
+        "description": "Personal site, biographical information, essays, timeline. Digital garden and personal wiki.",
+        "domain_verified": true,
+        "verified_in": "Zoho"
+      }
+    },
+    "business": {
+      "qially_com": {
+        "url": "https://qially.com",
+        "description": "Business website for Qi Ally consulting services. For professional inquiries and business services.",
+        "domain_managed": "Zoho",
+        "valid_until": "August 22, 2026"
+      }
+    },
+    "projects": {
+      "empower_q_now": {
+        "url": "https://empowerqnow.com",
+        "description": "Personal empowerment platform and 713 series",
+        "domain_verified": true,
+        "verified_in": "Zoho",
+        "valid_until": "July 19, 2026"
+      },
+      "memory_vault": {
+        "url": "https://memory.vault.qially.com",
+        "description": "Personal timeline and life archive"
+      },
+      "qi_vault_public_kb": {
+        "url": "https://vault.qially.com",
+        "description": "Public knowledge base, notes, frameworks, and resources"
+      },
+      "portfolio": {
+        "url": "https://portfolio.qially.com",
+        "description": "Professional portfolio and case studies"
+      }
+    },
+    "additional_domains": {
+      "builtbyrays_com": {
+        "url": "https://builtbyrays.com",
+        "status": "Active",
+        "managed_through": "Zoho",
+        "valid_until": "August 7, 2026"
+      }
+    }
+  },
+  "professional_information": {
+    "current_work": [
+      "Fractional CFO/COO services",
+      "AI workflow design and implementation",
+      "Systems thinking and operations consulting"
+    ],
+    "identity": {
+      "description": "Systems thinker, builder, writer",
+      "focus": "Intersection of finance, operations, and technology",
+      "interest": "AI-powered workflows that enhance human work"
+    },
+    "business_inquiries": "https://qially.com"
+  },
+  "personal_interests": {
+    "learning_exploration": [
+      "Systems thinking practice",
+      "Spiritual and operational integration",
+      "Building efficient knowledge systems",
+      "Structure meeting creativity"
+    ],
+    "current_projects": [
+      "Building EmpowerQNow 713 series",
+      "Maintaining and expanding Memory Vault",
+      "Iterating on personal site (qially.me)",
+      "Knowledge base development"
+    ]
+  },
+  "quick_reference": {
+    "contact": {
+      "email_primary": "cody@qially.com",
+      "email_personal": "cody@qially.me",
+      "email_legacy_gmail": "crice4485@gmail.com",
+      "phone_primary": "+1 317-205-4383",
+      "phone_secondary": "+1 317-209-7884",
+      "business_inquiries": "https://qially.com/contact",
+      "personal_site": "https://qially.me"
+    },
+    "professional": {
+      "business_website": "https://qially.com",
+      "linkedin": "https://www.linkedin.com/in/cody-rice-velasquez-qially/",
+      "portfolio": "https://portfolio.qially.com"
+    },
+    "personal_projects": {
+      "empower_q_now": "https://empowerqnow.com",
+      "memory_vault": "https://memory.vault.qially.com",
+      "public_kb": "https://vault.qially.com"
+    }
+  },
+  "account_information": {
+    "zoho_accounts": [
+      {
+        "email": "cody@qially.com",
+        "zoho_user_id": "897874347",
+        "role": "Organization administrator",
+        "manages": ["qially.com domain"],
+        "time_zone": "Eastern Daylight Time (America/Indiana/Indianapolis)",
+        "mobile": "+1 317-209-7884"
+      },
+      {
+        "email": "info@qially.me",
+        "role": "Primary Zoho account",
+        "manages": ["qially.me", "builtbyrays.com", "empowerqnow.com"],
+        "state": "Indiana",
+        "mobile": "+1 317-205-4383",
+        "linked_to": "qiallyme@gmail.com (Mishawaka, Indiana)"
+      }
+    ],
+    "domain_management": "All domains verified and actively managed through Zoho accounts. See `2_QsKb/2.70_TECH/Zoho/` for detailed account information."
+  },
+  "notes": [
+    "This document should be updated whenever contact information changes",
+    "All references to contact info across the system should link back to this document",
+    "Business inquiries should always route to qially.com",
+    "Personal site (qially.me) is intentionally separate from business presence",
+    "Phone numbers and sensitive personal addresses should be updated as needed"
+  ],
+  "reference_usage": [
+    "Contact forms",
+    "Email signatures",
+    "Social media profiles",
+    "Resume/CV",
+    "Any system requiring contact information"
+  ],
+  "version_history": [
+    {
+      "date": "2025-11-02",
+      "description": "Initial creation - Compiled from Contact.tsx component data, structured for easy reference and linking, separated personal from business contacts"
+    },
+    {
+      "date": "2025-11-02",
+      "description": "Updated with real contact information - Added verified phone numbers from Zoho accounts, updated address to Indianapolis, IN (verified current location), added all associated email addresses from Zoho accounts, added correct LinkedIn profile URL, added portfolio site reference, added domain management details, corrected time zone to Eastern Time (Indiana)"
+    }
+  ]
+}
+

@@ -1,0 +1,91 @@
+# QiOS Band Registry
+# Canonical machine-readable companion to:
+# docs/10_core/30_data/50_namespace_registry.md
+
+status: active
+version: 2.0
+updated: 2026-05-18
+
+range_policy:
+  "0000-1999": "Global / shared constitutional bands"
+  "2000-4999": "Future shared domain expansion"
+  "5000-7999": "Workspace allocation bands"
+  "8000-8999": "Lab / sandbox"
+  "9000-9999": "Archive / legacy"
+
+bands:
+  - range: "0000"
+    code: ROOT
+    canonical_name: Root
+    role: system root
+  - range: "0100"
+    code: KBS
+    canonical_name: Knowledge Base
+    role: doctrine, references, templates
+  - range: "0200"
+    code: VLT
+    canonical_name: Vault
+    role: records, entities, durable holdings
+  - range: "0300"
+    code: LGL
+    canonical_name: Legal
+    role: legal work and litigation support
+  - range: "0400"
+    code: FIN
+    canonical_name: Finance
+    role: financial routing and financial artifacts
+  - range: "0500"
+    code: OPS
+    canonical_name: Operations
+    role: tasks, projects, requests, schedules
+  - range: "0600"
+    code: SYS
+    canonical_name: Systems
+    role: architecture, schemas, automations, deployments
+  - range: "0700"
+    code: HUM
+    canonical_name: Human
+    role: household, support, relationships, routines
+  - range: "0800"
+    code: HLT
+    canonical_name: Health
+    role: logs, care, regulation, recovery
+  - range: "0900"
+    code: MED
+    canonical_name: Media
+    role: writing, publishing, campaigns, reusable media
+  - range: "1000"
+    code: CRM
+    canonical_name: CRM
+    role: leads, active clients, engagements, closeout
+  - range: "1100"
+    code: TPL
+    canonical_name: Templates
+    role: prompts, forms, packets, boilerplates
+  - range: "1200"
+    code: REF
+    canonical_name: Reference
+    role: laws, cases, snapshots, citations
+  - range: "8000"
+    code: LAB
+    canonical_name: Lab
+    role: experiments and prototypes
+  - range: "9000"
+    code: ARC
+    canonical_name: Archive
+    role: legacy and frozen materials
+
+workspace_allocation_patterns:
+  - pattern: "5xxxTNT"
+    meaning: "legacy/future tenant workspace alias"
+  - pattern: "54xxMAT"
+    meaning: "matter workspace"
+  - pattern: "56xxPRJ"
+    meaning: "project workspace"
+  - pattern: "58xxORG"
+    meaning: "organization-specific governed workspace"
+
+alias_policy:
+  ARC: "QiArchive alias only"
+  ALY: "QiAlly alias only"
+  CAS: "QiCase alias only"

@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EOS Frontmatter Schema",
+  "type": "object",
+  "required": [
+    "title",
+    "slug",
+    "date_created",
+    "last_updated",
+    "owner",
+    "system",
+    "realm",
+    "realm_slug",
+    "realm_tag",
+    "qi_decimal",
+    "qid",
+    "file_doc_type",
+    "node_type",
+    "tags",
+    "related_nodes",
+    "graph_weight",
+    "name_mode",
+    "file_name",
+    "status",
+    "parent",
+    "sort_order",
+    "version",
+    "summary"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "date_created": {
+      "type": "string",
+      "pattern": "^20[0-9]{2}-[0-1][0-9]-[0-3][0-9]$"
+    },
+    "last_updated": {
+      "type": "string",
+      "pattern": "^20[0-9]{2}-[0-1][0-9]-[0-3][0-9]$"
+    },
+    "owner": {
+      "type": "string",
+      "const": "q"
+    },
+    "system": {
+      "type": "string",
+      "const": "qios"
+    },
+    "realm": {
+      "type": "string",
+      "const": "system"
+    },
+    "realm_slug": {
+      "type": "string",
+      "const": "eos"
+    },
+    "realm_tag": {
+      "type": "string",
+      "const": "realm-eos"
+    },
+    "qi_decimal": {
+      "type": "string",
+      "pattern": "^[0-9]{1,2}\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}$"
+    },
+    "qid": {
+      "type": "string",
+      "pattern": "^qib-20[0-9]{2}-[0-1][0-9]-[0-3][0-9]-[0-9]{4}$"
+    },
+    "file_doc_type": {
+      "type": "string",
+      "enum": ["protocol", "reference", "specification"]
+    },
+    "node_type": {
+      "type": "string",
+      "enum": ["protocol", "registry", "specification", "taxonomy"]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "related_nodes": {
+      "type": "object",
+      "required": ["parents", "children", "siblings", "references"],
+      "properties": {
+        "parents": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "children": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "siblings": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "references": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "graph_weight": {
+      "type": "object",
+      "required": ["importance", "sensitivity", "stability"],
+      "properties": {
+        "importance": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "sensitivity": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        },
+        "stability": {
+          "type": "string",
+          "enum": ["stable", "evolving", "volatile"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "name_mode": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "file_name": {
+      "type": "string",
+      "pattern": "^[0-9]{1,2}\\.[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}_[a-z0-9._-]+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "draft", "archived"]
+    },
+    "parent": {
+      "type": "string",
+      "pattern": "^(0|0\\.00|0\\.00\\.[0-9]{2}\\.[0-9]{2})$"
+    },
+    "sort_order": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": true
+}
+

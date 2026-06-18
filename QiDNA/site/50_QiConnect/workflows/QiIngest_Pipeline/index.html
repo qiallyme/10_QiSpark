@@ -1,0 +1,919 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>QiIngest Pipeline - QiDNA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#qiingest-pipeline" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="QiDNA" class="md-header__button md-logo" aria-label="QiDNA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            QiDNA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              QiIngest Pipeline
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../00_QiLabs.workspace/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiLabs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../10_QiSpark/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiSpark
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../20_QiServer/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiServer
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../30_QiMemory/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiMemory
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../40_QiVault/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiVault
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiConnect
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../60_QiApps/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiApps
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../codex/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Codex
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="QiDNA" class="md-nav__button md-logo" aria-label="QiDNA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    QiDNA
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00_QiLabs.workspace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiLabs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_QiSpark/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiSpark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_QiServer/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_QiMemory/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiMemory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_QiVault/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiVault
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiConnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../60_QiApps/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiApps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../codex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="qiingest-pipeline">QiIngest Pipeline</h1>
+<h2 id="purpose">Purpose</h2>
+<p>QiIngest Pipeline is the future local-first ingestion workflow for documents and document-like artifacts. This page is architecture and planning only. It does not claim that the full pipeline already exists in this repo.</p>
+<h2 id="goal">Goal</h2>
+<p>Build a controlled local-first path that can:</p>
+<ol>
+<li>watch selected folders</li>
+<li>hash files</li>
+<li>detect duplicates</li>
+<li>import documents into Paperless</li>
+<li>extract text and OCR results</li>
+<li>classify documents by content and context</li>
+<li>propose cleaned filenames</li>
+<li>propose metadata, tags, correspondents, and document types</li>
+<li>update a file inventory</li>
+<li>embed document text into a vector store such as Qdrant</li>
+<li>optionally map entities and relationships into Neo4j</li>
+<li>create an approval queue for Cody</li>
+<li>update routing rules based on Cody-approved corrections</li>
+<li>improve routing accuracy over time</li>
+</ol>
+<h2 id="current-repo-reality">Current Repo Reality</h2>
+<h3 id="what-exists">What Exists</h3>
+<ul>
+<li>Paperless is already treated in repo docs as the first real ingestion target.</li>
+<li><code>docs/10_qicore/50_operations/20_qiserver/_index.md</code> documents the Paperless 10-document test rule before bulk import.</li>
+<li><code>docs/10_qicore/50_operations/30_dev_history/2026-05-17_open_loop_reset_paperless_ingestion_runbook.md</code> outlines a controlled staging and manifest concept for Paperless.</li>
+<li><code>docs/30_qiarchive/10_ingestion/</code>, <code>20_extraction/</code>, <code>40_embeddings/</code>, and <code>50_graphs/</code> contain placeholder planning folders.</li>
+</ul>
+<h3 id="what-does-not-exist-in-this-repo">What Does Not Exist In This Repo</h3>
+<ul>
+<li>no committed folder watcher for QiIngest</li>
+<li>no committed duplicate-detector for QiIngest</li>
+<li>no committed Paperless staging script for QiIngest</li>
+<li>no committed OCR or text extraction worker for QiIngest</li>
+<li>no committed classifier or filename-normalizer for QiIngest</li>
+<li>no committed inventory database or inventory writer for QiIngest</li>
+<li>no committed Qdrant writer for QiIngest</li>
+<li>no committed Neo4j mapper for QiIngest</li>
+<li>no committed approval queue implementation for QiIngest</li>
+</ul>
+<h3 id="important-non-match-to-avoid">Important Non-Match To Avoid</h3>
+<ul>
+<li><code>src/pages/api/hash.js</code> is a Homepage config hash endpoint, not a file-ingest hashing pipeline.</li>
+</ul>
+<h2 id="proposed-pipeline-stages">Proposed Pipeline Stages</h2>
+<h3 id="stage-1-watch-and-register">Stage 1: Watch And Register</h3>
+<p>Input:
+- approved local folders
+- manual drop zones
+- optionally exported document batches</p>
+<p>Actions:
+- detect new or changed files
+- compute stable hash values
+- record source path, timestamps, size, and file type
+- check duplicate history before deeper processing</p>
+<p>Output:
+- inventory registration record
+- staging decision: new, duplicate, skip, manual review</p>
+<h3 id="stage-2-paperless-intake">Stage 2: Paperless Intake</h3>
+<p>Actions:
+- stage safe copies into Paperless consume flow
+- keep originals untouched until verified
+- follow the 10-document maximum proof step before bulk import</p>
+<p>Output:
+- Paperless import receipt
+- initial document identity linkage back to the local inventory</p>
+<h3 id="stage-3-ocr-and-text-extraction">Stage 3: OCR And Text Extraction</h3>
+<p>Actions:
+- capture OCR text from scans
+- extract text from native digital documents when available
+- preserve raw extracted text plus cleaned text</p>
+<p>Output:
+- raw text
+- cleaned text
+- extraction status</p>
+<h3 id="stage-4-classification-and-naming-suggestions">Stage 4: Classification And Naming Suggestions</h3>
+<p>Actions:
+- classify by content, source context, and historical routing patterns
+- propose cleaned filenames
+- propose tags, correspondents, document types, and routing targets</p>
+<p>Output:
+- suggestion set, not silent auto-rename</p>
+<h3 id="stage-5-inventory-and-derived-layers">Stage 5: Inventory And Derived Layers</h3>
+<p>Actions:
+- update the file inventory with canonical facts
+- write embeddings to Qdrant or another approved vector store
+- optionally create Neo4j entity and relationship projections</p>
+<p>Rule:
+- inventory facts stay canonical
+- vectors and graph remain derived</p>
+<h3 id="stage-6-approval-queue-and-learning-loop">Stage 6: Approval Queue And Learning Loop</h3>
+<p>Actions:
+- queue proposed corrections for Cody review
+- record Cody-approved edits
+- update routing rules from approved corrections only
+- keep audit trail of changed rules and their source decisions</p>
+<h2 id="suggested-data-artifacts">Suggested Data Artifacts</h2>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>file inventory record</td>
+<td>canonical record of source file and ingest state</td>
+</tr>
+<tr>
+<td>content hash</td>
+<td>duplicate detection and lineage</td>
+</tr>
+<tr>
+<td>Paperless receipt</td>
+<td>proof of import or failure</td>
+</tr>
+<tr>
+<td>OCR text</td>
+<td>raw extraction output</td>
+</tr>
+<tr>
+<td>cleaned text</td>
+<td>downstream classification/search input</td>
+</tr>
+<tr>
+<td>suggestion payload</td>
+<td>proposed filename, tags, document type, correspondent, route</td>
+</tr>
+<tr>
+<td>approval decision record</td>
+<td>Cody review outcome</td>
+</tr>
+<tr>
+<td>routing rule update receipt</td>
+<td>record of what learning rule changed and why</td>
+</tr>
+</tbody>
+</table>
+<h2 id="verified-facts">Verified Facts</h2>
+<ul>
+<li>The repo already documents Paperless as the first real ingest lane.</li>
+<li>The repo already documents vector and graph layers as downstream/derived concepts.</li>
+<li>No full QiIngest implementation scripts are committed here today.</li>
+<li>Existing related tooling in this repo is limited to documentation audit and Homepage config-map generation.</li>
+</ul>
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+<li>Local-first means the first detection, hashing, staging, and approval loop should start from Cody-controlled folders or drop zones.</li>
+<li>Paperless should be the first durable document-ingest system before vector or graph expansion.</li>
+<li>Qdrant and Neo4j should remain optional downstream layers, not required first milestones.</li>
+</ul>
+<h2 id="unknowns">Unknowns</h2>
+<ul>
+<li>Which local folders should be watched first.</li>
+<li>Where the inventory should live.</li>
+<li>Which approval queue surface Cody wants to use.</li>
+<li>Whether filename cleanup should happen before or after Paperless import.</li>
+<li>Whether routing rules should stay file-based, database-backed, or both.</li>
+</ul>
+<h2 id="needs-cody-confirmation">Needs Cody Confirmation</h2>
+<ul>
+<li>Initial watch-folder set.</li>
+<li>Preferred approval queue surface.</li>
+<li>Preferred inventory location.</li>
+<li>Whether Paperless should stay the first mandatory destination for all document-like material or only a subset.</li>
+</ul>
+<h2 id="repo-only-content">Repo-Only Content</h2>
+<ul>
+<li>Exact source references to current runbook docs and placeholder archive folders.</li>
+<li>Warning that <code>src/pages/api/hash.js</code> is unrelated to QiIngest.</li>
+<li>Local implementation gap inventory.</li>
+</ul>
+<h2 id="wikijs-ready-content">Wiki.js-Ready Content</h2>
+<ul>
+<li>Stage-by-stage ingest overview.</li>
+<li>Manual-approval rule.</li>
+<li>Canonical-versus-derived rule.</li>
+<li>Paperless-first validation rule.</li>
+</ul>
+<h2 id="future-automation-candidates">Future Automation Candidates</h2>
+<ul>
+<li>folder watcher</li>
+<li>duplicate detector</li>
+<li>Paperless staging script</li>
+<li>OCR/extraction worker</li>
+<li>classifier and metadata suggester</li>
+<li>inventory writer</li>
+<li>Qdrant writer</li>
+<li>optional Neo4j mapper</li>
+<li>approval queue UI or CLI</li>
+<li>correction-to-routing-rule updater</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

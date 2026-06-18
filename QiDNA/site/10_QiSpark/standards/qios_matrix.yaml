@@ -1,0 +1,139 @@
+version: 1
+generated: 2025-11-24
+
+matrix:
+  - id: "L0"
+    name: "Root Integrity"
+    type: "governance_layer"
+    governs: ["folder_structure", "root_paths", "darkmatter_existence"]
+    touched_by: ["tree-compiler", "gina-orchestrator"]
+    depends_on: []
+    produces: ["root_validation_events"]
+    realm_effect: "global"
+
+  - id: "L1"
+    name: "Dark Matter Physics"
+    type: "governance_layer"
+    governs: ["system_darkmatter", "internal_only", "substrate"]
+    touched_by: ["darkmatter-worker"]
+    depends_on: ["L0"]
+    produces: ["dm_protection_events"]
+    realm_effect: "qios"
+
+  - id: "L2"
+    name: "Realm Schema"
+    type: "governance_layer"
+    governs: ["realm_structure", "client_mirroring"]
+    touched_by: ["realm-worker"]
+    depends_on: ["L0","L1"]
+    produces: ["realm_validation_events"]
+    realm_effect: "all_realms"
+
+  - id: "L3"
+    name: "File Identity"
+    type: "governance_layer"
+    governs: ["filetype", "asset_routes", "metadata_presence"]
+    touched_by: ["identity-worker"]
+    depends_on: ["L0","L2"]
+    produces: ["identity_events"]
+    realm_effect: "all"
+
+  - id: "L4"
+    name: "Naming Law"
+    type: "governance_layer"
+    governs: ["filename", "slug", "qidecimal"]
+    touched_by: ["naming-worker"]
+    depends_on: ["L3"]
+    produces: ["rename_events"]
+    realm_effect: "all"
+
+  - id: "L5"
+    name: "Metadata Layer"
+    type: "governance_layer"
+    governs: ["frontmatter_schema", "qid", "classification"]
+    touched_by: ["metadata-worker"]
+    depends_on: ["L4"]
+    produces: ["metadata_events"]
+    realm_effect: "all"
+
+  - id: "L6"
+    name: "Semantic Routing"
+    type: "governance_layer"
+    governs: ["routing", "similarity", "vector_profile"]
+    touched_by: ["semantic-ingest", "embedder"]
+    depends_on: ["L5"]
+    produces: ["semantic_events"]
+    realm_effect: "all_realms"
+
+  - id: "L7"
+    name: "Self-Healing"
+    type: "governance_layer"
+    governs: ["dedupe", "quarantine", "versioning"]
+    touched_by: ["healing-worker"]
+    depends_on: ["L6"]
+    produces: ["healing_events"]
+    realm_effect: "all"
+
+workers:
+  gina-orchestrator:
+    type: "controller"
+    runs_layers: ["L0","L1","L2","L3","L4","L5","L6","L7"]
+    writes_tables: ["system_events", "routing_prior", "automation_log"]
+    reads_tables: ["qios_files","qios_realms","qios_rules"]
+    dependencies: ["semantic-ingest","tree-compiler"]
+
+  semantic-ingest:
+    type: "ingestion"
+    runs_layers: ["L6"]
+    writes_tables: ["vectorindex","semantic_profile"]
+    dependencies: ["embedder"]
+
+  embedder:
+    type: "ai_worker"
+    runs_layers: ["L6"]
+    writes_tables: ["vectorindex"]
+    dependencies: []
+
+  healing-worker:
+    type: "maintenance"
+    runs_layers: ["L7"]
+    writes_tables: ["automation_log","system_events"]
+
+  naming-worker:
+    type: "compliance"
+    runs_layers: ["L4"]
+    writes_tables: ["qios_files"]
+
+  metadata-worker:
+    type: "compliance"
+    runs_layers: ["L5"]
+    writes_tables: ["qios_files"]
+
+filesystems:
+  qios_core: ["apps","workers","rules","data","docs","darkmatter"]
+  realms: ["qivault","qipersonal","qibusiness","qiclients"]
+  mounts:
+    - source: "QiOS/apps/"
+      target: "realms/*/apps/"
+      mode: "mirror"
+      enabled: false
+
+relationships:
+  - from: "semantic_profile"
+    to: "vectorindex"
+    type: "embeds"
+
+  - from: "qios_files"
+    to: "qios_realms"
+    type: "belongs_to"
+
+  - from: "qios_rules"
+    to: "qios_files"
+    type: "applies_to"
+
+events:
+  - "root_validation_events"
+  - "rename_events"
+  - "semantic_events"
+  - "healing_events"
+

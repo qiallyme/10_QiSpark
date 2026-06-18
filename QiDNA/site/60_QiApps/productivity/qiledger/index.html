@@ -1,0 +1,2065 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>QiLedger Blueprint - QiDNA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#qiledger-blueprint" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="QiDNA" class="md-header__button md-logo" aria-label="QiDNA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            QiDNA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              QiLedger Blueprint
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../00_QiLabs.workspace/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiLabs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../10_QiSpark/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiSpark
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../20_QiServer/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiServer
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../30_QiMemory/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiMemory
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../40_QiVault/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiVault
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../50_QiConnect/_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiConnect
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../_index/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  QiApps
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../codex/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Codex
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="QiDNA" class="md-nav__button md-logo" aria-label="QiDNA" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    QiDNA
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../00_QiLabs.workspace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiLabs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../10_QiSpark/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiSpark
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../20_QiServer/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiServer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../30_QiMemory/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiMemory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../40_QiVault/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiVault
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../50_QiConnect/_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiConnect
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../_index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QiApps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../codex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="qiledger-blueprint">QiLedger Blueprint</h1>
+<h2 id="1-project-name">1. Project Name</h2>
+<p><strong>QiLedger</strong>
+Working title: <strong>FinanceOS Ledger</strong></p>
+<p>A custom web-based money activity system for tracking, reviewing, categorizing, and reporting all financial activity across personal, household, business, legal, and caregiver-related money flows.</p>
+<hr />
+<h1 id="2-core-goal">2. Core Goal</h1>
+<p>Build a centralized, web-based general ledger that captures <strong>all money activity</strong> across accounts and contexts, then turns that activity into clear, filterable, reportable records.</p>
+<p>The system should answer:</p>
+<blockquote>
+<p>Who was money for?
+What was it spent on?
+When did it happen?
+Where did it come from?
+Which account touched it?
+Was it personal, household, business, legal, caregiver, or tax-related?
+Has it been reviewed?
+Can it support a report, reimbursement, tax record, legal record, or budget decision?</p>
+</blockquote>
+<hr />
+<h1 id="3-problem-statement">3. Problem Statement</h1>
+<p>Existing finance tools do not fit the actual use case.</p>
+<h2 id="current-tool-issues">Current tool issues</h2>
+<h3 id="money-manager-ex">Money Manager Ex</h3>
+<p>Good local ledger, but:</p>
+<ul>
+<li>not web-based</li>
+<li>difficult to access across devices</li>
+<li>limited automation</li>
+<li>not ideal for household/business/legal blended reporting</li>
+<li>not built around modern API workflows</li>
+</ul>
+<h3 id="google-sheets-excel">Google Sheets / Excel</h3>
+<p>Flexible, but:</p>
+<ul>
+<li>messy over time</li>
+<li>weak relational structure</li>
+<li>poor audit trail</li>
+<li>hard to normalize vendors/categories/accounts</li>
+<li>not ideal for long-term automation</li>
+</ul>
+<h3 id="quickbooks">QuickBooks</h3>
+<p>Rejected.</p>
+<p>Reasons:</p>
+<ul>
+<li>too rigid</li>
+<li>too expensive</li>
+<li>too accountant-centric</li>
+<li>overbuilt for this blended personal/household/business/legal use case</li>
+<li>painful UI</li>
+<li>bad fit for fast personal operations</li>
+</ul>
+<h3 id="zoho-books-quicken-other-apps">Zoho Books / Quicken / Other Apps</h3>
+<p>Problems:</p>
+<ul>
+<li>freemium limits</li>
+<li>subscription traps</li>
+<li>too consumer-focused or too enterprise-focused</li>
+<li>weak custom reporting</li>
+<li>not designed around caregiver/household/legal/business overlap</li>
+</ul>
+<hr />
+<h1 id="4-strategic-diagnosis">4. Strategic Diagnosis</h1>
+<p>This project sits between categories:</p>
+<h2 id="not-just-personal-budgeting">Not just personal budgeting</h2>
+<p>Because the system must handle:</p>
+<ul>
+<li>household contributions</li>
+<li>caregiver-related spending</li>
+<li>shared bills</li>
+<li>reimbursable items</li>
+<li>account transfers</li>
+<li>legal case expenses</li>
+<li>business expenses</li>
+<li>tax support</li>
+<li>recurring bills</li>
+<li>receipts and statements</li>
+<li>multiple people/entities</li>
+</ul>
+<h2 id="not-full-business-accounting">Not full business accounting</h2>
+<p>Because the goal is not traditional bookkeeping first.</p>
+<p>The goal is:</p>
+<blockquote>
+<p>Money intelligence first, formal accounting second.</p>
+</blockquote>
+<h2 id="not-enterprise-finance-ops">Not enterprise finance ops</h2>
+<p>Because it must remain lightweight, fast, and usable by one person under real-life pressure.</p>
+<hr />
+<h1 id="5-product-philosophy">5. Product Philosophy</h1>
+<p>QiLedger is not trying to replace full accounting software immediately.</p>
+<p>It is a <strong>ledger intelligence layer</strong>.</p>
+<p>The system should prioritize:</p>
+<ol>
+<li>Fast capture</li>
+<li>Clean review</li>
+<li>Unified transaction history</li>
+<li>Easy categorization</li>
+<li>Relationship tracking</li>
+<li>Reporting by context</li>
+<li>Audit support</li>
+<li>Exportability</li>
+<li>Automation readiness</li>
+</ol>
+<p>The system should avoid:</p>
+<ul>
+<li>overbuilding</li>
+<li>full double-entry accounting in v1</li>
+<li>complex invoicing</li>
+<li>payroll</li>
+<li>tax filing</li>
+<li>bloated dashboards</li>
+<li>enterprise permissions</li>
+<li>unnecessary accounting jargon</li>
+<li>trying to become QuickBooks</li>
+</ul>
+<hr />
+<h1 id="6-core-doctrine">6. Core Doctrine</h1>
+<h2 id="doctrine-1-postgres-is-the-source-of-truth">Doctrine 1: Postgres is the source of truth</h2>
+<p>The database is the real system.</p>
+<p>The UI is replaceable.</p>
+<p>No app builder, no-code platform, spreadsheet, or dashboard tool should become the foundation.</p>
+<h2 id="doctrine-2-every-money-event-becomes-a-normalized-record">Doctrine 2: Every money event becomes a normalized record</h2>
+<p>Raw bank data can be messy.</p>
+<p>The system must normalize it into consistent transaction records.</p>
+<h2 id="doctrine-3-imported-data-and-reviewed-data-are-separate">Doctrine 3: Imported data and reviewed data are separate</h2>
+<p>Never destroy the original import.</p>
+<p>Use a staging/inbox model:</p>
+<p><strong>Raw import → reviewed transaction → unified ledger</strong></p>
+<h2 id="doctrine-4-reports-are-views-not-separate-spreadsheets">Doctrine 4: Reports are views, not separate spreadsheets</h2>
+<p>Once the ledger is clean, reports should come from filters and views.</p>
+<p>Do not manually rebuild reports in separate files unless exporting for outside use.</p>
+<h2 id="doctrine-5-build-for-real-life-not-perfect-accounting-theory">Doctrine 5: Build for real life, not perfect accounting theory</h2>
+<p>The first priority is operational clarity.</p>
+<p>Formal accounting can be layered in later.</p>
+<hr />
+<h1 id="7-system-overview">7. System Overview</h1>
+<h2 id="high-level-flow">High-Level Flow</h2>
+<ol>
+<li>User imports or enters money activity.</li>
+<li>Activity lands in a review inbox.</li>
+<li>System normalizes vendor, category, account, person, project, and context.</li>
+<li>User reviews and approves transaction.</li>
+<li>Approved transaction becomes part of the unified ledger.</li>
+<li>Reports and dashboards pull from the unified ledger.</li>
+<li>Rules improve future categorization.</li>
+</ol>
+<h2 id="data-flow">Data Flow</h2>
+<p><strong>Bank / Card / Cash / Manual Entry</strong>
+→ <strong>Import Batch</strong>
+→ <strong>Raw Transactions</strong>
+→ <strong>Money Inbox</strong>
+→ <strong>Reviewed Ledger Transactions</strong>
+→ <strong>Reports / Views / Exports</strong></p>
+<hr />
+<h1 id="8-main-user-experience">8. Main User Experience</h1>
+<p>The daily experience should be fast.</p>
+<p>The user should not feel like they are “doing accounting.”</p>
+<p>They should feel like they are clearing an inbox.</p>
+<h2 id="primary-workflow">Primary workflow</h2>
+<ol>
+<li>Open QiLedger.</li>
+<li>See unreviewed transactions.</li>
+<li>Approve obvious items.</li>
+<li>Fix unclear items.</li>
+<li>Assign category/person/project.</li>
+<li>Mark transfers.</li>
+<li>Add notes or receipts where needed.</li>
+<li>View reports when needed.</li>
+</ol>
+<hr />
+<h1 id="9-core-screens">9. Core Screens</h1>
+<h2 id="91-money-inbox">9.1 Money Inbox</h2>
+<p>The most important screen.</p>
+<p>Purpose:</p>
+<blockquote>
+<p>Show transactions that need review.</p>
+</blockquote>
+<h3 id="key-features">Key features</h3>
+<ul>
+<li>list of unreviewed transactions</li>
+<li>quick approve button</li>
+<li>category dropdown</li>
+<li>person dropdown</li>
+<li>project/context dropdown</li>
+<li>vendor normalization</li>
+<li>transfer matching</li>
+<li>split transaction option</li>
+<li>notes field</li>
+<li>receipt attachment</li>
+<li>confidence indicator</li>
+<li>rule suggestion</li>
+</ul>
+<h3 id="filters">Filters</h3>
+<ul>
+<li>account</li>
+<li>date range</li>
+<li>amount range</li>
+<li>vendor</li>
+<li>imported batch</li>
+<li>possible transfer</li>
+<li>needs category</li>
+<li>needs person</li>
+<li>needs project</li>
+<li>low confidence</li>
+</ul>
+<hr />
+<h2 id="92-unified-ledger">9.2 Unified Ledger</h2>
+<p>The master transaction view.</p>
+<p>Purpose:</p>
+<blockquote>
+<p>Show all reviewed money activity in one normalized table.</p>
+</blockquote>
+<h3 id="must-support-filtering-by">Must support filtering by</h3>
+<ul>
+<li>date</li>
+<li>account</li>
+<li>person</li>
+<li>category</li>
+<li>vendor</li>
+<li>project</li>
+<li>context</li>
+<li>amount</li>
+<li>direction</li>
+<li>reviewed status</li>
+<li>tax relevance</li>
+<li>legal relevance</li>
+<li>household relevance</li>
+<li>business relevance</li>
+</ul>
+<h3 id="transaction-fields-displayed">Transaction fields displayed</h3>
+<ul>
+<li>transaction date</li>
+<li>account</li>
+<li>vendor/payee</li>
+<li>description</li>
+<li>amount</li>
+<li>direction</li>
+<li>category</li>
+<li>person</li>
+<li>project</li>
+<li>context</li>
+<li>reviewed status</li>
+<li>notes</li>
+</ul>
+<hr />
+<h2 id="93-accounts">9.3 Accounts</h2>
+<p>Tracks every place money can exist or move through.</p>
+<p>Examples:</p>
+<ul>
+<li>Chase Checking</li>
+<li>Cash App</li>
+<li>PayPal</li>
+<li>Venmo</li>
+<li>Mom Clearing</li>
+<li>Zai Clearing</li>
+<li>Household Bills</li>
+<li>Business Income</li>
+<li>Legal Costs</li>
+<li>Cash on Hand</li>
+<li>Credit Card</li>
+<li>Prepaid Card</li>
+</ul>
+<h3 id="account-types">Account types</h3>
+<ul>
+<li>checking</li>
+<li>savings</li>
+<li>credit card</li>
+<li>cash</li>
+<li>digital wallet</li>
+<li>clearing account</li>
+<li>loan</li>
+<li>liability</li>
+<li>income source</li>
+<li>external account</li>
+</ul>
+<hr />
+<h2 id="94-categories">9.4 Categories</h2>
+<p>The chart of accounts / reporting categories.</p>
+<p>This does not need to be overly formal in v1.</p>
+<p>Examples:</p>
+<ul>
+<li>Income</li>
+<li>Household Bills</li>
+<li>Groceries</li>
+<li>Medical</li>
+<li>Transportation</li>
+<li>Legal</li>
+<li>Business Expense</li>
+<li>Caregiver Expense</li>
+<li>Debt Payment</li>
+<li>Transfer</li>
+<li>Reimbursement</li>
+<li>Personal</li>
+<li>Emergency</li>
+<li>Subscriptions</li>
+<li>Taxes</li>
+</ul>
+<hr />
+<h2 id="95-vendors-payees">9.5 Vendors / Payees</h2>
+<p>Normalizes messy bank descriptions.</p>
+<p>Examples:</p>
+<p>Raw:</p>
+<ul>
+<li><code>WM SUPERCENTER #1341</code></li>
+<li><code>WALMART.COM 8009666546</code></li>
+<li><code>WAL-MART STORE</code></li>
+</ul>
+<p>Normalized:</p>
+<ul>
+<li>Walmart</li>
+</ul>
+<p>Raw:</p>
+<ul>
+<li><code>ASTOUND BROADBAND</code></li>
+<li><code>WOW INTERNET</code></li>
+<li><code>RCN ASTOUND</code></li>
+</ul>
+<p>Normalized:</p>
+<ul>
+<li>Astound Internet</li>
+</ul>
+<hr />
+<h2 id="96-people-entities">9.6 People / Entities</h2>
+<p>Tracks who the transaction relates to.</p>
+<p>Examples:</p>
+<ul>
+<li>Cody</li>
+<li>Mom</li>
+<li>Zai</li>
+<li>Household</li>
+<li>Client</li>
+<li>Court</li>
+<li>Vendor</li>
+<li>Business</li>
+<li>Legal Case</li>
+<li>Unknown</li>
+</ul>
+<p>This is critical because normal apps do not understand blended household operations.</p>
+<hr />
+<h2 id="97-projects-contexts">9.7 Projects / Contexts</h2>
+<p>Tracks why the money matters.</p>
+<p>Examples:</p>
+<ul>
+<li>Household Operations</li>
+<li>Caregiver Support</li>
+<li>Legal Case</li>
+<li>Business Operations</li>
+<li>Tax Prep</li>
+<li>Vehicle Repair</li>
+<li>Mom Medical Support</li>
+<li>Home Repair</li>
+<li>QiLabs</li>
+<li>Personal Spending</li>
+<li>Emergency Reset</li>
+</ul>
+<hr />
+<h2 id="98-reports">9.8 Reports</h2>
+<p>MVP reports should be simple and useful.</p>
+<h3 id="required-reports">Required reports</h3>
+<ol>
+<li>
+<p>Cashflow report
+   Money in vs money out.</p>
+</li>
+<li>
+<p>Spending by category
+   Where money went.</p>
+</li>
+<li>
+<p>Spending by person/entity
+   Who money was for.</p>
+</li>
+<li>
+<p>Spending by account
+   Which accounts were used.</p>
+</li>
+<li>
+<p>Vendor report
+   Who got paid.</p>
+</li>
+<li>
+<p>Household report
+   Shared household expenses.</p>
+</li>
+<li>
+<p>Mom contribution report
+   Contributions, expenses, balance, and usage.</p>
+</li>
+<li>
+<p>Legal expense report
+   Court, filing, document, transport, case-related costs.</p>
+</li>
+<li>
+<p>Business expense report
+   Tax/business-related expenses.</p>
+</li>
+<li>
+<p>Uncategorized report
+    Items needing cleanup.</p>
+</li>
+<li>
+<p>Transfer report
+    Movement between accounts.</p>
+</li>
+<li>
+<p>Reimbursement report
+    Items paid by one person/context that belong to another.</p>
+</li>
+</ol>
+<hr />
+<h1 id="10-mvp-scope">10. MVP Scope</h1>
+<h2 id="mvp-must-include">MVP must include</h2>
+<ul>
+<li>web-based login</li>
+<li>accounts table</li>
+<li>categories table</li>
+<li>vendors table</li>
+<li>people/entities table</li>
+<li>projects/contexts table</li>
+<li>manual transaction entry</li>
+<li>CSV import</li>
+<li>raw transaction staging</li>
+<li>money inbox review screen</li>
+<li>unified ledger screen</li>
+<li>basic reports</li>
+<li>export to CSV</li>
+<li>mobile-friendly layout</li>
+</ul>
+<h2 id="mvp-should-not-include-yet">MVP should not include yet</h2>
+<ul>
+<li>full double-entry accounting</li>
+<li>bank API integrations</li>
+<li>automatic Plaid sync</li>
+<li>invoice generation</li>
+<li>payroll</li>
+<li>inventory</li>
+<li>full tax filing</li>
+<li>OCR receipt processing</li>
+<li>AI categorization</li>
+<li>advanced permissions</li>
+<li>complex dashboards</li>
+</ul>
+<p>Those come later.</p>
+<p>Do not let v1 become a productivity swamp.</p>
+<hr />
+<h1 id="11-recommended-tech-stack">11. Recommended Tech Stack</h1>
+<h2 id="frontend">Frontend</h2>
+<p><strong>React + TypeScript + Vite</strong></p>
+<p>Reason:</p>
+<ul>
+<li>fast</li>
+<li>familiar</li>
+<li>flexible</li>
+<li>works well with Supabase</li>
+<li>easy to make mobile-first</li>
+<li>supports future PWA use</li>
+</ul>
+<h2 id="backend-database">Backend / Database</h2>
+<p><strong>Supabase Postgres</strong></p>
+<p>Reason:</p>
+<ul>
+<li>hosted Postgres</li>
+<li>auth included</li>
+<li>row-level security available</li>
+<li>APIs generated automatically</li>
+<li>can export/migrate</li>
+<li>works well with custom React apps</li>
+</ul>
+<h2 id="auth">Auth</h2>
+<p><strong>Supabase Auth</strong></p>
+<p>MVP:</p>
+<ul>
+<li>single-user first</li>
+<li>later add household/support users if needed</li>
+</ul>
+<h2 id="storage">Storage</h2>
+<p><strong>Supabase Storage or Google Drive link references</strong></p>
+<p>For:</p>
+<ul>
+<li>statement files</li>
+<li>receipts</li>
+<li>exported reports</li>
+<li>supporting documents</li>
+</ul>
+<p>MVP can store file metadata first, then add actual upload later.</p>
+<h2 id="automation-layer">Automation Layer</h2>
+<p>Later:</p>
+<ul>
+<li>n8n</li>
+<li>Python import scripts</li>
+<li>AI categorization worker</li>
+<li>statement parser</li>
+<li>Drive sync</li>
+</ul>
+<hr />
+<h1 id="12-architecture">12. Architecture</h1>
+<h2 id="core-architecture">Core architecture</h2>
+<p><strong>Frontend Web App</strong>
+→ Supabase client
+→ Postgres tables
+→ Views / RPC functions
+→ Reports</p>
+<h2 id="optional-later-architecture">Optional later architecture</h2>
+<p><strong>Statement Upload</strong>
+→ Storage
+→ Parser Worker
+→ Raw Transactions
+→ Rules Engine
+→ Review Inbox
+→ Unified Ledger</p>
+<h2 id="principle">Principle</h2>
+<p>The frontend should not contain the financial logic.</p>
+<p>The database should enforce:</p>
+<ul>
+<li>required fields</li>
+<li>account relationships</li>
+<li>category relationships</li>
+<li>transaction integrity</li>
+<li>duplicate prevention</li>
+<li>review state</li>
+</ul>
+<hr />
+<h1 id="13-core-data-model">13. Core Data Model</h1>
+<h2 id="131-accounts">13.1 <code>accounts</code></h2>
+<p>Stores financial accounts and clearing accounts.</p>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>name</code></li>
+<li><code>institution</code></li>
+<li><code>account_type</code></li>
+<li><code>owner_entity_id</code></li>
+<li><code>last_four</code></li>
+<li><code>currency</code></li>
+<li><code>is_active</code></li>
+<li><code>opening_balance</code></li>
+<li><code>notes</code></li>
+<li><code>created_at</code></li>
+<li><code>updated_at</code></li>
+</ul>
+<hr />
+<h2 id="132-entities">13.2 <code>entities</code></h2>
+<p>People, household members, businesses, vendors, institutions, courts, etc.</p>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>name</code></li>
+<li><code>entity_type</code></li>
+<li><code>default_context</code></li>
+<li><code>notes</code></li>
+<li><code>created_at</code></li>
+<li><code>updated_at</code></li>
+</ul>
+<p>Entity types:</p>
+<ul>
+<li>person</li>
+<li>household</li>
+<li>business</li>
+<li>vendor</li>
+<li>institution</li>
+<li>court</li>
+<li>client</li>
+<li>other</li>
+</ul>
+<hr />
+<h2 id="133-categories">13.3 <code>categories</code></h2>
+<p>Stores reporting categories.</p>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>name</code></li>
+<li><code>parent_category_id</code></li>
+<li><code>category_type</code></li>
+<li><code>tax_relevant</code></li>
+<li><code>business_relevant</code></li>
+<li><code>household_relevant</code></li>
+<li><code>legal_relevant</code></li>
+<li><code>is_active</code></li>
+<li><code>notes</code></li>
+</ul>
+<p>Category types:</p>
+<ul>
+<li>income</li>
+<li>expense</li>
+<li>transfer</li>
+<li>liability</li>
+<li>asset</li>
+<li>adjustment</li>
+</ul>
+<hr />
+<h2 id="134-vendors">13.4 <code>vendors</code></h2>
+<p>Normalized payees.</p>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>name</code></li>
+<li><code>default_category_id</code></li>
+<li><code>default_entity_id</code></li>
+<li><code>default_context_id</code></li>
+<li><code>notes</code></li>
+<li><code>created_at</code></li>
+<li><code>updated_at</code></li>
+</ul>
+<hr />
+<h2 id="135-contexts">13.5 <code>contexts</code></h2>
+<p>Projects, purposes, or operational buckets.</p>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>name</code></li>
+<li><code>context_type</code></li>
+<li><code>description</code></li>
+<li><code>is_active</code></li>
+<li><code>created_at</code></li>
+<li><code>updated_at</code></li>
+</ul>
+<p>Context examples:</p>
+<ul>
+<li>household</li>
+<li>personal</li>
+<li>business</li>
+<li>legal</li>
+<li>caregiver</li>
+<li>tax</li>
+<li>vehicle</li>
+<li>medical</li>
+<li>emergency</li>
+</ul>
+<hr />
+<h2 id="136-statements">13.6 <code>statements</code></h2>
+<p>Represents imported bank/card statements.</p>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>account_id</code></li>
+<li><code>statement_start_date</code></li>
+<li><code>statement_end_date</code></li>
+<li><code>statement_date</code></li>
+<li><code>beginning_balance</code></li>
+<li><code>ending_balance</code></li>
+<li><code>source_file_name</code></li>
+<li><code>source_file_url</code></li>
+<li><code>import_status</code></li>
+<li><code>notes</code></li>
+<li><code>created_at</code></li>
+</ul>
+<hr />
+<h2 id="137-import_batches">13.7 <code>import_batches</code></h2>
+<p>Tracks each import event.</p>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>account_id</code></li>
+<li><code>statement_id</code></li>
+<li><code>source_type</code></li>
+<li><code>source_file_name</code></li>
+<li><code>imported_at</code></li>
+<li><code>row_count</code></li>
+<li><code>duplicate_count</code></li>
+<li><code>status</code></li>
+<li><code>notes</code></li>
+</ul>
+<p>Source types:</p>
+<ul>
+<li>csv</li>
+<li>manual</li>
+<li>pdf</li>
+<li>api</li>
+<li>migration</li>
+</ul>
+<hr />
+<h2 id="138-raw_transactions">13.8 <code>raw_transactions</code></h2>
+<p>Stores untouched imported transaction data.</p>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>import_batch_id</code></li>
+<li><code>statement_id</code></li>
+<li><code>account_id</code></li>
+<li><code>raw_date</code></li>
+<li><code>raw_posted_date</code></li>
+<li><code>raw_description</code></li>
+<li><code>raw_amount</code></li>
+<li><code>raw_balance</code></li>
+<li><code>raw_category</code></li>
+<li><code>raw_reference</code></li>
+<li><code>source_row_hash</code></li>
+<li><code>matched_transaction_id</code></li>
+<li><code>created_at</code></li>
+</ul>
+<p>This table preserves source truth.</p>
+<hr />
+<h2 id="139-ledger_transactions">13.9 <code>ledger_transactions</code></h2>
+<p>The normalized unified ledger.</p>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>transaction_date</code></li>
+<li><code>posted_date</code></li>
+<li><code>account_id</code></li>
+<li><code>vendor_id</code></li>
+<li><code>payee_text</code></li>
+<li><code>description</code></li>
+<li><code>amount</code></li>
+<li><code>direction</code></li>
+<li><code>category_id</code></li>
+<li><code>entity_id</code></li>
+<li><code>context_id</code></li>
+<li><code>source_raw_transaction_id</code></li>
+<li><code>source_statement_id</code></li>
+<li><code>transfer_group_id</code></li>
+<li><code>review_status</code></li>
+<li><code>confidence_score</code></li>
+<li><code>tax_relevant</code></li>
+<li><code>business_relevant</code></li>
+<li><code>household_relevant</code></li>
+<li><code>legal_relevant</code></li>
+<li><code>receipt_url</code></li>
+<li><code>notes</code></li>
+<li><code>created_at</code></li>
+<li><code>updated_at</code></li>
+</ul>
+<p>Direction values:</p>
+<ul>
+<li>income</li>
+<li>expense</li>
+<li>transfer_in</li>
+<li>transfer_out</li>
+<li>adjustment</li>
+</ul>
+<p>Review statuses:</p>
+<ul>
+<li>inbox</li>
+<li>reviewed</li>
+<li>needs_info</li>
+<li>ignored</li>
+<li>duplicate</li>
+</ul>
+<hr />
+<h2 id="1310-transaction_splits">13.10 <code>transaction_splits</code></h2>
+<p>Allows one transaction to be split across multiple categories/entities/contexts.</p>
+<p>Example:</p>
+<p>A $60 Walmart purchase:</p>
+<ul>
+<li>$30 groceries</li>
+<li>$15 medical supplies</li>
+<li>$15 household supplies</li>
+</ul>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>ledger_transaction_id</code></li>
+<li><code>amount</code></li>
+<li><code>category_id</code></li>
+<li><code>entity_id</code></li>
+<li><code>context_id</code></li>
+<li><code>notes</code></li>
+</ul>
+<hr />
+<h2 id="1311-rules">13.11 <code>rules</code></h2>
+<p>Auto-categorization rules.</p>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>rule_name</code></li>
+<li><code>match_field</code></li>
+<li><code>match_operator</code></li>
+<li><code>match_value</code></li>
+<li><code>account_id</code></li>
+<li><code>vendor_id</code></li>
+<li><code>category_id</code></li>
+<li><code>entity_id</code></li>
+<li><code>context_id</code></li>
+<li><code>direction</code></li>
+<li><code>confidence_score</code></li>
+<li><code>is_active</code></li>
+<li><code>created_at</code></li>
+</ul>
+<p>Example:</p>
+<p>If description contains <code>ASTOUND</code>, set:</p>
+<ul>
+<li>vendor = Astound</li>
+<li>category = Internet</li>
+<li>entity = Household</li>
+<li>context = Household Operations</li>
+</ul>
+<hr />
+<h2 id="1312-reconciliation_runs">13.12 <code>reconciliation_runs</code></h2>
+<p>Tracks statement reconciliation.</p>
+<p>Important fields:</p>
+<ul>
+<li><code>id</code></li>
+<li><code>account_id</code></li>
+<li><code>statement_id</code></li>
+<li><code>period_start</code></li>
+<li><code>period_end</code></li>
+<li><code>expected_start_balance</code></li>
+<li><code>expected_end_balance</code></li>
+<li><code>calculated_end_balance</code></li>
+<li><code>difference</code></li>
+<li><code>status</code></li>
+<li><code>notes</code></li>
+<li><code>created_at</code></li>
+</ul>
+<hr />
+<h1 id="14-key-views">14. Key Views</h1>
+<p>Database views should power reports.</p>
+<h2 id="v_unreviewed_transactions"><code>v_unreviewed_transactions</code></h2>
+<p>Shows all transactions needing review.</p>
+<h2 id="v_unified_ledger"><code>v_unified_ledger</code></h2>
+<p>Clean ledger with joined names:</p>
+<ul>
+<li>account name</li>
+<li>vendor name</li>
+<li>category name</li>
+<li>entity name</li>
+<li>context name</li>
+</ul>
+<h2 id="v_cashflow_monthly"><code>v_cashflow_monthly</code></h2>
+<p>Monthly income, expenses, and net.</p>
+<h2 id="v_spending_by_category"><code>v_spending_by_category</code></h2>
+<p>Category totals by date range.</p>
+<h2 id="v_spending_by_entity"><code>v_spending_by_entity</code></h2>
+<p>Totals by person/entity.</p>
+<h2 id="v_spending_by_context"><code>v_spending_by_context</code></h2>
+<p>Totals by project/context.</p>
+<h2 id="v_legal_expenses"><code>v_legal_expenses</code></h2>
+<p>All legal-relevant transactions.</p>
+<h2 id="v_household_expenses"><code>v_household_expenses</code></h2>
+<p>All household-relevant transactions.</p>
+<h2 id="v_business_expenses"><code>v_business_expenses</code></h2>
+<p>All business-relevant transactions.</p>
+<h2 id="v_possible_duplicates"><code>v_possible_duplicates</code></h2>
+<p>Potential duplicate imports.</p>
+<h2 id="v_transfers"><code>v_transfers</code></h2>
+<p>Transfer groups and matched internal movement.</p>
+<hr />
+<h1 id="15-ui-design-principles">15. UI Design Principles</h1>
+<h2 id="fast-before-fancy">Fast before fancy</h2>
+<p>The app should feel like clearing messages, not doing bookkeeping.</p>
+<h2 id="mobile-first">Mobile-first</h2>
+<p>The user may need to enter or review transactions from phone.</p>
+<h2 id="big-tap-targets">Big tap targets</h2>
+<p>Do not make tiny spreadsheet controls.</p>
+<h2 id="default-to-inbox">Default to inbox</h2>
+<p>The first screen after login should be:</p>
+<p><strong>Money Inbox</strong></p>
+<h2 id="filters-must-be-obvious">Filters must be obvious</h2>
+<p>Every major ledger view needs quick filters.</p>
+<h2 id="review-should-be-one-click-when-possible">Review should be one-click when possible</h2>
+<p>If the system guesses correctly, user should approve quickly.</p>
+<h2 id="manual-editing-must-be-easy">Manual editing must be easy</h2>
+<p>No hidden modals for every tiny edit.</p>
+<h2 id="keep-visual-clutter-low">Keep visual clutter low</h2>
+<p>Use:</p>
+<ul>
+<li>left navigation on desktop</li>
+<li>bottom nav or drawer on mobile</li>
+<li>clean table/list hybrid</li>
+<li>badges for status/context</li>
+<li>persistent search</li>
+<li>quick action buttons</li>
+</ul>
+<hr />
+<h1 id="16-suggested-navigation">16. Suggested Navigation</h1>
+<h2 id="primary-nav">Primary nav</h2>
+<ul>
+<li>Inbox</li>
+<li>Ledger</li>
+<li>Accounts</li>
+<li>Reports</li>
+<li>Rules</li>
+<li>Imports</li>
+<li>Settings</li>
+</ul>
+<h2 id="secondary-admin-nav">Secondary admin nav</h2>
+<ul>
+<li>Categories</li>
+<li>Vendors</li>
+<li>People / Entities</li>
+<li>Contexts</li>
+<li>Reconciliation</li>
+<li>Exports</li>
+</ul>
+<hr />
+<h1 id="17-mvp-roadmap">17. MVP Roadmap</h1>
+<h2 id="phase-0-blueprint-and-schema">Phase 0 — Blueprint and schema</h2>
+<p>Goal:
+Define the system before building.</p>
+<p>Tasks:</p>
+<ul>
+<li>finalize table list</li>
+<li>finalize category structure</li>
+<li>finalize context structure</li>
+<li>define account list</li>
+<li>define import CSV requirements</li>
+<li>define review workflow</li>
+<li>create Supabase schema</li>
+</ul>
+<p>Deliverable:
+Working database schema.</p>
+<hr />
+<h2 id="phase-1-core-app-shell">Phase 1 — Core app shell</h2>
+<p>Goal:
+Create the web app foundation.</p>
+<p>Tasks:</p>
+<ul>
+<li>create React + TypeScript + Vite app</li>
+<li>connect Supabase</li>
+<li>set up auth</li>
+<li>create layout</li>
+<li>add navigation</li>
+<li>create protected routes</li>
+<li>create basic styling system</li>
+</ul>
+<p>Deliverable:
+Logged-in app shell with navigation.</p>
+<hr />
+<h2 id="phase-2-admin-data-setup">Phase 2 — Admin data setup</h2>
+<p>Goal:
+Create the supporting tables.</p>
+<p>Screens:</p>
+<ul>
+<li>Accounts</li>
+<li>Categories</li>
+<li>Vendors</li>
+<li>People / Entities</li>
+<li>Contexts</li>
+</ul>
+<p>Tasks:</p>
+<ul>
+<li>list records</li>
+<li>create records</li>
+<li>edit records</li>
+<li>deactivate records</li>
+<li>search/filter records</li>
+</ul>
+<p>Deliverable:
+Usable admin foundation.</p>
+<hr />
+<h2 id="phase-3-manual-transaction-entry">Phase 3 — Manual transaction entry</h2>
+<p>Goal:
+Allow quick manual logging.</p>
+<p>Tasks:</p>
+<ul>
+<li>add transaction form</li>
+<li>date/account/vendor/amount/category/entity/context</li>
+<li>notes</li>
+<li>review status</li>
+<li>save to ledger</li>
+</ul>
+<p>Deliverable:
+Manual ledger works.</p>
+<hr />
+<h2 id="phase-4-csv-import">Phase 4 — CSV import</h2>
+<p>Goal:
+Import statement transactions.</p>
+<p>Tasks:</p>
+<ul>
+<li>upload CSV</li>
+<li>map columns</li>
+<li>create import batch</li>
+<li>create raw transaction rows</li>
+<li>generate row hashes</li>
+<li>prevent duplicate rows</li>
+<li>display import summary</li>
+</ul>
+<p>Deliverable:
+CSV statement import works.</p>
+<hr />
+<h2 id="phase-5-money-inbox">Phase 5 — Money Inbox</h2>
+<p>Goal:
+Create the main workflow.</p>
+<p>Tasks:</p>
+<ul>
+<li>show raw/unreviewed transactions</li>
+<li>suggest vendor/category/context</li>
+<li>quick approve</li>
+<li>edit transaction</li>
+<li>mark duplicate</li>
+<li>mark transfer</li>
+<li>push to reviewed ledger</li>
+</ul>
+<p>Deliverable:
+User can clean imported transactions.</p>
+<hr />
+<h2 id="phase-6-unified-ledger">Phase 6 — Unified Ledger</h2>
+<p>Goal:
+Create master ledger view.</p>
+<p>Tasks:</p>
+<ul>
+<li>searchable ledger</li>
+<li>filters</li>
+<li>edit transaction</li>
+<li>split transaction</li>
+<li>attach notes</li>
+<li>export CSV</li>
+</ul>
+<p>Deliverable:
+Central money history works.</p>
+<hr />
+<h2 id="phase-7-reports">Phase 7 — Reports</h2>
+<p>Goal:
+Turn ledger into useful views.</p>
+<p>Reports:</p>
+<ul>
+<li>cashflow</li>
+<li>by category</li>
+<li>by person/entity</li>
+<li>by context/project</li>
+<li>by account</li>
+<li>household</li>
+<li>business</li>
+<li>legal</li>
+<li>uncategorized</li>
+<li>transfers</li>
+</ul>
+<p>Deliverable:
+Basic financial intelligence.</p>
+<hr />
+<h2 id="phase-8-rules-engine">Phase 8 — Rules engine</h2>
+<p>Goal:
+Reduce repetitive categorization.</p>
+<p>Tasks:</p>
+<ul>
+<li>create rules table</li>
+<li>apply rules on import</li>
+<li>suggest categories</li>
+<li>let user create rule from transaction</li>
+<li>confidence score</li>
+</ul>
+<p>Deliverable:
+System starts learning patterns.</p>
+<hr />
+<h2 id="phase-9-reconciliation">Phase 9 — Reconciliation</h2>
+<p>Goal:
+Verify statements against ledger.</p>
+<p>Tasks:</p>
+<ul>
+<li>compare statement ending balance</li>
+<li>compare ledger-calculated balance</li>
+<li>show differences</li>
+<li>mark reconciled</li>
+</ul>
+<p>Deliverable:
+Ledger becomes audit-friendly.</p>
+<hr />
+<h2 id="phase-10-automation-and-ai">Phase 10 — Automation and AI</h2>
+<p>Goal:
+Speed up imports and classification.</p>
+<p>Possible features:</p>
+<ul>
+<li>n8n import workflows</li>
+<li>receipt OCR</li>
+<li>AI vendor cleanup</li>
+<li>AI category suggestions</li>
+<li>recurring bill detection</li>
+<li>anomaly detection</li>
+<li>natural language search</li>
+</ul>
+<p>Deliverable:
+Semi-automated finance assistant.</p>
+<hr />
+<h1 id="18-initial-category-framework">18. Initial Category Framework</h1>
+<h2 id="income">Income</h2>
+<ul>
+<li>Caregiver Income</li>
+<li>Rideshare Income</li>
+<li>Business Income</li>
+<li>Family Contribution</li>
+<li>Refund</li>
+<li>Reimbursement</li>
+<li>Legal Disbursement</li>
+<li>Other Income</li>
+</ul>
+<h2 id="household">Household</h2>
+<ul>
+<li>Rent / Housing</li>
+<li>Utilities</li>
+<li>Internet</li>
+<li>Phone</li>
+<li>Groceries</li>
+<li>Household Supplies</li>
+<li>Repairs</li>
+<li>Furniture</li>
+<li>Appliances</li>
+<li>Shared Subscriptions</li>
+</ul>
+<h2 id="caregiver-medical-support">Caregiver / Medical Support</h2>
+<ul>
+<li>Medication</li>
+<li>Medical Supplies</li>
+<li>Transportation</li>
+<li>Food / Special Diet</li>
+<li>Mobility Equipment</li>
+<li>Home Health Support</li>
+</ul>
+<h2 id="transportation">Transportation</h2>
+<ul>
+<li>Gas</li>
+<li>Vehicle Repair</li>
+<li>Insurance</li>
+<li>Registration</li>
+<li>Rideshare Rental</li>
+<li>Parking</li>
+<li>Tolls</li>
+</ul>
+<h2 id="business">Business</h2>
+<ul>
+<li>Software</li>
+<li>Hosting</li>
+<li>Domain</li>
+<li>Equipment</li>
+<li>Office Supplies</li>
+<li>Client Expense</li>
+<li>Contractor</li>
+<li>Professional Services</li>
+</ul>
+<h2 id="legal">Legal</h2>
+<ul>
+<li>Filing Fees</li>
+<li>Copies / Printing</li>
+<li>Postage</li>
+<li>Court Costs</li>
+<li>Legal Research</li>
+<li>Travel for Legal</li>
+<li>Evidence / Records</li>
+</ul>
+<h2 id="personal">Personal</h2>
+<ul>
+<li>Food</li>
+<li>Clothing</li>
+<li>Personal Care</li>
+<li>Entertainment</li>
+<li>Subscriptions</li>
+<li>Miscellaneous</li>
+</ul>
+<h2 id="debt-liability">Debt / Liability</h2>
+<ul>
+<li>Loan Payment</li>
+<li>Credit Card Payment</li>
+<li>Cash Advance Repayment</li>
+<li>Overdraft / Fees</li>
+<li>Interest</li>
+</ul>
+<h2 id="transfers">Transfers</h2>
+<ul>
+<li>Internal Transfer</li>
+<li>Cash Withdrawal</li>
+<li>Cash Deposit</li>
+<li>Account Funding</li>
+<li>Clearing Movement</li>
+</ul>
+<h2 id="adjustments">Adjustments</h2>
+<ul>
+<li>Balance Correction</li>
+<li>Duplicate Correction</li>
+<li>Manual Adjustment</li>
+<li>Unknown</li>
+</ul>
+<hr />
+<h1 id="19-important-design-decisions">19. Important Design Decisions</h1>
+<h2 id="decision-1-one-ledger-many-contexts">Decision 1: One ledger, many contexts</h2>
+<p>Do not create separate ledgers for each bank.</p>
+<p>Each bank/account is a source.</p>
+<p>The unified ledger is the truth.</p>
+<h2 id="decision-2-raw-data-stays-raw">Decision 2: Raw data stays raw</h2>
+<p>Imported rows remain untouched.</p>
+<p>Normalized records link back to raw source rows.</p>
+<h2 id="decision-3-clearing-accounts-are-allowed">Decision 3: Clearing accounts are allowed</h2>
+<p>Clearing accounts are important for real life.</p>
+<p>Examples:</p>
+<ul>
+<li>Mom Clearing</li>
+<li>Zai Clearing</li>
+<li>Household Clearing</li>
+<li>Cash Clearing</li>
+<li>Reimbursement Clearing</li>
+</ul>
+<h2 id="decision-4-transfers-need-pairing">Decision 4: Transfers need pairing</h2>
+<p>Money moving between accounts should not count as income or expense.</p>
+<p>Use <code>transfer_group_id</code>.</p>
+<h2 id="decision-5-reports-should-not-require-duplicate-data">Decision 5: Reports should not require duplicate data</h2>
+<p>Reports should be generated from ledger views.</p>
+<h2 id="decision-6-manual-entry-matters">Decision 6: Manual entry matters</h2>
+<p>Not every transaction will come from a bank statement.</p>
+<p>Cash, informal repayments, and quick notes need manual entry.</p>
+<hr />
+<h1 id="20-risk-register">20. Risk Register</h1>
+<h2 id="risk-overbuilding">Risk: Overbuilding</h2>
+<p>Mitigation:
+Keep MVP focused on ledger, inbox, import, reports.</p>
+<h2 id="risk-accounting-complexity">Risk: Accounting complexity</h2>
+<p>Mitigation:
+Do not implement full double-entry in v1.</p>
+<h2 id="risk-dirty-imports">Risk: Dirty imports</h2>
+<p>Mitigation:
+Use raw transaction staging and source row hashes.</p>
+<h2 id="risk-duplicate-transactions">Risk: Duplicate transactions</h2>
+<p>Mitigation:
+Use hashes based on account/date/amount/description/reference.</p>
+<h2 id="risk-ui-becomes-spreadsheet-hell">Risk: UI becomes spreadsheet hell</h2>
+<p>Mitigation:
+Use card/list hybrid for review, not only tables.</p>
+<h2 id="risk-reports-become-inaccurate">Risk: Reports become inaccurate</h2>
+<p>Mitigation:
+Use reviewed status and reconciliation.</p>
+<h2 id="risk-tool-lock-in">Risk: Tool lock-in</h2>
+<p>Mitigation:
+Use plain Supabase/Postgres schema, not proprietary app-builder logic.</p>
+<hr />
+<h1 id="21-success-criteria">21. Success Criteria</h1>
+<p>QiLedger v1 is successful when Cody can:</p>
+<ul>
+<li>import transactions from at least one account</li>
+<li>manually add cash/manual transactions</li>
+<li>categorize transactions quickly</li>
+<li>assign transactions to person/entity/context</li>
+<li>view all money activity in one ledger</li>
+<li>filter by household, business, legal, personal, caregiver</li>
+<li>export transactions for backup or tax/legal use</li>
+<li>identify uncategorized or unreviewed transactions</li>
+<li>produce a basic monthly household report</li>
+<li>produce a basic legal expense report</li>
+<li>produce a basic business expense report</li>
+</ul>
+<hr />
+<h1 id="22-future-features">22. Future Features</h1>
+<h2 id="ai-assisted-categorization">AI-assisted categorization</h2>
+<p>Use prior reviewed transactions to suggest:</p>
+<ul>
+<li>vendor</li>
+<li>category</li>
+<li>entity</li>
+<li>context</li>
+<li>tax/legal relevance</li>
+</ul>
+<h2 id="natural-language-queries">Natural language queries</h2>
+<p>Examples:</p>
+<ul>
+<li>“How much did we spend on Mom’s medical stuff last month?”</li>
+<li>“Show all legal expenses since January.”</li>
+<li>“How much did Zai-related spending cost this week?”</li>
+<li>“What did I spend at Walmart in April?”</li>
+<li>“Show all transactions over $100 that are unreviewed.”</li>
+</ul>
+<h2 id="receipt-storage">Receipt storage</h2>
+<p>Attach:</p>
+<ul>
+<li>receipt images</li>
+<li>PDFs</li>
+<li>statement files</li>
+<li>screenshots</li>
+<li>notes</li>
+</ul>
+<h2 id="statement-parser">Statement parser</h2>
+<p>Support:</p>
+<ul>
+<li>CSV</li>
+<li>PDF</li>
+<li>screenshot/OCR later</li>
+</ul>
+<h2 id="recurring-bill-detection">Recurring bill detection</h2>
+<p>Identify recurring bills and expected due dates.</p>
+<h2 id="budget-layer">Budget layer</h2>
+<p>Add budget planning after ledger is stable.</p>
+<h2 id="forecasting">Forecasting</h2>
+<p>Predict upcoming cash needs based on:</p>
+<ul>
+<li>recurring bills</li>
+<li>average spending</li>
+<li>scheduled payments</li>
+<li>expected income</li>
+</ul>
+<h2 id="formal-accounting-mode">Formal accounting mode</h2>
+<p>Later optional layer:</p>
+<ul>
+<li>double-entry journal entries</li>
+<li>chart of accounts</li>
+<li>balance sheet</li>
+<li>profit and loss</li>
+<li>equity/liability tracking</li>
+</ul>
+<p>Not v1.</p>
+<hr />
+<h1 id="23-build-instruction-for-gemini-codex">23. Build Instruction for Gemini / Codex</h1>
+<p>Use this as the project direction:</p>
+<p>Build a mobile-first React + TypeScript + Vite web app connected to Supabase. The app is a custom financial ledger system called QiLedger. It should use Supabase Postgres as the source of truth and provide a fast user interface for importing, reviewing, categorizing, and reporting money activity across personal, household, business, legal, and caregiver contexts.</p>
+<p>The first version should not attempt to recreate QuickBooks. It should focus on:</p>
+<ul>
+<li>accounts</li>
+<li>entities</li>
+<li>categories</li>
+<li>vendors</li>
+<li>contexts</li>
+<li>manual transaction entry</li>
+<li>CSV import</li>
+<li>raw transaction staging</li>
+<li>review inbox</li>
+<li>unified ledger</li>
+<li>basic reports</li>
+<li>CSV export</li>
+</ul>
+<p>Design the UI for fast review and filtering. The default landing screen after login should be the Money Inbox. Use clean navigation, mobile-first layout, and minimal cognitive clutter.</p>
+<p>The database should preserve raw imported transaction data separately from normalized ledger transactions. All reports should come from the normalized unified ledger and database views.</p>
+<hr />
+<h1 id="24-mvp-build-order">24. MVP Build Order</h1>
+<p>Build in this exact order:</p>
+<ol>
+<li>Supabase schema</li>
+<li>Auth and app shell</li>
+<li>Accounts/categories/entities/contexts admin screens</li>
+<li>Manual transaction entry</li>
+<li>Unified ledger view</li>
+<li>CSV import into raw transactions</li>
+<li>Money Inbox review workflow</li>
+<li>Basic reports</li>
+<li>Rules engine</li>
+<li>Reconciliation</li>
+</ol>
+<p>Do not build dashboards first.</p>
+<p>Dashboards come after transaction data is clean.</p>
+<hr />
+<h1 id="25-bottom-line-strategy">25. Bottom-Line Strategy</h1>
+<p>The win is not “having another finance app.”</p>
+<p>The win is having a <strong>money command center</strong> that reflects real life:</p>
+<ul>
+<li>household chaos</li>
+<li>caregiver expenses</li>
+<li>personal survival money</li>
+<li>business operations</li>
+<li>legal documentation</li>
+<li>reimbursements</li>
+<li>shared responsibilities</li>
+<li>tax support</li>
+<li>messy bank data</li>
+</ul>
+<p>QiLedger should make the money story visible.</p>
+<p>Not perfect.
+Visible.</p>
+<p>Then visible becomes manageable.
+Manageable becomes reportable.
+Reportable becomes leverage.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
