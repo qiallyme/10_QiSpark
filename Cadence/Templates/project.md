@@ -4,7 +4,7 @@ name: {{name}}
 status: [active]
 priority: [medium]
 owner: []
-started: 2026-06-16
+started: 2026-06-18
 due:
 tags: []
 related_deals: []
@@ -25,7 +25,7 @@ _The outcome we want, why now._
 - 
 
 ## Milestones
-- [ ] 2026-06-16 — First milestone
+- [ ] 2026-06-18 — First milestone
 
 ## Tasks
 - [ ] 

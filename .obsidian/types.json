@@ -1,0 +1,31 @@
+{
+  "types": {
+    "aliases": "aliases",
+    "cssclasses": "multitext",
+    "tags": "tags",
+    "type": "text",
+    "name": "text",
+    "status": "text",
+    "priority": "text",
+    "owner": "multitext",
+    "started": "date",
+    "due": "date",
+    "title": "text",
+    "stage": "text",
+    "value": "number",
+    "company": "multitext",
+    "contact": "multitext",
+    "closeBy": "date",
+    "project": "multitext",
+    "email": "multitext",
+    "phone": "multitext",
+    "role": "multitext",
+    "lastContact": "date",
+    "domain": "multitext",
+    "industry": "multitext",
+    "size": "text",
+    "subject": "text",
+    "when": "date",
+    "with": "multitext"
+  }
+}
