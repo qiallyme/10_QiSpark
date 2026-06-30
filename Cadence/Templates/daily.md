@@ -1,7 +1,0 @@
-# {{date}}
-
-## Today
-- [ ] 
-
-## Journal
-
