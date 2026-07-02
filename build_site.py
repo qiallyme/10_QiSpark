@@ -209,33 +209,47 @@ def parse_frontmatter(text: str) -> tuple[dict[str, Any], str]:
 
 
 def should_include(fm: dict[str, Any], allow_active: bool) -> tuple[bool, str]:
-    # 1. Check status
     status = str(fm.get("status") or "").lower().strip()
-    if allow_active and status == "active":
-        pass
-    elif status not in VALID_STATUSES:
-        return (
-            False,
-            f"Status '{status}' not in {sorted(VALID_STATUSES)} "
-            "(use --allow-active to include 'active')",
-        )
-
-    # 2. Check sensitivity / classification
+    visibility = str(fm.get("visibility") or "").lower().strip()
+    publish_target = str(fm.get("publish_target") or "").lower().strip()
     sensitivity = str(fm.get("sensitivity") or "").lower().strip()
+    classification = str(fm.get("classification") or "").lower().strip()
+
+    # 1. Safety exclusions
+    if visibility in ("private",):
+        return False, f"Visibility is '{visibility}'"
+
     if sensitivity in EXCLUDE_SENSITIVITY:
         return False, f"Sensitivity '{sensitivity}' is restricted"
 
-    classification = str(fm.get("classification") or "").lower().strip()
     if classification in EXCLUDE_CLASSIFICATION:
         return False, f"Classification '{classification}' is restricted"
 
-    # 3. Check explicit boolean flags
+    # Explicit boolean flags
     for flag in EXCLUDE_FLAGS:
         val = fm.get(flag)
         if isinstance(val, bool) and val:
             return False, f"Explicit flag '{flag}' is true"
         if str(val).lower() in ("yes", "true", "1"):
             return False, f"Explicit flag '{flag}' is enabled"
+
+    # 2. Strict / Backwards Compatible Publish matching
+    is_backward_publish = status in ("published", "public")
+    is_strict_publish = (
+        status == "publish" and 
+        visibility == "public" and 
+        publish_target == "qispark"
+    )
+    is_active_allowed = (
+        allow_active and 
+        status == "active"
+    )
+
+    if not (is_backward_publish or is_strict_publish or is_active_allowed):
+        return (
+            False,
+            f"Status '{status}', visibility '{visibility}', publish_target '{publish_target}' not eligible for build"
+        )
 
     return True, ""
 
@@ -1027,15 +1041,26 @@ def render_docs_layout(sidebar_html: str, content_html: str, fm: dict[str, Any])
 
 
 def build_sidebar(docs_list: list[dict[str, Any]], current_rel_path: str | None = None) -> str:
+    # Filter out nav_hidden: True files
+    visible_docs = [doc for doc in docs_list if not doc.get("nav_hidden", False)]
+
+    # Group by nav_group
     hierarchy: dict[str, list[dict[str, Any]]] = {}
-    for doc in docs_list:
-        folder = doc["folder"] or "Root"
-        hierarchy.setdefault(folder, []).append(doc)
+    for doc in visible_docs:
+        group = doc.get("nav_group") or "Root"
+        hierarchy.setdefault(group, []).append(doc)
 
     output = ""
+    # Sort folders/groups by name
     for folder, items in sorted(hierarchy.items()):
+        # Sort items inside each folder by nav_order, then nav_title
+        sorted_items = sorted(
+            items,
+            key=lambda x: (x.get("nav_order", 999), str(x.get("nav_title") or "").lower())
+        )
+
         folder_items_html = ""
-        for item in sorted(items, key=lambda x: x["title"]):
+        for item in sorted_items:
             is_active = current_rel_path == item["rel_html"]
             active_class = " active" if is_active else ""
 
@@ -1045,8 +1070,8 @@ def build_sidebar(docs_list: list[dict[str, Any]], current_rel_path: str | None 
                 link_prefix = "../" * depth
 
             folder_items_html += f"""
-            <a href="{link_prefix}{html.escape(item['rel_html'], quote=True)}" class="tree-item{active_class}" title="{html.escape(item['title'], quote=True)}">
-                {html.escape(item['title'])}
+            <a href="{link_prefix}{html.escape(item['rel_html'], quote=True)}" class="tree-item{active_class}" title="{html.escape(item['nav_title'], quote=True)}">
+                {html.escape(item['nav_title'])}
             </a>
             """
 
@@ -1060,9 +1085,21 @@ def build_sidebar(docs_list: list[dict[str, Any]], current_rel_path: str | None 
     return output
 
 
-def convert_md_files(source_dir: Path, dist_dir: Path, allow_active: bool) -> list[dict[str, Any]]:
+def convert_md_files(source_dir: Path, dist_dir: Path, allow_active: bool) -> tuple[list[dict[str, Any]], dict[str, int]]:
     docs_list: list[dict[str, Any]] = []
     docs_dir = dist_dir / "docs"
+
+    stats = {
+        "scanned": 0,
+        "compiled": 0,
+        "skipped": 0,
+        "status_not_publishable": 0,
+        "visibility_restricted": 0,
+        "sensitivity_restricted": 0,
+        "classification_restricted": 0,
+        "explicit_flags_restricted": 0,
+        "read_errors": 0
+    }
 
     for root_dir, dirnames, files in os.walk(source_dir):
         root_path = Path(root_dir)
@@ -1083,18 +1120,33 @@ def convert_md_files(source_dir: Path, dist_dir: Path, allow_active: bool) -> li
 
             full_path = root_path / file_name
             rel_path = full_path.relative_to(source_dir)
+            stats["scanned"] += 1
 
             try:
                 content = full_path.read_text(encoding="utf-8", errors="replace")
             except Exception as e:
                 print(f"Error reading {full_path}: {e}")
+                stats["read_errors"] += 1
+                stats["skipped"] += 1
                 continue
 
             fm, body_text = parse_frontmatter(content)
 
             ok, reason = should_include(fm, allow_active)
             if not ok:
-                print(f"Skipped {rel_path} - {reason}")
+                stats["skipped"] += 1
+                if "Status" in reason:
+                    stats["status_not_publishable"] += 1
+                elif "Visibility" in reason:
+                    stats["visibility_restricted"] += 1
+                elif "Sensitivity" in reason:
+                    stats["sensitivity_restricted"] += 1
+                elif "Classification" in reason:
+                    stats["classification_restricted"] += 1
+                elif "Explicit flag" in reason:
+                    stats["explicit_flags_restricted"] += 1
+                else:
+                    stats["status_not_publishable"] += 1
                 continue
 
             html_body = markdown.markdown(
@@ -1117,6 +1169,34 @@ def convert_md_files(source_dir: Path, dist_dir: Path, allow_active: bool) -> li
             else:
                 folder_name = "Root"
 
+            # Parse navigation fields
+            nav_title = fm.get("nav_title") or title
+            nav_group = fm.get("nav_group") or folder_name
+
+            try:
+                nav_order = int(fm.get("nav_order", 999))
+            except (ValueError, TypeError):
+                nav_order = 999
+
+            nav_hidden_val = fm.get("nav_hidden")
+            if isinstance(nav_hidden_val, bool):
+                nav_hidden = nav_hidden_val
+            elif str(nav_hidden_val).lower() in ("yes", "true", "1"):
+                nav_hidden = True
+            else:
+                nav_hidden = False
+
+            is_index_val = fm.get("is_index")
+            if is_index_val is not None:
+                if isinstance(is_index_val, bool):
+                    is_index = is_index_val
+                else:
+                    is_index = str(is_index_val).lower() in ("yes", "true", "1")
+            else:
+                is_index = rel_path.name.lower() in ("_index.md", "index.md")
+
+            parent_ref = str(fm.get("parent_ref") or "")
+
             docs_list.append(
                 {
                     "title": title,
@@ -1128,10 +1208,17 @@ def convert_md_files(source_dir: Path, dist_dir: Path, allow_active: bool) -> li
                     "html_body": html_body,
                     "frontmatter": fm,
                     "folder": folder_name,
+                    "nav_title": nav_title,
+                    "nav_group": nav_group,
+                    "nav_order": nav_order,
+                    "nav_hidden": nav_hidden,
+                    "is_index": is_index,
+                    "parent_ref": parent_ref,
                 }
             )
+            stats["compiled"] += 1
 
-    return docs_list
+    return docs_list, stats
 
 
 # ---------------------------------------------------------------------------
@@ -1601,8 +1688,16 @@ def main() -> None:
     print(f"Loaded {len(bookmarks)} bookmarks from CSV.")
 
     # 4. Process Markdown documents
-    docs = convert_md_files(source_dir, dist_dir, allow_active)
-    print(f"Compiled {len(docs)} published documents.")
+    docs, stats = convert_md_files(source_dir, dist_dir, allow_active)
+    print(f"Markdown files scanned: {stats['scanned']}")
+    print(f"Published docs compiled: {stats['compiled']}")
+    print(f"Skipped: {stats['skipped']}")
+    print(f"- status not publishable: {stats['status_not_publishable']}")
+    print(f"- visibility private/internal: {stats['visibility_restricted']}")
+    print(f"- sensitivity restricted: {stats['sensitivity_restricted']}")
+    print(f"- classification restricted: {stats['classification_restricted']}")
+    print(f"- explicit flags restricted: {stats['explicit_flags_restricted']}")
+    print(f"- read errors: {stats['read_errors']}")
 
     # 5. Generate individual docs pages
     for doc in docs:

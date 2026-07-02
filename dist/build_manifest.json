@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-02T04:56:54+00:00",
+  "generated_at": "2026-07-02T05:12:22+00:00",
   "source": "C:\\QiLabs\\40_QiVault",
   "dist": "C:\\QiLabs\\10_QiSpark\\dist",
   "tree_root": "C:\\QiLabs",
   "source_read_only_mode": true,
-  "allow_active": false,
+  "allow_active": true,
   "site_title": "QiSpark Cockpit"
 }

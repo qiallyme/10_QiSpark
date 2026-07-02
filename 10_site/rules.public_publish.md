@@ -1,15 +1,65 @@
 # Rules: Public Publishing
 
-This document defines the strict filtering guidelines that prevent private content leakage during site builds.
+This document defines the frontmatter contract and strict filtering rules that prevent private content leakage during site builds.
 
-## 1. Inclusion Filter (White-list)
-A file is only compiled if its front-matter `status` property matches one of:
-- `publish`
-- `published`
-- `public`
+## 1. Publish States
 
-## 2. Exclusion Filter (Black-list)
-Any file matching any of the following is immediately skipped:
-- `sensitivity` contains `private`, `sensitive`, or `confidential`.
-- `classification` contains `private`, `sensitive`, or `confidential`.
-- Explicit boolean flags like `private`, `sensitive`, or `private_theory_flag` are set to `true` or `"yes"`.
+Allowed general lifecycle values:
+```yaml
+status: active
+status: draft
+status: archived
+status: deprecated
+status: publish
+status: published
+status: public
+```
+
+Builder-published values:
+```yaml
+status: publish
+status: published
+status: public
+```
+
+*Note: `status: active` will not publish unless the builder is run with `--allow-active`.*
+
+## 2. Visibility
+```yaml
+visibility: internal
+visibility: private
+visibility: public
+```
+
+## 3. Publish Target
+```yaml
+publish_target: none
+publish_target: qispark
+publish_target: qsaysit
+publish_target: qially
+```
+
+For static docs compiled by the QiSpark compiler, set:
+```yaml
+publish_target: qispark
+```
+
+## 4. Public Page Minimum (Required to Publish)
+To appear on the static QiSpark site, a document must use:
+```yaml
+status: publish
+visibility: public
+publish_target: qispark
+sensitivity: public
+classification: public
+```
+
+## 5. Internal Default (Safe Defaults)
+All normal notes and templates must default to:
+```yaml
+status: active
+visibility: internal
+publish_target: none
+sensitivity: internal
+classification: business_internal
+```
