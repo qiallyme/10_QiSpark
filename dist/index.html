@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QiSpark Cockpit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {{
+            --bg-color: #08090d;
+            --card-bg: rgba(255, 255, 255, 0.035);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-hover-border: rgba(99, 102, 241, 0.34);
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.16);
+            --text-color: #e2e8f0;
+            --text-muted: #94a3b8;
+            --sidebar-width: 320px;
+        }}
+
+        * {{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }}
+
+        body {{
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }}
+
+        .bg-glow-1 {{
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 70%);
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
+        }}
+
+        .bg-glow-2 {{
+            position: fixed;
+            bottom: -10%;
+            right: -10%;
+            width: 45vw;
+            height: 45vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, rgba(168, 85, 247, 0) 70%);
+            filter: blur(100px);
+            z-index: -1;
+            pointer-events: none;
+        }}
+
+        header {{
+            border-bottom: 1px solid var(--card-border);
+            background: rgba(8, 9, 13, 0.78);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }}
+
+        .nav-container {{
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+        }}
+
+        .logo-section {{
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: white;
+            font-weight: 650;
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+        }}
+
+        .logo-icon {{
+            color: var(--primary);
+        }}
+
+        .nav-links {{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 0.35rem;
+        }}
+
+        .nav-link {{
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: color 0.2s, background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.45rem 0.65rem;
+            border-radius: 999px;
+        }}
+
+        .nav-link:hover, .nav-link.active {{
+            color: white;
+            background: rgba(255, 255, 255, 0.05);
+        }}
+
+        .nav-link i, .logo-section i {{
+            width: 18px;
+            height: 18px;
+        }}
+
+        .glass-card {{
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+        }}
+
+        .glass-card:hover {{
+            border-color: var(--card-hover-border);
+            box-shadow: 0 12px 30px -10px var(--primary-glow);
+            transform: translateY(-2px);
+        }}
+
+        .container {{
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }}
+
+        @media (max-width: 820px) {{
+            .nav-container {{
+                align-items: flex-start;
+                flex-direction: column;
+            }}
+
+            .nav-links {{
+                justify-content: flex-start;
+            }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-section">
+                <i data-lucide="zap" class="logo-icon"></i>
+                <span>QiSpark Cockpit</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+                <a href="#" class="nav-link"><i data-lucide="book-open"></i> Documentation</a>
+                <a href="tree.html" class="nav-link"><i data-lucide="folder-tree"></i> QiLabs Tree</a>
+            </div>
+        </div>
+    </header>
+
+    <style>
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .service-card {
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--accent);
+            opacity: 0.85;
+        }
+
+        .service-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .service-icon i {
+            width: 22px;
+            height: 22px;
+        }
+
+        .service-details h3 {
+            color: white;
+            font-size: 1.08rem;
+            font-weight: 650;
+            margin-bottom: 0.2rem;
+        }
+
+        .service-details p {
+            color: var(--text-muted);
+            font-size: 0.84rem;
+            line-height: 1.35;
+        }
+
+        .service-arrow {
+            margin-left: auto;
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+
+        .service-card:hover .service-arrow {
+            transform: translateX(4px);
+            color: white;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.4rem);
+            font-weight: 760;
+            letter-spacing: -0.7px;
+            margin-bottom: 0.45rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            font-weight: 650;
+            margin-top: 2rem;
+            margin-bottom: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .bookmarks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .bookmark-group-card {
+            padding: 1.35rem;
+        }
+
+        .bookmark-group-card h2 {
+            font-size: 1.16rem;
+            font-weight: 650;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+        }
+
+        .bookmark-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .bookmark-item {
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+            padding-left: 0.9rem;
+            transition: border-color 0.2s;
+        }
+
+        .bookmark-item:hover {
+            border-left-color: var(--primary);
+        }
+
+        .bm-title-link {
+            color: #f1f5f9;
+            font-weight: 520;
+            font-size: 0.98rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: color 0.2s;
+        }
+
+        .bm-title-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .link-icon {
+            width: 14px;
+            height: 14px;
+            opacity: 0.65;
+        }
+
+        .bm-desc {
+            color: var(--text-muted);
+            font-size: 0.84rem;
+            margin-top: 0.25rem;
+        }
+
+        .bm-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-top: 0.5rem;
+        }
+
+        .bm-tag {
+            font-size: 0.74rem;
+            color: var(--primary);
+            background: rgba(99, 102, 241, 0.08);
+            padding: 0.1rem 0.4rem;
+            border-radius: 999px;
+        }
+    </style>
+
+    <main class="container">
+        <h1 class="section-title"><i data-lucide="layout-grid" style="color: var(--primary)"></i> Main Cockpit</h1>
+        <p class="section-desc">Quick launch pads for operational systems, docs, and generated workspace navigation.</p>
+
+        
+        <h2 class="section-subtitle"><i data-lucide="layers" style="color: var(--primary); width: 18px; height: 18px;"></i> Primary</h2>
+        <div class="dashboard-grid">
+            
+            <a href="https://server.qially.com" class="glass-card service-card" style="--accent: #a855f7; text-decoration: none;">
+                <div class="service-icon" style="background: rgba(168, 85, 247, 0.12); color: #a855f7"><i data-lucide="server"></i></div>
+                <div class="service-details">
+                    <h3>QiServer Cockpit</h3>
+                    <p>Control plane and Private server cluster management.</p>
+                </div>
+                <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+            <a href="https://life.qially.com" class="glass-card service-card" style="--accent: #ec4899; text-decoration: none;">
+                <div class="service-icon" style="background: rgba(236, 72, 153, 0.12); color: #ec4899"><i data-lucide="heart"></i></div>
+                <div class="service-details">
+                    <h3>QiLife</h3>
+                    <p>Personal life organizer and task manager.</p>
+                </div>
+                <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+            <a href="https://fi.qially.com" class="glass-card service-card" style="--accent: #eab308; text-decoration: none;">
+                <div class="service-icon" style="background: rgba(234, 179, 8, 0.12); color: #eab308"><i data-lucide="wallet"></i></div>
+                <div class="service-details">
+                    <h3>QiFinance</h3>
+                    <p>QiFinance dashboard and analytics.</p>
+                </div>
+                <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+            <a href="#/index.html" class="glass-card service-card" style="--accent: #38bdf8; text-decoration: none;">
+                <div class="service-icon" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8"><i data-lucide="book-open"></i></div>
+                <div class="service-details">
+                    <h3>QiSpark Docs</h3>
+                    <p>Static documentation and blueprints.</p>
+                </div>
+                <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+            <a href="tree.html" class="glass-card service-card" style="--accent: #14b8a6; text-decoration: none;">
+                <div class="service-icon" style="background: rgba(20, 184, 166, 0.12); color: #14b8a6"><i data-lucide="network"></i></div>
+                <div class="service-details">
+                    <h3>QiLabs Tree</h3>
+                    <p>Workspace file tree visualization map.</p>
+                </div>
+                <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+        </div>
+        
+        <h2 class="section-subtitle"><i data-lucide="layers" style="color: var(--primary); width: 18px; height: 18px;"></i> Publishing</h2>
+        <div class="dashboard-grid">
+            
+            <a href="https://qsaysit.com" class="glass-card service-card" style="--accent: #10b981; text-decoration: none;">
+                <div class="service-icon" style="background: rgba(16, 185, 129, 0.12); color: #10b981"><i data-lucide="pencil-line"></i></div>
+                <div class="service-details">
+                    <h3>QiSaysIt</h3>
+                    <p>Public writing, posts, and publishing surface.</p>
+                </div>
+                <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+            <a href="https://qially.com" class="glass-card service-card" style="--accent: #3b82f6; text-decoration: none;">
+                <div class="service-icon" style="background: rgba(59, 130, 246, 0.12); color: #3b82f6"><i data-lucide="globe"></i></div>
+                <div class="service-details">
+                    <h3>QiAlly</h3>
+                    <p>Primary QiAlly public/domain hub.</p>
+                </div>
+                <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+        </div>
+        
+        <h2 class="section-subtitle"><i data-lucide="layers" style="color: var(--primary); width: 18px; height: 18px;"></i> Systems</h2>
+        <div class="dashboard-grid">
+            
+            <a href="https://dash.cloudflare.com" class="glass-card service-card" style="--accent: #f97316; text-decoration: none;">
+                <div class="service-icon" style="background: rgba(249, 115, 22, 0.12); color: #f97316"><i data-lucide="cloud-lightning"></i></div>
+                <div class="service-details">
+                    <h3>Cloudflare</h3>
+                    <p>Domain DNS, proxy, and edge routing control.</p>
+                </div>
+                <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+            <a href="https://supabase.com/dashboard" class="glass-card service-card" style="--accent: #3ecf8e; text-decoration: none;">
+                <div class="service-icon" style="background: rgba(62, 207, 142, 0.12); color: #3ecf8e"><i data-lucide="database"></i></div>
+                <div class="service-details">
+                    <h3>Supabase</h3>
+                    <p>Database management and project dashboard.</p>
+                </div>
+                <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+            <a href="https://github.com" class="glass-card service-card" style="--accent: #f1f5f9; text-decoration: none;">
+                <div class="service-icon" style="background: rgba(241, 245, 249, 0.12); color: #f1f5f9"><i data-lucide="github"></i></div>
+                <div class="service-details">
+                    <h3>GitHub</h3>
+                    <p>Repositories, actions, and code repositories.</p>
+                </div>
+                <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+            </a>
+            
+        </div>
+        
+
+        <h1 class="section-title"><i data-lucide="bookmarks" style="color: var(--primary)"></i> Bookmarks Registry</h1>
+        <p class="section-desc">Static references imported from the local toolbox cockpit.</p>
+
+        <div class="bookmarks-grid">
+            
+        <div class="glass-card bookmark-group-card">
+            <h2><i data-lucide="folder" style="color: var(--primary)"></i> Local Toolbox</h2>
+            <div class="bookmark-list">
+                
+            <div class="bookmark-item">
+                <div class="bm-content">
+                    <a href="file:///C:/QiLabs/00_QiLabs.workspace/toolbox" target="_blank" rel="noopener noreferrer" class="bm-title-link">
+                        Toolbox Folder <i data-lucide="external-link" class="link-icon"></i>
+                    </a>
+                    <p class="bm-desc">Local toolbox root folder.</p>
+                    <div class="bm-tags"><span class="bm-tag">#local</span><span class="bm-tag">#toolbox</span><span class="bm-tag">#folder</span></div>
+                </div>
+            </div>
+            
+            <div class="bookmark-item">
+                <div class="bm-content">
+                    <a href="file:///C:/QiLabs" target="_blank" rel="noopener noreferrer" class="bm-title-link">
+                        QiLabs Root <i data-lucide="external-link" class="link-icon"></i>
+                    </a>
+                    <p class="bm-desc">Local QiLabs root folder.</p>
+                    <div class="bm-tags"><span class="bm-tag">#local</span><span class="bm-tag">#qilabs</span><span class="bm-tag">#folder</span></div>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+        <div class="glass-card bookmark-group-card">
+            <h2><i data-lucide="folder" style="color: var(--primary)"></i> Major Players</h2>
+            <div class="bookmark-list">
+                
+            <div class="bookmark-item">
+                <div class="bm-content">
+                    <a href="https://access.qially.com" target="_blank" rel="noopener noreferrer" class="bm-title-link">
+                        QiAccess <i data-lucide="external-link" class="link-icon"></i>
+                    </a>
+                    <p class="bm-desc">Access/cockpit entry point for QiAlly/QiLabs workflows.</p>
+                    <div class="bm-tags"><span class="bm-tag">#qiaccess</span><span class="bm-tag">#cockpit</span><span class="bm-tag">#major</span></div>
+                </div>
+            </div>
+            
+            <div class="bookmark-item">
+                <div class="bm-content">
+                    <a href="https://qsaysit.com" target="_blank" rel="noopener noreferrer" class="bm-title-link">
+                        QiSaysIt <i data-lucide="external-link" class="link-icon"></i>
+                    </a>
+                    <p class="bm-desc">Public writing / posts / publishing surface.</p>
+                    <div class="bm-tags"><span class="bm-tag">#public</span><span class="bm-tag">#writing</span><span class="bm-tag">#site</span><span class="bm-tag">#major</span></div>
+                </div>
+            </div>
+            
+            <div class="bookmark-item">
+                <div class="bm-content">
+                    <a href="https://qially.com" target="_blank" rel="noopener noreferrer" class="bm-title-link">
+                        QiAlly <i data-lucide="external-link" class="link-icon"></i>
+                    </a>
+                    <p class="bm-desc">Primary QiAlly public/domain hub.</p>
+                    <div class="bm-tags"><span class="bm-tag">#qially</span><span class="bm-tag">#public</span><span class="bm-tag">#major</span></div>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+        </div>
+    </main>
+    
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

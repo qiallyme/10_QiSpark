@@ -1,0 +1,82 @@
+[
+  {
+    "title": "QiServer Cockpit",
+    "description": "Control plane and Private server cluster management.",
+    "url": "https://server.qially.com",
+    "icon": "server",
+    "color": "#a855f7",
+    "category": "Primary"
+  },
+  {
+    "title": "QiLife",
+    "description": "Personal life organizer and task manager.",
+    "url": "https://life.qially.com",
+    "icon": "heart",
+    "color": "#ec4899",
+    "category": "Primary"
+  },
+  {
+    "title": "QiFinance",
+    "description": "QiFinance dashboard and analytics.",
+    "url": "https://fi.qially.com",
+    "icon": "wallet",
+    "color": "#eab308",
+    "category": "Primary"
+  },
+  {
+    "title": "QiSpark Docs",
+    "description": "Static documentation and blueprints.",
+    "url": "docs/index.html",
+    "icon": "book-open",
+    "color": "#38bdf8",
+    "category": "Primary"
+  },
+  {
+    "title": "QiLabs Tree",
+    "description": "Workspace file tree visualization map.",
+    "url": "tree.html",
+    "icon": "network",
+    "color": "#14b8a6",
+    "category": "Primary"
+  },
+  {
+    "title": "QiSaysIt",
+    "description": "Public writing, posts, and publishing surface.",
+    "url": "https://qsaysit.com",
+    "icon": "pencil-line",
+    "color": "#10b981",
+    "category": "Publishing"
+  },
+  {
+    "title": "QiAlly",
+    "description": "Primary QiAlly public/domain hub.",
+    "url": "https://qially.com",
+    "icon": "globe",
+    "color": "#3b82f6",
+    "category": "Publishing"
+  },
+  {
+    "title": "Cloudflare",
+    "description": "Domain DNS, proxy, and edge routing control.",
+    "url": "https://dash.cloudflare.com",
+    "icon": "cloud-lightning",
+    "color": "#f97316",
+    "category": "Systems"
+  },
+  {
+    "title": "Supabase",
+    "description": "Database management and project dashboard.",
+    "url": "https://supabase.com/dashboard",
+    "icon": "database",
+    "color": "#3ecf8e",
+    "category": "Systems"
+  },
+  {
+    "title": "GitHub",
+    "description": "Repositories, actions, and code repositories.",
+    "url": "https://github.com",
+    "icon": "github",
+    "color": "#f1f5f9",
+    "category": "Systems"
+  }
+]

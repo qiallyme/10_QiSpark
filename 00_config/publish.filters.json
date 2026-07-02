@@ -1,0 +1,6 @@
+{
+  "allowed_statuses": ["publish", "published", "public"],
+  "exclude_sensitivity": ["private", "sensitive", "confidential"],
+  "exclude_classification": ["private", "sensitive", "confidential"],
+  "exclude_flags": ["private", "sensitive", "confidential", "private_theory_flag"]
+}

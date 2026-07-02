@@ -1,0 +1,7 @@
+{
+  "canonical_routes": {
+    "index": "/",
+    "docs": "/docs/",
+    "tree": "/tree.html"
+  }
+}
