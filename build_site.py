@@ -922,7 +922,7 @@ def main() -> None:
         docs_path = "../" * depth + "docs/index.html" if len(docs) > 0 else "#"
         
         # Wrap inside general layout
-        page_html = HTML_HEADER.format(title=doc["title"], home_path=home_path, docs_path=docs_path)
+        page_html = HTML_HEADER.replace("{title}", doc["title"]).replace("{home_path}", home_path).replace("{docs_path}", docs_path)
         page_html += render_docs_layout(doc_sidebar, doc["html_body"], doc["frontmatter"])
         page_html += HTML_FOOTER
         
@@ -935,7 +935,7 @@ def main() -> None:
         docs_idx_sidebar = build_sidebar(docs, "docs/index.html")
         welcome_html = "<h1>Welcome to QiSpark Documentation</h1><p>Select a document from the left sidebar to begin reading.</p>"
         
-        docs_index = HTML_HEADER.format(title="QiSpark Documentation Index", home_path="../index.html", docs_path="index.html")
+        docs_index = HTML_HEADER.replace("{title}", "QiSpark Documentation Index").replace("{home_path}", "../index.html").replace("{docs_path}", "index.html")
         docs_index += render_docs_layout(docs_idx_sidebar, welcome_html, {})
         docs_index += HTML_FOOTER
         
@@ -946,7 +946,7 @@ def main() -> None:
     home_path = "index.html"
     docs_path = "docs/index.html" if docs else "#"
     
-    dashboard_html = HTML_HEADER.format(title="QiAccess Cockpit", home_path=home_path, docs_path=docs_path)
+    dashboard_html = HTML_HEADER.replace("{title}", "QiAccess Cockpit").replace("{home_path}", home_path).replace("{docs_path}", docs_path)
     dashboard_html += render_dashboard(bookmarks, "docs" if docs else "#")
     dashboard_html += HTML_FOOTER
     
