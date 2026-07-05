@@ -2,7 +2,7 @@
   {
     "title": "QiServer Cockpit",
     "description": "Control plane and Private server cluster management.",
-    "url": "https://server.qially.com",
+    "url": "http://qiserver-1.cerberus-sirius.ts.net",
     "icon": "server",
     "color": "#a855f7",
     "category": "Primary"
@@ -10,7 +10,7 @@
   {
     "title": "QiLife",
     "description": "Personal life organizer and task manager.",
-    "url": "https://life.qially.com",
+    "url": "https://qially.com/404.html",
     "icon": "heart",
     "color": "#ec4899",
     "category": "Primary"

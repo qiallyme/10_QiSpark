@@ -23,11 +23,11 @@ DEFAULT_QILABS_ROOT = Path(r"C:\QiLabs")
 DEFAULT_SOURCE = Path(r"C:\QiLabs\40_QiVault")
 DEFAULT_DIST = Path(r"C:\QiLabs\10_QiSpark\dist")
 BOOKMARKS_CSV = Path(
-    r"C:\QiLabs\00_QiLabs.workspace\toolbox\tools\access\qiaccess_bookmarks\bookmarks.csv"
+    r"C:\QiLabs\00_QiLabs.workspace\_qiconfig\_bookmarks\bookmarks.csv"
 )
 
 # Controlled tag vocabulary configuration
-VALID_STATUSES = {"publish", "published", "public"}
+VALID_STATUSES = {"publish", "published", "public", "pub"}
 EXCLUDE_SENSITIVITY = {"private", "sensitive", "confidential"}
 EXCLUDE_CLASSIFICATION = {"private", "sensitive", "confidential"}
 EXCLUDE_FLAGS = ["private", "sensitive", "confidential", "private_theory_flag"]
@@ -209,13 +209,21 @@ def parse_frontmatter(text: str) -> tuple[dict[str, Any], str]:
 
 
 def should_include(fm: dict[str, Any], allow_active: bool) -> tuple[bool, str]:
+    """Return (True, "") if a file should be included in the build.
+
+    Publish rule (simple):
+      Include any file whose `status` field is one of the VALID_STATUSES
+      (publish, published, public, pub). Safety exclusions run first.
+
+    Future: granular publish_target / visibility filtering can be layered
+    back on top of this without changing the core rule.
+    """
     status = str(fm.get("status") or "").lower().strip()
     visibility = str(fm.get("visibility") or "").lower().strip()
-    publish_target = str(fm.get("publish_target") or "").lower().strip()
     sensitivity = str(fm.get("sensitivity") or "").lower().strip()
     classification = str(fm.get("classification") or "").lower().strip()
 
-    # 1. Safety exclusions
+    # 1. Safety exclusions — always run first regardless of status
     if visibility in ("private",):
         return False, f"Visibility is '{visibility}'"
 
@@ -225,7 +233,6 @@ def should_include(fm: dict[str, Any], allow_active: bool) -> tuple[bool, str]:
     if classification in EXCLUDE_CLASSIFICATION:
         return False, f"Classification '{classification}' is restricted"
 
-    # Explicit boolean flags
     for flag in EXCLUDE_FLAGS:
         val = fm.get(flag)
         if isinstance(val, bool) and val:
@@ -233,25 +240,15 @@ def should_include(fm: dict[str, Any], allow_active: bool) -> tuple[bool, str]:
         if str(val).lower() in ("yes", "true", "1"):
             return False, f"Explicit flag '{flag}' is enabled"
 
-    # 2. Strict / Backwards Compatible Publish matching
-    is_backward_publish = status in ("published", "public")
-    is_strict_publish = (
-        status == "publish" and 
-        visibility == "public" and 
-        publish_target == "qispark"
-    )
-    is_active_allowed = (
-        allow_active and 
-        status == "active"
-    )
+    # 2. Publish gate — status must be in VALID_STATUSES
+    if status in VALID_STATUSES:
+        return True, ""
 
-    if not (is_backward_publish or is_strict_publish or is_active_allowed):
-        return (
-            False,
-            f"Status '{status}', visibility '{visibility}', publish_target '{publish_target}' not eligible for build"
-        )
+    # 3. Optional: allow `status: active` via --allow-active CLI flag
+    if allow_active and status == "active":
+        return True, ""
 
-    return True, ""
+    return False, f"Status '{status}' is not a publish status (expected one of: {', '.join(sorted(VALID_STATUSES))})"
 
 
 def read_bookmarks(csv_path: Path) -> list[dict[str, str]]:
@@ -465,6 +462,11 @@ HTML_HEADER = """<!DOCTYPE html>
 HTML_FOOTER = """
     <script>
         lucide.createIcons();
+        function toggleAllDetails(open) {
+            document.querySelectorAll('.doc-tree details').forEach(el => {
+                el.open = open;
+            });
+        }
     </script>
 </body>
 </html>
@@ -823,6 +825,21 @@ def render_docs_layout(sidebar_html: str, content_html: str, fm: dict[str, Any])
             gap: 0.25rem;
         }}
 
+        .tree-folder details {{
+            width: 100%;
+        }}
+
+        .tree-folder summary {{
+            list-style: none;
+            cursor: pointer;
+            outline: none;
+            user-select: none;
+        }}
+
+        .tree-folder summary::-webkit-details-marker {{
+            display: none;
+        }}
+
         .folder-header {{
             font-weight: 650;
             font-size: 0.92rem;
@@ -832,6 +849,50 @@ def render_docs_layout(sidebar_html: str, content_html: str, fm: dict[str, Any])
             gap: 0.5rem;
             margin-top: 0.35rem;
             margin-bottom: 0.2rem;
+        }}
+
+        .folder-content {{
+            padding-left: 0.55rem;
+            border-left: 1px dashed rgba(255, 255, 255, 0.08);
+            margin-left: 0.45rem;
+            margin-top: 0.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }}
+
+        .sidebar-controls {{
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem 0.25rem;
+            border-bottom: 1px solid var(--card-border);
+            margin-bottom: 0.75rem;
+        }}
+
+        .sidebar-controls button {{
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }}
+
+        .sidebar-controls button:hover {{
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--card-hover-border);
+            color: white;
+        }}
+
+        .sidebar-controls button i {{
+            width: 12px;
+            height: 12px;
         }}
 
         .tree-item {{
@@ -1026,6 +1087,10 @@ def render_docs_layout(sidebar_html: str, content_html: str, fm: dict[str, Any])
     <main class="docs-layout">
         <aside class="sidebar">
             <div class="sidebar-title"><i data-lucide="book-open" style="width: 16px; height: 16px;"></i> Document Tree</div>
+            <div class="sidebar-controls">
+                <button onclick="toggleAllDetails(true)"><i data-lucide="folder-open"></i> Expand All</button>
+                <button onclick="toggleAllDetails(false)"><i data-lucide="folder-closed"></i> Collapse All</button>
+            </div>
             <nav class="doc-tree">
                 {sidebar_html}
             </nav>
@@ -1044,45 +1109,93 @@ def build_sidebar(docs_list: list[dict[str, Any]], current_rel_path: str | None 
     # Filter out nav_hidden: True files
     visible_docs = [doc for doc in docs_list if not doc.get("nav_hidden", False)]
 
-    # Group by nav_group
-    hierarchy: dict[str, list[dict[str, Any]]] = {}
-    for doc in visible_docs:
-        group = doc.get("nav_group") or "Root"
-        hierarchy.setdefault(group, []).append(doc)
+    # We need to compute link_prefix up front to build correct relative links
+    link_prefix = ""
+    if current_rel_path:
+        parts = current_rel_path.replace("\\", "/").split("/")
+        depth = len(parts) - 1
+        link_prefix = "../" * depth
 
-    output = ""
-    # Sort folders/groups by name
-    for folder, items in sorted(hierarchy.items()):
-        # Sort items inside each folder by nav_order, then nav_title
-        sorted_items = sorted(
-            items,
+    # Build a nested tree structure
+    root_node = {"files": [], "dirs": {}}
+
+    for doc in visible_docs:
+        rel_html = doc["rel_html"]  # e.g., "docs/30_empowerqnow713/manifesto.html"
+        
+        # Strip "docs/" prefix if present to find nested folder structure
+        path_str = rel_html
+        if path_str.startswith("docs/"):
+            path_str = path_str[5:]
+        elif path_str.startswith("docs\\"):
+            path_str = path_str[5:]
+            
+        parts = path_str.replace("\\", "/").split("/")
+        dir_parts = parts[:-1]
+        
+        current_node = root_node
+        for part in dir_parts:
+            if not part:
+                continue
+            current_node = current_node["dirs"].setdefault(part, {"files": [], "dirs": {}})
+            
+        current_node["files"].append(doc)
+
+    def render_node(node: dict[str, Any], current_path: str | None, prefix: str) -> str:
+        html_out = ""
+        
+        # Render directories first
+        for dir_key in sorted(node["dirs"].keys()):
+            child = node["dirs"][dir_key]
+            
+            display_name = dir_key
+            if display_name.isdigit() or (len(display_name) > 2 and display_name[:2].isdigit()):
+                display_name = re.sub(r"^\d+_", "", display_name)
+            display_name = display_name.replace("_", " ").title()
+            
+            child_html = render_node(child, current_path, prefix)
+            if not child_html.strip():
+                continue
+                
+            is_open = False
+            if current_path:
+                norm_path = current_path.replace("\\", "/")
+                path_parts = norm_path.split("/")[:-1]
+                if dir_key in path_parts:
+                    is_open = True
+                    
+            open_attr = " open" if is_open else ""
+            
+            html_out += f"""
+            <div class="tree-folder">
+                <details{open_attr}>
+                    <summary class="folder-header">
+                        <i data-lucide="folder" style="width: 14px; height: 14px; color: var(--text-muted)"></i>
+                        {html.escape(display_name)}
+                    </summary>
+                    <div class="folder-content">
+                        {child_html}
+                    </div>
+                </details>
+            </div>
+            """
+            
+        # Render files
+        sorted_files = sorted(
+            node["files"],
             key=lambda x: (x.get("nav_order", 999), str(x.get("nav_title") or "").lower())
         )
-
-        folder_items_html = ""
-        for item in sorted_items:
-            is_active = current_rel_path == item["rel_html"]
+        for f in sorted_files:
+            is_active = current_path == f["rel_html"]
             active_class = " active" if is_active else ""
-
-            link_prefix = ""
-            if current_rel_path:
-                depth = len(current_rel_path.split("/")) - 1
-                link_prefix = "../" * depth
-
-            folder_items_html += f"""
-            <a href="{link_prefix}{html.escape(item['rel_html'], quote=True)}" class="tree-item{active_class}" title="{html.escape(item['nav_title'], quote=True)}">
-                {html.escape(item['nav_title'])}
+            html_out += f"""
+            <a href="{prefix}{html.escape(f['rel_html'], quote=True)}" class="tree-item{active_class}" title="{html.escape(f['nav_title'], quote=True)}">
+                {html.escape(f['nav_title'])}
             </a>
             """
+            
+        return html_out
 
-        output += f"""
-        <div class="tree-folder">
-            <div class="folder-header"><i data-lucide="folder" style="width: 14px; height: 14px; color: var(--text-muted)"></i> {html.escape(folder)}</div>
-            {folder_items_html}
-        </div>
-        """
-
-    return output
+    return render_node(root_node, current_rel_path, link_prefix)
 
 
 def convert_md_files(source_dir: Path, dist_dir: Path, allow_active: bool) -> tuple[list[dict[str, Any]], dict[str, int]]:
@@ -1702,9 +1815,12 @@ def main() -> None:
     # 5. Generate individual docs pages
     for doc in docs:
         doc_sidebar = build_sidebar(docs, doc["rel_html"])
-        depth = len(doc["rel_html"].split("/")) - 1
+        # rel_html is like "docs/folder/sub/file.html"
+        # depth = number of path segments above the file, relative to dist/
+        rel_parts = doc["rel_html"].replace("\\", "/").split("/")
+        depth = len(rel_parts) - 1  # how many "../" to get back to dist/
         home_path = "../" * depth + "index.html"
-        docs_path = "../" * depth + "docs/index.html"
+        docs_path = "../" * (depth - 1) + "index.html"  # dist/docs/ is 1 level above the doc root
         tree_path = "../" * depth + "tree.html"
 
         page_html = make_header(doc["title"], home_path, docs_path, tree_path, site_title=site_title)

@@ -1,4 +1,4 @@
 {
-  "source_csv": "C:\\QiLabs\\00_QiLabs.workspace\\toolbox\\tools\\access\\qiaccess_bookmarks\\bookmarks.csv",
-  "canonical_csv": "C:\\QiLabs\\00_QiLabs.workspace\\toolbox\\tools\\qispark_bookmarks\\bookmarks.csv"
+  "source_csv": "C:\\QiLabs\\00_QiLabs.workspace\\_qiconfig\\_bookmarks",
+  "canonical_csv": "C:\\QiLabs\\00_QiLabs.workspace\\_qiconfig\\_bookmarks_sorted"
 }
