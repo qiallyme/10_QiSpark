@@ -78,5 +78,13 @@
     "icon": "github",
     "color": "#f1f5f9",
     "category": "Systems"
+  },
+  {
+    "title": "QiLabs Housekeeping",
+    "description": "Trigger the digital housekeeping console to audit metadata, tags, and folder indexes.",
+    "url": "file:///C:/QiLabs/40_QiVault/_system/launch_housekeeping.bat",
+    "icon": "brush",
+    "color": "#ec4899",
+    "category": "Systems"
   }
 ]
