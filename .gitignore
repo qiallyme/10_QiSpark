@@ -1,1 +1,8 @@
 docs/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+Thumbs.db
