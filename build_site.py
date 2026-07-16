@@ -223,31 +223,22 @@ def should_include(fm: dict[str, Any], allow_active: bool) -> tuple[bool, str]:
     sensitivity = str(fm.get("sensitivity") or "").lower().strip()
     classification = str(fm.get("classification") or "").lower().strip()
 
-    # 1. Safety exclusions — always run first regardless of status
+    # Safety exclusions first
     if visibility in ("private",):
         return False, f"Visibility is '{visibility}'"
-
     if sensitivity in EXCLUDE_SENSITIVITY:
         return False, f"Sensitivity '{sensitivity}' is restricted"
-
     if classification in EXCLUDE_CLASSIFICATION:
         return False, f"Classification '{classification}' is restricted"
-
     for flag in EXCLUDE_FLAGS:
         val = fm.get(flag)
-        if isinstance(val, bool) and val:
-            return False, f"Explicit flag '{flag}' is true"
-        if str(val).lower() in ("yes", "true", "1"):
+        if isinstance(val, bool) and val or str(val).lower() in ("yes", "true", "1"):
             return False, f"Explicit flag '{flag}' is enabled"
 
-    # 2. Publish gate — status must be in VALID_STATUSES
     if status in VALID_STATUSES:
         return True, ""
-
-    # 3. Optional: allow `status: active` via --allow-active CLI flag
     if allow_active and status == "active":
         return True, ""
-
     return False, f"Status '{status}' is not a publish status (expected one of: {', '.join(sorted(VALID_STATUSES))})"
 
 
@@ -290,15 +281,17 @@ HTML_HEADER = """<!DOCTYPE html>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --bg-color: #08090d;
-            --card-bg: rgba(255, 255, 255, 0.035);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --card-hover-border: rgba(99, 102, 241, 0.34);
+            --bg-color: #05060b;
+            --card-bg: rgba(255, 255, 255, 0.028);
+            --card-border: rgba(255, 255, 255, 0.065);
+            --card-hover-border: rgba(99, 102, 241, 0.45);
             --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.16);
+            --primary-glow: rgba(99, 102, 241, 0.22);
+            --accent-purple: #a855f7;
             --text-color: #e2e8f0;
             --text-muted: #94a3b8;
-            --sidebar-width: 320px;
+            --text-subtle: #64748b;
+            --sidebar-width: 340px;
         }
 
         * {
@@ -311,7 +304,7 @@ HTML_HEADER = """<!DOCTYPE html>
             font-family: 'Outfit', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.65;
             overflow-x: hidden;
         }
 
@@ -322,7 +315,7 @@ HTML_HEADER = """<!DOCTYPE html>
             width: 50vw;
             height: 50vw;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 70%);
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, rgba(99, 102, 241, 0) 70%);
             filter: blur(100px);
             z-index: -1;
             pointer-events: none;
@@ -335,7 +328,7 @@ HTML_HEADER = """<!DOCTYPE html>
             width: 45vw;
             height: 45vw;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, rgba(168, 85, 247, 0) 70%);
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.09) 0%, rgba(168, 85, 247, 0) 70%);
             filter: blur(100px);
             z-index: -1;
             pointer-events: none;
@@ -343,12 +336,13 @@ HTML_HEADER = """<!DOCTYPE html>
 
         header {
             border-bottom: 1px solid var(--card-border);
-            background: rgba(8, 9, 13, 0.78);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(5, 6, 11, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 1px 0 rgba(255,255,255,0.03);
         }
 
         .nav-container {
@@ -368,72 +362,76 @@ HTML_HEADER = """<!DOCTYPE html>
             text-decoration: none;
             color: white;
             font-weight: 650;
-            font-size: 1.3rem;
+            font-size: 1.32rem;
             letter-spacing: -0.5px;
             white-space: nowrap;
-        }
-
-        .logo-icon {
-            color: var(--primary);
         }
 
         .nav-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-end;
-            gap: 0.35rem;
+            gap: 0.4rem;
         }
 
         .nav-link {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.92rem;
+            font-size: 0.93rem;
             font-weight: 500;
-            transition: color 0.2s, background 0.2s;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 0.45rem;
-            padding: 0.45rem 0.65rem;
-            border-radius: 999px;
+            padding: 0.48rem 0.75rem;
+            border-radius: 9999px;
+            position: relative;
         }
 
         .nav-link:hover, .nav-link.active {
             color: white;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.06);
         }
 
-        .nav-link i, .logo-section i {
-            width: 18px;
-            height: 18px;
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background: var(--primary);
+            border-radius: 50%;
         }
 
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 18px;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
         }
 
         .glass-card:hover {
             border-color: var(--card-hover-border);
-            box-shadow: 0 12px 30px -10px var(--primary-glow);
-            transform: translateY(-2px);
+            box-shadow: 0 14px 32px -12px var(--primary-glow);
+            transform: translateY(-3px);
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2.5rem 1.5rem;
+            padding: 2.75rem 1.5rem;
         }
 
         @media (max-width: 820px) {
             .nav-container {
                 align-items: flex-start;
                 flex-direction: column;
+                gap: 1rem;
             }
-
             .nav-links {
                 justify-content: flex-start;
             }
@@ -447,7 +445,7 @@ HTML_HEADER = """<!DOCTYPE html>
         <div class="nav-container">
             <a href="{home_path}" class="logo-section">
                 <i data-lucide="zap" class="logo-icon"></i>
-                <span>QiAccess Cockpit</span>
+                <span>{site_title}</span>
             </a>
             <div class="nav-links">
                 <a href="{home_path}" class="nav-link"><i data-lucide="layout-dashboard"></i> Dashboard</a>
@@ -462,11 +460,22 @@ HTML_HEADER = """<!DOCTYPE html>
 HTML_FOOTER = """
     <script>
         lucide.createIcons();
-        function toggleAllDetails(open) {
-            document.querySelectorAll('.doc-tree details').forEach(el => {
-                el.open = open;
+
+        function setActiveNav() {
+            const currentPath = window.location.pathname;
+            document.querySelectorAll('.nav-link').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && (currentPath.endsWith(href) || (href.includes('index.html') && (currentPath === '/' || currentPath.endsWith('/'))))) {
+                    link.classList.add('active');
+                }
             });
         }
+
+        function toggleAllDetails(open) {
+            document.querySelectorAll('.doc-tree details').forEach(el => el.open = open);
+        }
+
+        window.addEventListener('load', setActiveNav);
     </script>
 </body>
 </html>
@@ -480,7 +489,7 @@ def make_header(title: str, home_path: str, docs_path: str, tree_path: str, site
         .replace("{home_path}", home_path)
         .replace("{docs_path}", docs_path)
         .replace("{tree_path}", tree_path)
-        .replace("<span>QiAccess Cockpit</span>", f"<span>{html.escape(site_title)}</span>")
+        .replace("{site_title}", html.escape(site_title))
     )
 
 
