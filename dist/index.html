@@ -170,14 +170,14 @@
     <div class="bg-glow-2"></div>
     <header>
         <div class="nav-container">
-            <a href="index.html" class="logo-section">
+            <a href="/10_QiSpark/index.html" class="logo-section">
                 <i data-lucide="zap" class="logo-icon"></i>
                 <span>QiSpark Cockpit</span>
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link"><i data-lucide="layout-dashboard"></i> Dashboard</a>
-                <a href="docs/index.html" class="nav-link"><i data-lucide="book-open"></i> Documentation</a>
-                <a href="tree.html" class="nav-link"><i data-lucide="folder-tree"></i> QiLabs Tree</a>
+                <a href="/10_QiSpark/index.html" class="nav-link"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+                <a href="/10_QiSpark/docs/index.html" class="nav-link"><i data-lucide="book-open"></i> Documentation</a>
+                <a href="/10_QiSpark/tree.html" class="nav-link"><i data-lucide="folder-tree"></i> QiLabs Tree</a>
             </div>
         </div>
     </header>
@@ -390,7 +390,7 @@
                 <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
             </a>
             
-            <a href="docs/index.html" class="glass-card service-card" style="--accent: #38bdf8; text-decoration: none;">
+            <a href="/10_QiSpark/docs/index.html" class="glass-card service-card" style="--accent: #38bdf8; text-decoration: none;">
                 <div class="service-icon" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8"><i data-lucide="book-open"></i></div>
                 <div class="service-details">
                     <h3>QiSpark Docs</h3>
@@ -399,7 +399,7 @@
                 <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
             </a>
             
-            <a href="tree.html" class="glass-card service-card" style="--accent: #14b8a6; text-decoration: none;">
+            <a href="/10_QiSpark/tree.html" class="glass-card service-card" style="--accent: #14b8a6; text-decoration: none;">
                 <div class="service-icon" style="background: rgba(20, 184, 166, 0.12); color: #14b8a6"><i data-lucide="network"></i></div>
                 <div class="service-details">
                     <h3>QiLabs Tree</h3>
@@ -495,7 +495,17 @@
             const currentPath = window.location.pathname;
             document.querySelectorAll('.nav-link').forEach(link => {
                 const href = link.getAttribute('href');
-                if (href && (currentPath.endsWith(href) || (href.includes('index.html') && (currentPath === '/' || currentPath.endsWith('/'))))) {
+                if (!href) return;
+                // Match if the current path ends with the href, or if the href
+                // points to the same resolved URL.
+                try {
+                    const resolved = new URL(href, window.location.href).pathname;
+                    if (resolved === currentPath || currentPath === resolved + 'index.html') {
+                        link.classList.add('active');
+                        return;
+                    }
+                } catch(e) {}
+                if (currentPath.endsWith(href) || (href.includes('index.html') && (currentPath === '/' || currentPath.endsWith('/')))) {
                     link.classList.add('active');
                 }
             });

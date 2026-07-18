@@ -465,7 +465,17 @@ HTML_FOOTER = """
             const currentPath = window.location.pathname;
             document.querySelectorAll('.nav-link').forEach(link => {
                 const href = link.getAttribute('href');
-                if (href && (currentPath.endsWith(href) || (href.includes('index.html') && (currentPath === '/' || currentPath.endsWith('/'))))) {
+                if (!href) return;
+                // Match if the current path ends with the href, or if the href
+                // points to the same resolved URL.
+                try {
+                    const resolved = new URL(href, window.location.href).pathname;
+                    if (resolved === currentPath || currentPath === resolved + 'index.html') {
+                        link.classList.add('active');
+                        return;
+                    }
+                } catch(e) {}
+                if (currentPath.endsWith(href) || (href.includes('index.html') && (currentPath === '/' || currentPath.endsWith('/')))) {
                     link.classList.add('active');
                 }
             });
@@ -1114,16 +1124,12 @@ def render_docs_layout(sidebar_html: str, content_html: str, fm: dict[str, Any])
     """
 
 
-def build_sidebar(docs_list: list[dict[str, Any]], current_rel_path: str | None = None) -> str:
+def build_sidebar(docs_list: list[dict[str, Any]], current_rel_path: str | None = None, base_path: str = "/") -> str:
     # Filter out nav_hidden: True files
     visible_docs = [doc for doc in docs_list if not doc.get("nav_hidden", False)]
 
-    # We need to compute link_prefix up front to build correct relative links
-    link_prefix = ""
-    if current_rel_path:
-        parts = current_rel_path.replace("\\", "/").split("/")
-        depth = len(parts) - 1
-        link_prefix = "../" * depth
+    # Use absolute base_path prefix for all sidebar links
+    link_prefix = base_path
 
     # Build a nested tree structure
     root_node = {"files": [], "dirs": {}}
@@ -1197,7 +1203,7 @@ def build_sidebar(docs_list: list[dict[str, Any]], current_rel_path: str | None 
             is_active = current_path == f["rel_html"]
             active_class = " active" if is_active else ""
             html_out += f"""
-            <a href="{prefix}{html.escape(f['rel_html'], quote=True)}" class="tree-item{active_class}" title="{html.escape(f['nav_title'], quote=True)}">
+            <a href="{html.escape(prefix + f['rel_html'], quote=True)}" class="tree-item{active_class}" title="{html.escape(f['nav_title'], quote=True)}">
                 {html.escape(f['nav_title'])}
             </a>
             """
@@ -1683,6 +1689,14 @@ def main() -> None:
     parser.add_argument("--bookmarks-csv", type=str, default=None, help="Bookmarks CSV file path (overrides config)")
     parser.add_argument("--services-json", type=str, default=None, help="Services registry JSON path (overrides config)")
     parser.add_argument("--site-title", type=str, default=None, help="Overrides site title")
+    parser.add_argument(
+        "--base-path",
+        type=str,
+        default=None,
+        help="URL base path for deployment (e.g. '/10_QiSpark/' for GitHub Pages). "
+             "Defaults to '/' or the value in site.config.json. "
+             "All internal links become absolute from this root.",
+    )
     args = parser.parse_args()
 
     # Load site configuration
@@ -1690,6 +1704,7 @@ def main() -> None:
     source_path = DEFAULT_SOURCE
     dist_path = DEFAULT_DIST
     tree_root_path = DEFAULT_QILABS_ROOT
+    base_path = "/"  # default: site served from domain root
 
     config_file = Path(args.config) if args.config else Path("00_config/site.config.json")
     if config_file.exists():
@@ -1700,6 +1715,7 @@ def main() -> None:
                 source_path = Path(site_conf.get("default_source", str(source_path)))
                 dist_path = Path(site_conf.get("default_dist", str(dist_path)))
                 tree_root_path = Path(site_conf.get("default_tree_root", str(tree_root_path)))
+                base_path = site_conf.get("base_path", base_path)
         except Exception as e:
             print(f"Error loading site config JSON: {e}")
 
@@ -1712,6 +1728,15 @@ def main() -> None:
         dist_path = Path(args.dist)
     if args.tree_root:
         tree_root_path = Path(args.tree_root)
+    if args.base_path is not None:
+        base_path = args.base_path
+
+    # Normalize base_path: must start and end with '/'
+    base_path = base_path.strip()
+    if not base_path.startswith("/"):
+        base_path = "/" + base_path
+    if not base_path.endswith("/"):
+        base_path = base_path + "/"
 
     source_dir = normalize_path(source_path)
     dist_dir = normalize_path(dist_path)
@@ -1721,6 +1746,7 @@ def main() -> None:
     print(f"Building Static Site inside: {dist_dir}")
     print(f"Markdown Source, read-only: {source_dir}")
     print(f"QiLabs Tree Root: {tree_root}")
+    print(f"Base Path: {base_path}")
     print(f"Allow active status files: {allow_active}")
     print(f"Site Title: {site_title}")
     print("-" * 72)
@@ -1823,14 +1849,11 @@ def main() -> None:
 
     # 5. Generate individual docs pages
     for doc in docs:
-        doc_sidebar = build_sidebar(docs, doc["rel_html"])
-        # rel_html is like "docs/folder/sub/file.html"
-        # depth = number of path segments above the file, relative to dist/
-        rel_parts = doc["rel_html"].replace("\\", "/").split("/")
-        depth = len(rel_parts) - 1  # how many "../" to get back to dist/
-        home_path = "../" * depth + "index.html"
-        docs_path = "../" * (depth - 1) + "index.html"  # dist/docs/ is 1 level above the doc root
-        tree_path = "../" * depth + "tree.html"
+        doc_sidebar = build_sidebar(docs, doc["rel_html"], base_path=base_path)
+        # All nav links are now absolute using base_path
+        home_path = base_path + "index.html"
+        docs_path = base_path + "docs/index.html"
+        tree_path = base_path + "tree.html"
 
         page_html = make_header(doc["title"], home_path, docs_path, tree_path, site_title=site_title)
         page_html += render_docs_layout(doc_sidebar, doc["html_body"], doc["frontmatter"])
@@ -1841,12 +1864,12 @@ def main() -> None:
     # 6. Generate docs index page
     if docs:
         docs_idx_path = dist_dir / "docs" / "index.html"
-        docs_idx_sidebar = build_sidebar(docs, "docs/index.html")
+        docs_idx_sidebar = build_sidebar(docs, "docs/index.html", base_path=base_path)
         welcome_html = """
         <h1>Welcome to QiSpark Documentation</h1>
         <p>Select a document from the left sidebar to begin reading.</p>
         """
-        docs_index = make_header("QiSpark Documentation Index", "../index.html", "index.html", "../tree.html", site_title=site_title)
+        docs_index = make_header("QiSpark Documentation Index", base_path + "index.html", base_path + "docs/index.html", base_path + "tree.html", site_title=site_title)
         docs_index += render_docs_layout(docs_idx_sidebar, welcome_html, {})
         docs_index += HTML_FOOTER
         write_text(docs_idx_path, docs_index)
@@ -1854,7 +1877,7 @@ def main() -> None:
     # 7. Generate QiLabs tree page
     if not args.no_tree:
         if tree_root.exists() and tree_root.is_dir():
-            tree_page = make_header("QiLabs Tree", "index.html", "docs/index.html" if docs else "#", "tree.html", site_title=site_title)
+            tree_page = make_header("QiLabs Tree", base_path + "index.html", base_path + "docs/index.html" if docs else "#", base_path + "tree.html", site_title=site_title)
             tree_page += render_tree_page(
                 tree_root=tree_root,
                 docs=docs,
@@ -1868,9 +1891,9 @@ def main() -> None:
             print(f"Warning: Tree root not found or not a directory: {tree_root}")
 
     # 8. Generate homepage
-    docs_path = "docs/index.html" if docs else "#"
-    dashboard_html = make_header(site_title, "index.html", docs_path, "tree.html", site_title=site_title)
-    dashboard_html += render_dashboard(bookmarks, services, "docs" if docs else "#", "tree.html")
+    docs_path_hp = base_path + "docs/index.html" if docs else "#"
+    dashboard_html = make_header(site_title, base_path + "index.html", docs_path_hp, base_path + "tree.html", site_title=site_title)
+    dashboard_html += render_dashboard(bookmarks, services, base_path + "docs" if docs else "#", base_path + "tree.html")
     dashboard_html += HTML_FOOTER
     write_text(dist_dir / "index.html", dashboard_html)
 
