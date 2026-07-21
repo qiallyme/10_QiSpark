@@ -261,30 +261,6 @@ def should_include(fm: dict[str, Any], allow_active: bool) -> tuple[bool, str]:
     return False, f"Status '{status}' is not a publish status (expected one of: {', '.join(sorted(VALID_STATUSES))})"
 
 
-def read_bookmarks(csv_path: Path) -> list[dict[str, str]]:
-    bookmarks: list[dict[str, str]] = []
-    if not csv_path.exists() or not csv_path.is_file():
-        print(f"Warning: Bookmarks CSV not found or not a file at {csv_path}")
-        return []
-
-    try:
-        with csv_path.open(mode="r", encoding="utf-8-sig", newline="") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                enabled_val = str(row.get("enabled", "")).lower().strip()
-                vis_val = str(row.get("visibility", "public")).lower().strip()
-                surface_raw = str(row.get("surface", "qispark")).lower()
-                surfaces = [s.strip() for s in surface_raw.replace(";", ",").split(",") if s.strip()]
-                status_val = str(row.get("status", "active")).lower().strip()
-
-                if enabled_val in ("true", "1", "yes") and vis_val == "public" and "qispark" in surfaces and status_val == "active":
-                    bookmarks.append({k: (v or "") for k, v in row.items()})
-    except Exception as e:
-        print(f"Error reading bookmarks: {e}")
-
-    return bookmarks
-
-
 def hex_to_rgb(hex_str: str) -> str:
     hex_str = hex_str.lstrip("#")
     r = int(hex_str[0:2], 16)
@@ -473,7 +449,7 @@ HTML_HEADER = """<!DOCTYPE html>
                 <span>{site_title}</span>
             </a>
             <div class="nav-links">
-                <a href="{home_path}" class="nav-link"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+                <a href="{home_path}" class="nav-link"><i data-lucide="home"></i> Home</a>
                 <a href="{docs_path}" class="nav-link"><i data-lucide="book-open"></i> Documentation</a>
                 <a href="{tree_path}" class="nav-link"><i data-lucide="folder-tree"></i> QiLabs Tree</a>
             </div>
@@ -517,7 +493,7 @@ HTML_FOOTER = """
 """
 
 
-def make_header(title: str, home_path: str, docs_path: str, tree_path: str, site_title: str = "QiSpark Cockpit") -> str:
+def make_header(title: str, home_path: str, docs_path: str, tree_path: str, site_title: str = "QiSpark") -> str:
     return (
         HTML_HEADER
         .replace("{title}", html.escape(title))
@@ -529,30 +505,14 @@ def make_header(title: str, home_path: str, docs_path: str, tree_path: str, site
 
 
 # ---------------------------------------------------------------------------
-# Dashboard
+# Landing Page
 # ---------------------------------------------------------------------------
-def render_dashboard(bookmarks: list[dict[str, str]], services: list[dict[str, Any]], docs_root_rel: str, tree_rel: str) -> str:
-    bookmark_groups: dict[str, list[dict[str, str]]] = {}
-    for bm in bookmarks:
-        group = bm.get("group", "Other Bookmarks") or "Other Bookmarks"
-        bookmark_groups.setdefault(group, []).append(bm)
-
+def render_landing(services: list[dict[str, Any]], docs_root_rel: str, tree_rel: str) -> str:
     # Filter services by surface == public
-    public_services: list[dict[str, Any]] = []
-    for svc in services:
-        surface_val = svc.get("surface", ["public"])
-        if isinstance(surface_val, str):
-            surfaces = [s.strip().lower() for s in surface_val.replace(";", ",").split(",") if s.strip()]
-        elif isinstance(surface_val, list):
-            surfaces = [str(s).strip().lower() for s in surface_val]
-        else:
-            surfaces = ["public"]
-
-        if "public" in surfaces:
-            public_services.append(svc)
+    public_services = [svc for svc in services if "public" in svc.get("surface", ["public"])]
 
     # Group services by category
-    service_groups: dict[str, list[dict[str, Any]]] = {}
+    service_groups = {}
     for svc in public_services:
         category = svc.get("category", "Other Services") or "Other Services"
         service_groups.setdefault(category, []).append(svc)
@@ -569,6 +529,7 @@ def render_dashboard(bookmarks: list[dict[str, str]], services: list[dict[str, A
                 url = f"{docs_root_rel}/index.html" if not docs_root_rel.endswith("docs") else f"{docs_root_rel}/index.html"
                 if docs_root_rel == "#":
                     url = "docs/index.html"
+            elif url == "tree.html":
                 url = tree_rel
 
             color = svc.get('color', '#6366f1')
@@ -578,7 +539,7 @@ def render_dashboard(bookmarks: list[dict[str, str]], services: list[dict[str, A
             icon = svc.get('icon', 'zap')
 
             if is_dev:
-                cards_html += f"""
+                cards_html += f'''
                 <div class="glass-card service-card service-card-disabled" style="--accent: {color}; cursor: default; opacity: 0.85;">
                     <div class="service-icon" style="background: rgba({rgb}, 0.12); color: {color}"><i data-lucide="{icon}"></i></div>
                     <div class="service-details">
@@ -586,9 +547,9 @@ def render_dashboard(bookmarks: list[dict[str, str]], services: list[dict[str, A
                         <p>{desc}</p>
                     </div>
                 </div>
-                """
+                '''
             else:
-                cards_html += f"""
+                cards_html += f'''
                 <a href="{html.escape(url, quote=True)}" class="glass-card service-card" style="--accent: {color}; text-decoration: none;">
                     <div class="service-icon" style="background: rgba({rgb}, 0.12); color: {color}"><i data-lucide="{icon}"></i></div>
                     <div class="service-details">
@@ -597,54 +558,56 @@ def render_dashboard(bookmarks: list[dict[str, str]], services: list[dict[str, A
                     </div>
                     <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
                 </a>
-                """
+                '''
 
-        services_sections_html += f"""
+        services_sections_html += f'''
         <h2 class="section-subtitle"><i data-lucide="layers" style="color: var(--primary); width: 18px; height: 18px;"></i> {html.escape(category)}</h2>
         <div class="dashboard-grid">
             {cards_html}
         </div>
-        """
+        '''
 
-    bookmarks_html = ""
-    for group_name, items in sorted(bookmark_groups.items()):
-        group_items_html = ""
-        for item in items:
-            tags_html = ""
-            for tag in [t.strip() for t in item.get("tags", "").split(",") if t.strip()]:
-                tags_html += f'<span class="bm-tag">#{html.escape(tag)}</span>'
-
-            group_items_html += f"""
-            <div class="bookmark-item">
-                <div class="bm-content">
-                    <a href="{html.escape(item.get('url', '#'), quote=True)}" target="_blank" rel="noopener noreferrer" class="bm-title-link">
-                        {html.escape(item.get('title', 'Untitled'))} <i data-lucide="external-link" class="link-icon"></i>
-                    </a>
-                    <p class="bm-desc">{html.escape(item.get('description', ''))}</p>
-                    <div class="bm-tags">{tags_html}</div>
-                </div>
-            </div>
-            """
-
-        bookmarks_html += f"""
-        <div class="glass-card bookmark-group-card">
-            <h2><i data-lucide="folder" style="color: var(--primary)"></i> {html.escape(group_name)}</h2>
-            <div class="bookmark-list">
-                {group_items_html}
-            </div>
-        </div>
-        """
-
-    if not bookmarks_html.strip():
-        bookmarks_html = """
-        <div class="glass-card bookmark-group-card">
-            <h2><i data-lucide="info" style="color: var(--primary)"></i> No bookmarks loaded</h2>
-            <p class="bm-desc">The bookmarks CSV was not found or did not contain enabled rows.</p>
-        </div>
-        """
-
-    return f"""
+    return f'''
     <style>
+        .hero-section {{
+            text-align: center;
+            padding: 4rem 1rem;
+            margin-bottom: 2rem;
+        }}
+        .hero-section h1 {{
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }}
+        .hero-section p {{
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+        }}
+        .enter-qilife-btn {{
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 9999px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+        }}
+        .enter-qilife-btn:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.23);
+            background: #4f46e5;
+        }}
         .dashboard-grid {{
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -710,16 +673,6 @@ def render_dashboard(bookmarks: list[dict[str, str]], services: list[dict[str, A
             color: white;
         }}
 
-        .section-title {{
-            font-size: clamp(1.75rem, 4vw, 2.4rem);
-            font-weight: 760;
-            letter-spacing: -0.7px;
-            margin-bottom: 0.45rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }}
-
         .section-subtitle {{
             font-size: 1.25rem;
             font-weight: 650;
@@ -730,92 +683,7 @@ def render_dashboard(bookmarks: list[dict[str, str]], services: list[dict[str, A
             gap: 0.5rem;
             color: white;
         }}
-
-        .section-desc {{
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 1rem;
-        }}
-
-        .bookmarks-grid {{
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-            gap: 1.25rem;
-        }}
-
-        .bookmark-group-card {{
-            padding: 1.35rem;
-        }}
-
-        .bookmark-group-card h2 {{
-            font-size: 1.16rem;
-            font-weight: 650;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: white;
-        }}
-
-        .bookmark-list {{
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }}
-
-        .bookmark-item {{
-            border-left: 2px solid rgba(255, 255, 255, 0.1);
-            padding-left: 0.9rem;
-            transition: border-color 0.2s;
-        }}
-
-        .bookmark-item:hover {{
-            border-left-color: var(--primary);
-        }}
-
-        .bm-title-link {{
-            color: #f1f5f9;
-            font-weight: 520;
-            font-size: 0.98rem;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            transition: color 0.2s;
-        }}
-
-        .bm-title-link:hover {{
-            color: white;
-            text-decoration: underline;
-        }}
-
-        .link-icon {{
-            width: 14px;
-            height: 14px;
-            opacity: 0.65;
-        }}
-
-        .bm-desc {{
-            color: var(--text-muted);
-            font-size: 0.84rem;
-            margin-top: 0.25rem;
-        }}
-
-        .bm-tags {{
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.35rem;
-            margin-top: 0.5rem;
-        }}
-
-        .bm-tag {{
-            font-size: 0.74rem;
-            color: var(--primary);
-            background: rgba(99, 102, 241, 0.08);
-            padding: 0.1rem 0.4rem;
-            border-radius: 999px;
-        }}
-
+        
         .status-badge {{
             font-size: 0.7rem;
             font-weight: 600;
@@ -840,19 +708,17 @@ def render_dashboard(bookmarks: list[dict[str, str]], services: list[dict[str, A
     </style>
 
     <main class="container">
-        <h1 class="section-title"><i data-lucide="layout-grid" style="color: var(--primary)"></i> Main Cockpit</h1>
-        <p class="section-desc">Quick launch pads for operational systems, docs, and generated workspace navigation.</p>
-
-        {services_sections_html}
-
-        <h1 class="section-title"><i data-lucide="bookmark" style="color: var(--primary)"></i> Bookmarks Registry</h1>
-        <p class="section-desc">Static references imported from the local toolbox cockpit.</p>
-
-        <div class="bookmarks-grid">
-            {bookmarks_html}
+        <div class="hero-section">
+            <h1>Welcome to QiSpark</h1>
+            <p>The centralized public gateway for the QiLabs ecosystem.</p>
+            <a href="https://qilife.local" class="enter-qilife-btn">
+                Enter QiLife <i data-lucide="arrow-right"></i>
+            </a>
         </div>
+        
+        {services_sections_html}
     </main>
-    """
+    '''
 
 
 # ---------------------------------------------------------------------------
@@ -1853,7 +1719,7 @@ def main() -> None:
     args = parser.parse_args()
 
     # Load site configuration
-    site_title = "QiSpark Cockpit"
+    site_title = "QiSpark"
     source_path = DEFAULT_SOURCE
     dist_path = DEFAULT_DIST
     tree_root_path = DEFAULT_QILABS_ROOT
@@ -1923,23 +1789,6 @@ def main() -> None:
             print(f"Error loading publish filters JSON: {e}")
 
     # Load bookmarks config to resolve path
-    bookmarks_csv_path = BOOKMARKS_CSV
-    bookmarks_conf_file = SCRIPT_DIR / "00_config/bookmarks.config.json"
-    if bookmarks_conf_file.exists() and bookmarks_conf_file.is_file():
-        try:
-            with bookmarks_conf_file.open("r", encoding="utf-8") as f:
-                bm_conf = json.load(f)
-                canonical_p = Path(bm_conf.get("canonical_csv", ""))
-                source_p = Path(bm_conf.get("source_csv", ""))
-                if canonical_p.exists() and canonical_p.is_file():
-                    bookmarks_csv_path = canonical_p
-                elif source_p.exists() and source_p.is_file():
-                    bookmarks_csv_path = source_p
-        except Exception as e:
-            print(f"Error loading bookmarks config: {e}")
-
-    if args.bookmarks_csv:
-        bookmarks_csv_path = Path(args.bookmarks_csv)
 
     # Load services registry JSON
     services = []
@@ -1980,10 +1829,6 @@ def main() -> None:
             indent=2,
         ),
     )
-
-    # 3. Read bookmarks
-    bookmarks = read_bookmarks(bookmarks_csv_path)
-    print(f"Loaded {len(bookmarks)} public bookmarks from CSV.")
 
     # 4. Process Markdown documents
     docs, stats = convert_md_files(source_dir, dist_dir, allow_active)
@@ -2039,7 +1884,7 @@ def main() -> None:
     # 8. Generate homepage
     docs_path_hp = base_path + "docs/index.html" if docs else "#"
     dashboard_html = make_header(site_title, base_path + "index.html", docs_path_hp, base_path + "tree.html", site_title=site_title)
-    dashboard_html += render_dashboard(bookmarks, services, base_path + "docs" if docs else "#", base_path + "tree.html")
+    dashboard_html += render_landing(services, base_path + "docs" if docs else "#", base_path + "tree.html")
     dashboard_html += HTML_FOOTER
     write_text(dist_dir / "index.html", dashboard_html)
 
