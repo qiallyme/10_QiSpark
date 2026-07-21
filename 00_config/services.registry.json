@@ -1,90 +1,134 @@
 [
   {
+    "id": "qiserver",
     "title": "QiServer Cockpit",
     "description": "Control plane and Private server cluster management.",
-    "url": "http://qiserver-1.cerberus-sirius.ts.net",
+    "url": null,
     "icon": "server",
     "color": "#a855f7",
-    "category": "Primary"
+    "category": "Primary",
+    "kind": "portal",
+    "surface": ["private"],
+    "status": "development"
   },
   {
+    "id": "qilife",
     "title": "QiLife",
     "description": "Personal life organizer and task manager.",
-    "url": "https://qially.com/404.html",
+    "url": null,
     "icon": "heart",
     "color": "#ec4899",
-    "category": "Primary"
+    "category": "Primary",
+    "kind": "application",
+    "surface": ["public", "private"],
+    "status": "development"
   },
   {
+    "id": "qifinance",
     "title": "QiFinance",
     "description": "QiFinance dashboard and analytics.",
-    "url": "https://fi.qially.com",
+    "url": null,
     "icon": "wallet",
     "color": "#eab308",
-    "category": "Primary"
+    "category": "Primary",
+    "kind": "application",
+    "surface": ["private"],
+    "status": "development"
   },
   {
+    "id": "qispark_docs",
     "title": "QiSpark Docs",
     "description": "Static documentation and blueprints.",
     "url": "docs/index.html",
     "icon": "book-open",
     "color": "#38bdf8",
-    "category": "Primary"
+    "category": "Primary",
+    "kind": "reference",
+    "surface": ["public"],
+    "status": "active"
   },
   {
+    "id": "qilabs_tree",
     "title": "QiLabs Tree",
-    "description": "Workspace file tree visualization map.",
+    "description": "Sanitized map of public workspace systems and documentation.",
     "url": "tree.html",
     "icon": "network",
     "color": "#14b8a6",
-    "category": "Primary"
+    "category": "Primary",
+    "kind": "service",
+    "surface": ["public"],
+    "status": "active"
   },
   {
+    "id": "qisaysit",
     "title": "QiSaysIt",
     "description": "Public writing, posts, and publishing surface.",
     "url": "https://qsaysit.com",
     "icon": "pencil-line",
     "color": "#10b981",
-    "category": "Publishing"
+    "category": "Publishing",
+    "kind": "portal",
+    "surface": ["public"],
+    "status": "active"
   },
   {
+    "id": "qially",
     "title": "QiAlly",
-    "description": "Primary QiAlly public/domain hub.",
+    "description": "Primary QiAlly public domain hub.",
     "url": "https://qially.com",
     "icon": "globe",
     "color": "#3b82f6",
-    "category": "Publishing"
+    "category": "Publishing",
+    "kind": "portal",
+    "surface": ["public"],
+    "status": "active"
   },
   {
+    "id": "cloudflare",
     "title": "Cloudflare",
     "description": "Domain DNS, proxy, and edge routing control.",
     "url": "https://dash.cloudflare.com",
     "icon": "cloud-lightning",
     "color": "#f97316",
-    "category": "Systems"
+    "category": "Systems",
+    "kind": "service",
+    "surface": ["private"],
+    "status": "active"
   },
   {
+    "id": "supabase",
     "title": "Supabase",
     "description": "Database management and project dashboard.",
     "url": "https://supabase.com/dashboard",
     "icon": "database",
     "color": "#3ecf8e",
-    "category": "Systems"
+    "category": "Systems",
+    "kind": "service",
+    "surface": ["private"],
+    "status": "active"
   },
   {
+    "id": "github",
     "title": "GitHub",
     "description": "Repositories, actions, and code repositories.",
     "url": "https://github.com",
     "icon": "github",
     "color": "#f1f5f9",
-    "category": "Systems"
+    "category": "Systems",
+    "kind": "service",
+    "surface": ["private"],
+    "status": "active"
   },
   {
+    "id": "qilabs_housekeeping",
     "title": "QiLabs Housekeeping",
-    "description": "Trigger the digital housekeeping console to audit metadata, tags, and folder indexes.",
+    "description": "Digital housekeeping console for auditing metadata, tags, and folder indexes.",
     "url": "file:///C:/QiLabs/40_QiVault/_system/launch_housekeeping.bat",
     "icon": "brush",
     "color": "#ec4899",
-    "category": "Systems"
+    "category": "Systems",
+    "kind": "service",
+    "surface": ["private"],
+    "status": "active"
   }
 ]

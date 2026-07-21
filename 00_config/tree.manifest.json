@@ -1,0 +1,64 @@
+{
+  "title": "QiLabs Public Architecture Map",
+  "root_name": "QiLabs Public Surface",
+  "description": "Explicit public manifest map for QiSpark. Only approved public systems and published documentation appear in this tree.",
+  "nodes": [
+    {
+      "name": "10_QiSpark (Public Launch Pad)",
+      "type": "directory",
+      "description": "Public documentation engine and application dashboard.",
+      "children": [
+        {
+          "name": "Published Documentation",
+          "type": "docs_root",
+          "description": "Compiled public Markdown documents from QiVault."
+        },
+        {
+          "name": "Public Services",
+          "type": "directory",
+          "children": [
+            {
+              "name": "QiSpark Documentation Index",
+              "type": "file",
+              "url": "docs/index.html"
+            },
+            {
+              "name": "QiSpark Home",
+              "type": "file",
+              "url": "index.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "60_QiApps (Ecosystem Applications)",
+      "type": "directory",
+      "children": [
+        {
+          "name": "QiLife (In Development)",
+          "type": "file",
+          "description": "Personal life organizer and task manager"
+        },
+        {
+          "name": "QiSaysIt",
+          "type": "file",
+          "url": "https://qsaysit.com",
+          "description": "Public publishing surface"
+        }
+      ]
+    },
+    {
+      "name": "70_QiSites (Web Surfaces)",
+      "type": "directory",
+      "children": [
+        {
+          "name": "QiAlly Hub",
+          "type": "file",
+          "url": "https://qially.com",
+          "description": "Primary domain hub"
+        }
+      ]
+    }
+  ]
+}

@@ -211,48 +211,73 @@ def parse_frontmatter(text: str) -> tuple[dict[str, Any], str]:
 def should_include(fm: dict[str, Any], allow_active: bool) -> tuple[bool, str]:
     """Return (True, "") if a file should be included in the build.
 
-    Publish rule (simple):
-      Include any file whose `status` field is one of the VALID_STATUSES
-      (publish, published, public, pub). Safety exclusions run first.
+    Fail-closed publish safety rule:
+      A document MUST satisfy ALL of the following to be included in QiSpark Public:
+      1. status in VALID_STATUSES (publish, published, public, pub) OR (allow_active is True and status == 'active')
+      2. visibility == 'public'
+      3. publish_target contains 'qispark'
+      4. sensitivity == 'public'
+      5. classification == 'public'
 
-    Future: granular publish_target / visibility filtering can be layered
-    back on top of this without changing the core rule.
+      If any required tag is missing or non-public, the document is excluded.
     """
     status = str(fm.get("status") or "").lower().strip()
     visibility = str(fm.get("visibility") or "").lower().strip()
     sensitivity = str(fm.get("sensitivity") or "").lower().strip()
     classification = str(fm.get("classification") or "").lower().strip()
 
-    # Safety exclusions first
-    if visibility in ("private",):
+    pt_val = fm.get("publish_target") or ""
+    if isinstance(pt_val, list):
+        targets = [str(t).lower().strip() for t in pt_val]
+    else:
+        targets = [t.strip() for t in str(pt_val).lower().replace(";", ",").split(",") if t.strip()]
+
+    # Explicit exclusions check first
+    if visibility in ("private", "internal", "business_internal"):
         return False, f"Visibility is '{visibility}'"
-    if sensitivity in EXCLUDE_SENSITIVITY:
-        return False, f"Sensitivity '{sensitivity}' is restricted"
-    if classification in EXCLUDE_CLASSIFICATION:
-        return False, f"Classification '{classification}' is restricted"
+    if sensitivity in EXCLUDE_SENSITIVITY or sensitivity != "public":
+        return False, f"Sensitivity '{sensitivity}' is not 'public'"
+    if classification in EXCLUDE_CLASSIFICATION or classification != "public":
+        return False, f"Classification '{classification}' is not 'public'"
     for flag in EXCLUDE_FLAGS:
         val = fm.get(flag)
         if isinstance(val, bool) and val or str(val).lower() in ("yes", "true", "1"):
             return False, f"Explicit flag '{flag}' is enabled"
 
+    # Require visibility to be public
+    if visibility != "public":
+        return False, f"Visibility '{visibility}' is not 'public'"
+
+    # Require publish_target to include qispark
+    if "qispark" not in targets:
+        return False, f"Publish target '{pt_val}' does not include 'qispark'"
+
+    # Require status to be valid publish status (or active if allow_active=True)
     if status in VALID_STATUSES:
         return True, ""
     if allow_active and status == "active":
         return True, ""
+
     return False, f"Status '{status}' is not a publish status (expected one of: {', '.join(sorted(VALID_STATUSES))})"
 
 
 def read_bookmarks(csv_path: Path) -> list[dict[str, str]]:
     bookmarks: list[dict[str, str]] = []
-    if not csv_path.exists():
-        print(f"Warning: Bookmarks CSV not found at {csv_path}")
+    if not csv_path.exists() or not csv_path.is_file():
+        print(f"Warning: Bookmarks CSV not found or not a file at {csv_path}")
         return []
 
     try:
         with csv_path.open(mode="r", encoding="utf-8-sig", newline="") as f:
             reader = csv.DictReader(f)
             for row in reader:
-                if str(row.get("enabled", "")).lower() == "true":
+                enabled_val = str(row.get("enabled", "")).lower().strip()
+                vis_val = str(row.get("visibility", "public")).lower().strip()
+                surface_raw = str(row.get("surface", "qispark")).lower()
+                surfaces = [s.strip() for s in surface_raw.replace(";", ",").split(",") if s.strip()]
+                status_val = str(row.get("status", "active")).lower().strip()
+
+                if enabled_val in ("true", "1", "yes") and vis_val == "public" and "qispark" in surfaces and status_val == "active":
                     bookmarks.append({k: (v or "") for k, v in row.items()})
     except Exception as e:
         print(f"Error reading bookmarks: {e}")
@@ -512,9 +537,23 @@ def render_dashboard(bookmarks: list[dict[str, str]], services: list[dict[str, A
         group = bm.get("group", "Other Bookmarks") or "Other Bookmarks"
         bookmark_groups.setdefault(group, []).append(bm)
 
+    # Filter services by surface == public
+    public_services: list[dict[str, Any]] = []
+    for svc in services:
+        surface_val = svc.get("surface", ["public"])
+        if isinstance(surface_val, str):
+            surfaces = [s.strip().lower() for s in surface_val.replace(";", ",").split(",") if s.strip()]
+        elif isinstance(surface_val, list):
+            surfaces = [str(s).strip().lower() for s in surface_val]
+        else:
+            surfaces = ["public"]
+
+        if "public" in surfaces:
+            public_services.append(svc)
+
     # Group services by category
     service_groups: dict[str, list[dict[str, Any]]] = {}
-    for svc in services:
+    for svc in public_services:
         category = svc.get("category", "Other Services") or "Other Services"
         service_groups.setdefault(category, []).append(svc)
 
@@ -522,22 +561,43 @@ def render_dashboard(bookmarks: list[dict[str, str]], services: list[dict[str, A
     for category, svcs in service_groups.items():
         cards_html = ""
         for svc in svcs:
-            url = svc.get("url", "")
+            url = svc.get("url")
+            status = str(svc.get("status", "active")).lower().strip()
+            is_dev = status == "development" or not url or url == "#"
+
             if url == "docs/index.html":
-                url = f"{docs_root_rel}/index.html"
-            elif url == "tree.html":
+                url = f"{docs_root_rel}/index.html" if not docs_root_rel.endswith("docs") else f"{docs_root_rel}/index.html"
+                if docs_root_rel == "#":
+                    url = "docs/index.html"
                 url = tree_rel
 
-            cards_html += f"""
-            <a href="{html.escape(url, quote=True)}" class="glass-card service-card" style="--accent: {svc.get('color', '#6366f1')}; text-decoration: none;">
-                <div class="service-icon" style="background: rgba({hex_to_rgb(svc.get('color', '#6366f1'))}, 0.12); color: {svc.get('color', '#6366f1')}"><i data-lucide="{svc.get('icon', 'zap')}"></i></div>
-                <div class="service-details">
-                    <h3>{html.escape(svc.get('title', 'Untitled'))}</h3>
-                    <p>{html.escape(svc.get('description', ''))}</p>
+            color = svc.get('color', '#6366f1')
+            rgb = hex_to_rgb(color)
+            title = html.escape(svc.get('title', 'Untitled'))
+            desc = html.escape(svc.get('description', ''))
+            icon = svc.get('icon', 'zap')
+
+            if is_dev:
+                cards_html += f"""
+                <div class="glass-card service-card service-card-disabled" style="--accent: {color}; cursor: default; opacity: 0.85;">
+                    <div class="service-icon" style="background: rgba({rgb}, 0.12); color: {color}"><i data-lucide="{icon}"></i></div>
+                    <div class="service-details">
+                        <h3>{title} <span class="status-badge dev-badge">In Development</span></h3>
+                        <p>{desc}</p>
+                    </div>
                 </div>
-                <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
-            </a>
-            """
+                """
+            else:
+                cards_html += f"""
+                <a href="{html.escape(url, quote=True)}" class="glass-card service-card" style="--accent: {color}; text-decoration: none;">
+                    <div class="service-icon" style="background: rgba({rgb}, 0.12); color: {color}"><i data-lucide="{icon}"></i></div>
+                    <div class="service-details">
+                        <h3>{title}</h3>
+                        <p>{desc}</p>
+                    </div>
+                    <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+                </a>
+                """
 
         services_sections_html += f"""
         <h2 class="section-subtitle"><i data-lucide="layers" style="color: var(--primary); width: 18px; height: 18px;"></i> {html.escape(category)}</h2>
@@ -754,6 +814,28 @@ def render_dashboard(bookmarks: list[dict[str, str]], services: list[dict[str, A
             background: rgba(99, 102, 241, 0.08);
             padding: 0.1rem 0.4rem;
             border-radius: 999px;
+        }}
+
+        .status-badge {{
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.15rem 0.45rem;
+            border-radius: 999px;
+            margin-left: 0.35rem;
+            vertical-align: middle;
+            display: inline-block;
+        }}
+
+        .dev-badge {{
+            background: rgba(236, 72, 153, 0.15);
+            color: #f472b6;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }}
+
+        .service-card-disabled:hover {{
+            transform: none !important;
+            border-color: var(--card-border) !important;
+            box-shadow: none !important;
         }}
     </style>
 
@@ -1478,24 +1560,95 @@ def render_tree_node(
     """
 
 
-def render_tree_page(
-    tree_root: Path,
-    docs: list[dict[str, Any]],
-    include_hidden: bool,
-    max_depth: int | None,
-) -> str:
-    tree_root = normalize_path(tree_root)
-    doc_link_map = build_doc_source_link_map(docs, tree_root)
-    tree_html = render_tree_node(
-        tree_root,
-        tree_root,
-        doc_link_map,
-        include_hidden=include_hidden,
-        max_depth=max_depth,
-    )
+def render_manifest_node(node: dict[str, Any], docs: list[dict[str, Any]], base_path: str = "/") -> str:
+    name = html.escape(node.get("name", "Untitled"))
+    node_type = node.get("type", "file")
 
-    skipped = ", ".join(sorted(TREE_SKIP_DIRS))
-    depth_text = "full depth" if max_depth is None else f"max depth {max_depth}"
+    if node_type == "directory":
+        children = node.get("children", [])
+        children_html = "".join(render_manifest_node(child, docs, base_path) for child in children)
+        count = len(children)
+        return f"""
+        <li class="tree-dir">
+            <details open>
+                <summary class="tree-row">
+                    <i data-lucide="folder"></i>
+                    <span class="node-name">{name}</span>
+                    <span class="node-count">{count}</span>
+                </summary>
+                <ul>{children_html}</ul>
+            </details>
+        </li>
+        """
+    elif node_type == "docs_root":
+        doc_items_html = ""
+        for doc in sorted(docs, key=lambda d: str(d.get("title")).lower()):
+            doc_title = html.escape(doc.get("title", "Untitled"))
+            doc_url = html.escape(base_path + doc.get("rel_html", ""), quote=True)
+            doc_items_html += f"""
+            <li class="tree-file linked">
+                <a class="tree-row" href="{doc_url}">
+                    <i data-lucide="file-text"></i>
+                    <span class="node-name">{doc_title}</span>
+                    <span class="node-badge">published</span>
+                </a>
+            </li>
+            """
+        if not doc_items_html.strip():
+            doc_items_html = '<li class="tree-file"><span class="tree-row"><i data-lucide="info"></i><span class="node-name">No published documents</span></span></li>'
+
+        return f"""
+        <li class="tree-dir">
+            <details open>
+                <summary class="tree-row">
+                    <i data-lucide="book-open"></i>
+                    <span class="node-name">{name}</span>
+                    <span class="node-count">{len(docs)}</span>
+                </summary>
+                <ul>{doc_items_html}</ul>
+            </details>
+        </li>
+        """
+    else:
+        url = node.get("url")
+        if url:
+            if not (url.startswith("http://") or url.startswith("https://") or url.startswith("/")):
+                url = base_path + url
+            return f"""
+            <li class="tree-file linked">
+                <a class="tree-row" href="{html.escape(url, quote=True)}">
+                    <i data-lucide="globe"></i>
+                    <span class="node-name">{name}</span>
+                </a>
+            </li>
+            """
+        return f"""
+        <li class="tree-file">
+            <span class="tree-row">
+                <i data-lucide="file"></i>
+                <span class="node-name">{name}</span>
+            </span>
+        </li>
+        """
+
+
+def render_tree_page(
+    manifest_path: Path,
+    docs: list[dict[str, Any]],
+    base_path: str = "/",
+) -> str:
+    manifest_data: dict[str, Any] = {}
+    if manifest_path.exists() and manifest_path.is_file():
+        try:
+            with manifest_path.open("r", encoding="utf-8") as f:
+                manifest_data = json.load(f)
+        except Exception as e:
+            print(f"Error loading tree manifest JSON: {e}")
+
+    nodes = manifest_data.get("nodes", [])
+    root_title = manifest_data.get("root_name", "QiLabs Public Surface")
+
+    tree_html = "".join(render_manifest_node(node, docs, base_path) for node in nodes)
 
     return f"""
     <style>
@@ -1564,7 +1717,7 @@ def render_tree_page(
             gap: 0.45rem;
             min-height: 1.75rem;
             padding: 0.2rem 0.45rem;
-            border-radius: 9px;
+            border-radius: 999px;
             transition: background 0.15s, color 0.15s;
         }}
 
@@ -1638,12 +1791,11 @@ def render_tree_page(
     <main class="container tree-page">
         <section class="glass-card tree-hero">
             <h1>QiLabs Tree</h1>
-            <p>Generated from the local workspace tree during the static-site build. Markdown files that passed publish filters are linked to their generated docs pages.</p>
+            <p>Sanitized public manifest map of QiLabs systems and published documentation pages.</p>
             <div class="tree-meta">
-                <span class="tree-pill">Root: {html.escape(str(tree_root))}</span>
+                <span class="tree-pill">Surface: {html.escape(root_title)}</span>
                 <span class="tree-pill">Generated: {html.escape(now_iso())}</span>
-                <span class="tree-pill">{html.escape(depth_text)}</span>
-                <span class="tree-pill">Hidden included: {str(include_hidden).lower()}</span>
+                <span class="tree-pill">Published Docs: {len(docs)}</span>
             </div>
         </section>
 
@@ -1651,7 +1803,7 @@ def render_tree_page(
             <ul class="qilabs-tree">
                 {tree_html}
             </ul>
-            <p class="tree-note">Skipped noisy or risky folders/files by default: {html.escape(skipped)}. Secret-like files and database/key extensions are also hidden.</p>
+            <p class="tree-note">Built strictly from explicit public architecture manifests. Unpublished filesystem directories are omitted.</p>
         </section>
     </main>
     """
@@ -1672,6 +1824,8 @@ def main() -> None:
     except AttributeError:
         pass
 
+    SCRIPT_DIR = Path(__file__).resolve().parent
+
     parser = argparse.ArgumentParser(description="Static HTML documentation site builder for QiSpark.")
     parser.add_argument("--source", type=str, default=None, help="Read-only source markdown directory")
     parser.add_argument("--dist", type=str, default=None, help="Output static site directory")
@@ -1683,7 +1837,7 @@ def main() -> None:
         "--tree-max-depth",
         type=int,
         default=None,
-        help="Maximum tree depth. Default is full depth, while still skipping noisy/risky folders.",
+        help="Maximum tree depth.",
     )
     parser.add_argument("--config", type=str, default=None, help="Site config JSON path")
     parser.add_argument("--bookmarks-csv", type=str, default=None, help="Bookmarks CSV file path (overrides config)")
@@ -1693,8 +1847,7 @@ def main() -> None:
         "--base-path",
         type=str,
         default=None,
-        help="URL base path for deployment (e.g. '/10_QiSpark/' for GitHub Pages). "
-             "Defaults to '/' or the value in site.config.json. "
+        help="URL base path for deployment (e.g. '/' for domain root). "
              "All internal links become absolute from this root.",
     )
     args = parser.parse_args()
@@ -1706,8 +1859,8 @@ def main() -> None:
     tree_root_path = DEFAULT_QILABS_ROOT
     base_path = "/"  # default: site served from domain root
 
-    config_file = Path(args.config) if args.config else Path("00_config/site.config.json")
-    if config_file.exists():
+    config_file = Path(args.config) if args.config else (SCRIPT_DIR / "00_config/site.config.json")
+    if config_file.exists() and config_file.is_file():
         try:
             with config_file.open("r", encoding="utf-8") as f:
                 site_conf = json.load(f)
@@ -1752,8 +1905,8 @@ def main() -> None:
     print("-" * 72)
 
     # Load publish filters JSON
-    filters_file = Path("00_config/publish.filters.json")
-    if filters_file.exists():
+    filters_file = SCRIPT_DIR / "00_config/publish.filters.json"
+    if filters_file.exists() and filters_file.is_file():
         try:
             with filters_file.open("r", encoding="utf-8") as f:
                 pub_filters = json.load(f)
@@ -1771,16 +1924,16 @@ def main() -> None:
 
     # Load bookmarks config to resolve path
     bookmarks_csv_path = BOOKMARKS_CSV
-    bookmarks_conf_file = Path("00_config/bookmarks.config.json")
-    if bookmarks_conf_file.exists():
+    bookmarks_conf_file = SCRIPT_DIR / "00_config/bookmarks.config.json"
+    if bookmarks_conf_file.exists() and bookmarks_conf_file.is_file():
         try:
             with bookmarks_conf_file.open("r", encoding="utf-8") as f:
                 bm_conf = json.load(f)
                 canonical_p = Path(bm_conf.get("canonical_csv", ""))
                 source_p = Path(bm_conf.get("source_csv", ""))
-                if canonical_p.exists():
+                if canonical_p.exists() and canonical_p.is_file():
                     bookmarks_csv_path = canonical_p
-                elif source_p.exists():
+                elif source_p.exists() and source_p.is_file():
                     bookmarks_csv_path = source_p
         except Exception as e:
             print(f"Error loading bookmarks config: {e}")
@@ -1790,8 +1943,8 @@ def main() -> None:
 
     # Load services registry JSON
     services = []
-    services_file = Path(args.services_json) if args.services_json else Path("00_config/services.registry.json")
-    if services_file.exists():
+    services_file = Path(args.services_json) if args.services_json else (SCRIPT_DIR / "00_config/services.registry.json")
+    if services_file.exists() and services_file.is_file():
         try:
             with services_file.open("r", encoding="utf-8") as f:
                 services = json.load(f)
@@ -1800,13 +1953,10 @@ def main() -> None:
 
     if not services:
         services = [
-            {"title": "QiServer Cockpit", "description": "Control plane and Private server cluster management.", "url": "https://server.qially.com", "icon": "server", "color": "#a855f7", "category": "Primary"},
-            {"title": "QiLife", "description": "Personal life organizer and task manager.", "url": "https://life.qially.com", "icon": "heart", "color": "#ec4899", "category": "Primary"},
-            {"title": "QiFinance", "description": "QiFinance dashboard and analytics.", "url": "https://fi.qially.com", "icon": "wallet", "color": "#eab308", "category": "Primary"},
-            {"title": "QiSpark Docs", "description": "Static documentation and blueprints.", "url": "docs/index.html", "icon": "book-open", "color": "#38bdf8", "category": "Primary"},
-            {"title": "QiLabs Tree", "description": "Current generated map of the local QiLabs workspace.", "url": "tree.html", "icon": "folder-tree", "color": "#f59e0b", "category": "Primary"},
-            {"title": "QiSaysIt", "description": "Public writing, posts and publishing surface.", "url": "https://qsaysit.com", "icon": "pencil-line", "color": "#10b981", "category": "Publishing"},
-            {"title": "QiAlly", "description": "Primary QiAlly public/domain hub.", "url": "https://qially.com", "icon": "globe", "color": "#3b82f6", "category": "Publishing"}
+            {"id": "qispark_docs", "title": "QiSpark Docs", "description": "Static documentation and blueprints.", "url": "docs/index.html", "icon": "book-open", "color": "#38bdf8", "category": "Primary", "surface": ["public"], "status": "active"},
+            {"id": "qilabs_tree", "title": "QiLabs Tree", "description": "Sanitized map of public workspace systems and documentation.", "url": "tree.html", "icon": "folder-tree", "color": "#14b8a6", "category": "Primary", "surface": ["public"], "status": "active"},
+            {"id": "qisaysit", "title": "QiSaysIt", "description": "Public writing, posts and publishing surface.", "url": "https://qsaysit.com", "icon": "pencil-line", "color": "#10b981", "category": "Publishing", "surface": ["public"], "status": "active"},
+            {"id": "qially", "title": "QiAlly", "description": "Primary QiAlly public domain hub.", "url": "https://qially.com", "icon": "globe", "color": "#3b82f6", "category": "Publishing", "surface": ["public"], "status": "active"}
         ]
 
     # 1. Path guardrails + clean output
@@ -1833,7 +1983,7 @@ def main() -> None:
 
     # 3. Read bookmarks
     bookmarks = read_bookmarks(bookmarks_csv_path)
-    print(f"Loaded {len(bookmarks)} bookmarks from CSV.")
+    print(f"Loaded {len(bookmarks)} public bookmarks from CSV.")
 
     # 4. Process Markdown documents
     docs, stats = convert_md_files(source_dir, dist_dir, allow_active)
@@ -1850,7 +2000,6 @@ def main() -> None:
     # 5. Generate individual docs pages
     for doc in docs:
         doc_sidebar = build_sidebar(docs, doc["rel_html"], base_path=base_path)
-        # All nav links are now absolute using base_path
         home_path = base_path + "index.html"
         docs_path = base_path + "docs/index.html"
         tree_path = base_path + "tree.html"
@@ -1876,19 +2025,16 @@ def main() -> None:
 
     # 7. Generate QiLabs tree page
     if not args.no_tree:
-        if tree_root.exists() and tree_root.is_dir():
-            tree_page = make_header("QiLabs Tree", base_path + "index.html", base_path + "docs/index.html" if docs else "#", base_path + "tree.html", site_title=site_title)
-            tree_page += render_tree_page(
-                tree_root=tree_root,
-                docs=docs,
-                include_hidden=args.include_hidden_tree,
-                max_depth=args.tree_max_depth,
-            )
-            tree_page += HTML_FOOTER
-            write_text(dist_dir / "tree.html", tree_page)
-            print(f"Generated QiLabs tree: {dist_dir / 'tree.html'}")
-        else:
-            print(f"Warning: Tree root not found or not a directory: {tree_root}")
+        tree_manifest_file = SCRIPT_DIR / "00_config/tree.manifest.json"
+        tree_page = make_header("QiLabs Tree", base_path + "index.html", base_path + "docs/index.html" if docs else "#", base_path + "tree.html", site_title=site_title)
+        tree_page += render_tree_page(
+            manifest_path=tree_manifest_file,
+            docs=docs,
+            base_path=base_path,
+        )
+        tree_page += HTML_FOOTER
+        write_text(dist_dir / "tree.html", tree_page)
+        print(f"Generated QiLabs tree: {dist_dir / 'tree.html'}")
 
     # 8. Generate homepage
     docs_path_hp = base_path + "docs/index.html" if docs else "#"
