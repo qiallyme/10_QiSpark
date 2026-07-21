@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QiSpark Cockpit</title>
+    <title>QiSpark</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -172,10 +172,10 @@
         <div class="nav-container">
             <a href="/index.html" class="logo-section">
                 <i data-lucide="zap" class="logo-icon"></i>
-                <span>QiSpark Cockpit</span>
+                <span>QiSpark</span>
             </a>
             <div class="nav-links">
-                <a href="/index.html" class="nav-link"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+                <a href="/index.html" class="nav-link"><i data-lucide="home"></i> Home</a>
                 <a href="#" class="nav-link"><i data-lucide="book-open"></i> Documentation</a>
                 <a href="/tree.html" class="nav-link"><i data-lucide="folder-tree"></i> QiLabs Tree</a>
             </div>
@@ -183,6 +183,45 @@
     </header>
 
     <style>
+        .hero-section {
+            text-align: center;
+            padding: 4rem 1rem;
+            margin-bottom: 2rem;
+        }
+        .hero-section h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-section p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+        }
+        .enter-qilife-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 9999px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+        }
+        .enter-qilife-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.23);
+            background: #4f46e5;
+        }
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -248,16 +287,6 @@
             color: white;
         }
 
-        .section-title {
-            font-size: clamp(1.75rem, 4vw, 2.4rem);
-            font-weight: 760;
-            letter-spacing: -0.7px;
-            margin-bottom: 0.45rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
         .section-subtitle {
             font-size: 1.25rem;
             font-weight: 650;
@@ -268,92 +297,7 @@
             gap: 0.5rem;
             color: white;
         }
-
-        .section-desc {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 1rem;
-        }
-
-        .bookmarks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .bookmark-group-card {
-            padding: 1.35rem;
-        }
-
-        .bookmark-group-card h2 {
-            font-size: 1.16rem;
-            font-weight: 650;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: white;
-        }
-
-        .bookmark-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .bookmark-item {
-            border-left: 2px solid rgba(255, 255, 255, 0.1);
-            padding-left: 0.9rem;
-            transition: border-color 0.2s;
-        }
-
-        .bookmark-item:hover {
-            border-left-color: var(--primary);
-        }
-
-        .bm-title-link {
-            color: #f1f5f9;
-            font-weight: 520;
-            font-size: 0.98rem;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            transition: color 0.2s;
-        }
-
-        .bm-title-link:hover {
-            color: white;
-            text-decoration: underline;
-        }
-
-        .link-icon {
-            width: 14px;
-            height: 14px;
-            opacity: 0.65;
-        }
-
-        .bm-desc {
-            color: var(--text-muted);
-            font-size: 0.84rem;
-            margin-top: 0.25rem;
-        }
-
-        .bm-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.35rem;
-            margin-top: 0.5rem;
-        }
-
-        .bm-tag {
-            font-size: 0.74rem;
-            color: var(--primary);
-            background: rgba(99, 102, 241, 0.08);
-            padding: 0.1rem 0.4rem;
-            border-radius: 999px;
-        }
-
+        
         .status-badge {
             font-size: 0.7rem;
             font-weight: 600;
@@ -378,31 +322,19 @@
     </style>
 
     <main class="container">
-        <h1 class="section-title"><i data-lucide="layout-grid" style="color: var(--primary)"></i> Main Cockpit</h1>
-        <p class="section-desc">Quick launch pads for operational systems, docs, and generated workspace navigation.</p>
-
+        <div class="hero-section">
+            <h1>Welcome to QiSpark</h1>
+            <p>The centralized public gateway for the QiLabs ecosystem.</p>
+            <a href="https://qilife.local" class="enter-qilife-btn">
+                Enter QiLife <i data-lucide="arrow-right"></i>
+            </a>
+        </div>
         
-        <h2 class="section-subtitle"><i data-lucide="layers" style="color: var(--primary); width: 18px; height: 18px;"></i> Primary</h2>
+        
+        <h2 class="section-subtitle"><i data-lucide="layers" style="color: var(--primary); width: 18px; height: 18px;"></i> QiLabs overview</h2>
         <div class="dashboard-grid">
             
-                <div class="glass-card service-card service-card-disabled" style="--accent: #ec4899; cursor: default; opacity: 0.85;">
-                    <div class="service-icon" style="background: rgba(236, 72, 153, 0.12); color: #ec4899"><i data-lucide="heart"></i></div>
-                    <div class="service-details">
-                        <h3>QiLife <span class="status-badge dev-badge">In Development</span></h3>
-                        <p>Personal life organizer and task manager.</p>
-                    </div>
-                </div>
-                
-                <a href="/tree.html" class="glass-card service-card" style="--accent: #38bdf8; text-decoration: none;">
-                    <div class="service-icon" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8"><i data-lucide="book-open"></i></div>
-                    <div class="service-details">
-                        <h3>QiSpark Docs</h3>
-                        <p>Static documentation and blueprints.</p>
-                    </div>
-                    <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
-                </a>
-                
-                <a href="tree.html" class="glass-card service-card" style="--accent: #14b8a6; text-decoration: none;">
+                <a href="/tree.html" class="glass-card service-card" style="--accent: #14b8a6; text-decoration: none;">
                     <div class="service-icon" style="background: rgba(20, 184, 166, 0.12); color: #14b8a6"><i data-lucide="network"></i></div>
                     <div class="service-details">
                         <h3>QiLabs Tree</h3>
@@ -413,7 +345,21 @@
                 
         </div>
         
-        <h2 class="section-subtitle"><i data-lucide="layers" style="color: var(--primary); width: 18px; height: 18px;"></i> Publishing</h2>
+        <h2 class="section-subtitle"><i data-lucide="layers" style="color: var(--primary); width: 18px; height: 18px;"></i> QiDNA docs</h2>
+        <div class="dashboard-grid">
+            
+                <a href="docs/index.html" class="glass-card service-card" style="--accent: #38bdf8; text-decoration: none;">
+                    <div class="service-icon" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8"><i data-lucide="book-open"></i></div>
+                    <div class="service-details">
+                        <h3>QiDNA</h3>
+                        <p>Static documentation and blueprints for the ecosystem.</p>
+                    </div>
+                    <div class="service-arrow"><i data-lucide="chevron-right"></i></div>
+                </a>
+                
+        </div>
+        
+        <h2 class="section-subtitle"><i data-lucide="layers" style="color: var(--primary); width: 18px; height: 18px;"></i> QiSites</h2>
         <div class="dashboard-grid">
             
                 <a href="https://qsaysit.com" class="glass-card service-card" style="--accent: #10b981; text-decoration: none;">
@@ -436,77 +382,19 @@
                 
         </div>
         
-
-        <h1 class="section-title"><i data-lucide="bookmark" style="color: var(--primary)"></i> Bookmarks Registry</h1>
-        <p class="section-desc">Static references imported from the local toolbox cockpit.</p>
-
-        <div class="bookmarks-grid">
+        <h2 class="section-subtitle"><i data-lucide="layers" style="color: var(--primary); width: 18px; height: 18px;"></i> System status</h2>
+        <div class="dashboard-grid">
             
-        <div class="glass-card bookmark-group-card">
-            <h2><i data-lucide="folder" style="color: var(--primary)"></i> Developer Resources</h2>
-            <div class="bookmark-list">
+                <div class="glass-card service-card service-card-disabled" style="--accent: #8b5cf6; cursor: default; opacity: 0.85;">
+                    <div class="service-icon" style="background: rgba(139, 92, 246, 0.12); color: #8b5cf6"><i data-lucide="activity"></i></div>
+                    <div class="service-details">
+                        <h3>System Status <span class="status-badge dev-badge">In Development</span></h3>
+                        <p>Current operational status of all public facing infrastructure.</p>
+                    </div>
+                </div>
                 
-            <div class="bookmark-item">
-                <div class="bm-content">
-                    <a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer" class="bm-title-link">
-                        MDN Web Docs <i data-lucide="external-link" class="link-icon"></i>
-                    </a>
-                    <p class="bm-desc">Open web technologies documentation for HTML, CSS, and JavaScript.</p>
-                    <div class="bm-tags"><span class="bm-tag">#web</span><span class="bm-tag">#dev</span><span class="bm-tag">#mdn</span><span class="bm-tag">#reference</span></div>
-                </div>
-            </div>
-            
-            <div class="bookmark-item">
-                <div class="bm-content">
-                    <a href="https://lucide.dev/icons/" target="_blank" rel="noopener noreferrer" class="bm-title-link">
-                        Lucide Icons Catalog <i data-lucide="external-link" class="link-icon"></i>
-                    </a>
-                    <p class="bm-desc">Clean and consistent open-source icon set used in QiSpark.</p>
-                    <div class="bm-tags"><span class="bm-tag">#icons</span><span class="bm-tag">#ui</span><span class="bm-tag">#design</span></div>
-                </div>
-            </div>
-            
-            </div>
         </div>
         
-        <div class="glass-card bookmark-group-card">
-            <h2><i data-lucide="folder" style="color: var(--primary)"></i> QiLabs Ecosystem</h2>
-            <div class="bookmark-list">
-                
-            <div class="bookmark-item">
-                <div class="bm-content">
-                    <a href="docs/index.html" target="_blank" rel="noopener noreferrer" class="bm-title-link">
-                        QiSpark Documentation Index <i data-lucide="external-link" class="link-icon"></i>
-                    </a>
-                    <p class="bm-desc">Official static documentation and system blueprints for QiSpark.</p>
-                    <div class="bm-tags"><span class="bm-tag">#qispark</span><span class="bm-tag">#docs</span><span class="bm-tag">#blueprints</span></div>
-                </div>
-            </div>
-            
-            <div class="bookmark-item">
-                <div class="bm-content">
-                    <a href="https://qsaysit.com" target="_blank" rel="noopener noreferrer" class="bm-title-link">
-                        QiSaysIt Publishing Surface <i data-lucide="external-link" class="link-icon"></i>
-                    </a>
-                    <p class="bm-desc">Public essays, notes, and published articles.</p>
-                    <div class="bm-tags"><span class="bm-tag">#publishing</span><span class="bm-tag">#writing</span><span class="bm-tag">#blog</span></div>
-                </div>
-            </div>
-            
-            <div class="bookmark-item">
-                <div class="bm-content">
-                    <a href="https://qially.com" target="_blank" rel="noopener noreferrer" class="bm-title-link">
-                        QiAlly Public Hub <i data-lucide="external-link" class="link-icon"></i>
-                    </a>
-                    <p class="bm-desc">Primary public portal and identity hub.</p>
-                    <div class="bm-tags"><span class="bm-tag">#hub</span><span class="bm-tag">#portal</span><span class="bm-tag">#public</span></div>
-                </div>
-            </div>
-            
-            </div>
-        </div>
-        
-        </div>
     </main>
     
     <script>
